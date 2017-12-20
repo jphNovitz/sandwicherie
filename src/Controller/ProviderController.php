@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Provider ;
 use App\Form\ProviderType;
+use App\Service\CustomPersister;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,6 +15,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProviderController extends Controller
 {
+    private $customPersister;
+
+    public function __construct(CustomPersister $customPersister)
+    {
+        $this->customPersister = $customPersister;
+    }
+
     /**
      * @Route("/provider", name="provider")
      */
@@ -31,7 +39,8 @@ class ProviderController extends Controller
         $form = $this->createForm(ProviderType::class, $provider);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()):
-            return new Response('submitted');
+           $this->customPersister->insert($provider);
+            die('fait');
         endif;
         return $this->render('Form/provider.html.twig', [
             'form'=>$form->createView()
