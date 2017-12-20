@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Input;
+use App\Entity\Provider;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -10,7 +10,23 @@ class ProviderRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Input::class);
+        parent::__construct($registry, Provider::class);
+    }
+
+    public function findAll()
+    {
+/*
+        $query = $this->createQueryBuilder('a')
+            ->leftJoin('a.forbidden', 'f')
+            //->leftJoin('f.ingredients', 'i')
+            ->addSelect('a,f');
+        return $query->getQuery()->execute();*/
+
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
     /*

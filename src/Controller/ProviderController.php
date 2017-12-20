@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Provider ;
 use App\Form\ProviderType;
+use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -15,11 +16,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProviderController extends Controller
 {
-    private $customPersister;
+    protected $customPersister;
+    protected $customLoader;
 
-    public function __construct(CustomPersister $customPersister)
+    public function __construct(CustomPersister $customPersister, CustomObjectLoader $customObjectLoader)
     {
         $this->customPersister = $customPersister;
+        $this->customLoader = $customObjectLoader;
     }
 
     /**
@@ -27,7 +30,12 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        return new Response('Welcome to Provider');
+       //$list=$this->getDoctrine()->getManager()->getRepository('App:Provider')->findAll();
+       $list = $this->customLoader->LoadAll('App:Provider');
+       //var_dump($list);die();
+        return $this->render('Provider/providers-list.html.twig', [
+            'list'=>$list
+        ]);
     }
 
     /**

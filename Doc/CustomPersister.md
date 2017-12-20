@@ -10,7 +10,7 @@
 * Simplification pour la creation, modification et les test de cette fonctionnalité: un seul endroit où travailler et tout se répercute
 
 ##Action:
-... création d'un dossiere Model pour placer l'interface [CustomPersisterInterface](repo/blob/master/src/Model/CustomPersister.md)
+... création d'un dossiere Model pour placer l'interface [CustomPersisterInterface](blob/master/src/Model/CustomPersister.md)
 ... création d'un dossier Service pour mettre mon service [CustomPersister]()
 ... Le service implémente le l'inteface et ses methodes.
 ... Injection du service dans le controller
