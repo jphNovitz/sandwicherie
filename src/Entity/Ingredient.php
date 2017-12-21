@@ -36,6 +36,7 @@ class Ingredient
     /**
      * @var Category
      * @ORM\ManyToMany(targetEntity="App\Entity\Category")
+     * @ORM\JoinColumn(nullable=true)
      *
      */
     private $categories;
@@ -47,6 +48,7 @@ class Ingredient
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Ingredient", inversedBy="composed")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $parent;
 
@@ -57,7 +59,7 @@ class Ingredient
     public function __construct()
     {
 
-        $this->categories = new ArrayCollection();
+        //$this->categories = new ArrayCollection();
         $this->composed = new ArrayCollection();
     }
 
@@ -109,30 +111,9 @@ class Ingredient
         $this->comment = $comment;
     }
 
-    /**
-     * Add Category
-     * @param Category $category
-     *
-     * @return Category
-     */
-    public  function  addCategory(Category $category){
-        $this->categories[] = $category;
-        return $this;
 
-    }
 
     /**
-     * Remove Category
-     *
-     * @param Category $category
-     *
-     *
-     */
-    public function removeCategory(Category $category){
-        $this->categories->removeElement($category);
-    }
-
- /**
      * Add Ingredient
      * @param Ingredient $composed
      *
@@ -143,6 +124,24 @@ class Ingredient
         return $this;
 
     }
+
+    /**
+     * @return Category
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComposed()
+    {
+        return $this->composed;
+    }
+
+
 
     /**
      * Remove Ingredient
@@ -171,5 +170,9 @@ class Ingredient
         $this->parent = $parent;
     }
 
+   public function __toString()
+   {
+       return $this->name;
+   }
 
 }

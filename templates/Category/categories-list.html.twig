@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Categories List</h1>
+    {% for category in list %}
+        <a href="{{ path('category_show', {'id' : category.id}) }}">{{ category.name }}</a>
+    {%  endfor %}
+
+{% endblock %}

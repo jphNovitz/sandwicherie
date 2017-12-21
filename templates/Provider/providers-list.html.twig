@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    <h1>Providers List</h1>
     {% for provider in list %}
-        {{ provider.name }}
+        <a href="{{ path('provider_show', {'id' : provider.id}) }}">{{ provider.name }}</a>
     {%  endfor %}
 
 {% endblock %}

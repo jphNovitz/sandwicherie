@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Provider ;
-use App\Form\ProviderType;
+use App\Entity\Category ;
+use App\Form\CategoryType;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 
-class ProviderController extends Controller
+class CategoryController extends Controller
 {
     protected $customPersister;
     protected $customLoader;
@@ -26,62 +26,59 @@ class ProviderController extends Controller
     }
 
     /**
-     * @Route("/provider/new", name="provider_add")
+     * @Route("/category/new", name="category_add")
      */
     public function add(Request $request)
     {
-        $provider = new Provider();
-        $form = $this->createForm(ProviderType::class, $provider);
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()):
-            $this->customPersister->insert($provider);
+            $this->customPersister->insert($category);
             die('fait');
         endif;
-        return $this->render('Form/provider.html.twig', [
+        return $this->render('Form/category.html.twig', [
             'form'=>$form->createView()
         ]);
 
     }
 
     /**
-     * @Route("/providers", name="providers_list")
+     * @Route("/categories", name="categories_list")
      */
     public function index()
     {
-       //$list=$this->getDoctrine()->getManager()->getRepository('App:Provider')->findAll();
-       $list = $this->customLoader->LoadAll('App:Provider');
-       //var_dump($list);die();
-        return $this->render('Provider/providers-list.html.twig', [
+        $list = $this->customLoader->LoadAll('App:Category');
+        return $this->render('Category/categories-list.html.twig', [
             'list'=>$list
         ]);
     }
 
     /**
-     * @Route("/provider/{id}", name="provider_show")
+     * @Route("/category/{id}", name="category_show")
      */
     public function show(Request $request, $id = null)
     {
-        $provider = $this->customLoader->LoadOne('App:Provider', $id);
-        return $this->render('Provider/provider-card.html.twig', [
-            'provider'=>$provider
+        $category = $this->customLoader->LoadOne('App:Category', $id);
+        return $this->render('Category/category-card.html.twig', [
+            'category'=>$category
         ]);
     }
 
 
 
     /**
-     * @Route("/provider/{id}/update", name="provider_update")
+     * @Route("/category/{id}/update", name="category_update")
      */
-    public function update(Request $request, Provider $provider= NULL )
+    public function update(Request $request, Category $category= NULL )
     {
 
-        if (!$provider) {
+        if (!$category) {
             return new Response('To do: renvoyer vers une page');
         }
-        $form = $this->createForm(ProviderType::class, $provider);
-        return $this->render('Form/provider.html.twig', [
+        $form = $this->createForm(CategoryType::class, $category);
+        return $this->render('Form/category.html.twig', [
             'form'=>$form->createView()
         ]);
     }
-
 }

@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Provider ;
-use App\Form\ProviderType;
+use App\Entity\Ingredient ;
+use App\Form\IngredientType;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 
-class ProviderController extends Controller
+class IngredientController extends Controller
 {
     protected $customPersister;
     protected $customLoader;
@@ -26,62 +26,58 @@ class ProviderController extends Controller
     }
 
     /**
-     * @Route("/provider/new", name="provider_add")
+     * @Route("/ingredient/new", name="ingredient_add")
      */
     public function add(Request $request)
     {
-        $provider = new Provider();
-        $form = $this->createForm(ProviderType::class, $provider);
+        $ingredient = new Ingredient();
+        $form = $this->createForm(IngredientType::class, $ingredient);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()):
-            $this->customPersister->insert($provider);
+            $this->customPersister->insert($ingredient);
             die('fait');
         endif;
-        return $this->render('Form/provider.html.twig', [
+        return $this->render('Form/ingredient.html.twig', [
             'form'=>$form->createView()
         ]);
 
     }
 
     /**
-     * @Route("/providers", name="providers_list")
+     * @Route("/ingredients", name="ingredients_list")
      */
     public function index()
     {
-       //$list=$this->getDoctrine()->getManager()->getRepository('App:Provider')->findAll();
-       $list = $this->customLoader->LoadAll('App:Provider');
-       //var_dump($list);die();
-        return $this->render('Provider/providers-list.html.twig', [
+        $list = $this->customLoader->LoadAll('App:Category');
+        return $this->render('Ingredient/ingredients-list.html.twig', [
             'list'=>$list
         ]);
     }
 
     /**
-     * @Route("/provider/{id}", name="provider_show")
+     * @Route("/ingredient/{id}", name="ingredient_show")
      */
     public function show(Request $request, $id = null)
     {
-        $provider = $this->customLoader->LoadOne('App:Provider', $id);
-        return $this->render('Provider/provider-card.html.twig', [
-            'provider'=>$provider
-        ]);
+        $ingredient = $this->customLoader->LoadOne('App:Ingredient', $id);
+        return $this->render('Ingredient/ingredient-card.html.twig', [
+            'ingredient'=>$ingredient        ]);
     }
 
 
 
     /**
-     * @Route("/provider/{id}/update", name="provider_update")
+     * @Route("/ingredient/{id}/update", name="ingredient_update")
      */
-    public function update(Request $request, Provider $provider= NULL )
+    public function update(Request $request, Ingredient $ingredient= NULL )
     {
 
-        if (!$provider) {
+        if (!$ingredient) {
             return new Response('To do: renvoyer vers une page');
         }
-        $form = $this->createForm(ProviderType::class, $provider);
-        return $this->render('Form/provider.html.twig', [
+        $form = $this->createForm(IngredientType::class, $ingredient);
+        return $this->render('Form/ingredient.html.twig', [
             'form'=>$form->createView()
         ]);
     }
-
 }
