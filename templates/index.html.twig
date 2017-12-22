@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{%  block body %}
+
+    <h1>index (provisoire)</h1>
+
+    <ul>
+        <li><a href="{{ path('ingredients_list') }}"> Liste ingredients</a> </li>
+        <li><a href="{{ path('categories_list') }}"> Liste categories</a> </li>
+        <li><a href="{{ path('providers_list') }}"> Liste fournisseurs</a> </li>
+        <li><a href="{{ path('inputs_list') }}"> Liste entrées</a> </li>
+    </ul>
+
+{% endblock %}

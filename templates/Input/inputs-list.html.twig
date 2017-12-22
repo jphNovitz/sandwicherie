@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Inputs List</h1>
+    {% for input in list %}
+        <a href="{{ path('input_show', {'id' : input.id}) }}">{{ input.dateEntry|date}}</a>
+    {%  endfor %}
+
+{% endblock %}

@@ -35,16 +35,28 @@ class Input
     private $temperature;
 
     /**
-     * @var datetime $created
+     * @var datetime $dateEncode
      *
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private $date;
+    private $dateEncode;
+
+    /**
+     * @var datetime $dateEntry
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateEntry;
+
+
+    /**
+     * Input constructor.
+     */
 
     public function __construct()
     {
-
+        $this->dateEncode = new  \DateTime();
+        $this->dateEntry = new \DateTime();
     }
 
     /**
@@ -112,20 +124,39 @@ class Input
     }
 
     /**
-     * @return date
+     * @return datetime
      */
-    public function getDate()
+    public function getDateEncode()
     {
-        return $this->date;
+        return $this->dateEncode;
     }
 
     /**
-     * @param date $date
+     * @param datetime $dateEncode
      */
-    public function setDate($date)
+    public function setDateEncode(datetime $dateEncode)
     {
-        $this->date = $date;
+        $this->dateEncode = $dateEncode;
     }
+
+    /**
+     * @return datetime
+     */
+    public function getDateEntry()
+    {
+        return $this->dateEntry;
+    }
+
+    /**
+     * @param datetime $dateEntry
+     */
+    public function setDateEntry($dateEntry)
+    {
+        $this->dateEntry = $dateEntry;
+        return $this;
+    }
+
+
 
 
 }
