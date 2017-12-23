@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Allergies List</h1>
+    {% for allergy in list %}
+        <a href="">{{ allergy.name }}</a>
+    {%  endfor %}
+
+{% endblock %}

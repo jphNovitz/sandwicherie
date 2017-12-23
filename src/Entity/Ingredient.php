@@ -42,6 +42,14 @@ class Ingredient
     private $categories;
 
     /**
+     * @var Provider
+     * @ORM\ManyToMany(targetEntity="App\Entity\Provider")
+     * @ORM\JoinColumn(nullable=true)
+     *
+     */
+    private $providers;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ingredient", mappedBy="parent")
      */
     private $composed;
@@ -59,7 +67,8 @@ class Ingredient
     public function __construct()
     {
 
-        //$this->categories = new ArrayCollection();
+        $this->providers = new ArrayCollection();
+        $this->categories = new ArrayCollection();
         $this->composed = new ArrayCollection();
     }
 
@@ -170,9 +179,44 @@ class Ingredient
         $this->parent = $parent;
     }
 
+    /**
+     * @return Provider
+     */
+    public function getProviders()
+    {
+        return $this->providers;
+    }
+
+
+    /**
+     * Add Provider
+     * @param Provider $provider
+     *
+     * @return Provider
+     */
+    public  function  addProvider(Provider $provider){
+        $this->providers[] = $provider;
+        return $this;
+
+    }
+
+    /**
+     * Remove Provider
+     *
+     * @param Provider $provider
+     *
+     *
+     */
+    public function removeProvider(Provider $provider){
+        $this->providers->removeElement($provider);
+    }
+
    public function __toString()
    {
        return $this->name;
    }
+
+
+
 
 }

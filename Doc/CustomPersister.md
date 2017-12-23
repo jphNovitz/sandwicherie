@@ -1,5 +1,5 @@
 # Creation d'un CustomPersister
-=============================
+=
  
 ## Rappel
 **Interface**: Classe Abstraite qui n'implémente aucune méthode, son utilité est simplement de forcer à respecter un contrat: chacune des méthodes doivent se retrouver dans les classes qui l'implémentent.
