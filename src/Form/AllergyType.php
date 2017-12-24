@@ -15,9 +15,19 @@ class AllergyType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('description', TextType::class)
-            ->add('forbiddenCategories', EntityType::class, [
-                'class'=>'App\Entity\Category'
+            ->add('categories', EntityType::class,[
+                'class'=>'App\Entity\Category',
+                'empty_data' => '',
+                'by_reference' => true,
+                'multiple' => true,
+                'required' => false
+            ])
+            ->add('ingredients', EntityType::class,[
+                'class'=>'App\Entity\Ingredient',
+                'empty_data' => '',
+                'by_reference' => false,
+                'multiple' => true,
+                'required' => false
             ])
         ;
     }

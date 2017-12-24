@@ -32,7 +32,9 @@ class IngredientController extends Controller
     {
         $ingredient = new Ingredient();
         $form = $this->createForm(IngredientType::class, $ingredient);
+
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()):
             $this->customPersister->insert($ingredient);
             die('fait');

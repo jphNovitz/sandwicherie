@@ -16,16 +16,15 @@ class IngredientType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('comment', TextType::class)
-            ->add('parent', EntityType::class,[
+            ->add('components', EntityType::class,[
                 'class'=>'App\Entity\Ingredient',
-                'empty_data' => '',
-                'multiple' => false,
+                'multiple' => true,
                 'required' => false
             ])
             ->add('categories', EntityType::class,[
                 'class'=>'App\Entity\Category',
                 'empty_data' => '',
-                'multiple' => false,
+                'multiple' => true,
                 'required' => false
             ])
         ;

@@ -6,8 +6,11 @@ use App\Entity\Allergy;
 use App\Form\AllergyType;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class AllergyController extends Controller{

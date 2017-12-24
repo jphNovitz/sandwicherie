@@ -50,15 +50,11 @@ class Ingredient
     private $providers;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ingredient", mappedBy="parent")
-     */
-    private $composed;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ingredient", inversedBy="composed")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $parent;
+    private $components;
+
 
     /**
      * Ingredient constructor.
@@ -66,9 +62,9 @@ class Ingredient
 
     public function __construct()
     {
-
-        $this->providers = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->providers = new ArrayCollection();
+        $this->components = new ArrayCollection();
         $this->composed = new ArrayCollection();
     }
 
@@ -120,19 +116,27 @@ class Ingredient
         $this->comment = $comment;
     }
 
+    /**
+     * @param mixed $category
+     */
+    public function addCategory($category)
+    {
+        $this->categories->add($category);
+        // uncomment if you want to update other side
+        //$category->setAllergy($this);
+    }
 
 
     /**
-     * Add Ingredient
-     * @param Ingredient $composed
-     *
-     * @return Ingredient
+     * @param mixed $category
      */
-    public  function  addComposed(Ingredient $ingredient){
-        $this->composed[] = $ingredient;
-        return $this;
-
+    public function removeCategory($category)
+    {
+        $this->categories->removeElement($category);
+        // uncomment if you want to update other side
+        //$category->setAllergy(null);
     }
+
 
     /**
      * @return Category
@@ -145,39 +149,32 @@ class Ingredient
     /**
      * @return mixed
      */
-    public function getComposed()
+    public function getComponents()
     {
-        return $this->composed;
+        return $this->components;
     }
 
-
+    /**
+     * @param mixed $component
+     */
+    public function addcomponent($component)
+    {
+        $this->components->add($component);
+        // uncomment if you want to update other side
+        //$category->setAllergy($this);
+    }
 
     /**
      * Remove Ingredient
      *
-     * @param Ingredient $composed
+     * @param Ingredient $component
      *
      *
      */
-    public function removeComposed(Ingredient $ingredient){
-        $this->composed->removeElement($ingredient);
+    public function removeComponent(Ingredient $component){
+        $this->components->removeElement($component);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @param mixed $parent
-     */
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-    }
 
     /**
      * @return Provider
@@ -215,8 +212,6 @@ class Ingredient
    {
        return $this->name;
    }
-
-
 
 
 }

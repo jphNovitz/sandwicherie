@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,28 +19,28 @@ class Allergy
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", nullable=false)
+     * @ORM\Column(name="name")
      */
     private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description", nullable=false)
-     */
-    private $description;
-
-    /**
-     * @var Category
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category")
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $forbiddenCategories;
+    private $categories;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $ingredients;
 
     public function __construct()
     {
-        $this->forbiddenCategories= new ArrayCollection();
+        $this->categories =  new ArrayCollection();
+        $this->ingredients =  new ArrayCollection();
     }
 
     /**
@@ -56,7 +54,7 @@ class Allergy
     /**
      * @param mixed $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -64,7 +62,7 @@ class Allergy
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -72,45 +70,66 @@ class Allergy
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
+
     /**
-     * @return string
+     * @return ArrayCollection
      */
-    public function getDescription()
+    public function getCategories(): ArrayCollection
     {
-        return $this->description;
+        return $this->categories;
     }
 
     /**
-     * @param string $description
+     * @param mixed $category
      */
-    public function setDescription(string $description)
+    public function addCategory($category)
     {
-        $this->description = $description;
+        $this->categories->add($category);
+        // uncomment if you want to update other side
+        //$category->setAllergy($this);
     }
 
     /**
-     * @return Category
+     * @param mixed $category
      */
-    public function getForbiddenCategories()
+    public function removeCategory($category)
     {
-        return $this->forbiddenCategories;
+        $this->categories->removeElement($category);
+        // uncomment if you want to update other side
+        //$category->setAllergy(null);
     }
 
     /**
-     * Add ForbiddenCategory
-     * @param Category $forbiddenCategory
-     *
-     * @return forbiddenCategory
+     * @param mixed $ingredient
      */
-    public  function  addforbiddenCategory(Category $forbiddenCategory){
-        $this->forbiddenCategories[] = $forbiddenCategory;
-        return $this;
+    public function addIngredient($ingredient)
+    {
+        $this->ingredients->add($ingredient);
+        // uncomment if you want to update other side
+        //$ingredient->setAllergy($this);
+    }
 
+    /**
+     * @param mixed $ingredient
+     */
+    public function removeIngredient($ingredient)
+    {
+        $this->ingredients->removeElement($ingredient);
+        // uncomment if you want to update other side
+        //$ingredient->setAllergy(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getIngredients(): ArrayCollection
+    {
+        return $this->ingredients;
     }
 
 
