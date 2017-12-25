@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,9 +23,10 @@ class Allergy
     private $name;
 
     /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"})
+     * @var Category
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category")
      * @ORM\JoinColumn(nullable=true)
+     *
      */
     private $categories;
 
@@ -75,35 +75,6 @@ class Allergy
         $this->name = $name;
     }
 
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getCategories(): ArrayCollection
-    {
-        return $this->categories;
-    }
-
-    /**
-     * @param mixed $category
-     */
-    public function addCategory($category)
-    {
-        $this->categories->add($category);
-        // uncomment if you want to update other side
-        //$category->setAllergy($this);
-    }
-
-    /**
-     * @param mixed $category
-     */
-    public function removeCategory($category)
-    {
-        $this->categories->removeElement($category);
-        // uncomment if you want to update other side
-        //$category->setAllergy(null);
-    }
-
     /**
      * @param mixed $ingredient
      */
@@ -129,7 +100,37 @@ class Allergy
      */
     public function getIngredients(): ArrayCollection
     {
-        return $this->ingredients;
+        return new ArrayCollection($this->ingredients->getValues());
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCategories(): ArrayCollection
+    {
+        return new ArrayCollection($this->categories->getValues());
+    }
+
+
+
+    /**
+     * @param mixed $category
+     */
+    public function addCategory($category)
+    {
+        $this->categories->add($category);
+        // uncomment if you want to update other side
+        //$category->setAllergy($this);
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function removeCategory($category)
+    {
+        $this->categories->removeElement($category);
+        // uncomment if you want to update other side
+        //$category->setAllergy(null);
     }
 
 

@@ -4,7 +4,7 @@
 
     <h1>Allergies List</h1>
     {% for allergy in list %}
-        <a href="">{{ allergy.name }}</a>
+        <a href="{{ path('allergy_show', {'id': allergy.id}) }}">{{ allergy.name }}</a>
     {%  endfor %}
 
 {% endblock %}

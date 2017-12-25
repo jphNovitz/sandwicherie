@@ -79,6 +79,7 @@ class ProviderController extends Controller
             return new Response('To do: renvoyer vers une page');
         }
         $form = $this->createForm(ProviderType::class, $provider);
+        $form->handleRequest($request);
         return $this->render('Form/provider.html.twig', [
             'form'=>$form->createView()
         ]);

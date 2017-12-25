@@ -18,4 +18,9 @@ class CustomPersister implements  CustomPersisterInterface{
         $this->entityManager->persist($obj);
         $this->entityManager->flush();
     }
+    public function update($obj)
+    {
+        $this->entityManager->merge($obj);
+        $this->entityManager->flush();
+    }
 }
