@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,6 +44,20 @@ class Provider
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $email;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="image_provider")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $images;
+
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -124,6 +139,33 @@ class Provider
         $this->email = $email;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getImages(): ArrayCollection
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function addImage($image)
+    {
+        $this->images->add($image);
+        // uncomment if you want to update other side
+        //$image->setProvider($this);
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function removeImage($image)
+    {
+        $this->images->removeElement($image);
+        // uncomment if you want to update other side
+        //$image->setProvider(null);
+    }
 
 
 }

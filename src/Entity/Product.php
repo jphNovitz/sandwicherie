@@ -93,6 +93,14 @@ class Product
     */
    private $bread;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="image_ingredient")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $images;
+
    public function __construct()
    {
        $this->ingredients = new ArrayCollection();
@@ -309,6 +317,34 @@ class Product
         $this->bread->removeElement($bread);
         // uncomment if you want to update other side
         //$bread->setProduct(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getImages(): ArrayCollection
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function addImage($image)
+    {
+        $this->images->add($image);
+        // uncomment if you want to update other side
+        //$image->setProduct($this);
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function removeImage($image)
+    {
+        $this->images->removeElement($image);
+        // uncomment if you want to update other side
+        //$image->setProduct(null);
     }
 
 

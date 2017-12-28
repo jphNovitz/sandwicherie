@@ -37,6 +37,17 @@ class Allergy
      */
     private $ingredients;
 
+    /**
+     * @var Image
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist"})
+     */
+     private $image;
+
+    /**
+     * Allergy constructor.
+     */
+
     public function __construct()
     {
         $this->categories =  new ArrayCollection();
@@ -131,6 +142,22 @@ class Allergy
         $this->categories->removeElement($category);
         // uncomment if you want to update other side
         //$category->setAllergy(null);
+    }
+
+    /**
+     * @return Image
+     */
+    public function getImage(): Image
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param Image $image
+     */
+    public function setImage(Image $image): void
+    {
+        $this->image = $image;
     }
 
 

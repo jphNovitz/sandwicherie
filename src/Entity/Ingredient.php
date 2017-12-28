@@ -55,6 +55,13 @@ class Ingredient
      */
     private $components;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="image_ingredient")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $images;
 
     /**
      * Ingredient constructor.
@@ -65,7 +72,7 @@ class Ingredient
         $this->categories = new ArrayCollection();
         $this->providers = new ArrayCollection();
         $this->components = new ArrayCollection();
-        $this->composed = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -208,7 +215,36 @@ class Ingredient
         $this->providers->removeElement($provider);
     }
 
-   public function __toString()
+    /**
+     * @return ArrayCollection
+     */
+    public function getImages(): ArrayCollection
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function addImage($image)
+    {
+        $this->images->add($image);
+        // uncomment if you want to update other side
+        //$image->setIngredient($this);
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function removeImage($image)
+    {
+        $this->images->removeElement($image);
+        // uncomment if you want to update other side
+        //$image->setIngredient(null);
+    }
+
+
+    public function __toString()
    {
        return $this->name;
    }
