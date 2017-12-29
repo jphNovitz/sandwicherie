@@ -166,6 +166,9 @@ class Provider
         // uncomment if you want to update other side
         //$image->setProvider(null);
     }
-
+public function __toString()
+{
+    return $this->name;
+}
 
 }
