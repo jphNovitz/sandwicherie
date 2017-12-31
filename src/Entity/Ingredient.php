@@ -64,6 +64,18 @@ class Ingredient
     private $images;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="bread", type="boolean", length=1)
+     */
+    private $bread;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="sauce", type="boolean", length=1)
+     */
+    private $sauce;
+
+    /**
      * Ingredient constructor.
      */
 
@@ -73,6 +85,8 @@ class Ingredient
         $this->providers = new ArrayCollection();
         $this->components = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->bread = false;
+        $this->sauce = false;
     }
 
     /**
@@ -241,6 +255,38 @@ class Ingredient
         $this->images->removeElement($image);
         // uncomment if you want to update other side
         //$image->setIngredient(null);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBread(): bool
+    {
+        return $this->bread;
+    }
+
+    /**
+     * @param bool $bread
+     */
+    public function setBread(bool $bread): void
+    {
+        $this->bread = $bread;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSauce(): bool
+    {
+        return $this->sauce;
+    }
+
+    /**
+     * @param bool $sauce
+     */
+    public function setSauce(bool $sauce): void
+    {
+        $this->sauce = $sauce;
     }
 
 

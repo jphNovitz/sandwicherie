@@ -72,26 +72,6 @@ class Product
     */
    private $types;
 
-
-   /**
-    * @var ArrayCollection
-    * @ORM\ManyToMany(targetEntity="App\Entity\Sauce")
-    * @ORM\JoinColumn(nullable=true)
-    * @ORM\JoinTable(name="product_sauce")
-    *
-    */
-   private $sauce;
-
-
-   /**
-    * @var ArrayCollection
-    * @ORM\ManyToMany(targetEntity="App\Entity\Bread")
-    * @ORM\JoinColumn(nullable=true)
-    * @ORM\JoinTable(name="product_bread")
-    *
-    */
-   private $bread;
-
     /**
      * @var ArrayCollection
      *
@@ -270,52 +250,6 @@ class Product
         $this->type->removeElement($type);
         // uncomment if you want to update other side
         //$type->setProduct(null);
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getSauce(): ArrayCollection
-    {
-        return $this->sauce;
-    }
-
-    /**
-     * @param mixed $sauce
-     */
-    public function removeSauce($sauce)
-    {
-        $this->sauce->removeElement($sauce);
-        // uncomment if you want to update other side
-        //$sauce->setProduct(null);
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getBread(): ArrayCollection
-    {
-        return $this->bread;
-    }
-
-    /**
-     * @param mixed $bread
-     */
-    public function addBread($bread)
-    {
-        $this->bread->add($bread);
-        // uncomment if you want to update other side
-        //$bread->setProduct($this);
-    }
-
-    /**
-     * @param mixed $bread
-     */
-    public function removeBread($bread)
-    {
-        $this->bread->removeElement($bread);
-        // uncomment if you want to update other side
-        //$bread->setProduct(null);
     }
 
     /**
