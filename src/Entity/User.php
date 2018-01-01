@@ -54,6 +54,12 @@ class User implements UserInterface
      private $email;
 
     /**
+     * @var Loyalty $loyalty
+     * @ORM\OneToOne(targetEntity="App\Entity\Loyalty", mappedBy="customer")
+     */
+     private $loyalty;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -137,6 +143,7 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity="App\Entity\City")
      */
     private $city;
+
     /**
      * @return String
      */
@@ -184,6 +191,24 @@ class User implements UserInterface
     {
         $this->city = $city;
     }
+
+    /**
+     * @return Loyalty
+     */
+    public function getLoyalty(): Loyalty
+    {
+        return $this->loyalty;
+    }
+
+    /**
+     * @param Loyalty $loyalty
+     */
+    public function setLoyalty(Loyalty $loyalty): void
+    {
+        $this->loyalty = $loyalty;
+    }
+
+
 
     /**
      * Returns the roles granted to the user.

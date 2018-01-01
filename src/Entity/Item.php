@@ -69,38 +69,6 @@ class Item
     }
 
     /**
-     * @return datetime
-     */
-    public function getCreated(): datetime
-    {
-        return $this->created;
-    }
-
-    /**
-     * @param datetime $created
-     */
-    public function setCreated(datetime $created): void
-    {
-        $this->created = $created;
-    }
-
-    /**
-     * @return datetime
-     */
-    public function getUpdated(): datetime
-    {
-        return $this->updated;
-    }
-
-    /**
-     * @param datetime $updated
-     */
-    public function setUpdated(datetime $updated): void
-    {
-        $this->updated = $updated;
-    }
-
-    /**
      * @return Product
      */
     public function getProduct(): Product

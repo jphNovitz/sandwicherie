@@ -55,7 +55,6 @@ class Input
 
     public function __construct()
     {
-        $this->dateEncode = new  \DateTime();
         $this->dateEntry = new \DateTime();
     }
 
@@ -121,22 +120,6 @@ class Input
     public function setTemperature($temperature)
     {
         $this->temperature = $temperature;
-    }
-
-    /**
-     * @return datetime
-     */
-    public function getDateEncode()
-    {
-        return $this->dateEncode;
-    }
-
-    /**
-     * @param datetime $dateEncode
-     */
-    public function setDateEncode(datetime $dateEncode)
-    {
-        $this->dateEncode = $dateEncode;
     }
 
     /**
