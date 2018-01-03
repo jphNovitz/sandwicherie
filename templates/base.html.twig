@@ -3,9 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet">
+        <link href="{{ asset('build/css/app.css') }}" rel="stylesheet">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+
+    <div class="toolbar">
+        <i class="material-icons md-36">menu</i>
+        <span id="title">La Clémentine</span>
+    </div>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
