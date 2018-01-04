@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Amarante|Open+Sans|Roboto');
+
+$darkOrange: rgb(255, 140, 0);
+$green: rgb(0, 100, 0);
+$white: rgb(255, 255, 255);
+$black: rgb(0, 0, 0);
+$grey: #212121;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vh;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+  .toolbar {
+    max-width: 100%;
+    padding: .8vh 3vw;
+    background-color: $darkOrange;
+    color: $white;
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  .toolbar #menu-icon .material-icons {
+    font-size: 29px;
+  }
+  .toolbar #title {
+    font-family: 'Amarante', cursive;
+    margin-left: 24px;
+    font-size: 24px;
+  }
+  #lateral-menu{
+    position: absolute;
+    top: 0px;
+    margin-top: 0px;
+    margin-left: -100vw;
+    height: 100vh;
+    background-color: lighten($darkOrange,40%);
+    color: lighten($grey, 20%) ;
+    padding: 0;
+    transition: margin-left 800ms ease-out;
+  }
+
+  #lateral-menu ul{
+    padding-left: 0px;
+  }
+
+  #lateral-menu ul li{
+    display: flex;
+    list-style-type: none;
+    padding: 12px 24px;
+    font-size: 1.18rem;
+  }
+  #lateral-menu ul li .material-icons{
+    margin-right: 1.2rem;
+  }
+
+  #lateral-menu ul li:hover{
+    background-color: lighten($darkOrange,20%);
+  }
+
+  #lateral-menu .separation {
+    background-color: $darkOrange;
+    height: 1px;
+    border: none;
+  }
+
+
+}
+
+@media screen and (max-width: 501px) {
+  .toolbar #menu-icon .material-icons {
+    font-size: 1.8rem;
+    margin-left: 1rem;
+  }
+  .toolbar #title {
+    font-family: 'Amarante', cursive;
+    margin-left: 1rem;
+    font-size: 1.8rem;
+  }
+}

@@ -14,10 +14,30 @@
     <body>
 
     <div class="toolbar">
-        <i class="material-icons md-36">menu</i>
+        <span id="menu-icon">
+            <i class="material-icons" id="menu">menu</i>
+        </span>
         <span id="title">La Clémentine</span>
     </div>
+
+    <div id="lateral-menu">
+        <ul>
+            <li> <i class="material-icons">input</i> Entrée marchandises</li>
+            <li> <i class="material-icons">shopping_cart</i> Commandes</li>
+            <hr class="separation">
+            <li> <i class="material-icons">free_breakfast</i> Produits</li>
+            <li> <i class="material-icons">store</i> Fournisseurs</li>
+            <li> <i class="material-icons">info</i> Allergies</li>
+            <hr class="separation">
+            <li> <i class="material-icons">layers</i> Ingredients</li>
+            <li> <i class="material-icons">local_offer</i> Categories</li>
+            <li> <i class="material-icons">assignment</i> Types</li>
+            <hr class="separation">
+        </ul>
+
+    </div>
         {% block body %}{% endblock %}
+    <script src="{{ asset('build/js/app.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
