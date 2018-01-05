@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-              rel="stylesheet">
-        <link href="{{ asset('build/css/app.css') }}" rel="stylesheet">
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link href="{{ asset('build/css/app.css') }}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<div class="container">
     <div class="toolbar">
         <span id="menu-icon">
             <i class="material-icons" id="menu">menu</i>
@@ -22,22 +22,23 @@
 
     <div id="lateral-menu">
         <ul>
-            <li> <i class="material-icons">input</i> Entrée marchandises</li>
-            <li> <i class="material-icons">shopping_cart</i> Commandes</li>
+            <li><i class="material-icons">input</i> <a href="">Entrée marchandises</a></li>
+            <li><i class="material-icons">shopping_cart</i><a href=""> Commandes </a></li>
             <hr class="separation">
-            <li> <i class="material-icons">free_breakfast</i> Produits</li>
-            <li> <i class="material-icons">store</i> Fournisseurs</li>
-            <li> <i class="material-icons">info</i> Allergies</li>
+            <li><i class="material-icons">free_breakfast</i><a href=""> Produits </a></li>
+            <li><i class="material-icons">store</i> <a href=""> Fournisseurs </a></li>
+            <li><i class="material-icons">info</i> <a href=""> Allergies</a></li>
             <hr class="separation">
-            <li> <i class="material-icons">layers</i> Ingredients</li>
-            <li> <i class="material-icons">local_offer</i> Categories</li>
-            <li> <i class="material-icons">assignment</i> Types</li>
+            <li><i class="material-icons">layers</i> <a href=""> Ingredients</a></li>
+            <li><i class="material-icons">local_offer</i> <a href="{{ path('categories_list') }}"> Categories</a></li>
+            <li><i class="material-icons">assignment</i> <a href=""> Types</a></li>
             <hr class="separation">
         </ul>
 
     </div>
-        {% block body %}{% endblock %}
-    <script src="{{ asset('build/js/app.js') }}"></script>
-        {% block javascripts %}{% endblock %}
-    </body>
+    {% block body %}{% endblock %}
+</div>
+<script src="{{ asset('build/js/app.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</body>
 </html>

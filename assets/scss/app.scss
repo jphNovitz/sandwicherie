@@ -13,6 +13,33 @@ html, body {
   position: relative;
   font-family: 'Roboto', sans-serif;
 }
+.container {
+  width: 100vw;
+}
+/*
+ * alerts
+ */
+.alert {
+  display: flex;
+  align-items: center;
+  margin: 5px auto;
+  width: 80%;
+  padding: 8px;
+  border-radius: 10px;
+  font-weight: bolder;
+}
+.alert-notice {
+  color: #8a6d3b;
+  background-color: #efbe80;
+  border: solid 2px #fb8b00;
+}
+.alert .material-icons{
+  margin-right: -140px;
+}
+/*
+ * end alert
+ */
+
 
 @media screen and (max-width: 768px) {
   .toolbar {
@@ -39,9 +66,12 @@ html, body {
     margin-left: -100vw;
     height: 100vh;
     background-color: lighten($darkOrange,40%);
-    color: lighten($grey, 20%) ;
     padding: 0;
-    transition: margin-left 800ms ease-out;
+    transition: margin-left 680ms ease-out;
+  }
+
+  #lateral-menu, #lateral-menu li a {
+    color: lighten($grey, 20%) ;
   }
 
   #lateral-menu ul{
@@ -50,9 +80,10 @@ html, body {
 
   #lateral-menu ul li{
     display: flex;
+    align-items: center;
     list-style-type: none;
-    padding: 12px 24px;
-    font-size: 1.18rem;
+    padding: 6px 24px;
+    font-size: 81%;
   }
   #lateral-menu ul li .material-icons{
     margin-right: 1.2rem;
@@ -66,6 +97,7 @@ html, body {
     background-color: $darkOrange;
     height: 1px;
     border: none;
+    margin: 9px 3px;
   }
 
 

@@ -1,6 +1,15 @@
 {%  extends 'base.html.twig' %}
 
 {% block body %}
+
+    {% for label, messages in app.flashes %}
+        {%  for message in messages %}
+        <div class="alert alert-{{ label }}">
+            <i class="material-icons">info_outile</i> {{ message }}
+        </div>
+        {% endfor %}
+    {% endfor %}
+
     <h1>Category  Form</h1>
 
     {{ form_start(form) }}

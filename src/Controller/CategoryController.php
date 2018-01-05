@@ -46,9 +46,13 @@ class CategoryController extends Controller
     /**
      * @Route("/categories", name="categories_list")
      */
-    public function index()
+    public function index(Request $request)
     {
         $list = $this->customLoader->LoadAll('App:Category');
+        if (!$list) {
+            $this->addFlash('notice', 'Il n\' y a aucune catégorie, je vous propose d\'en ajouter une');
+            return $this->redirectToRoute('category_add');
+        }
         return $this->render('Category/categories-list.html.twig', [
             'list'=>$list
         ]);
