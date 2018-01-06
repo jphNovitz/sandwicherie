@@ -16,6 +16,42 @@ html, body {
 .container {
   width: 100vw;
 }
+.content {
+  padding: 5px 10px;
+}
+.content h1{
+  font-size: 1.5em;
+  color: #708238;
+}
+.content form .form-row{
+  position: relative;
+  margin: 10px 0;
+  line-height: 5em;
+}
+.content form .form-row input,
+.content form .form-row input{
+
+}
+.content form .form-row label{
+ display: inherit;
+}
+.content form .form-row input{
+  border: 0;
+  position: absolute;
+  left: 0;
+  bottom: 28px;
+  opacity: 0.6;
+  border-bottom: solid 1px #000;
+  width: 90vw;
+  font-size: 1.2em;
+  transition: all 1s ease;
+}
+
+.content form .form-row input:focus{
+  bottom: 0;
+  outline: none ;
+}
+
 /*
  * alerts
  */
