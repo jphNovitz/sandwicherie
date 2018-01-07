@@ -7,6 +7,6 @@ My Client has some responsabilities which are my priorities.  My missions are:
 * offer some informations about allergens ;
 * stimulate customer to reserve in advance. 
   
-  ![logo] (http://jphnovitz.be/_clem_stickers_01.png?raw=true)
+![laclementine](http://jphnovitz.be/_clem_stickers_01.png?raw=true)
   
 [CustomPersisterInterface](/Doc/CustomPersister.md)  

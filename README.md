@@ -7,6 +7,6 @@ Mon client ayant une séries d’obligations, j'aurais la mission de:
 * proposer une information sur les allergènes; 
 * encourager les utilisateurs à réserver. 
 
-  ![logo] (http://jphnovitz.be/_clem_stickers_01.png?raw=true)
+![laclementine](http://jphnovitz.be/_clem_stickers_01.png?raw=true)
 
 [CustomPersisterInterface](/Doc/CustomPersister.md)
