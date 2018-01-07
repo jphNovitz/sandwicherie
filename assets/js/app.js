@@ -4,13 +4,13 @@ const menu = document.getElementById('lateral-menu');
 const test = document.getElementsByTagName('input');
 for (let i=0 ; i< test.length ; i++){
     test[i].addEventListener("focusin", function (event) {
-        this.style.bottom = 0;
+        this.style.bottom = "-2px";
     });
     test[i].addEventListener("focusout", function (event) {
         if (this.value){
-            this.style.bottom = 0;
+            this.style.bottom = "-2px";
         }else {
-            this.style.bottom = "28px";
+            this.style.bottom = "26px";
         }
     })
 }

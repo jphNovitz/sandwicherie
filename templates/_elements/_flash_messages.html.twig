@@ -1,0 +1,17 @@
+{############################################################################################}
+{#     _flash_messages.html.twig                                                            #}
+{#     display message flash in a page                                                      #}
+{#     this module should be included in the body of the page                               #}
+{#     @jphnovitz    2018                                                                   #}
+{############################################################################################}
+
+<!-- Flash message display module -->
+{% for label, messages in app.flashes %}
+    {%  for message in messages %}
+        <div class="alert alert-{{ label }}">
+            <i class="material-icons">info_outile</i> {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<!-- end Flash message display module -->

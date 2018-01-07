@@ -1,27 +1,13 @@
-{%  extends 'base.html.twig' %}
+{% extends '_skeletons/_forms.html.twig' %}
 
-{% block body %}
-
-    {% for label, messages in app.flashes %}
-        {%  for message in messages %}
-        <div class="alert alert-{{ label }}">
-            <i class="material-icons">info_outile</i> {{ message }}
+{% block title %}Ajout d'une catégorie{% endblock %}
+    {% block form_details %}
+        <div class="form-row">
+            <label for="form_name">Nom</label>
+            {{ form_widget(form.name) }}
         </div>
-        {% endfor %}
-    {% endfor %}
-
-    <h1>Category  Form</h1>
-
-    {{ form_start(form) }}
-    <div class="form-row">
-        {{ form_label(form.name) }}
-        {{ form_widget(form.name) }}
-    </div>
-    <div class="form-row">
-        {{ form_label(form.comment) }}
-        {{ form_widget(form.comment) }}
-    </div>
-    {{ form_widget(form) }}
-    <button type="submit">GO</button>
-    {{ form_end(form) }}
-{% endblock %}
+        <div class="form-row">
+            <label for="form_comment">Commentaire</label>
+            {{ form_widget(form.comment) }}
+        </div>
+    {% endblock %}

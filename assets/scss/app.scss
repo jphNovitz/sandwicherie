@@ -26,7 +26,7 @@ html, body {
 .content form .form-row{
   position: relative;
   margin: 10px 0;
-  line-height: 5em;
+  line-height: 4.5em;
 }
 .content form .form-row input,
 .content form .form-row input{
@@ -34,21 +34,22 @@ html, body {
 }
 .content form .form-row label{
  display: inherit;
+  font-size: 1.2em;
 }
 .content form .form-row input{
   border: 0;
   position: absolute;
   left: 0;
-  bottom: 28px;
+  bottom: 26px;
   opacity: 0.6;
   border-bottom: solid 1px #000;
   width: 90vw;
   font-size: 1.2em;
-  transition: all 1s ease;
+  transition: all .5s ease-in;
 }
 
 .content form .form-row input:focus{
-  bottom: 0;
+  bottom: -2px;
   outline: none ;
 }
 
@@ -90,6 +91,9 @@ html, body {
   .toolbar #menu-icon .material-icons {
     font-size: 29px;
   }
+  .toolbar #menu-icon .material-icons:hover {
+    cursor: pointer;
+  }
   .toolbar #title {
     font-family: 'Amarante', cursive;
     margin-left: 24px;
@@ -97,6 +101,7 @@ html, body {
   }
   #lateral-menu{
     position: absolute;
+    z-index: 100;
     top: 0px;
     margin-top: 0px;
     margin-left: -100vw;
@@ -142,7 +147,7 @@ html, body {
 @media screen and (max-width: 501px) {
   .toolbar #menu-icon .material-icons {
     font-size: 1.8rem;
-    margin-left: 1rem;
+    margin-left: 0rem;
   }
   .toolbar #title {
     font-family: 'Amarante', cursive;
