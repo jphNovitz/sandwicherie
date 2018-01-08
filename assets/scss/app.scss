@@ -5,6 +5,9 @@ $green: rgb(0, 100, 0);
 $white: rgb(255, 255, 255);
 $black: rgb(0, 0, 0);
 $grey: #212121;
+$primary: #3e75b3;
+$red: #D63246;
+$lightred: #f2dadc;
 
 html, body {
   margin: 0;
@@ -53,9 +56,34 @@ html, body {
   outline: none ;
 }
 
+.btn{
+  padding: 1%;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(54,69,79,1);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(54,69,79,1);
+  box-shadow: 0px 0px 5px 0px rgba(54,69,79,1);
+}
+.btn:active{
+  -webkit-box-shadow: 0px 0px 9px 0px rgba(54,69,79,1);
+  -moz-box-shadow: 0px 0px 9px 0px rgba(54,69,79,1);
+  box-shadow: 0px 0px 9px 0px rgba(54,69,79,1);
+}
+.btn-primary {
+  background-color: $primary;
+  color: #fff;
+  border-color: transparent;
+ }
+
 /*
  * alerts
  */
+
+.form-errors{
+  background-color: $lightred;
+  color: $red;
+  padding: 0.8em;
+  border-radius: 10px;
+}
 .alert {
   display: flex;
   align-items: center;

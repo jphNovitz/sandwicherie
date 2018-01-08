@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -20,6 +21,7 @@ class Category
      * @var string
      *
      * @ORM\Column(type="string", length=80, nullable=false)
+     * @Assert\NotBlank(message="une Catégorie doit avoir un nom ")
      */
     private $name;
 

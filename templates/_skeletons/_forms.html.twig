@@ -5,10 +5,14 @@
 {% include '_elements/_flash_messages.html.twig' %}
 
     <h1>{%  block title %} Category  Form {% endblock %} </h1>
-    {{ form_start(form) }}
+
+    {{ form_start(form, {attr:{novalidate : 'novalidate'}}) }}
+    <div class="form-errors">
+        {{ form_errors(form.name) }}
+    </div>
     {% block form_details %}
         {{ form_widget(form) }}
     {% endblock %}
-    <button type="submit">GO</button>
+    <button type="submit" class="btn btn-primary">GO</button>
     {{ form_end(form) }}
 {% endblock %}
