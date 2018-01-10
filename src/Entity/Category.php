@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -20,7 +22,7 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=80, nullable=false)
+     * @ORM\Column(type="string", length=80, nullable=false, unique=true)
      * @Assert\NotBlank(message="une Catégorie doit avoir un nom ")
      */
     private $name;
@@ -31,6 +33,13 @@ class Category
      * @ORM\Column(type="string", length=120, nullable=true)
      */
     private $comment;
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(name="slug", type="string", length=90, unique=true)
+     */
+    private $slug;
 
     /**
      * @return mixed
@@ -84,9 +93,23 @@ class Category
     {
         return $this->name;
     }
+
     /**
-     *   @todo add category
+     * @return string
      */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
 
 
 }

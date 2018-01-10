@@ -1,9 +1,13 @@
 <?php
+
 namespace App\Service;
 
 use App\Model\CustomPersisterInterface;
 use Doctrine\ORM\EntityManagerInterface;
-class CustomPersister implements  CustomPersisterInterface{
+use Doctrine\ORM\Persisters\PersisterException;
+
+class CustomPersister implements CustomPersisterInterface
+{
 
     private $entityManager;
 
@@ -15,12 +19,23 @@ class CustomPersister implements  CustomPersisterInterface{
 
     public function insert($obj)
     {
-        $this->entityManager->persist($obj);
-        $this->entityManager->flush();
+        try {
+            $this->entityManager->persist($obj);
+            $this->entityManager->flush();
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
+
     public function update($obj)
     {
-        $this->entityManager->merge($obj);
-        $this->entityManager->flush();
+        try {
+            $this->entityManager->merge($obj);
+            $this->entityManager->flush();
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }

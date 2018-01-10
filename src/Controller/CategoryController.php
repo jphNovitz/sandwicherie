@@ -34,10 +34,17 @@ class CategoryController extends Controller
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()):
-            $this->customPersister->insert($category);
-            die('fait');
+            if ($this->customPersister->insert($category)):
+                $this->addFlash("success",
+                    "La catégorie ". $category->getName() . " a été créée avec succès !");
+             else:
+                 $this->addFlash("error",
+                        "La catégorie ". $category->getName() . " n'a pas pu être ajoutée");
+            endif;
+            return $this->redirectToRoute('category_add');
+
         endif;
-        return $this->render('Form/category.html.twig', [
+        return $this->render('Category/category_add.html.twig', [
             'form'=>$form->createView()
         ]);
 
@@ -72,16 +79,29 @@ class CategoryController extends Controller
 
 
     /**
-     * @Route("/category/{id}/update", name="category_update")
+     * @Route("/category/{slug}/update", name="category_update")
      */
     public function update(Request $request, Category $category= NULL )
     {
-
         if (!$category) {
-            return new Response('To do: renvoyer vers une page');
+            $this->addFlash("error", "Cette categorie n'existe pas ");
+            return $this->redirectToRoute('category_add');
         }
         $form = $this->createForm(CategoryType::class, $category);
-        return $this->render('Form/category.html.twig', [
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()):
+            if ($this->customPersister->update($category)):
+                $this->addFlash("success",
+                    "La catégorie ". $category->getName() . " a été modifiée !");
+            else:
+                $this->addFlash("error",
+                    "La catégorie ". $category->getName() . " n'a pas pu être modifiée ");
+            endif;
+            return $this->redirectToRoute('category_update',[
+                "slug"=>$category->getSlug()
+            ]);
+        endif;
+        return $this->render('Category/category_update.html.twig', [
             'form'=>$form->createView()
         ]);
     }

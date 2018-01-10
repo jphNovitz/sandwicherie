@@ -2,6 +2,7 @@
 
 $darkOrange: rgb(255, 140, 0);
 $green: rgb(0, 100, 0);
+$greenPastel: #A1E7AE;
 $white: rgb(255, 255, 255);
 $black: rgb(0, 0, 0);
 $grey: #212121;
@@ -93,13 +94,23 @@ html, body {
   border-radius: 10px;
   font-weight: bolder;
 }
+.alert-error {
+  color: $red;
+  background-color: $lightred;
+  border: solid 2px $red;
+}
 .alert-notice {
   color: #8a6d3b;
   background-color: #efbe80;
   border: solid 2px #fb8b00;
 }
+.alert-success {
+  color: $green;
+  background-color: $greenPastel;
+  border: solid 2px $green;
+}
 .alert .material-icons{
-  margin-right: -140px;
+  margin-right: 1.6em;
 }
 /*
  * end alert
