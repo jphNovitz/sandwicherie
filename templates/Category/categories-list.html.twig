@@ -3,8 +3,13 @@
 {% block body %}
 
     <h1>Categories List</h1>
-    {% for category in list %}
-        <a href="{{ path('category_show', {'id' : category.id}) }}">{{ category.name }}</a>
-    {%  endfor %}
+    <div class="list-group">
+        {% for category in list %}
+            <div class="list-group-item">
+                <a href="{{ path('category_show', {'id' : category.id}) }}">{{ category.name }}</a>
+            </div>
+        {%  endfor %}
+    </div>
+
 
 {% endblock %}

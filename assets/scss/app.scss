@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Amarante|Open+Sans|Roboto');
 
 $darkOrange: rgb(255, 140, 0);
+$lightOrange: #FFB479;
 $green: rgb(0, 100, 0);
 $greenPastel: #A1E7AE;
 $white: rgb(255, 255, 255);
@@ -19,9 +20,14 @@ html, body {
 }
 .container {
   width: 100vw;
-}
+  height: 100vh;
+  }
 .content {
-  padding: 5px 10px;
+  padding: 5px 0;
+  background-color: #FFEFE3;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
 }
 .content h1{
   font-size: 1.5em;
@@ -41,6 +47,7 @@ html, body {
   font-size: 1.2em;
 }
 .content form .form-row input{
+  background-color: inherit;
   border: 0;
   position: absolute;
   left: 0;
@@ -179,7 +186,37 @@ html, body {
     border: none;
     margin: 9px 3px;
   }
+  /*
+  * list display
+  */
+  .list-group{
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .list-group .list-group-item:first-child {
+    border-top: solid 1px $lightOrange;
+  }
+  .list-group .list-group-item{
+    border-bottom: solid 1px #FFB479;
+    border-left: solid 1px #FFB479;
+    border-right: solid 1px #FFB479;
+    -webkit-box-shadow:  4px 3px 18px 0px #cecece;
+    -moz-box-shadow: 4px 3px 18px 0px #cecece;
+    box-shadow: 4px 3px 18px 0px #cecece;
+    display: flex;
+    line-height: 2em;
+    padding: 0 1em;
+    width: 80%;
+  }
+  .list-group .list-group-item:hover{
+    background-color: #FFEFE3;
+  }
 
+  /*
+  * end list display
+  */
 
 }
 
