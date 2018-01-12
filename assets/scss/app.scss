@@ -8,6 +8,7 @@ $white: rgb(255, 255, 255);
 $black: rgb(0, 0, 0);
 $grey: #212121;
 $primary: #3e75b3;
+$info: #00A2B5;
 $red: #D63246;
 $lightred: #f2dadc;
 
@@ -32,6 +33,20 @@ html, body {
 .content h1{
   font-size: 1.5em;
   color: #708238;
+  padding: 1px 20px;
+}
+.bg-alert{
+  background-color: $red;
+}
+.bg-primary{
+  background-color: $primary;
+}
+.bg-info{
+  background-color: $info;
+}
+
+form{
+  margin: 0 20px;
 }
 .content form .form-row{
   position: relative;
@@ -194,6 +209,7 @@ html, body {
     padding: 0;
     display: flex;
     justify-content: center;
+    flex-direction: row;
   }
   .list-group .list-group-item:first-child {
     border-top: solid 1px $lightOrange;
@@ -207,11 +223,34 @@ html, body {
     box-shadow: 4px 3px 18px 0px #cecece;
     display: flex;
     line-height: 2em;
-    padding: 0 1em;
+    padding: 5px 1em;
     width: 80%;
+    flex-direction: column;
   }
   .list-group .list-group-item:hover{
     background-color: #FFEFE3;
+  }
+  .list-group .list-group-item .actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 8px 0;
+  }
+  .list-group .list-group-item .name{
+    padding: 8px 5px;
+    font-size: 1.2em;
+    border-bottom: dotted 1px #cecece;
+  }
+  .list-group .list-group-item .name a{
+    text-decoration: none;
+    background-color: inherit;
+    color: black;
+  }
+
+  .list-group .list-group-item .actions .material-icons{
+    border-radius: 25px;
+    padding: 5px;
+    color: #fff;
   }
 
   /*

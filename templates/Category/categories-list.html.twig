@@ -1,12 +1,18 @@
 {% extends 'base.html.twig' %}
+{% set entity = "category" %}
 
 {% block body %}
 
-    <h1>Categories List</h1>
+    <h1> Liste  </h1>
     <div class="list-group">
-        {% for category in list %}
+        {% for object in list %}
             <div class="list-group-item">
-                <a href="{{ path('category_show', {'id' : category.id}) }}">{{ category.name }}</a>
+                <div class="name"> <a href="{{ path(entity ~ '_show', {'id' : object.id}) }}">{{ object.name }}</a> </div>
+                <div class="actions">
+                    <a href="{{ path(entity ~ '_show', {'id' : object.id}) }}"> <i class="material-icons bg-info">details</i></a>
+                    <a href="{{ path(entity ~ '_update', {'slug' : object.slug}) }}"> <i class="material-icons bg-primary">mode_edit</i></a>
+                    <a href=""> <i class="material-icons bg-alert">delete</i></a>
+                </div>
             </div>
         {%  endfor %}
     </div>
