@@ -209,7 +209,7 @@ form{
     padding: 0;
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
   }
   .list-group .list-group-item:first-child {
     border-top: solid 1px $lightOrange;
@@ -223,10 +223,19 @@ form{
     box-shadow: 4px 3px 18px 0px #cecece;
     display: flex;
     line-height: 2em;
+    margin: 3px auto;
     padding: 5px 1em;
     width: 80%;
     flex-direction: column;
+    transition: all 1s ease;
   }
+  .list-group .list-group-item:hover{
+
+    -webkit-box-shadow:  4px 3px 21px 2px #757474;
+    -moz-box-shadow:  4px 3px 21px 2px #757474;
+    box-shadow:  4px 3px 21px 2px #757474;
+  }
+
   .list-group .list-group-item:hover{
     background-color: #FFEFE3;
   }
