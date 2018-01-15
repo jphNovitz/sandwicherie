@@ -8,12 +8,18 @@ use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-
+/**
+ * Class IngredientController
+ * @package App\Controller
+ * @Route("/admin/ingredients/")
+ * @Method({"GET"})
+ */
 class IngredientController extends Controller
 {
     protected $customPersister;
@@ -26,7 +32,8 @@ class IngredientController extends Controller
     }
 
     /**
-     * @Route("/ingredient/new", name="ingredient_add")
+     * @Route("new", name="ingredients_add")
+     * @Method({"GET", "POST"})
      */
     public function add(Request $request)
     {
@@ -34,12 +41,16 @@ class IngredientController extends Controller
         $form = $this->createForm(IngredientType::class, $ingredient);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()):
-            $this->customPersister->insert($ingredient);
-            die('fait');
+            if($this->customPersister->insert($ingredient)) {
+                $this->addFlash("success",
+                    "Votre ingrédient ".$ingredient->getName()." a bien été ajouté.");
+            } else {
+                $this->addFlash("error",
+                    "l'ingrédient n'a pas pu être ajouté.");
+            }
         endif;
-        return $this->render('Form/ingredient.html.twig', [
+        return $this->render('Ingredient/ingredient_add.html.twig', [
             'form'=>$form->createView()
         ]);
 
