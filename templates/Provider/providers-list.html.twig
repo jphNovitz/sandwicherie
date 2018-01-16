@@ -1,10 +1,3 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-
-    <h1>Providers List</h1>
-    {% for provider in list %}
-        <a href="{{ path('provider_show', {'id' : provider.id}) }}">{{ provider.name }}</a>
-    {%  endfor %}
-
-{% endblock %}
+{% extends '_skeletons/_list.html.twig' %}
+{% set entity = "providers" %}
+{%  block title %}Liste des fournisseurs {% endblock %}

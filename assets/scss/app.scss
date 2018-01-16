@@ -16,18 +16,20 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100vh;
+  min-height: 100%;
+  height: 100%;
   position: relative;
   font-family: 'Roboto', sans-serif;
 }
 .container {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   }
 .content {
   padding: 5px 0;
   background-color: #FFEFE3;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   justify-content: center;
 }
 .content h1{

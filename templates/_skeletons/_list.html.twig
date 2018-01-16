@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+    {% include '_elements/_flash_messages.html.twig' %}
     <h1> {%  block title %}skeleton list {% endblock %} </h1>
     <div class="list-group">
         {% for object in list %}

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Ingredient;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,6 +28,8 @@ class IngredientType extends AbstractType
                 'multiple' => true,
                 'required' => false
             ])
+            ->add('bread', CheckboxType::class)
+            ->add('sauce', CheckboxType::class);
         ;
     }
 

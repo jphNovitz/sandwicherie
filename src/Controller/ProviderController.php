@@ -8,12 +8,18 @@ use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-
+/**
+ * Class ProviderController
+ * @package App\Controller
+ * @Route("/admin/providers/")
+ * @Method({"GET"})
+ */
 class ProviderController extends Controller
 {
     protected $customPersister;
@@ -26,7 +32,21 @@ class ProviderController extends Controller
     }
 
     /**
-     * @Route("/provider/new", name="provider_add")
+     * @Route("", name="providers_list")
+     */
+    public function index()
+    {
+        $list = $this->customLoader->LoadAll('App:Provider');
+        if (!$list) {
+            $this->addFlash("notice", "Aucun fournisseur trouvé, ajoutez-en un ");
+            return $this->redirectToRoute('providers_add');
+        }
+        return $this->render('Provider/providers-list.html.twig', ['list'=>$list]);
+    }
+
+    /**
+     * @Route("new", name="providers_add")
+     * @Method({"GET", "POST"})
      */
     public function add(Request $request)
     {
@@ -34,53 +54,45 @@ class ProviderController extends Controller
         $form = $this->createForm(ProviderType::class, $provider);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()):
-            $this->customPersister->insert($provider);
-            die('fait');
+            if ($this->customPersister->insert($provider)){
+                $this->addFlash("success", "Le fournisseur a été ajouté.");
+                return $this->redirectToRoute('providers_add');
+            } else {
+                $this->addFlash("error", "Il y a eu un problème, fournisseur non ajouté");
+            }
         endif;
-        return $this->render('Form/provider.html.twig', [
+        return $this->render('Provider/provider-add.html.twig', [
             'form'=>$form->createView()
         ]);
 
     }
 
     /**
-     * @Route("/providers", name="providers_list")
+     * @Route("{id}", name="providers_show")
      */
-    public function index()
+    public function show(Request $request, Provider $provider=null)
     {
-       //$list=$this->getDoctrine()->getManager()->getRepository('App:Provider')->findAll();
-       $list = $this->customLoader->LoadAll('App:Provider');
-       //var_dump($list);die();
-        return $this->render('Provider/providers-list.html.twig', [
-            'list'=>$list
-        ]);
-    }
-
-    /**
-     * @Route("/provider/{id}", name="provider_show")
-     */
-    public function show(Request $request, $id = null)
-    {
-        $provider = $this->customLoader->LoadOne('App:Provider', $id);
-        return $this->render('Provider/provider-card.html.twig', [
-            'provider'=>$provider
-        ]);
+        if (!$provider){
+            $this->addFlash("error", "fournisseur inconnu");
+            return $this->redirectToRoute('providers_list');
+        }
+        return $this->render('Provider/provider-card.html.twig', ['provider'=>$provider]);
     }
 
 
 
     /**
-     * @Route("/provider/{id}/update", name="provider_update")
+     * @Route("{slug}/update", name="providers_update")
      */
     public function update(Request $request, Provider $provider= NULL )
     {
-
         if (!$provider) {
-            return new Response('To do: renvoyer vers une page');
+            $this->addFlash("error", "fournisseur inconnu");
+            return $this->redirectToRoute('providers_list');
         }
         $form = $this->createForm(ProviderType::class, $provider);
         $form->handleRequest($request);
-        return $this->render('Form/provider.html.twig', [
+        return $this->render('Provider/provider-update.html.twig', [
             'form'=>$form->createView()
         ]);
     }

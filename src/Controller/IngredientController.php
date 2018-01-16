@@ -57,22 +57,28 @@ class IngredientController extends Controller
     }
 
     /**
-     * @Route("/ingredients", name="ingredients_list")
+     * @Route("", name="ingredients_list")
      */
     public function index()
     {
-        $list = $this->customLoader->LoadAll('App:Category');
-        return $this->render('Ingredient/ingredients-list.html.twig', [
-            'list'=>$list
-        ]);
+        $list = $this->customLoader->LoadAll('App:Ingredient');
+        if (!$list) {
+            $this->addFlash("notice", "Il n'y a aucun ingrédient, ajoutez-en un");
+            return $this->redirectToRoute("ingredients_add");
+        }
+        return $this->render('Ingredient/ingredients-list.html.twig', ['list'=>$list]);
     }
 
     /**
-     * @Route("/ingredient/{id}", name="ingredient_show")
+     * @Route("{id}", name="ingredients_show")
      */
     public function show(Request $request, $id = null)
     {
         $ingredient = $this->customLoader->LoadOne('App:Ingredient', $id);
+        if (!$ingredient){
+            $this->addFlash("error", "ingrédient inconnu");
+            return $this->redirectToRoute('ingredients_list');
+        }
         return $this->render('Ingredient/ingredient-card.html.twig', [
             'ingredient'=>$ingredient        ]);
     }
@@ -80,7 +86,7 @@ class IngredientController extends Controller
 
 
     /**
-     * @Route("/ingredient/{id}/update", name="ingredient_update")
+     * @Route("{slug}/update", name="ingredients_update")
      */
     public function update(Request $request, Ingredient $ingredient= NULL )
     {
@@ -89,7 +95,7 @@ class IngredientController extends Controller
             return new Response('To do: renvoyer vers une page');
         }
         $form = $this->createForm(IngredientType::class, $ingredient);
-        return $this->render('Form/ingredient.html.twig', [
+        return $this->render('Ingredient/ingredient-update.html.twig', [
             'form'=>$form->createView()
         ]);
     }
