@@ -2,39 +2,42 @@
 
 namespace App\Form;
 
-use App\Entity\Allergy;
+use App\Entity\Product;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AllergyType extends AbstractType
+class ProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', TextType::class)
-            ->add('categories', EntityType::class,[
-                'class'=>'App\Entity\Category',
-
-                'by_reference' => true,
-                'multiple' => true,
-                'required' => false
-            ])
-            ->add('ingredients', EntityType::class,[
+            ->add('description', TextType::class)
+            ->add('vegetables', EntityType::class, [
                 'class'=>'App\Entity\Ingredient',
-                'by_reference' => false,
-                'multiple' => true,
-                'required' => false
+                'required'=>false
             ])
+            ->add('breads', EntityType::class, [
+                'class'=>'App\Entity\Ingredient',
+                'required'=>false
+            ])
+            ->add('breads', EntityType::class, [
+                'class'=>'App\Entity\Ingredient',
+                'required'=>false
+            ])
+            ->add('isActive', CheckboxType::class)
+
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Allergy::class,
+            'data_class' => Product::class,
         ]);
     }
 }

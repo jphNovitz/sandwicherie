@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin\Provider;
 
 use App\Entity\Provider ;
 use App\Form\ProviderType;
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ProviderController
- * @package App\Controller
+ * @package App\Controller\Admin\Provider
  * @Route("/admin/providers/")
  * @Method({"GET"})
  */

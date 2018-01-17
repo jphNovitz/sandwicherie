@@ -1,0 +1,19 @@
+{% extends '_skeletons/_forms.html.twig' %}
+
+{% block title %}Ajout d'une allergie{% endblock %}
+    {% block form_details %}
+        <div class="form-row">
+            <label for="form_name">Nom</label>
+            {{ form_widget(form.name) }}
+        </div>
+        <div class="form-row">
+            {{ form_errors(form.categories) }}
+            <label for="form_categories">categories</label>
+            {{ form_widget(form.categories) }}
+        </div>
+        <div class="form-row">
+            <label for="form_ingredients">ingredients</label>
+            {{ form_widget(form.ingredients) }}
+        </div>
+
+    {% endblock %}

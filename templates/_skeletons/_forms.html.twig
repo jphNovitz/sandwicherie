@@ -9,7 +9,7 @@
     {{ form_start(form, {attr:{novalidate : 'novalidate'}}) }}
         {% if not form.vars.valid %}
             <div class="form-errors">
-                {{ form_errors(form.name) }}
+                {{ form_errors(form) }}
             </div>
         {% endif %}
     {% block form_details %}

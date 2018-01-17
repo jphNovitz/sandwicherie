@@ -27,12 +27,14 @@ class Category
      */
     private $name;
 
+
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=120, nullable=true)
      */
     private $comment;
+
     /**
      * @var string
      *

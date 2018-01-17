@@ -1,0 +1,9 @@
+{% extends '_skeletons/_forms.html.twig' %}
+
+{% block title %}Ajout d'un type de produit{% endblock %}
+    {% block form_details %}
+        <div class="form-row">
+            <label for="form_name">Nom</label>
+            {{ form_widget(form.name) }}
+        </div>
+    {% endblock %}

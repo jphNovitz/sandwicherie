@@ -1,11 +1,24 @@
 # isl ei 2018 : La Clémentine - Log
   
  memo / todo  
+ améliorer  affichage erreurs dans les formulaires
  remplacer les id par les slugs dans les routes
  separer menu lateral du template -> mettre dans _elements
  bread et sauce dans formulaire ingredient
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
+
+ 
+### 17 janvier 2018
+##### Continué le travail des jours précédents  
+**Avancements**  
+Modification entité ingredients, products, type, allergie .... ajout de propriétés dont SLUG  
+Corrections dans les controllers des jours précédent + même structure des actions pour input, product,
+type, ...  
+Modification de la structure des controller et des templates pour une meilleure lisibilité  
+**Reflexions**  
+ressemble plus à mes idées.
+ 
 ### 16 janvier 2018
 ##### ingredientController, ProviderController  
 **Avancements**  
@@ -41,7 +54,7 @@ Utilisation de material design pour la partie admin car j'ai besoin que l'utilis
 soit facile et instinctive.  Je suis certain que la cliente saura l'utiliser car 
 elle utilise tous les jours goole et facebook et ces deux interfaces ont beaucoup de similitude.
 
-### Du 12 novembre au 2 janvier 2018
+### Du 12 decembre au 2 janvier 2018
 ##### Création des schéma et création des entité  
   
 **Avancement**  

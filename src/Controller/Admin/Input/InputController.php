@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin\Input;
 
 use App\Entity\Input ;
 use App\Form\InputType;

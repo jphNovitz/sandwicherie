@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin\Ingredient;
 
 use App\Entity\Ingredient ;
 use App\Form\IngredientType;
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class IngredientController
- * @package App\Controller
+ * @package App\Controller\Admin\Ingredient
  * @Route("/admin/ingredients/")
  * @Method({"GET"})
  */
@@ -50,7 +50,7 @@ class IngredientController extends Controller
                     "l'ingrédient n'a pas pu être ajouté.");
             }
         endif;
-        return $this->render('Ingredient/ingredient_add.html.twig', [
+        return $this->render('Ingredient/form/ingredient_add.html.twig', [
             'form'=>$form->createView()
         ]);
 
@@ -95,7 +95,16 @@ class IngredientController extends Controller
             return new Response('To do: renvoyer vers une page');
         }
         $form = $this->createForm(IngredientType::class, $ingredient);
-        return $this->render('Ingredient/ingredient-update.html.twig', [
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()):
+            if ($this->customPersister->update($ingredient)){
+                $this->addFlash("success", "Ingrédient modifié.");
+                return $this->redirectToRoute('ingredients_update', ['slug'=>$ingredient->getSlug()]);
+            } else {
+                $this->addFlash("error", "Il y a eu un problème, ingredient non modifié.");
+            }
+        endif;
+        return $this->render('Ingredient/form/ingredient-update.html.twig', [
             'form'=>$form->createView()
         ]);
     }

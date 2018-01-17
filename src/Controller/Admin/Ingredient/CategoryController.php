@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin\Ingredient;
 
 use App\Entity\Category ;
 use App\Form\CategoryType;
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class CategoryController
- * @package App\Controller
+ * @package App\Controller\Admin\Ingredient
  * @Route("/admin/categories/")
  * @Method({"GET"})
  */
@@ -50,7 +50,7 @@ class CategoryController extends Controller
             endif;
             return $this->redirectToRoute('categories_add');
         endif;
-        return $this->render('Category/category_add.html.twig', [
+        return $this->render('Ingredient/Category/form/category_add.html.twig', [
             'form'=>$form->createView()
         ]);
 
@@ -66,7 +66,7 @@ class CategoryController extends Controller
             $this->addFlash('notice', 'Il n\' y a aucune catégorie, je vous propose d\'en ajouter une');
             return $this->redirectToRoute('categories_add');
         }
-        return $this->render('Category/categories-list.html.twig', [
+        return $this->render('Ingredient/Category/categories-list.html.twig', [
             'list'=>$list
         ]);
     }
@@ -77,7 +77,7 @@ class CategoryController extends Controller
     public function show(Request $request, $id = null)
     {
         $category = $this->customLoader->LoadOne('App:Category', $id);
-        return $this->render('Category/category-card.html.twig', [
+        return $this->render('Ingredient/Category/category-card.html.twig', [
             'category'=>$category
         ]);
     }
@@ -108,7 +108,7 @@ class CategoryController extends Controller
                 "slug"=>$category->getSlug()
             ]);
         endif;
-        return $this->render('Category/category_update.html.twig', [
+        return $this->render('Ingredient/Category/form/category_update.html.twig', [
             'form'=>$form->createView()
         ]);
     }

@@ -25,13 +25,13 @@
             <li><i class="material-icons">input</i> <a href="">Entrée marchandises</a></li>
             <li><i class="material-icons">shopping_cart</i><a href=""> Commandes </a></li>
             <hr class="separation">
-            <li><i class="material-icons">free_breakfast</i><a href=""> Produits </a></li>
+            <li><i class="material-icons">free_breakfast</i><a href="{{ path('products_list') }}"> Produits </a></li>
             <li><i class="material-icons">store</i> <a href="{{ path('providers_list') }}"> Fournisseurs </a></li>
-            <li><i class="material-icons">info</i> <a href=""> Allergies</a></li>
+            <li><i class="material-icons">info</i> <a href="{{ path('allergies_list') }}"> Allergies</a></li>
             <hr class="separation">
             <li><i class="material-icons">layers</i> <a href="{{ path('ingredients_list') }}"> Ingredients</a></li>
             <li><i class="material-icons">local_offer</i> <a href="{{ path('categories_list') }}"> Categories</a></li>
-            <li><i class="material-icons">assignment</i> <a href=""> Types</a></li>
+            <li><i class="material-icons">assignment</i> <a href="{{ path('types_list') }}"> Types</a></li>
             <hr class="separation">
         </ul>
 

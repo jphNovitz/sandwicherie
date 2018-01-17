@@ -1,10 +1,3 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-
-    <h1>Allergies List</h1>
-    {% for allergy in list %}
-        <a href="{{ path('allergy_show', {'id': allergy.id}) }}">{{ allergy.name }}</a>
-    {%  endfor %}
-
-{% endblock %}
+{% extends '_skeletons/_list.html.twig' %}
+{% set entity = "allergies" %}
+{%  block title %}Liste des allergies {% endblock %}

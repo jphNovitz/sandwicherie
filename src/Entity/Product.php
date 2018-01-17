@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -23,7 +24,16 @@ class Product
     */
    private $name;
 
-   /**
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(name="slug", type="string", length=90, unique=true)
+     */
+    private $slug;
+
+
+    /**
     * @var string
     * @ORM\Column(name="description", type="string", length=255, nullable=true)
     *
@@ -65,6 +75,22 @@ class Product
 
    /**
     * @var ArrayCollection
+    * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
+    * @ORM\JoinColumn(nullable=true)
+    * @ORM\JoinTable(name="product_breads")
+    */
+   private $breads;
+
+   /**
+    * @var ArrayCollection
+    * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
+    * @ORM\JoinColumn(nullable=true)
+    * @ORM\JoinTable(name="product_sauces")
+    */
+   private $sauces;
+
+   /**
+    * @var ArrayCollection
     * @ORM\ManyToMany(targetEntity="App\Entity\Type")
     * @ORM\JoinColumn(nullable=false)
     * @ORM\JoinTable(name="product_types")
@@ -84,8 +110,9 @@ class Product
    {
        $this->ingredients = new ArrayCollection();
        $this->vegetables = new ArrayCollection();
+       $this->breads = new ArrayCollection();
+       $this->sauces = new ArrayCollection();
        $this->types = new ArrayCollection();
-       $this->bread = new ArrayCollection();
    }
 
     /**
@@ -118,6 +145,22 @@ class Product
     public function setName(String $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 
     /**
@@ -209,7 +252,7 @@ class Product
      */
     public function addVegetable($vegetable)
     {
-        $this->vegetable->add($vegetable);
+        $this->vegetables->add($vegetable);
         // uncomment if you want to update other side
         //$vegetable->setProduct($this);
     }
@@ -219,9 +262,65 @@ class Product
      */
     public function removeVegetable($vegetable)
     {
-        $this->vegetable->removeElement($vegetable);
+        $this->vegetables->removeElement($vegetable);
         // uncomment if you want to update other side
         //$vegetable->setProduct(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBreads(): ArrayCollection
+    {
+        return $this->breads;
+    }
+
+    /**
+     * @param mixed $bread
+     */
+    public function addBread($bread)
+    {
+        $this->breads->add($bread);
+        // uncomment if you want to update other side
+        //$bread->setProduct($this);
+    }
+
+    /**
+     * @param mixed $bread
+     */
+    public function removeBread($bread)
+    {
+        $this->breads->removeElement($bread);
+        // uncomment if you want to update other side
+        //$bread->setProduct(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSauces(): ArrayCollection
+    {
+        return $this->sauces;
+    }
+
+    /**
+     * @param mixed $sauce
+     */
+    public function addSauce($sauce)
+    {
+        $this->sauces->add($sauce);
+        // uncomment if you want to update other side
+        //$sauce->setProduct($this);
+    }
+
+    /**
+     * @param mixed $sauce
+     */
+    public function removeSauce($sauce)
+    {
+        $this->sauces->removeElement($sauce);
+        // uncomment if you want to update other side
+        //$sauce->setProduct(null);
     }
 
     /**
@@ -237,7 +336,7 @@ class Product
      */
     public function addType($type)
     {
-        $this->type->add($type);
+        $this->types->add($type);
         // uncomment if you want to update other side
         //$type->setProduct($this);
     }
@@ -247,7 +346,7 @@ class Product
      */
     public function removeType($type)
     {
-        $this->type->removeElement($type);
+        $this->types->removeElement($type);
         // uncomment if you want to update other side
         //$type->setProduct(null);
     }

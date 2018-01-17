@@ -3,6 +3,8 @@
 namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AllergyRepository")
@@ -18,22 +20,26 @@ class Allergy
 
     /**
      * @var string
-     * @ORM\Column(name="name")
+     * @ORM\Column(name="name", length=80)
      */
     private $name;
 
     /**
-     * @var Category
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=80, unique=true)
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
      *
      */
     private $categories;
 
     /**
-     * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
      */
     private $ingredients;
 
@@ -85,6 +91,24 @@ class Allergy
     {
         $this->name = $name;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
+    }
+
+
 
     /**
      * @param mixed $ingredient
