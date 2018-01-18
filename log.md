@@ -1,6 +1,7 @@
 # isl ei 2018 : La Clémentine - Log
   
  memo / todo  
+
  améliorer  affichage erreurs dans les formulaires
  remplacer les id par les slugs dans les routes
  separer menu lateral du template -> mettre dans _elements
@@ -8,7 +9,17 @@
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
- 
+### 18 janvier 2018
+##### Allergy - updload images  
+**Avancement**
+* création Admin controller pour une page d'accueil dans l'admin. 
+* quelque corrections
+* installation vich bundle pour updload image -> ajout dans formulaire ajout allergie
+* travail sur allergy   
+**Reflexion**  
+Beaucoup de temps gagner avec vich, pour l'instant cela me permet d'avancer. Continuer a tester vich avec
+des entites/relations plus complexes.
+     
 ### 17 janvier 2018
 ##### Continué le travail des jours précédents  
 **Avancements**  

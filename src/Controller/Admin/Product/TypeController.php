@@ -41,7 +41,7 @@ class TypeController extends Controller
             $this->addFlash('notice', 'Il n\' y a aucune catégorie, je vous propose d\'en ajouter une');
             return $this->redirectToRoute('types_add');
         }
-        return $this->render('Product/Type/types-list.html.twig', [
+        return $this->render('Admin/Product/Type/types-list.html.twig', [
             'list'=>$list
         ]);
     }
@@ -63,7 +63,7 @@ class TypeController extends Controller
             endif;
             return $this->redirectToRoute('types_add');
         endif;
-        return $this->render('Product/Type/form/type_add.html.twig', [
+        return $this->render('Admin/Product/Type/form/type_add.html.twig', [
             'form'=>$form->createView()
         ]);
 
@@ -75,12 +75,10 @@ class TypeController extends Controller
     public function show(Request $request, $id = null)
     {
         $type = $this->customLoader->LoadOne('App:Type', $id);
-        return $this->render('Product/Type/type-card.html.twig', [
+        return $this->render('Admin/Product/Type/type-card.html.twig', [
             'type'=>$type
         ]);
     }
-
-
 
     /**
      * @Route("{slug}/update", name="types_update")
@@ -106,7 +104,7 @@ class TypeController extends Controller
                 "slug"=>$type->getSlug()
             ]);
         endif;
-        return $this->render('Product/Type/form/type_update.html.twig', [
+        return $this->render('Admin/Product/Type/form/type_update.html.twig', [
             'form'=>$form->createView()
         ]);
     }

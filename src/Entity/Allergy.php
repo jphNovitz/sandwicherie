@@ -4,10 +4,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AllergyRepository")
+ * @Vich\Uploadable
  */
 class Allergy
 {
@@ -31,6 +35,22 @@ class Allergy
     private $slug;
 
     /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="allergy", fileNameProperty="imageName")
+     *
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $imageName;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category")
      * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
      *
@@ -44,13 +64,6 @@ class Allergy
     private $ingredients;
 
     /**
-     * @var Image
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist"})
-     */
-     private $image;
-
-    /**
      * Allergy constructor.
      */
 
@@ -59,6 +72,8 @@ class Allergy
         $this->categories =  new ArrayCollection();
         $this->ingredients =  new ArrayCollection();
     }
+
+
 
     /**
      * @return mixed
@@ -106,6 +121,38 @@ class Allergy
     public function setSlug($slug): void
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     */
+    public function setImageFile(File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName(string $imageName): void
+    {
+        $this->imageName = $imageName;
     }
 
 
@@ -168,21 +215,6 @@ class Allergy
         //$category->setAllergy(null);
     }
 
-    /**
-     * @return Image
-     */
-    public function getImage(): Image
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param Image $image
-     */
-    public function setImage(Image $image): void
-    {
-        $this->image = $image;
-    }
 
 
 }

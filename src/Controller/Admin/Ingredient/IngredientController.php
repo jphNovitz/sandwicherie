@@ -32,6 +32,19 @@ class IngredientController extends Controller
     }
 
     /**
+     * @Route("", name="ingredients_list")
+     */
+    public function index()
+    {
+        $list = $this->customLoader->LoadAll('App:Ingredient');
+        if (!$list) {
+            $this->addFlash("notice", "Il n'y a aucun ingrédient, ajoutez-en un");
+            return $this->redirectToRoute("ingredients_add");
+        }
+        return $this->render('Admin/Ingredient/ingredients-list.html.twig', ['list'=>$list]);
+    }
+
+    /**
      * @Route("new", name="ingredients_add")
      * @Method({"GET", "POST"})
      */
@@ -50,23 +63,10 @@ class IngredientController extends Controller
                     "l'ingrédient n'a pas pu être ajouté.");
             }
         endif;
-        return $this->render('Ingredient/form/ingredient_add.html.twig', [
+        return $this->render('Admin/Ingredient/form/ingredient_add.html.twig', [
             'form'=>$form->createView()
         ]);
 
-    }
-
-    /**
-     * @Route("", name="ingredients_list")
-     */
-    public function index()
-    {
-        $list = $this->customLoader->LoadAll('App:Ingredient');
-        if (!$list) {
-            $this->addFlash("notice", "Il n'y a aucun ingrédient, ajoutez-en un");
-            return $this->redirectToRoute("ingredients_add");
-        }
-        return $this->render('Ingredient/ingredients-list.html.twig', ['list'=>$list]);
     }
 
     /**
@@ -79,7 +79,7 @@ class IngredientController extends Controller
             $this->addFlash("error", "ingrédient inconnu");
             return $this->redirectToRoute('ingredients_list');
         }
-        return $this->render('Ingredient/ingredient-card.html.twig', [
+        return $this->render('Admin/Ingredient/ingredient-card.html.twig', [
             'ingredient'=>$ingredient        ]);
     }
 
@@ -90,9 +90,9 @@ class IngredientController extends Controller
      */
     public function update(Request $request, Ingredient $ingredient= NULL )
     {
-
-        if (!$ingredient) {
-            return new Response('To do: renvoyer vers une page');
+        if (!$ingredient){
+            $this->addFlash("error", "ingrédient inconnu");
+            return $this->redirectToRoute('ingredients_list');
         }
         $form = $this->createForm(IngredientType::class, $ingredient);
         $form->handleRequest($request);
@@ -104,7 +104,7 @@ class IngredientController extends Controller
                 $this->addFlash("error", "Il y a eu un problème, ingredient non modifié.");
             }
         endif;
-        return $this->render('Ingredient/form/ingredient-update.html.twig', [
+        return $this->render('Admin/Ingredient/form/ingredient-update.html.twig', [
             'form'=>$form->createView()
         ]);
     }

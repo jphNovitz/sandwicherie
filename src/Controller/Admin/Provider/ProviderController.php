@@ -41,7 +41,7 @@ class ProviderController extends Controller
             $this->addFlash("notice", "Aucun fournisseur trouvé, ajoutez-en un ");
             return $this->redirectToRoute('providers_add');
         }
-        return $this->render('Provider/providers-list.html.twig', ['list'=>$list]);
+        return $this->render('Admin/Provider/providers-list.html.twig', ['list'=>$list]);
     }
 
     /**
@@ -61,7 +61,7 @@ class ProviderController extends Controller
                 $this->addFlash("error", "Il y a eu un problème, fournisseur non ajouté");
             }
         endif;
-        return $this->render('Provider/provider-add.html.twig', [
+        return $this->render('Admin/Provider/provider-add.html.twig', [
             'form'=>$form->createView()
         ]);
 
@@ -76,7 +76,7 @@ class ProviderController extends Controller
             $this->addFlash("error", "fournisseur inconnu");
             return $this->redirectToRoute('providers_list');
         }
-        return $this->render('Provider/provider-card.html.twig', ['provider'=>$provider]);
+        return $this->render('Admin/Provider/provider-card.html.twig', ['provider'=>$provider]);
     }
 
 
@@ -92,7 +92,7 @@ class ProviderController extends Controller
         }
         $form = $this->createForm(ProviderType::class, $provider);
         $form->handleRequest($request);
-        return $this->render('Provider/provider-update.html.twig', [
+        return $this->render('Admin/Provider/provider-update.html.twig', [
             'form'=>$form->createView()
         ]);
     }

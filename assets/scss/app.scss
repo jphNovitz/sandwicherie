@@ -73,12 +73,14 @@ form{
   border-bottom: solid 1px #000;
   width: 90vw;
   font-size: 1.2em;
-  transition: all .5s ease-in;
+  transition: all .25s ease-out;
 }
 
 .content form .form-row input:focus{
+  border-bottom: solid 1px $darkOrange;
   bottom: -2px;
   outline: none ;
+  opacity: 1;
 }
 
 .btn{

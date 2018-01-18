@@ -40,7 +40,7 @@ class InputController extends Controller
             die('fait');
         endif;
 
-        return $this->render('Form/input.html.twig', [
+        return $this->render('Admin/Input/input-add.html.twig', [
             'form'=>$form->createView()
         ]);
 
@@ -52,7 +52,7 @@ class InputController extends Controller
     public function list()
     {
         $list = $this->customLoader->LoadAll('App:Input');
-        return $this->render('Input/inputs-list.html.twig', [
+        return $this->render('Admin/Input/inputs-list.html.twig', [
             'list'=>$list
         ]);
     }
@@ -61,7 +61,7 @@ class InputController extends Controller
      * @Route("/input/{id}", name="input_show")
      */
     public function show(Request $request, Input $input){
-        return $this->render('Input/input-card.html.twig', [
+        return $this->render('Admin/Input/input-card.html.twig', [
             'input'=>$input
         ]);
     }
