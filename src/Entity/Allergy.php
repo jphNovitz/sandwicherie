@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -25,6 +26,7 @@ class Allergy
     /**
      * @var string
      * @ORM\Column(name="name", length=80)
+     *  @Assert\NotBlank(message="Vous avez oubliez de mettre un nom ")
      */
     private $name;
 

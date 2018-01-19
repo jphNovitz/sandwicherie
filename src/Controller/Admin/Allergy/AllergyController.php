@@ -62,7 +62,7 @@ class AllergyController extends Controller
                 $this->addFlash("error", "Il y a eu un problème, allergie non ajoutée.");
             }
         endif;
-        return $this->render('Admin/Allergy/form/allergy-add.html.twig', [
+        return $this->render($this->getParameter('adm_allergy').'/form/allergy-add.html.twig', [
             'form'=>$form->createView()
         ]);
 
@@ -77,7 +77,7 @@ class AllergyController extends Controller
             $this->addFlash("error", "Allergie inconnue");
             return $this->redirectToRoute('allergies_list');
         }
-        return $this->render('Admin/Allergy/allergy-card.html.twig', ['allergy'=>$allergy]);
+        return $this->render($this->getParameter('adm_allergy').'/allergy-card.html.twig', ['allergy'=>$allergy]);
     }
 
 

@@ -7,15 +7,15 @@
     <h1>{%  block title %} Category  Form {% endblock %} </h1>
 
     {{ form_start(form, {attr:{novalidate : 'novalidate'}}) }}
-        {% if not form.vars.valid %}
+        {#if not form.vars.valid %}
             <div class="form-errors">
                 {{ form_errors(form) }}
             </div>
-        {% endif %}
+        {% endif #}
     {% block form_details %}
         {{ form_widget(form) }}
     {% endblock %}
-    <button type="submit" class="btn btn-primary">Envoi</button>
+    <button type="submit" class="btn btn-primary submit">Envoi</button>
     {% block other_buttons %} {% endblock %}
     {{ form_end(form) }}
 {% endblock %}

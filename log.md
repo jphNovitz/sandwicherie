@@ -9,6 +9,17 @@
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
+### 19 janvier 2018  
+##### Allergy finalisation d'une version de base  
+***Avancement***
+* finalisation de vich uploader bundle  dans les formulaire (allergy) add et update  
+* mise en forme des formulaires add et update avec un peu de style (css) 
+* amélioration affichage erreur l'erreur pour nom s'affiche en dessous de l'imput
+* modification du controller pour modifier les chemins vers les templates pour utiliser des parametres  
+  
+***Réflexions***  
+partie à retravailler plus tard mais version qui se tient. Je peux avancer.
+
 ### 18 janvier 2018
 ##### Allergy - updload images  
 **Avancement**

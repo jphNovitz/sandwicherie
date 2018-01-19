@@ -3,17 +3,32 @@
 {% block title %}Ajout d'une allergie{% endblock %}
     {% block form_details %}
         <div class="form-row">
-            <label for="form_name">Nom</label>
-            {{ form_widget(form.name) }}
+            <label for="form_name" class="custom">Nom</label>
+            {{ form_widget(form.name, {"attr": {"class": "custom"}}) }}
+        </div>
+        <div class="form">
+            {{ form_errors(form.name) }}
         </div>
         <div class="form-row">
             {{ form_errors(form.categories) }}
             <label for="form_categories">categories</label>
-            {{ form_widget(form.categories) }}
+            {{ form_widget(form.categories,
+                {"attr": {"class": "dropdown"}}) }}
         </div>
         <div class="form-row">
             <label for="form_ingredients">ingredients</label>
-            {{ form_widget(form.ingredients) }}
+            {{ form_widget(form.ingredients, {"attr": {
+                "class": "dropdown"
+            }}) }}
         </div>
+        <div class="form-row">
+            <label for="form_imageFile">image</label>
+            {{ form_widget(form.imageFile,
+                {"attr": {"class": ""},
+                "label": "Click me" }) }}
+        </div>
+
+
+
 
     {% endblock %}
