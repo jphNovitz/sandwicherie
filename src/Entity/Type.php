@@ -57,7 +57,7 @@ class Type
     /**
      * @return String
      */
-    public function getName(): String
+    public function getName(): ?String
     {
         return $this->name;
     }
@@ -89,7 +89,7 @@ class Type
     /**
      * @return string
      */
-    public function getComment(): string
+    public function getComment(): ?string
     {
         return $this->comment;
     }
@@ -102,5 +102,9 @@ class Type
         $this->comment = $comment;
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
 }

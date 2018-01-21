@@ -3,7 +3,42 @@
 {% block title %}Ajout d'un produit{% endblock %}
     {% block form_details %}
         <div class="form-row">
-            <label for="form_name">Nom</label>
-            {{ form_widget(form.name) }}
+            <label for="form_name" class="custom">Nom</label>
+            {{ form_widget(form.name, {"attr": {"class": "custom"}}) }}
+        </div>
+        <div class="form">
+            {{ form_errors(form.name) }}
+        </div>
+        <div class="form-row">
+            <label for="form_name" class="custom">Description</label>
+            {{ form_widget(form.description, {"attr": {"class": "custom"}}) }}
+        </div>
+        <div class="form">
+            {{ form_errors(form.description) }}
+        </div>
+        <div class="form-row">
+            {{ form_errors(form.types) }}
+            <label for="form_types">Types</label>
+            {{ form_widget(form.types,
+                {"attr": {"class": "dropdown"}}) }}
+        </div>
+        <div class="form-row">
+            {{ form_errors(form.vegetables) }}
+            <label for="form_vegetable">Crudités</label>
+            {{ form_widget(form.vegetables,
+                {"attr": {"class": "dropdown"}}) }}
+        </div>
+        <div class="form-row">
+            {{ form_errors(form.breads) }}
+            <label for="form_breads">Pains</label>
+            {{ form_widget(form.breads,
+                {"attr": {"class": "dropdown"}}) }}
+        </div>
+        <div class="form-row">
+            <label for="form_name" class="custom">Actif</label>
+            {{ form_widget(form.isActive, {"attr": {"class": "custom"}}) }}
+        </div>
+        <div class="form">
+            {{ form_errors(form.description) }}
         </div>
     {% endblock %}

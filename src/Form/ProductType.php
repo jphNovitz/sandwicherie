@@ -19,15 +19,23 @@ class ProductType extends AbstractType
             ->add('description', TextType::class)
             ->add('vegetables', EntityType::class, [
                 'class'=>'App\Entity\Ingredient',
-                'required'=>false
+                'required'=>false,
+                'multiple'=>true
             ])
             ->add('breads', EntityType::class, [
                 'class'=>'App\Entity\Ingredient',
-                'required'=>false
+                'required'=>false,
+                'multiple'=>true
             ])
             ->add('breads', EntityType::class, [
                 'class'=>'App\Entity\Ingredient',
-                'required'=>false
+                'required'=>false,
+                'multiple'=>true
+            ])
+            ->add('types', EntityType::class, [
+                'class'=>'App\Entity\Type',
+                'required'=>true,
+                'multiple'=>true
             ])
             ->add('isActive', CheckboxType::class)
 

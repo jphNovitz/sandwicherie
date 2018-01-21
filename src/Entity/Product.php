@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -65,7 +66,6 @@ class Product
    private $ingredients;
 
    /**
-    * @var ArrayCollection
     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
     * @ORM\JoinColumn(nullable=true)
     * @ORM\JoinTable(name="product_vegetables")
@@ -113,6 +113,7 @@ class Product
        $this->breads = new ArrayCollection();
        $this->sauces = new ArrayCollection();
        $this->types = new ArrayCollection();
+       $this->isActive = true;
    }
 
     /**
@@ -134,7 +135,7 @@ class Product
     /**
      * @return String
      */
-    public function getName(): String
+    public function getName(): ?String
     {
         return $this->name;
     }
@@ -166,7 +167,7 @@ class Product
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -182,7 +183,7 @@ class Product
     /**
      * @return float
      */
-    public function getPrice(): float
+    public function getPrice(): ?float
     {
         return $this->price;
     }
@@ -198,7 +199,7 @@ class Product
     /**
      * @return bool
      */
-    public function isActive(): bool
+    public function isActive(): ?bool
     {
         return $this->isActive;
     }
@@ -214,7 +215,7 @@ class Product
     /**
      * @return ArrayCollection
      */
-    public function getIngredients(): ArrayCollection
+    public function getIngredients(): ?ArrayCollection
     {
         return $this->ingredients;
     }
@@ -242,7 +243,7 @@ class Product
     /**
      * @return ArrayCollection
      */
-    public function getVegetables(): ArrayCollection
+    public function getVegetables(): ?Collection
     {
         return $this->vegetables;
     }
@@ -270,7 +271,7 @@ class Product
     /**
      * @return ArrayCollection
      */
-    public function getBreads(): ArrayCollection
+    public function getBreads(): ?Collection
     {
         return $this->breads;
     }
@@ -326,7 +327,7 @@ class Product
     /**
      * @return ArrayCollection
      */
-    public function getTypes(): ArrayCollection
+    public function getTypes(): ?Collection
     {
         return $this->types;
     }

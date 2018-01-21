@@ -3,7 +3,17 @@
 {% block title %}Ajout d'un type de produit{% endblock %}
     {% block form_details %}
         <div class="form-row">
-            <label for="form_name">Nom</label>
-            {{ form_widget(form.name) }}
+            <label for="form_name" class="custom">Nom</label>
+            {{ form_widget(form.name, {"attr": {"class": "custom"}}) }}
+        </div>
+        <div class="form">
+            {{ form_errors(form.name) }}
+        </div>
+        <div class="form-row">
+            <label for="form_comment" class="custom">Commentaire</label>
+            {{ form_widget(form.comment, {"attr": {"class": "custom"}}) }}
+        </div>
+        <div class="form">
+            {{ form_errors(form.comment) }}
         </div>
     {% endblock %}

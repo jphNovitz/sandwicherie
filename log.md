@@ -9,6 +9,14 @@
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
+### 21 janvier 2018  
+#####  Type  
+***Avancement***  
+corrections erreurs (php7), utilisation des parametre vers les vues ds Controlleurs.  Amélioration form et vues:
+* Products
+* Types
+
+
 ### 19 janvier 2018  
 ##### Allergy finalisation d'une version de base  
 ***Avancement***

@@ -41,7 +41,7 @@ class ProductController extends Controller
             $this->addFlash('notice', 'Il n\' y a aucune catégorie, je vous propose d\'en ajouter une');
             return $this->redirectToRoute('products_add');
         }
-        return $this->render('Admin/Product/products-list.html.twig', [
+        return $this->render($this->getParameter('adm_product').'/products-list.html.twig', [
             'list'=>$list
         ]);
     }
@@ -63,7 +63,7 @@ class ProductController extends Controller
             endif;
             return $this->redirectToRoute('products_add');
         endif;
-        return $this->render('Admin/Product/form/product_add.html.twig', [
+        return $this->render($this->getParameter('adm_product').'form/product_add.html.twig', [
             'form'=>$form->createView()
         ]);
 
@@ -75,7 +75,7 @@ class ProductController extends Controller
     public function show(Request $request, $id = null)
     {
         $product = $this->customLoader->LoadOne('App:Product', $id);
-        return $this->render('Admin/Product/product-card.html.twig', [
+        return $this->render($this->getParameter('adm_product').'product-card.html.twig', [
             'product'=>$product
         ]);
     }
@@ -104,7 +104,7 @@ class ProductController extends Controller
                 "slug"=>$product->getSlug()
             ]);
         endif;
-        return $this->render('Admin/Product/form/product_update.html.twig', [
+        return $this->render($this->getParameter('adm_product').'form/product_update.html.twig', [
             'form'=>$form->createView()
         ]);
     }

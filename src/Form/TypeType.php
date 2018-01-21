@@ -14,6 +14,9 @@ class TypeType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('comment', TextType::class, [
+                "required" => false
+            ])
         ;
     }
 
@@ -23,4 +26,5 @@ class TypeType extends AbstractType
           'data_class' => Type::class,
         ]);
     }
+
 }
