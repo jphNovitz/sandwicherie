@@ -6,4 +6,9 @@
             <label for="form_name">Nom</label>
             {{ form_widget(form.name) }}
         </div>
+        {% if form.name.vars.errors|length %}
+            <div class="form-errors">
+                {{ form_errors(form.name, {"attr": {"class": "form-error"}}) }}
+            </div>
+        {% endif %}
     {% endblock %}

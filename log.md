@@ -9,6 +9,11 @@
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
+### 22 janvier 2018  
+#####  Provider
+maj chemins parametres formulaire et affichage erreurs pour PROVIDER  
+quelques corrections  
+
 ### 21 janvier 2018  
 #####  Type  
 ***Avancement***  

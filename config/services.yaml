@@ -3,6 +3,10 @@
 parameters:
     locale: 'fr_BE'
     adm_allergy: Admin/Allergy/
+    adm_type: Admin/Product/Type/
+    adm_product: Admin/Product/
+    adm_provider: Admin/Provider/
+
 
 services:
     # default configuration for services in *this* file

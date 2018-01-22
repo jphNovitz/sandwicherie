@@ -1,0 +1,30 @@
+{% extends '_skeletons/_forms.html.twig' %}
+
+{% block title %}Ajout d'un fournisseur{% endblock %}
+    {% block form_details %}
+        <div class="form-row">
+            <label for="form_name" class="custom">Nom</label>
+            {{ form_widget(form.name, {"attr": {"class": "custom"}}) }}
+
+        </div>
+        {% if form.name.vars.errors|length %}
+        <div class="form-errors">
+            {{ form_errors(form.name, {"attr": {"class": "form-error"}}) }}
+        </div>
+        {% endif %}
+        <div class="form-row">
+            <label for="form_streetName" class="custom">Rue</label>
+            {{ form_widget(form.streetName, {"attr": {"class": "custom"}}) }}
+
+        </div>
+
+        <div class="form-row">
+            <label for="form_streetNr" class="custom">No</label>
+            {{ form_widget(form.streetNr, {"attr": {"class": "custom"}}) }}
+
+        </div>
+        <div class="form-row">
+            <label for="form_streetEmail" class="custom">Email</label>
+            {{ form_widget(form.email, {"attr": {"class": "custom"}}) }}
+        </div>
+    {% endblock %}

@@ -26,7 +26,7 @@ class Allergy
     /**
      * @var string
      * @ORM\Column(name="name", length=80)
-     *  @Assert\NotBlank(message="Vous avez oubliez de mettre un nom ")
+     * @Assert\NotBlank(message="Vous avez oubliez de mettre un nom ")
      */
     private $name;
 
@@ -46,7 +46,7 @@ class Allergy
     private $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @var string
      */

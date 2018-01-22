@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TypeRepository")
@@ -20,6 +21,7 @@ class Type
     /**
      * @var String
      * @ORM\Column(name="name", type="string", length=80, nullable=false)
+     * @Assert\NotBlank(message="N'oubliez pas le nom !")
      */
     private $name;
 

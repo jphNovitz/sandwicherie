@@ -6,6 +6,11 @@
             <label for="form_name">Nom</label>
             {{ form_widget(form.name) }}
         </div>
+        {% if form.name.vars.errors|length %}
+            <div class="form-errors">
+                {{ form_errors(form.name, {"attr": {"class": "form-error"}}) }}
+            </div>
+        {% endif %}
         <div class="form-row">
             <label for="form_comment">Commentaire</label>
             {{ form_widget(form.comment) }}

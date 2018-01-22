@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IngredientRepository")
@@ -23,6 +23,7 @@ class Ingredient
      * @var string
      *
      * @ORM\Column(type="string", length=80, nullable=false)
+     * @Assert\NotBlank(message="N'oubliez pas le nom !")
      */
     private $name;
 
