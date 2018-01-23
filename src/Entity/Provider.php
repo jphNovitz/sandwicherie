@@ -56,6 +56,14 @@ class Provider
     private $email;
 
     /**
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\City")
+     */
+    private $city;
+
+
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="image_provider")
@@ -192,9 +200,28 @@ class Provider
         // uncomment if you want to update other side
         //$image->setProvider(null);
     }
-public function __toString()
-{
-    return $this->name;
-}
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city): void
+    {
+        $this->city = $city;
+    }
+
+
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
 }

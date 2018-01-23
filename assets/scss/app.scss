@@ -258,6 +258,9 @@ html, body {
     line-height: 1.4rem;
     width: 100%;
     padding: 5px;
+    margin-top: -12px;
+    margin-bottom: 12px;
+    background-color: darkorange;
   }
   .content form .form-row .dropdown :hover{
     background-color: $darkOrange;

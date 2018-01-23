@@ -27,4 +27,10 @@
             <label for="form_streetEmail" class="custom">Email</label>
             {{ form_widget(form.email, {"attr": {"class": "custom"}}) }}
         </div>
+        <div class="form-row">
+        {{ form_errors(form.city) }}
+        <label for="form_city">Localité</label>
+        {{ form_widget(form.city,
+            {"attr": {"class": "dropdown"}}) }}
+    </div>
     {% endblock %}

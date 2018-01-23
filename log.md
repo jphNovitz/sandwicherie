@@ -9,9 +9,21 @@
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
+### 23 janvier 2018
+#####  Provider -> city (ville)
+***Avancement***  
+* rempli la table de villes / cp
+* modifié pour que que cp puisse etre multiple  
+* __toString pour afficher 'cp ville'
+* intégration du champs 'city' dans le ProviderType
+* modification template / css   
+* installation LOGGER
+
+
 ### 22 janvier 2018  
-#####  Provider
-maj chemins parametres formulaire et affichage erreurs pour PROVIDER  
+#####  Provider  
+***Avancement***   
+maj chemins parametres formulaire et affichage erreurs pour PROVIDER   
 quelques corrections  
 
 ### 21 janvier 2018  

@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\City;
 use App\Entity\Provider;
+use App\Repository\CityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,6 +21,14 @@ class ProviderType extends AbstractType
             ->add('streetName',TextType::class)
             ->add('streetNr',TextType::class)
             ->add('email',EmailType::class)
+            ->add('city', EntityType::class,[
+                'class'=> City::class,
+                'query_builder' => function (CityRepository $r) {
+                    return $r->createQueryBuilder('c')
+                        ->orderBy('c.zip', 'ASC');
+                },
+
+            ])
         ;
     }
 
