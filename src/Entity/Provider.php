@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -63,18 +64,16 @@ class Provider
 
 
 
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="image_provider")
+    /**     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $images;
+    private $image;
 
 
     public function __construct()
     {
-        $this->images = new ArrayCollection();
+       // $this->images = new ArrayCollection();
     }
 
     /**
@@ -173,33 +172,6 @@ class Provider
         $this->email = $email;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getImages(): ArrayCollection
-    {
-        return $this->images;
-    }
-
-    /**
-     * @param mixed $image
-     */
-    public function addImage($image)
-    {
-        $this->images->add($image);
-        // uncomment if you want to update other side
-        //$image->setProvider($this);
-    }
-
-    /**
-     * @param mixed $image
-     */
-    public function removeImage($image)
-    {
-        $this->images->removeElement($image);
-        // uncomment if you want to update other side
-        //$image->setProvider(null);
-    }
 
     /**
      * @return mixed
@@ -216,6 +188,23 @@ class Provider
     {
         $this->city = $city;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
+
 
 
 

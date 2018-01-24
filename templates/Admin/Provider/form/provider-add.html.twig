@@ -2,6 +2,7 @@
 
 {% block title %}Ajout d'un fournisseur{% endblock %}
     {% block form_details %}
+
         <div class="form-row">
             <label for="form_name" class="custom">Nom</label>
             {{ form_widget(form.name, {"attr": {"class": "custom"}}) }}
@@ -32,5 +33,14 @@
         <label for="form_city">Localité</label>
         {{ form_widget(form.city,
             {"attr": {"class": "dropdown"}}) }}
-    </div>
+        </div>
+
+        <div class="form-row">
+            <label for="form_imageFile">image</label>
+            {{ form_widget(form.image.imageFile,
+                {"attr": {"class": ""},
+                    "label": "Click me" }) }}
+        </div>
+
+
     {% endblock %}

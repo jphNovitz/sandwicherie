@@ -30,7 +30,7 @@ class AllergyType extends AbstractType
                 'required' => false
             ])
             ->add('imageFile', VichImageType::class, [
-                'download_label' => '...'
+
             ])
         ;
     }

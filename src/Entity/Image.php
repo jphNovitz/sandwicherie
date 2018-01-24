@@ -5,9 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
+ * @Vich\Uploadable
  */
 class Image
 {
@@ -46,14 +50,20 @@ class Image
     private $images_provider;
 
     /**
-     * @var String
-     * @Assert\Image()
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @ORM\Column(name="image", type="string")
+     * @Vich\UploadableField(mapping="provider", fileNameProperty="imageName")
+     *
+     * @var File
      */
-    private $image;
+    private $imageFile;
 
-    private $upImage;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $imageName;
 
 
     public function __construct()
@@ -80,36 +90,38 @@ class Image
     }
 
     /**
-     * @return String
+     * @return File
      */
-    public function getImage(): String
+    public function getImageFile(): ?File
     {
-        return $this->image;
+        return $this->imageFile;
     }
 
     /**
-     * @param String $image
+     * @param File $imageFile
      */
-    public function setImage(String $image): void
+    public function setImageFile(File $imageFile): void
     {
-        $this->image = $image;
+        $this->imageFile = $imageFile;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getUpImage()
+    public function getImageName(): ?string
     {
-        return $this->upImage;
+        return $this->imageName;
     }
 
     /**
-     * @param mixed $upImage
+     * @param string $imageName
      */
-    public function setUpImage($upImage): void
+    public function setImageName(string $imageName): void
     {
-        $this->upImage = $upImage;
+        $this->imageName = $imageName;
     }
+
+
 
     /**
      * @return ArrayCollection

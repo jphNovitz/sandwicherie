@@ -7,6 +7,7 @@ use App\Entity\Provider;
 use App\Repository\CityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,9 +27,9 @@ class ProviderType extends AbstractType
                 'query_builder' => function (CityRepository $r) {
                     return $r->createQueryBuilder('c')
                         ->orderBy('c.zip', 'ASC');
-                },
-
+                }
             ])
+           ->add('image', ImagesProviderType::class)
         ;
     }
 
