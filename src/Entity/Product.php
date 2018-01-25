@@ -23,6 +23,7 @@ class Product
    /**
     * @var String
     * @ORM\Column(name="name", type="string", length=80, nullable=false)
+    * @Assert\NotBlank(message="N'oubliez pas le nom !")
     */
    private $name;
 
@@ -31,7 +32,6 @@ class Product
      *
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(name="slug", type="string", length=90, unique=true)
-     * @Assert\NotBlank(message="N'oubliez pas le nom !")
      */
     private $slug;
 

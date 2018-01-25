@@ -6,6 +6,8 @@ parameters:
     adm_type: Admin/Product/Type/
     adm_product: Admin/Product/
     adm_provider: Admin/Provider/
+    adm_ingredient: Admin/Ingredient/
+
 
 
 services:

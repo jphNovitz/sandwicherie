@@ -5,4 +5,5 @@ twig:
     globals:
         #path shortcuts
         adm_provider: '%adm_provider%'
+        adm_ingredient: '%adm_ingredient%'
         adm_allergy: Admin/Allergy/

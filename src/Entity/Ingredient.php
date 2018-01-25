@@ -66,7 +66,7 @@ class Ingredient
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="image_ingredient")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image")
      * @ORM\JoinColumn(nullable=true)
      */
     private $images;

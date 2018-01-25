@@ -3,12 +3,21 @@
 {% block title %}Ajout d'une catégorie d'ingredient{% endblock %}
     {% block form_details %}
         <div class="form-row">
-            <label for="form_name">Nom</label>
-            {{ form_widget(form.name) }}
+            <label for="form_name" class="custom">Nom</label>
+            {{ form_widget(form.name, {"attr": {"class": "custom"}}) }}
         </div>
         {% if form.name.vars.errors|length %}
             <div class="form-errors">
                 {{ form_errors(form.name, {"attr": {"class": "form-error"}}) }}
+            </div>
+        {% endif %}
+        <div class="form-row">
+            <label for="form_comment" class="custom">Comment</label>
+            {{ form_widget(form.comment, {"attr": {"class": "custom"}}) }}
+        </div>
+        {% if form.comment.vars.errors|length %}
+            <div class="form-errors">
+                {{ form_errors(form.comment, {"attr": {"class": "form-error"}}) }}
             </div>
         {% endif %}
     {% endblock %}

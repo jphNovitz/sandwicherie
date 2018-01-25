@@ -2,13 +2,19 @@
 
 namespace App\Form;
 
+use App\Entity\Image;
 use App\Entity\Ingredient;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class IngredientType extends AbstractType
 {
@@ -24,12 +30,16 @@ class IngredientType extends AbstractType
             ])
             ->add('categories', EntityType::class,[
                 'class'=>'App\Entity\Category',
-                'empty_data' => '',
                 'multiple' => true,
                 'required' => false
             ])
             ->add('bread', CheckboxType::class)
-            ->add('sauce', CheckboxType::class);
+            ->add('sauce', checkboxType::class)
+            ->add('images', CollectionType::class,[
+                'entry_type'=>ImagesIngredientType::class,
+                'allow_add'     => true,
+                'allow_delete'  => true
+            ])
         ;
     }
 
