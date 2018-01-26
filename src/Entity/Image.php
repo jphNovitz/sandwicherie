@@ -26,33 +26,14 @@ class Image
      * @var ArrayCollection
      * @Assert\Image()
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="images")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $images_ingredient;
-
-    /**
-     * @var ArrayCollection
-     * @Assert\Image()
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="images")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $images_product;
-
-    /**
-     * @var ArrayCollection
-     * @Assert\Image()
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Provider", inversedBy="images")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $images_provider;
-
+    private $product;
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="provider", fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="product", fileNameProperty="imageName")
      *
      * @var File
      */
@@ -68,9 +49,7 @@ class Image
 
     public function __construct()
     {
-        $this->images_ingredient = new ArrayCollection();
-        $this->images_product = new ArrayCollection();
-        $this->images_provider = new ArrayCollection();
+
     }
     /**
      * @return mixed
@@ -120,26 +99,6 @@ class Image
     {
         $this->imageName = $imageName;
     }
-
-
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getImagesIngredient(): ArrayCollection
-    {
-        return $this->images_ingredient;
-    }
-
-    /**
-     * @param mixed $images_ingredient
-     */
-    public function addImagesingredient($images_ingredient)
-    {
-        $this->images_ingredient->add($images_ingredient);
-        $images_ingredient->setImage($this);
-    }
-
     /**
      * @param mixed $images_ingredient
      */
@@ -152,54 +111,11 @@ class Image
     /**
      * @return ArrayCollection
      */
-    public function getImagesProduct(): ArrayCollection
+    public function getProduct(): ArrayCollection
     {
-        return $this->images_product;
+        return $this->product;
     }
 
-    /**
-     * @param mixed $images_product
-     */
-    public function addImagesproduct($images_product)
-    {
-        $this->images_product->add($images_product);
-        $images_product->setImage($this);
-    }
-
-    /**
-     * @param mixed $images_product
-     */
-    public function removeImagesproduct($images_product)
-    {
-        $this->images_product->removeElement($images_product);
-        $images_product->setImage(null);
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getImagesProvider(): ArrayCollection
-    {
-        return $this->images_provider;
-    }
-
-    /**
-     * @param mixed $images_provider
-     */
-    public function addImagesprovider($images_provider)
-    {
-        $this->images_provider->add($images_provider);
-        $images_provider->setImage($this);
-    }
-
-    /**
-     * @param mixed $images_provider
-     */
-    public function removeImagesprovider($images_provider)
-    {
-        $this->images_provider->removeElement($images_provider);
-        $images_provider->setImage(null);
-    }
 
 
 }

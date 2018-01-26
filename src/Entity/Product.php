@@ -45,18 +45,17 @@ class Product
 
    /**
     * @var float
-    * @ORM\Column(name="price", type="float", length=3, nullable=true)
+    * @ORM\Column(name="price", type="float", length=3)
+    * @Assert\NotBlank(message="Le produit est gratuit ?")
+    * @Assert\Type(type="float", message="Le prix est un nombre")
     */
    private $price;
 
    /**
     * @var boolean
     * @ORM\Column(name="isactive", type="boolean", length=1, nullable=true)
-    *
     */
    private $isActive;
-
-
 
    /**
     * @var ArrayCollection
@@ -96,14 +95,16 @@ class Product
     * @ORM\ManyToMany(targetEntity="App\Entity\Type")
     * @ORM\JoinColumn(nullable=false)
     * @ORM\JoinTable(name="product_types")
-    *
+    * @Assert\Collection(fields={"name" = {
+    *     @Assert\NotBlank(message=" "),
+    *     @Assert\NotNull(message=" ")}})
     */
    private $types;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="image_ingredient")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="product")
      * @ORM\JoinColumn(nullable=true)
      */
     private $images;
@@ -115,6 +116,7 @@ class Product
        $this->breads = new ArrayCollection();
        $this->sauces = new ArrayCollection();
        $this->types = new ArrayCollection();
+       $this->images = new ArrayCollection();
        $this->isActive = true;
    }
 
@@ -215,9 +217,9 @@ class Product
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getIngredients(): ?ArrayCollection
+    public function getIngredients(): ?Collection
     {
         return $this->ingredients;
     }
@@ -243,7 +245,7 @@ class Product
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getVegetables(): ?Collection
     {
@@ -271,7 +273,7 @@ class Product
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getBreads(): ?Collection
     {
@@ -299,9 +301,9 @@ class Product
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getSauces(): ArrayCollection
+    public function getSauces(): ?Collection
     {
         return $this->sauces;
     }
@@ -327,7 +329,7 @@ class Product
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getTypes(): ?Collection
     {
@@ -355,9 +357,9 @@ class Product
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getImages(): ArrayCollection
+    public function getImages(): ?Collection
     {
         return $this->images;
     }

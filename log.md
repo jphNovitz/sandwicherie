@@ -9,6 +9,15 @@
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
+### 27janvier 2018  
+##### Product  
+***Avancement***  
+* modification entité, formType, formulaire twig 
+* inclusion vich uploader pour une relation Many To Many
+* correction des Constraints et messages d'erreur  
+* modification (nettoyage) entité image
+   
+   
 ### 26 janvier 2018
 #####  collection updload
 ***Avancement***  

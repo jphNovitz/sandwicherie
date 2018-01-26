@@ -15,15 +15,16 @@
             <label for="form_name" class="custom">Description</label>
             {{ form_widget(form.description, {"attr": {"class": "custom"}}) }}
         </div>
-        <div class="form">
-            {{ form_errors(form.description) }}
-        </div>
         <div class="form-row">
-            {{ form_errors(form.types) }}
             <label for="form_types">Types</label>
             {{ form_widget(form.types,
                 {"attr": {"class": "dropdown"}}) }}
         </div>
+        {% if form.types.vars.errors|length %}
+            <div class="form-errors">
+                {{ form_errors(form.types, {"attr": {"class": "form-error"}}) }}
+            </div>
+        {% endif %}
         <div class="form-row">
             {{ form_errors(form.vegetables) }}
             <label for="form_vegetable">Crudités</label>
@@ -37,10 +38,24 @@
                 {"attr": {"class": "dropdown"}}) }}
         </div>
         <div class="form-row">
+            <label for="form_price" class="custom">Prix</label>
+            {{ form_widget(form.price, {"attr": {"class": "custom"}}) }}
+        </div>
+        {% if form.price.vars.errors|length %}
+            <div class="form-errors">
+                {{ form_errors(form.price, {"attr": {"class": "form-error"}}) }}
+            </div>
+        {% endif %}
+        <div class="form-row">
+            <label for="form_name" class="custom">Actif</label>
             <label for="form_name" class="custom">Actif</label>
             {{ form_widget(form.isActive, {"attr": {"class": "custom"}}) }}
         </div>
-        <div class="form">
-            {{ form_errors(form.description) }}
+        <div class="form-row">
+            {% for image in form.images %}
+                {{ form_row(image.imageFile) }}
+            {% endfor %}
         </div>
+        <ul class="vich-image" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
+        </ul>
     {% endblock %}
