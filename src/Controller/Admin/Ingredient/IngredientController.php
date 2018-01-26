@@ -41,7 +41,7 @@ class IngredientController extends Controller
             $this->addFlash("notice", "Il n'y a aucun ingrédient, ajoutez-en un");
             return $this->redirectToRoute("ingredients_add");
         }
-        return $this->render('Admin/Ingredient/ingredients-list.html.twig', ['list'=>$list]);
+        return $this->render($this->getParameter('adm_ingredient').'ingredients-list.html.twig', ['list'=>$list]);
     }
 
     /**
@@ -63,10 +63,9 @@ class IngredientController extends Controller
                     "l'ingrédient n'a pas pu être ajouté.");
             }
         endif;
-        return $this->render('Admin/Ingredient/form/ingredient_add.html.twig', [
+        return $this->render($this->getParameter('adm_ingredient').'form/ingredient-add.html.twig', [
             'form'=>$form->createView()
         ]);
-
     }
 
     /**
@@ -79,7 +78,7 @@ class IngredientController extends Controller
             $this->addFlash("error", "ingrédient inconnu");
             return $this->redirectToRoute('ingredients_list');
         }
-        return $this->render('Admin/Ingredient/ingredient-card.html.twig', [
+        return $this->render($this->getParameter('adm_ingredient').'ingredient-card.html.twig', [
             'ingredient'=>$ingredient        ]);
     }
 
@@ -104,7 +103,7 @@ class IngredientController extends Controller
                 $this->addFlash("error", "Il y a eu un problème, ingredient non modifié.");
             }
         endif;
-        return $this->render('Admin/Ingredient/form/ingredient-update.html.twig', [
+        return $this->render($this->getParameter('adm_ingredient').'form/ingredient-update.html.twig', [
             'form'=>$form->createView()
         ]);
     }

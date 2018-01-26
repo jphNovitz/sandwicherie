@@ -36,4 +36,12 @@
             <label for="form_components">Sauce</label>
             {{ form_widget(form.sauce) }}
         </div>
+        <div class="form-row">
+                {% for image in form.images %}
+                    {{ form_row(image.imageFile) }}
+                {% endfor %}
+        </div>
+        <ul class="vich-image" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
+
+        </ul>
     {% endblock %}

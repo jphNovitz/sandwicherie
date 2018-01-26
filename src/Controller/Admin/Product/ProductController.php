@@ -38,7 +38,7 @@ class ProductController extends Controller
     {
         $list = $this->customLoader->LoadAll('App:Product');
         if (!$list) {
-            $this->addFlash('notice', 'Il n\' y a aucune catégorie, je vous propose d\'en ajouter une');
+            $this->addFlash('notice', "Aucun produit, je vous propose d'en ajouter un");
             return $this->redirectToRoute('products_add');
         }
         return $this->render($this->getParameter('adm_product').'/products-list.html.twig', [

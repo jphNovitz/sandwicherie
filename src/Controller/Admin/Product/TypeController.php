@@ -38,7 +38,7 @@ class TypeController extends Controller
     {
         $list = $this->customLoader->LoadAll('App:Type');
         if (!$list) {
-            $this->addFlash('notice', 'Il n\' y a aucune catégorie, je vous propose d\'en ajouter une');
+            $this->addFlash('notice', "Aucun type trouvé !");
             return $this->redirectToRoute('types_add');
         }
         return $this->render($this->getParameter('adm_type').'types-list.html.twig', [
@@ -98,7 +98,7 @@ class TypeController extends Controller
                     $type->getName() . " a été modifiée !");
             else:
                 $this->addFlash("error",
-                    "La catégorie ". $type->getName() . " n'a pas pu être modifiée ");
+                    $type->getName() . " n'a pas pu être modifiée ");
             endif;
             return $this->redirectToRoute('types_update',[
                 "slug"=>$type->getSlug()

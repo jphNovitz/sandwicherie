@@ -37,8 +37,11 @@ class IngredientType extends AbstractType
             ->add('sauce', checkboxType::class)
             ->add('images', CollectionType::class,[
                 'entry_type'=>ImagesIngredientType::class,
-                'allow_add'     => true,
-                'allow_delete'  => true
+                'allow_add'  => true,
+                'allow_delete'  => true,
+                'by_reference' => false,
+                'label' => 'Fichier(s) :',
+                'prototype' => true
             ])
         ;
     }

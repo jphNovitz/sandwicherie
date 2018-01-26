@@ -9,6 +9,16 @@
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
+### 26 janvier 2018
+#####  collection updload
+***Avancement***  
+* continué le travail des autres jours pour arriver à une cohésion : la même structure les mêmes éléments 
+* ajout d'upload d'images pour (One To Many) l'entité Ingrédients -> utilisation de jQuery
+***Réfléxions***
+VichUploader se révèle bien il s'intègre assez facilement, je vais peut-être le garder.  
+Appris à faire une collection d'upload -> utilisation de JQuery  
+[lien vers la doc](https://symfony.com/doc/current/form/form_collections.html) 
+
 ### 23 janvier 2018
 #####  Provider -> city (ville)
 ***Avancement***  

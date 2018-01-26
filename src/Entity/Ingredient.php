@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 use Doctrine\ORM\Mapping as ORM;use Symfony\Component\Validator\Constraints as Assert;
@@ -66,7 +67,7 @@ class Ingredient
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Image")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $images;
@@ -256,7 +257,7 @@ class Ingredient
     /**
      * @return ArrayCollection
      */
-    public function getImages(): ArrayCollection
+    public function getImages(): ?Collection
     {
         return $this->images;
     }
