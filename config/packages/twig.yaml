@@ -6,4 +6,5 @@ twig:
         #path shortcuts
         adm_provider: '%adm_provider%'
         adm_ingredient: '%adm_ingredient%'
+        adm_input: '%adm_input%'
         adm_allergy: Admin/Allergy/

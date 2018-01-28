@@ -4,12 +4,11 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ItemRepository")
  */
-class Item
+class Item extends Part
 {
     /**
      * @ORM\Id
@@ -17,20 +16,6 @@ class Item
      * @ORM\Column(type="integer")
      */
     private $id;
-    /**
-     * @var datetime $created
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
-     */
-    private $created;
-    /**
-     * @var datetime $created
-     *
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime")
-     */
-    private $updated;
 
     /**
      * @var Product
@@ -39,16 +24,16 @@ class Item
      *
      */
     private $product;
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Quantity", type="integer", nullable=true)
-     */
-    private $quantity;
+
+    public function __construct()
+    {
+        $this->cart = new ArrayCollection();
+    }
 
     /**
-     *@var string $cart
-     *@ORM\ManyToMany(targetEntity="App\Entity\Cart", inversedBy="items")
+     *
+     * @var ArrayCollection $cart
+     * @ORM\ManyToMany(targetEntity="App\Entity\Cart", inversedBy="items")
      */
     private $cart;
 
@@ -85,22 +70,6 @@ class Item
     }
 
     /**
-     * @return int
-     */
-    public function getQuantity(): int
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * @param int $quantity
-     */
-    public function setQuantity(int $quantity): void
-    {
-        $this->quantity = $quantity;
-    }
-
-    /**
      * @return string
      */
     public function getCart(): string
@@ -109,11 +78,24 @@ class Item
     }
 
     /**
-     * @param string $cart
+     * @param mixed $cart
      */
-    public function setCart(string $cart): void
+    public function addCart($cart)
     {
-        $this->cart = $cart;
+        $this->cart->add($cart);
+        // uncomment if you want to update other side
+        //$cart->setItem($this);
     }
+
+    /**
+     * @param mixed $cart
+     */
+    public function removeCart($cart)
+    {
+        $this->cart->removeElement($cart);
+        // uncomment if you want to update other side
+        //$cart->setItem(null);
+    }
+
 
 }

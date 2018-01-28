@@ -6,7 +6,7 @@
     <div class="list-group">
         {% for object in list %}
             <div class="list-group-item">
-                <div class="name"> <a href="{{ path(entity ~ '_show', {'id' : object.id}) }}">{{ object.name }}</a> </div>
+                    <div class="name"> <a href="{{ path(entity ~ '_show', {'id' : object.id}) }}">{{ object.name }}</a> </div>
                 <div class="actions">
                     <a href="{{ path(entity ~ '_show', {'id' : object.id}) }}"> <i class="material-icons bg-info">details</i></a>
                     <a href="{{ path(entity ~ '_update', {'slug' : object.slug}) }}"> <i class="material-icons bg-primary">mode_edit</i></a>

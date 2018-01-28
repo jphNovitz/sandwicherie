@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -18,29 +20,28 @@ class Input
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Ingredient")
-     */
-    private $ingredient;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Provider")
-     */
-    private $provider;
-
-    /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(type="smallint", length=2, nullable=true)
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(name="slug", type="string", length=20, unique=true)
      */
-    private $temperature;
+    private $slug;
 
     /**
-     * @var datetime $dateEncode
+     * @var datetime $created
      *
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
-    private $dateEncode;
+    private $created;
+
+    /**
+     * @var datetime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
 
     /**
      * @var datetime $dateEntry
@@ -48,6 +49,17 @@ class Input
      */
     private $dateEntry;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\Line", mappedBy="input", cascade={"persist", "remove"})
+     */
+    private $lines;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var String
+     */
+    private $name;
 
     /**
      * Input constructor.
@@ -55,7 +67,10 @@ class Input
 
     public function __construct()
     {
+        $this->created = new \DateTime();
+        $this->updated = new \DateTime();
         $this->dateEntry = new \DateTime();
+        $this->lines = new ArrayCollection();
     }
 
     /**
@@ -75,71 +90,75 @@ class Input
     }
 
     /**
-     * @return mixed
+     * @return String
      */
-    public function getIngredient()
+    public function getName(): String
     {
-        return $this->ingredient;
+        return $this->name;
     }
 
-    /**
-     * @param mixed $ingredient
-     */
-    public function setIngredient($ingredient)
-    {
-        $this->ingredient = $ingredient;
-    }
 
     /**
      * @return mixed
      */
-    public function getProvider()
+    public function getLines()
     {
-        return $this->provider;
+        return $this->lines;
     }
 
     /**
-     * @param mixed $provider
+     * @param mixed $line
      */
-    public function setProvider($provider)
+    public function addLine($line)
     {
-        $this->provider = $provider;
+        $this->lines->add($line);
+        $line->setInput($this);
     }
 
     /**
-     * @return int
+     * @param mixed $line
      */
-    public function getTemperature()
+    public function removeLine($line)
     {
-        return $this->temperature;
+        $this->lines->removeElement($line);
+        $line->setInput(null);
     }
-
     /**
-     * @param int $temperature
+     * @return DateTime
      */
-    public function setTemperature($temperature)
-    {
-        $this->temperature = $temperature;
-    }
-
-    /**
-     * @return datetime
-     */
-    public function getDateEntry()
+    public function getDateEntry(): DateTime
     {
         return $this->dateEntry;
     }
 
     /**
-     * @param datetime $dateEntry
+     * @param DateTime $dateEntry
      */
-    public function setDateEntry($dateEntry)
+    public function setDateEntry(DateTime $dateEntry): void
     {
         $this->dateEntry = $dateEntry;
-        return $this;
+        $this->name= $dateEntry->format('Y-m-d H:i:s');
     }
 
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
 
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
+    public function dateToText(){
+        $this->dateSluggable= $this->dateEntry->format('Y-m-d H:i:s');
+    }
 
 
 }

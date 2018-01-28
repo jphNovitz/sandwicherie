@@ -7,6 +7,7 @@ parameters:
     adm_product: Admin/Product/
     adm_provider: Admin/Provider/
     adm_ingredient: Admin/Ingredient/
+    adm_input: Admin/Input/
 
 
 

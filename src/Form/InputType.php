@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Input;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
@@ -17,17 +18,14 @@ class InputType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('ingredient', EntityType::class,[
-                'class'=>'App\Entity\Ingredient'
-            ])
-            ->add('provider', EntityType::class,[
-                'class'=>'App\Entity\Provider',
-                'choice_label'=>'name'
-            ])
-            ->add('dateEntry', DateType::class,[
-                'widget' => 'choice',
+            ->add('dateEntry', DateTimeType::class)
+            ->add('lines', CollectionType::class,[
+            'entry_type'=>LineType::class,
+            'allow_add'  => true,
+            'allow_delete'  => true,
+            'prototype' => true
+        ])
 
-            ])
         ;
     }
 

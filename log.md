@@ -9,6 +9,20 @@
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
+### 28 janvier 2018
+##### Input = entrées de marchandises  
+***Avancement***  
+* Travail sur les entrées de marchandies (inputs)  
+* une entrée de marchandise est une collection de 'lignes'
+* C'est le même principe que j'utiliserais pour les commandes
+* utilisation de la Single Table Inheritance
+* part se divise en line et item (le élements communs se trouvent dans part)
+* modification du schéma (entité)
+* InputType et LineType
+* fait la plus grosse partie du controller -> reste update
+* vues 
+  
+  
 ### 27janvier 2018  
 ##### Product  
 ***Avancement***  

@@ -1,0 +1,8 @@
+{% extends '_skeletons/_forms.html.twig' %}
+
+{% block title %}Entrée de marchandises{% endblock %}
+    {% block form_details %}
+        <ul class="lines" data-prototype="{{ form_widget(form.lines.vars.prototype)|e('html_attr') }}">
+        </ul>
+        {% include '_elements/_input_collection.html.twig' %}
+    {% endblock %}
