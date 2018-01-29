@@ -64,7 +64,6 @@ class Input
     /**
      * Input constructor.
      */
-
     public function __construct()
     {
         $this->created = new \DateTime();
@@ -97,11 +96,10 @@ class Input
         return $this->name;
     }
 
-
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getLines()
+    public function getLines(): ArrayCollection
     {
         return $this->lines;
     }
@@ -112,7 +110,8 @@ class Input
     public function addLine($line)
     {
         $this->lines->add($line);
-        $line->setInput($this);
+        // uncomment if you want to update other side
+        //$line->setInput($this);
     }
 
     /**
@@ -121,8 +120,10 @@ class Input
     public function removeLine($line)
     {
         $this->lines->removeElement($line);
-        $line->setInput(null);
+        // uncomment if you want to update other side
+        //$line->setInput(null);
     }
+
     /**
      * @return DateTime
      */
@@ -155,10 +156,5 @@ class Input
     {
         $this->slug = $slug;
     }
-
-    public function dateToText(){
-        $this->dateSluggable= $this->dateEntry->format('Y-m-d H:i:s');
-    }
-
 
 }
