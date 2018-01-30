@@ -286,6 +286,14 @@ html, body {
   .content form .submit:hover{
     background-color: #315182 ;
   }
+
+  .content form .table-presentation{
+    position: static !important;
+    width: 45% !important;
+    display: inline-block !important;
+    margin: 0px auto;
+    line-height: 1em;
+  }
   .btn{
     padding: 1.5%;
     border-radius: 10px;

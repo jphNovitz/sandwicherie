@@ -2,13 +2,19 @@
 
 {% block title %}Entrée de marchandises{% endblock %}
     {% block form_details %}
-        <div class="form-row">
+        {{ form_widget(form.dateEntry, {'attr': {
+            'type': 'date'}}) }}
+        <div class="form-row ">
             {% for line in form.lines %}
-               kkk
+                {{ form_widget(line.ingredient, {'attr': {'class':  'table-presentation custom'}}) }}
+                {{ form_widget(line.price, {'attr': {'class':  'table-presentation custom'}}) }}
+                {{ form_widget(line.quantity, {'attr': {'class':  'table-presentation custom'}}) }}
+                {{ form_widget(line.provider, {'attr': {'class':  'table-presentation custom'}}) }}
             {% endfor %}
+
         </div>
 
-        <ul class="lines" data-prototype="{{ form_widget(form.lines.vars.prototype)|e('html_attr') }}">
+        <ul class="lines form-row" data-prototype="{{ form_widget(form.lines.vars.prototype)|e('html_attr') }}">
         </ul>
         {% include '_elements/_input_collection.html.twig' %}
     {% endblock %}

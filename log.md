@@ -9,6 +9,13 @@
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
+### 29 et 30 janvier 2018
+##### Input form add et update
+***Avancement***  
+Probleme résolu: lors de la creation d'un input dans la table part (line) la reference à l'input 
+restait à null.  Solution. il faut ajouter 'by_reference'=> false dans le type sinon les adders ne sont pas pris en compte.
+Un peu de mise en forme css  
+
 ### 28 janvier 2018
 ##### Input = entrées de marchandises  
 ***Avancement***  

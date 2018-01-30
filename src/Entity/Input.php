@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -51,7 +52,7 @@ class Input
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="App\Entity\Line", mappedBy="input", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Line", mappedBy="input", cascade={"persist","remove"})
      */
     private $lines;
 
@@ -67,8 +68,8 @@ class Input
     public function __construct()
     {
         $this->created = new \DateTime();
-        $this->updated = new \DateTime();
         $this->dateEntry = new \DateTime();
+        $this->updated = new \DateTime();
         $this->lines = new ArrayCollection();
     }
 
@@ -99,7 +100,7 @@ class Input
     /**
      * @return ArrayCollection
      */
-    public function getLines(): ArrayCollection
+    public function getLines(): ?Collection
     {
         return $this->lines;
     }
@@ -107,11 +108,12 @@ class Input
     /**
      * @param mixed $line
      */
-    public function addLine($line)
+    public function addLine(Line $line)
     {
         $this->lines->add($line);
-        // uncomment if you want to update other side
-        //$line->setInput($this);
+        $line->setInput($this);
+
+        return $this;
     }
 
     /**

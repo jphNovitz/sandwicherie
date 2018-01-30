@@ -18,10 +18,15 @@ class LineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('ingredient', EntityType::class, ['class'=>Ingredient::class])
-            ->add('provider', EntityType::class, ['class'=>Provider::class])
-            ->add('quantity', NumberType::class)
-            ->add('price', NumberType::class)
+            ->add('ingredient', EntityType::class, [
+                'class'=>Ingredient::class,
+                'label'=>false
+            ])
+            ->add('provider', EntityType::class, [
+                'class'=>Provider::class,
+                'label'=>false])
+            ->add('quantity', NumberType::class,['label'=>false])
+            ->add('price', NumberType::class,['label'=>false])
         ;
     }
 

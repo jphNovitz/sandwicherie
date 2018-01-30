@@ -18,12 +18,14 @@ class InputType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateEntry', DateTimeType::class)
+            ->add('dateEntry', DateType::class,['format' => 'MM-dd-MM-yyyy'])
             ->add('lines', CollectionType::class,[
             'entry_type'=>LineType::class,
             'allow_add'  => true,
             'allow_delete'  => true,
-            'prototype' => true
+            'prototype' => true,
+             'by_reference'=>false,
+
         ])
 
         ;
