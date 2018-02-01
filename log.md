@@ -9,6 +9,18 @@
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
+
+## 31 janvier / 01 fevirer 2018
+##### INPUTS & LINES  
+***Avancement***
+* ajouté un champs pour le codebar et intégré les champs qui ne l'étaient pas comme la température.
+* de la mise en forme de la page d'ajout/modification input avec lines integré.
+* ajout de quelques contraintes.
+* ajout messages d'erreurs ! implémentation des messages d'erreurs non verifiée.  
+***Réflexion***
+Petit soucis causés dans la mise en forme par la collection de line dans Input.  
+Solutions trouvées. Interface pas au top du top mais lisible, claire et en tous cas satisfaisante pour l'instant.
+
 ### 29 et 30 janvier 2018
 ##### Input form add et update
 ***Avancement***  

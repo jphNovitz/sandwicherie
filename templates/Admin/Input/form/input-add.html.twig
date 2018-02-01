@@ -4,17 +4,57 @@
     {% block form_details %}
         {{ form_widget(form.dateEntry, {'attr': {
             'type': 'date'}}) }}
-        <div class="form-row ">
+        <div class="form-row " style="
+                    position: relative; margin: 10px 0;
+                    line-height: 4.5em; display: flex;
+                    flex-direction: row; flex-wrap: wrap;
+        ">
             {% for line in form.lines %}
-                {{ form_widget(line.ingredient, {'attr': {'class':  'table-presentation custom'}}) }}
-                {{ form_widget(line.price, {'attr': {'class':  'table-presentation custom'}}) }}
-                {{ form_widget(line.quantity, {'attr': {'class':  'table-presentation custom'}}) }}
-                {{ form_widget(line.provider, {'attr': {'class':  'table-presentation custom'}}) }}
+                    <label for="form_ingredient" class="table-presentation custom">Ingredient</label>
+                    <label for="form_provider" class="table-presentation custom">Fournisseur</label>
+                    {{ form_widget(line.ingredient, {'attr': {'class':  'table-presentation custom'}}) }}
+                    {{ form_widget(line.provider, {'attr': {'class':  'table-presentation custom'}}) }}
+                <div style="margin-top: 5px; width:90%"> &nbsp;</div>
+                {% if line.ingredient.vars.errors|length %}
+                    <div class="form-errors">
+                        {{ form_errors(line.ingredient, {"attr": {"class": "form-error"}}) }}
+                    </div>
+                {% endif %}
+                {% if line.provider.vars.errors|length %}
+                    <div class="form-errors">
+                        {{ form_errors(line.provider, {"attr": {"class": "form-error"}}) }}
+                    </div>
+                {% endif %}
+                <label for="form_price" class="table-presentation custom" >Prix</label>
+                <label for="form_quantiy" class="table-presentation custom">Quantité</label>
+                {{ form_widget(line.price, {'attr': {
+                    'class':  'table-presentation custom',
+                    'maxlength' : 3,
+                }}) }}
+                {{ form_widget(line.quantity, {'attr': {
+                    'class':  'table-presentation custom',
+                    'maxlength' : 3 }}) }}
+                {% if line.price.vars.errors|length %}
+                    <div class="form-errors">
+                        {{ form_errors(line.price, {"attr": {"class": "form-error"}}) }}
+                    </div>
+                {% endif %}
+                {% if line.quantity.vars.errors|length %}
+                    <div class="form-errors">
+                        {{ form_errors(line.name, {"attr": {"class": "form-error"}}) }}
+                    </div>
+                {% endif %}
+                <div style="margin-top: 5px; width:90%"> &nbsp;</div>
+                <label for="form_temperature" class="table-presentation custom">Quantité</label>
+                <label for="form_barcode" class="table-presentation custom">Code Bar</label>
+                {{ form_widget(line.temperature, {'attr': {'class':  'table-presentation custom'}}) }}
+                {{ form_widget(line.barcode, {'attr': {'class':  'table-presentation custom'}}) }}
             {% endfor %}
 
         </div>
 
-        <ul class="lines form-row" data-prototype="{{ form_widget(form.lines.vars.prototype)|e('html_attr') }}">
-        </ul>
+        <div class="lines form-row" data-prototype="{{ form_widget(form.lines.vars.prototype)|e('html_attr') }}">
+        </div>
         {% include '_elements/_input_collection.html.twig' %}
+
     {% endblock %}

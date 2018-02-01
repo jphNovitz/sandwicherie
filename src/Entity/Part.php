@@ -5,6 +5,7 @@ namespace App\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -25,7 +26,9 @@ class Part
     /**
      * @var int
      *
-     * @ORM\Column(name="Quantity", type="integer", nullable=true)
+     * @ORM\Column(name="Quantity", type="integer", length=3, nullable=true)
+     * @Assert\Length(max="3", maxMessage="trop")
+     *
      */
     private $quantity;
 

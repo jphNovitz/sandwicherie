@@ -6,10 +6,10 @@ code taken from the Symfony Doc https://symfony.com/doc/current/form/form_collec
     var $collectionHolder;
 
     var $addInputLink = $('<a href="#" class="add_input_link">Nouvelle ligne</a>');
-    var $newLinkLi = $('<li></li>').append($addInputLink);
+    var $newLinkLi = $('<div></div>').append($addInputLink);
     $(document).ready(function () {
         // Get the ul that holds the collection of inputs
-        $collectionHolder = $('ul.lines');
+        $collectionHolder = $('div.lines');
         // add the "add an input" anchor and li to the input ul
         $collectionHolder.append($newLinkLi);
 
@@ -45,7 +45,7 @@ code taken from the Symfony Doc https://symfony.com/doc/current/form/form_collec
             $collectionHolder.data('index', index + 1);
 
             // Display the form in the page in an li, before the "Add a tag" link li
-            var $newFormLi = $('<li></li>').append(newForm);
+            var $newFormLi = $('<div></div>').append(newForm);
             $newLinkLi.before($newFormLi);
         }
 

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LineRepository")
@@ -44,8 +45,16 @@ class Line extends Part
      * @var integer
      *
      * @ORM\Column(type="smallint", length=2, nullable=true)
+     * @Assert\Length(max="2", maxMessage="Trop chaud !")
      */
     private $temperature;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=12, nullable=true, unique=true)
+     */
+    private $barcode;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Input", inversedBy="lines")
@@ -74,7 +83,7 @@ class Line extends Part
         $this->id = $id;
     }
 
-    /**
+    /**²
      * @return Float
      */
     public function getPrice(): ?Float
@@ -125,7 +134,7 @@ class Line extends Part
     /**
      * @return int
      */
-    public function getTemperature(): int
+    public function getTemperature(): ?int
     {
         return $this->temperature;
     }
@@ -152,6 +161,22 @@ class Line extends Part
     public function setInput($input): void
     {
         $this->input = $input;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBarcode(): ?string
+    {
+        return $this->barcode;
+    }
+
+    /**
+     * @param string $barcode
+     */
+    public function setBarcode(string $barcode): void
+    {
+        $this->barcode = $barcode;
     }
 
 
