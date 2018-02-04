@@ -1,0 +1,12 @@
+{# Display the Action Floating menu for a list #}
+
+<div id="menu-container">
+    <div id="menu-rotation" class="box-rounded">
+        <i class="material-icons">add</i>
+    </div>
+    <div class="hideit">
+        <div class="box-rounded bg-blue"> <a href="{{ path('admin_default') }}"> <i class="material-icons">home</i></a></div>
+        <div class="box-rounded bg-blue"> <a href="{{ path(entity ~ '_add') }}"> <i class="material-icons">create</i></a></div>
+        <div class="box-rounded bg-blue">  <a href="{{ path(entity ~ '_list') }}"> <i class="material-icons">view_list</i></a></div>
+    </div>
+</div>

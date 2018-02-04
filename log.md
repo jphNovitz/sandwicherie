@@ -9,8 +9,18 @@
  ajouter une fonctionnalité pour categorie :   
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
+##4 fevrier 2018
+**Avancement**  
+* Integration du floating menu dans le tempate list
+* verifiaction que ce la ne pose pas de problème avec links/path/chemins ->ok
+* Ajout dans le readme.md 
 
-## 31 janvier / 01 fevirer 2018
+##3 fébrier 2018
+*Avancement*  
+Sur le côté préparation d'un 'floating action menu' dans le style google par exemple inbox qui sera à intégrer à 
+mon template.
+
+##31 janvier / 01 fevirer 2018
 ##### INPUTS & LINES  
 ***Avancement***
 * ajouté un champs pour le codebar et intégré les champs qui ne l'étaient pas comme la température.
