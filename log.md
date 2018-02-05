@@ -7,7 +7,17 @@
  separer menu lateral du template -> mettre dans _elements
  bread et sauce dans formulaire ingredient
  ajouter une fonctionnalité pour categorie :   
- dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
+ dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients  
+
+
+##5 février 2018
+***Avancement***  
+Mise en forme de la page accueil admin avec des logos material design
+***Reflexions*** 
+Pas certains que ces logos soient compréhensibles soit:
+* je met le mot en dessous pour aider
+* je change de librairie icones pour avoir des plus clairs
+* je reviens aux mots seuls.  
 
 ##4 fevrier 2018
 **Avancement**  

@@ -3,13 +3,13 @@
 {%  block body %}
 
     <h1>Admin</h1>
-    <div class="list-group">
-    <div class="list-group-item"> <a href="{{ path('ingredients_list') }}"> Liste ingredients</a> </div>
-    <div class="list-group-item"> <a href="{{ path('categories_list') }}"> Liste categories d'ingredients</a> </div>
-    <div class="list-group-item"> <a href="{{ path('products_list') }}"> Liste produits</a> </div>
-    <div class="list-group-item"> <a href="{{ path('types_list') }}"> Liste types de produits</a> </div>
-    <div class="list-group-item"> <a href="{{ path('providers_list') }}"> Liste fournisseurs</a> </div>
-    <div class="list-group-item"> <a href="{{ path('allergies_list') }}"> Liste allergies</a> </div>
-    <div class="list-group-item"> <a href="{{ path('inputs_list') }}"> Liste entrées</a> </div>
+    <div class="square-group">
+    <div class="square-group-item"> <a href="{{ path('ingredients_list') }}"><i class="material-icons">layers</i></a> </div>
+    <div class="square-group-item"> <a href="{{ path('categories_list') }}"><i class="material-icons">local_offer</i></a> </div>
+    <div class="square-group-item"> <a href="{{ path('products_list') }}"><i class="material-icons">restaurant</i></a> </div>
+    <div class="square-group-item"> <a href="{{ path('types_list') }}"> <i class="material-icons">event_note</i></a> </div>
+    <div class="square-group-item"> <a href="{{ path('providers_list') }}"><i class="material-icons">store_mall_directory</i></a> </div>
+    <div class="square-group-item"> <a href="{{ path('allergies_list') }}"><i class="material-icons">assignment_late</i></a> </div>
+    <div class="square-group-item"> <a href="{{ path('inputs_list') }}"> <i class="material-icons">input</i></a> </div>
 <div>
 {% endblock %}
