@@ -2,13 +2,15 @@
   
  memo / todo  
 
- améliorer  affichage erreurs dans les formulaires
- remplacer les id par les slugs dans les routes
- separer menu lateral du template -> mettre dans _elements
- bread et sauce dans formulaire ingredient
- ajouter une fonctionnalité pour categorie :   
- dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients  
+ remplacer les id par les slugs dans les routes  
+ separer menu lateral du template -> mettre dans _elements  
+ bread et sauce dans formulaire ingredient  
+ ajouter une fonctionnalité pour categorie :    
+ dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients    
 
+##8 février 2018 
+* Entité Ingredient -> ajout vegetable pour crudité.
+* Modifications css  
 
 ##5 février 2018
 ***Avancement***  

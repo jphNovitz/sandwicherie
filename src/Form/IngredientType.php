@@ -35,6 +35,7 @@ class IngredientType extends AbstractType
             ])
             ->add('bread', CheckboxType::class)
             ->add('sauce', checkboxType::class)
+            ->add('vegetable', checkboxType::class)
             ->add('images', CollectionType::class,[
                 'entry_type'=>ImagesIngredientType::class,
                 'allow_add'  => true,

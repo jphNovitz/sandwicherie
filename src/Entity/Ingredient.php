@@ -85,6 +85,12 @@ class Ingredient
     private $sauce;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="vegetable", type="boolean", length=1)
+     */
+    private $vegetable;
+
+    /**
      * Ingredient constructor.
      */
 
@@ -96,6 +102,7 @@ class Ingredient
         $this->images = new ArrayCollection();
         $this->bread = false;
         $this->sauce = false;
+        $this->vegetable = false;
     }
 
     /**
@@ -312,6 +319,22 @@ class Ingredient
     public function setSauce(bool $sauce): void
     {
         $this->sauce = $sauce;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVegetable(): bool
+    {
+        return $this->vegetable;
+    }
+
+    /**
+     * @param bool $vegetable
+     */
+    public function setVegetable(bool $vegetable): void
+    {
+        $this->vegetable = $vegetable;
     }
 
 

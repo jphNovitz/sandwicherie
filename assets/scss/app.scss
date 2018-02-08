@@ -260,6 +260,9 @@ html, body {
   form{
     margin: 0 20px;
   }
+  .inline {
+    display: inline;
+  }
   .content form .form-row{
     position: relative;
     margin: 10px 0;
@@ -292,6 +295,7 @@ html, body {
     outline: none ;
     opacity: 1;
   }
+
   .content form .form-row .dropdown{
     font-size: 1.1rem;
     line-height: 1.4rem;
@@ -302,13 +306,18 @@ html, body {
     background-color: darkorange;
   }
   .content form .form-row .dropdown :hover{
-    background-color: $darkOrange;
+    background-color: $lightOrange;
     color: $white;
   }
   .content form .form-row .dropdown input :checked{
     background-color:  black;
     color: $lightOrange;
     font-style: oblique;
+  }
+
+  .content form .form-row .dropdown option[selected=selected] {
+    background-color: #000000;
+    color: $white;
   }
   .vich-image{
     display: flex;
@@ -384,8 +393,8 @@ html, body {
     flex-direction: column-reverse;
     width: 56px;
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    top: 60vh;
+    left: 80vw;
   }
 
   #menu-container #menu-rotation{

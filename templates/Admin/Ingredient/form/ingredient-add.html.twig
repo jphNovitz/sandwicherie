@@ -28,13 +28,17 @@
                     "class": "dropdown"
                 }}) }}
             </div>
-        <div class="form-row">
+        <div class="form-row inline">
             <label for="form_components">Pain</label>
             {{ form_widget(form.bread) }}
         </div>
-        <div class="form-row">
+        <div class="form-row inline">
             <label for="form_components">Sauce</label>
             {{ form_widget(form.sauce) }}
+        </div>
+        <div class="form-row inline">
+            <label for="form_components">Crudité</label>
+            {{ form_widget(form.vegetable) }}
         </div>
         <div class="form-row">
                 {% for image in form.images %}
