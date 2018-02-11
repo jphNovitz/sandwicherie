@@ -2,11 +2,16 @@
   
  memo / todo  
 
+ adresse media queries https://v4-alpha.getbootstrap.com/layout/overview/
  remplacer les id par les slugs dans les routes  
  separer menu lateral du template -> mettre dans _elements  
  bread et sauce dans formulaire ingredient  
  ajouter une fonctionnalité pour categorie :    
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients    
+
+##11 février 2018  
+***Avancement***  
+* Mise en forme des éléments aux media queries supérieur auw smarphones -> ok pour page accueil jusque 768px
 
 ##8 février 2018 
 * Entité Ingredient -> ajout vegetable pour crudité.

@@ -34,7 +34,7 @@ html, body {
   justify-content: center;
 }
 .content h1{
-  font-size: 1.5em;
+  //font-size: 1.5em;
   color: #708238;
   padding: 1px 20px;
 }
@@ -90,11 +90,10 @@ html, body {
  * end alert
  */
 
-
 @media screen and (max-width: 768px) {
   .toolbar {
     max-width: 100%;
-    padding: .8vh 3vw;
+    padding: 25px 20px;
     background-color: $darkOrange;
     color: $white;
     margin: 0;
@@ -110,8 +109,10 @@ html, body {
   .toolbar #title {
     font-family: 'Amarante', cursive;
     margin-left: 24px;
-    font-size: 24px;
+    font-size: 50px;
   }
+
+
   #lateral-menu{
     position: absolute;
     z-index: 100;
@@ -153,6 +154,101 @@ html, body {
     border: none;
     margin: 9px 3px;
   }
+
+  .square-group{
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .square-group-item{
+    width: 23vw;
+    height: 23vw;
+    border: solid 1px transparent;
+    padding: 14px 7px;
+    margin: 15px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    text-align: center;
+    background-color: darkorange;
+    border-radius: 50%;
+  }
+
+  .square-group-item a:link, .square-group-item a:visited  {
+    color: $white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .square-group-item .material-icons{
+    font-size: 2.5em;
+
+  }
+}
+
+  @media screen and (max-width: 576px) {
+  .toolbar {
+    padding: .8vh 3vw;
+    background-color: $darkOrange;
+
+  } /*
+  .toolbar #menu-icon .material-icons {
+    font-size: 29px;
+  }
+  .toolbar #menu-icon .material-icons:hover {
+    cursor: pointer;
+  } */
+  .toolbar #title {
+    font-size: 24px;
+  }
+  /*
+  #lateral-menu{
+    position: absolute;
+    z-index: 100;
+    top: 0px;
+    margin-top: 0px;
+    margin-left: -100vw;
+    height: 100vh;
+    background-color: lighten($darkOrange,40%);
+    padding: 0;
+    transition: margin-left 680ms ease-out;
+  }
+
+  #lateral-menu, #lateral-menu li a {
+    color: lighten($grey, 20%) ;
+  }
+
+  #lateral-menu ul{
+    padding-left: 0px;
+  }
+
+  #lateral-menu ul li{
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    padding: 6px 24px;
+    font-size: 81%;
+  }
+  #lateral-menu ul li .material-icons{
+    margin-right: 1.2rem;
+  }
+
+  #lateral-menu ul li:hover{
+    background-color: lighten($darkOrange,20%);
+  }
+
+  #lateral-menu .separation {
+    background-color: $darkOrange;
+    height: 1px;
+    border: none;
+    margin: 9px 3px;
+  }
+    */
   /*
   * list display
   */
@@ -222,27 +318,25 @@ html, body {
   /*
    * square list display
    */
-  .square-group{
-    width: 90%;
+ /* .square-group{
+    width: 100%;
     padding: 0;
     display: flex;
     justify-content: center;
     flex-direction: row;
+    align-items: center;
     flex-wrap: wrap;
   }
-
+*/
   .square-group-item{
-    width: 43%;
-    border: solid 1px transparent;
-    /* padding: 10px 5px; */
+    width: 40vw;
+    height: 40vw;
     padding: 14px 7px;
-    margin: 5px 3px;
+    margin: 7px 7px;
     font-size: 1.5em;
-    text-align: center;
-    background-color: $darkOrange
 
   }
-
+/*
   .square-group-item a:link, .square-group-item a:visited  {
     color: $white;
     text-decoration: none;
@@ -252,7 +346,7 @@ html, body {
     font-size: 2.5em;
 
   }
-
+*/
   /*
    * END square list display
    */
