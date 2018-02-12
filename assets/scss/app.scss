@@ -90,8 +90,9 @@ html, body {
  * end alert
  */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .toolbar {
+    min-width: 100vw;
     max-width: 100%;
     padding: 25px 20px;
     background-color: $darkOrange;
@@ -100,16 +101,23 @@ html, body {
     display: flex;
     align-items: center;
   }
+  .toolbar #title {
+    font-family: 'Amarante', cursive;
+    margin-left: 24px;
+    font-size: 50px;
+  }
   .toolbar #menu-icon .material-icons {
     font-size: 29px;
   }
   .toolbar #menu-icon .material-icons:hover {
     cursor: pointer;
   }
-  .toolbar #title {
-    font-family: 'Amarante', cursive;
-    margin-left: 24px;
-    font-size: 50px;
+
+  .toolbar #menu-icon .material-icons {
+    font-size: 52px;
+  }
+  .toolbar #menu-icon .material-icons:hover {
+    cursor: pointer;
   }
 
 
@@ -138,7 +146,7 @@ html, body {
     align-items: center;
     list-style-type: none;
     padding: 6px 24px;
-    font-size: 81%;
+    font-size: 2em;
   }
   #lateral-menu ul li .material-icons{
     margin-right: 1.2rem;
@@ -154,7 +162,6 @@ html, body {
     border: none;
     margin: 9px 3px;
   }
-
   .square-group{
     width: 100%;
     padding: 0;
@@ -164,22 +171,51 @@ html, body {
     align-items: center;
     flex-wrap: wrap;
   }
+.square-group-item {
+  width: 16vw;
+  height: 16vw;
+  border: solid 1px transparent;
+  padding: 14px 7px;
+  margin: 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  text-align: center;
+  background-color: darkorange;
+  border-radius: 50%;
+  }
+  .square-group .square-group-item .material-icons{
+    font-size: 2.3em;
+  }
+  .square-group .square-group-item a:link .material-icons,
+  .square-group .square-group-item a:visited .material-icons{
+    color: #FFEFE3 ;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .toolbar #menu-icon .material-icons {
+    font-size: 29px;
+  }
+  .toolbar #title {
+    margin-left: 24px;
+    font-size: 50px;
+  }
 
   .square-group-item{
     width: 23vw;
     height: 23vw;
-    border: solid 1px transparent;
     padding: 14px 7px;
     margin: 15px 15px;
+  }
+  #lateral-menu ul li{
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 2em;
-    text-align: center;
-    background-color: darkorange;
-    border-radius: 50%;
+    list-style-type: none;
+    padding: .5em 24px;
+    font-size: 81%;
   }
-
   .square-group-item a:link, .square-group-item a:visited  {
     color: $white;
     text-decoration: none;
