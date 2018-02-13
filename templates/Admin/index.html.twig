@@ -4,12 +4,45 @@
 
     <h1>Admininistration</h1>
     <div class="square-group">
-    <div class="square-group-item"> <a href="{{ path('ingredients_list') }}"><i class="material-icons">layers</i></a> </div>
-    <div class="square-group-item"> <a href="{{ path('categories_list') }}"><i class="material-icons">local_offer</i></a> </div>
-    <div class="square-group-item"> <a href="{{ path('products_list') }}"><i class="material-icons">restaurant</i></a> </div>
-    <div class="square-group-item"> <a href="{{ path('types_list') }}"> <i class="material-icons">event_note</i></a> </div>
-    <div class="square-group-item"> <a href="{{ path('providers_list') }}"><i class="material-icons">store_mall_directory</i></a> </div>
-    <div class="square-group-item"> <a href="{{ path('allergies_list') }}"><i class="material-icons">assignment_late</i></a> </div>
-    <div class="square-group-item"> <a href="{{ path('inputs_list') }}"> <i class="material-icons">input</i></a> </div>
+    <div class="square-group-item">
+        <a href="{{ path('ingredients_list') }}">
+            <i class="material-icons">layers</i>
+            <span class="link-name">Ingrédients</span>
+        </a> </div>
+    <div class="square-group-item">
+        <a href="{{ path('categories_list') }}">
+            <i class="material-icons">local_offer</i>
+            <span class="link-name">Categorie</span>
+        </a>
+    </div>
+    <div class="square-group-item">
+        <a href="{{ path('products_list') }}">
+            <i class="material-icons">restaurant</i>
+            <span class="link-name">Products</span>
+        </a>
+    </div>
+    <div class="square-group-item">
+        <a href="{{ path('types_list') }}">
+            <i class="material-icons">event_note</i>
+            <span class="link-name">Types</span>
+        </a> </div>
+    <div class="square-group-item">
+        <a href="{{ path('providers_list') }}">
+            <i class="material-icons">store_mall_directory</i>
+            <span class="link-name">Fournisseurs</span>
+        </a>
+    </div>
+    <div class="square-group-item">
+        <a href="{{ path('allergies_list') }}">
+            <i class="material-icons">assignment_late</i>
+            <span class="link-name">Allergies</span>
+        </a>
+    </div>
+    <div class="square-group-item">
+        <a href="{{ path('inputs_list') }}">
+            <i class="material-icons">input</i>
+            <span class="link-name">Entrées</span>
+        </a>
+    </div>
 <div>
 {% endblock %}

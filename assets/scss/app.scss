@@ -107,15 +107,12 @@ html, body {
     font-size: 50px;
   }
   .toolbar #menu-icon .material-icons {
-    font-size: 29px;
+    font-size: 70px;
   }
   .toolbar #menu-icon .material-icons:hover {
     cursor: pointer;
   }
 
-  .toolbar #menu-icon .material-icons {
-    font-size: 52px;
-  }
   .toolbar #menu-icon .material-icons:hover {
     cursor: pointer;
   }
@@ -150,6 +147,7 @@ html, body {
   }
   #lateral-menu ul li .material-icons{
     margin-right: 1.2rem;
+    font-size: 2.2em;
   }
 
   #lateral-menu ul li:hover{
@@ -175,15 +173,27 @@ html, body {
   width: 16vw;
   height: 16vw;
   border: solid 1px transparent;
-  padding: 14px 7px;
+  padding: 41px;
   margin: 4vw;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
   font-size: 2em;
   text-align: center;
   background-color: darkorange;
   border-radius: 50%;
+  }
+  .square-group .square-group-item a{
+    text-decoration: none;
+  }
+  .square-group .square-group-item .link-name,
+  .square-group .square-group-item a:link .link-name,
+  .square-group .square-group-item a:visited .link-name{
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    text-decoration: none;
   }
   .square-group .square-group-item .material-icons{
     font-size: 2.3em;
@@ -220,10 +230,6 @@ html, body {
     color: $white;
     text-decoration: none;
     font-weight: bold;
-  }
-  .square-group-item .material-icons{
-    font-size: 2.5em;
-
   }
 }
 
