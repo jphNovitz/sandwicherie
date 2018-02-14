@@ -34,7 +34,7 @@ html, body {
   justify-content: center;
 }
 .content h1{
-  //font-size: 1.5em;
+  font-size: 3em;
   color: #708238;
   padding: 1px 20px;
 }
@@ -173,13 +173,13 @@ html, body {
   width: 16vw;
   height: 16vw;
   border: solid 1px transparent;
-  padding: 41px;
-  margin: 4vw;
+  padding: 50px;
+  margin: 2%;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
-  font-size: 2em;
+  font-size: 1.9em;
   text-align: center;
   background-color: darkorange;
   border-radius: 50%;
@@ -216,8 +216,8 @@ html, body {
   .square-group-item{
     width: 23vw;
     height: 23vw;
-    padding: 14px 7px;
-    margin: 15px 15px;
+    padding: 3.8%;
+    margin: 5% 1%;
   }
   #lateral-menu ul li{
     display: flex;
@@ -226,6 +226,17 @@ html, body {
     padding: .5em 24px;
     font-size: 81%;
   }
+  .square-group .square-group-item .material-icons {
+    font-size: 3em;
+  }
+  .square-group .square-group-item .link-name,
+  .square-group .square-group-item a:link .link-name,
+  .square-group .square-group-item a:visited .link-name
+  {
+    font-size: .65em;
+    text-decoration: none;
+  }
+
   .square-group-item a:link, .square-group-item a:visited  {
     color: $white;
     text-decoration: none;
@@ -237,8 +248,8 @@ html, body {
   .toolbar {
     padding: .8vh 3vw;
     background-color: $darkOrange;
-
-  } /*
+  }
+    /*
   .toolbar #menu-icon .material-icons {
     font-size: 29px;
   }
@@ -291,6 +302,24 @@ html, body {
     margin: 9px 3px;
   }
     */
+
+    .square-group .square-group-item .material-icons,
+    .square-group .square-group-item a:link .material-icons,
+    .square-group .square-group-item a:visited .material-icons{
+      font-size: 5em;
+    }
+
+    .square-group .square-group-item .link-name,
+    .square-group .square-group-item a:link .link-name,
+    .square-group .square-group-item a:visited .link-name{
+      display: none;
+    }
+
+    .square-group .square-group-item .link-name::first-letter,
+    .square-group .square-group-item a:link .link-name::first-letter,
+    .square-group .square-group-item a:visited .link-name::first-letter{
+      visibility: visible;
+    }
   /*
   * list display
   */
