@@ -1,0 +1,6 @@
+{# receive a list and display each element #}
+<ul>
+    {% for object in objects|slice(0, 5) %}
+        <li>{{ object.name }}</li>
+    {% endfor  %}
+</ul>

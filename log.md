@@ -9,6 +9,14 @@
  ajouter une fonctionnalité pour categorie :    
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients    
 
+##du 12 au 15 février 2018
+***Avancement***
+* Continuer à adapter le css pour les versions au delà des smartphones vers les laptops -> pages d'accueil
+* sur la page accueil admin pour version ordi (grand écran) pour afficher plus que les liens vers les pages
+** affichage de cinq éléments pour chaque entité
+** utilisation d'un 'element partiel' à inclure plusieurs fois-> un seul élément à modifier pour tout 
+mettre en forme d'un coup.
+
 ##11 février 2018  
 ***Avancement***  
 * Mise en forme des éléments aux media queries supérieur auw smarphones -> ok pour page accueil jusque 768px
