@@ -1,6 +1,6 @@
 {# receive a list and display each element #}
-<ul>
+<ul class="list">
     {% for object in objects|slice(0, 5) %}
-        <li>{{ object.name }}</li>
+        <a href="{{ path(object|entity~'_show', {'id': object.id}) }}"><li>{{ object.name }}</li></a>
     {% endfor  %}
 </ul>

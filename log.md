@@ -2,12 +2,20 @@
   
  memo / todo  
 
+decalage vers le bas different enre ingredients et inputs -> checker
+
  adresse media queries https://v4-alpha.getbootstrap.com/layout/overview/
  remplacer les id par les slugs dans les routes  
  separer menu lateral du template -> mettre dans _elements  
  bread et sauce dans formulaire ingredient  
  ajouter une fonctionnalité pour categorie :    
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients    
+
+##16 février 2018  
+***Avancement***  
+L'ajout de lien dans _loop_entity_list et donc l'utilisation de route/path  
+Pour que cela fonctionne j'ai besoin de recuperer le nom de l'entité à laquelle appartient l'élement  
+-> j'ai créer un filtre twig (src/Twig)  
 
 ##du 12 au 15 février 2018
 ***Avancement***

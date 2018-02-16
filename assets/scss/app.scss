@@ -28,7 +28,7 @@ html, body {
   }
 .content {
   padding: 8px;
-  background-color: #FFEFE3;
+  background-color: $white;
   width: 100vw;
   min-height: 100%;
   justify-content: center;
@@ -167,18 +167,19 @@ html, body {
 }
 
 .square-group-item {
-  width: 16vw;
+  width: 26vw;
   min-height: 13vw;
   border: solid 1px transparent;
   padding: 10px;
   margin: 1%;
   display: flex;
+  flex-direction: column;
   align-items: start;
   flex-wrap: wrap;
   justify-content: start;
   font-size: .9em;
   text-align: center;
-  background-color: darkorange;
+  background-color: rgba(255, 180, 121, .18);
   border-radius: 10% 10% 20% 20%;
 }
 .square-group .square-group-item a{
@@ -187,7 +188,7 @@ html, body {
 .square-group .square-group-item .link-name,
 .square-group .square-group-item a:link .link-name,
 .square-group .square-group-item a:visited .link-name{
-  color: white;
+  color: $darkOrange;
   font-weight: bold;
   font-size: 1em;
   text-decoration: none;
@@ -197,7 +198,14 @@ html, body {
 }
 .square-group .square-group-item a:link .material-icons,
 .square-group .square-group-item a:visited .material-icons{
-  color: #FFEFE3 ;
+  color: $darkOrange ;
+}
+.square-group .square-group-item .list{
+  //margin-top: -1.5em;
+}
+.square-group .square-group-item .list li{
+  list-style-type: none;
+  color: $darkOrange;
 }
 
 
