@@ -22,9 +22,10 @@ html, body {
   font-family: 'Roboto', sans-serif;
 }
 .container {
-  width: 100%;
-  min-width: 100%;
+  width: 100vw;
+  min-width: 100vw;
   height: 100%;
+  overflow: hidden;
   }
 .content {
   padding: 8px;
@@ -34,7 +35,7 @@ html, body {
   justify-content: center;
 }
 .content h1{
-  font-size: 3em;
+  font-size: 2.4em;
   color: #708238;
   padding: 1px 20px;
 }
@@ -93,7 +94,7 @@ html, body {
 .toolbar {
   min-width: 100vw;
   max-width: 100%;
-  padding: 25px 20px;
+  padding: 5px 20px;
   background-color: $darkOrange;
   color: $white;
   margin: 0;
@@ -104,11 +105,12 @@ html, body {
 .toolbar #title {
   font-family: 'Amarante', cursive;
   margin-left: 24px;
-  font-size: 50px;
+  font-size: 3em;
 }
 .toolbar #menu-icon .material-icons {
-  font-size: 70px;
+  font-size: 3.2em;
 }
+
 .toolbar #menu-icon .material-icons:hover {
   cursor: pointer;
 }
@@ -184,6 +186,8 @@ html, body {
 }
 .square-group .square-group-item a{
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 .square-group .square-group-item .link-name,
 .square-group .square-group-item a:link .link-name,
@@ -209,89 +213,145 @@ html, body {
 }
 
 
-@media screen and (max-width: 992px) {
- /* .toolbar {
-    min-width: 100vw;
-    max-width: 100%;
-    padding: 25px 20px;
-    background-color: $darkOrange;
-    color: $white;
-    margin: 0;
-    display: flex;
-    align-items: center;
-  }*/
-  /*.toolbar #title {
-    font-family: 'Amarante', cursive;
-    margin-left: 24px;
-    font-size: 50px;
-  }
-  .toolbar #menu-icon .material-icons {
-    font-size: 70px;
-  }
-  .toolbar #menu-icon .material-icons:hover {
-    cursor: pointer;
-  } */
 /*
-  #lateral-menu{
-    position: absolute;
-    z-index: 100;
-    top: 0px;
-    margin-top: 0px;
-    margin-left: -100vw;
-    height: 100vh;
-    background-color: lighten($darkOrange,40%);
-    padding: 0;
-    transition: margin-left 680ms ease-out;
-  }
+* display list group
+ */
+.list-group{
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.list-group .list-group-item{
+  border-bottom: solid 1px #FFB479;
+  border-left: solid 1px #FFB479;
+  border-right: solid 1px #FFB479;
+  -webkit-box-shadow:  4px 3px 18px 0px #cecece;
+  -moz-box-shadow: 4px 3px 18px 0px #cecece;
+  box-shadow: 4px 3px 18px 0px #cecece;
+  display: flex;
+  line-height: 2em;
+  margin: 3px auto;
+  padding: 5px 1em;
+  width: 88%;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: all 1s ease;
+}
+.list-group .list-group-item:hover{
 
-  #lateral-menu, #lateral-menu li a {
-    color: lighten($grey, 20%) ;
-  }
+  -webkit-box-shadow:  4px 3px 21px 2px #757474;
+  -moz-box-shadow:  4px 3px 21px 2px #757474;
+  box-shadow:  4px 3px 21px 2px #757474;
+}
 
-  #lateral-menu ul{
-    padding-left: 0px;
-  }
+.list-group .list-group-item:hover{
+  background-color: #FFEFE3;
+}
+.list-group .list-group-item .actions{
+  width: 18%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 8px 0;
 
-  #lateral-menu ul li{
-    display: flex;
-    align-items: center;
-    list-style-type: none;
-    padding: 6px 24px;
-    font-size: 2em;
-  }
-  #lateral-menu ul li .material-icons{
-    margin-right: 1.2rem;
-    font-size: 2.2em;
-  }
+}
+.list-group .list-group-item .name{
+  padding: 8px 5px;
+  font-size: 1.2em;
+  width: 80%;
+}
+.list-group .list-group-item .name a{
+  text-decoration: none;
+  background-color: inherit;
+  color: black;
+}
 
-  #lateral-menu ul li:hover{
-    background-color: lighten($darkOrange,20%);
-  }
+.list-group .list-group-item .actions .material-icons{
+  border-radius: 25px;
+  padding: 5px;
+  color: #fff;
+}
 
-  #lateral-menu .separation {
-    background-color: $darkOrange;
-    height: 1px;
-    border: none;
-    margin: 9px 3px;
-  }
-  .square-group{
+/*
+* end list display
+*/
+/*
+    action floating menu
+  */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+#menu-container {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 56px;
+  position: fixed;
+  top: 60vh;
+  left: 80vw;
+}
+
+
+
+#menu-container:hover .hideit{
+  opacity: 1;
+}
+#menu-container #menu-rotation{
+  background-color: palevioletred;
+  color: #fff;
+  transition: all .6s ease;
+}
+#menu-container:hover #menu-rotation{
+  transform: rotate(45deg);
+}
+.box-rounded{
+  width: 24px;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 50%;
+}
+
+.bg-blue{
+  background-color: #727272;
+  color: #fafafa;
+}
+.bg-blue :link{
+  color: #fafafa;
+}
+.hideit{
+  opacity: 0;
+  transition: all 1.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/*
+  end action floating menu
+ */
+
+
+@media screen and (max-width: 992px) {
+
+  .content {
+    margin: 0px;
     width: 100%;
-    padding: 0;
     display: flex;
-    justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-  }*/
+    justify-content: start;
+  }
+
+  .content h1 {
+    font-size: 1.8em;
+  }
 .square-group-item {
   width: 16vw;
   height: 16vw;
   //border: solid 1px transparent;
   padding: 50px;
   margin: 2%;
-  //display: flex;
-  //align-items: center;
-  //flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   font-size: 1.9em;
   text-align: center;
@@ -300,6 +360,10 @@ html, body {
   }
   .square-group .square-group-item a{
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   .square-group .square-group-item .link-name,
   .square-group .square-group-item a:link .link-name,
@@ -311,17 +375,90 @@ html, body {
   }
   .square-group .square-group-item .material-icons{
     font-size: 2.3em;
+
   }
+  .square-group .square-group-item a:link .link-name,
+  .square-group .square-group-item a:visited .link-name,
   .square-group .square-group-item a:link .material-icons,
   .square-group .square-group-item a:visited .material-icons{
-    color: #FFEFE3 ;
+    color: $darkOrange ;
   }
   .square-group .square-group-item .list{
     display: none;
   }
+  /*
+ * list display
+ */
+ /* .list-group{
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .list-group .list-group-item{
+    border-bottom: solid 1px #FFB479;
+    border-left: solid 1px #FFB479;
+    border-right: solid 1px #FFB479;
+    -webkit-box-shadow:  4px 3px 18px 0px #cecece;
+    -moz-box-shadow: 4px 3px 18px 0px #cecece;
+    box-shadow: 4px 3px 18px 0px #cecece;
+    display: flex;
+    line-height: 2em;
+    margin: 3px auto;
+    padding: 5px 1em;
+    width: 88%;
+    flex-direction: row;
+    justify-content: space-between;
+    transition: all 1s ease;
+  }
+  .list-group .list-group-item:hover{
+
+    -webkit-box-shadow:  4px 3px 21px 2px #757474;
+    -moz-box-shadow:  4px 3px 21px 2px #757474;
+    box-shadow:  4px 3px 21px 2px #757474;
+  }
+
+  .list-group .list-group-item:hover{
+    background-color: #FFEFE3;
+  }
+  .list-group .list-group-item .actions{
+    width: 18%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 8px 0;
+
+  }
+  .list-group .list-group-item .name{
+    padding: 8px 5px;
+    font-size: 1.2em;
+    width: 80%;
+  }
+  .list-group .list-group-item .name a{
+    text-decoration: none;
+    background-color: inherit;
+    color: black;
+  }
+
+  .list-group .list-group-item .actions .material-icons{
+    border-radius: 25px;
+    padding: 5px;
+    color: #fff;
+  }
+*/
+  /*
+  * end list display
+  */
+
 }
 
 @media screen and (max-width: 768px) {
+
+  .content {
+    margin: 0px;
+    width: 100vw
+  }
   .toolbar #menu-icon .material-icons {
     font-size: 29px;
   }
@@ -440,51 +577,24 @@ html, body {
   /*
   * list display
   */
-  .list-group{
-    width: 100%;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .list-group .list-group-item:first-child {
+    .list-group .list-group-item{
+      flex-direction: column;
+    }
+    .list-group .list-group-item:first-child {
     border-top: solid 1px $lightOrange;
   }
-  .list-group .list-group-item{
-    border-bottom: solid 1px #FFB479;
-    border-left: solid 1px #FFB479;
-    border-right: solid 1px #FFB479;
-    -webkit-box-shadow:  4px 3px 18px 0px #cecece;
-    -moz-box-shadow: 4px 3px 18px 0px #cecece;
-    box-shadow: 4px 3px 18px 0px #cecece;
-    display: flex;
-    line-height: 2em;
-    margin: 3px auto;
-    padding: 5px 1em;
-    width: 80%;
-    flex-direction: column;
-    transition: all 1s ease;
-  }
-  .list-group .list-group-item:hover{
-
-    -webkit-box-shadow:  4px 3px 21px 2px #757474;
-    -moz-box-shadow:  4px 3px 21px 2px #757474;
-    box-shadow:  4px 3px 21px 2px #757474;
-  }
-
   .list-group .list-group-item:hover{
     background-color: #FFEFE3;
   }
   .list-group .list-group-item .actions{
+   width: 99%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 8px 0;
   }
   .list-group .list-group-item .name{
-    padding: 8px 5px;
-    font-size: 1.2em;
-    border-bottom: dotted 1px #cecece;
+    width: 99%;
   }
   .list-group .list-group-item .name a{
     text-decoration: none;
@@ -665,54 +775,7 @@ html, body {
     width: 80%;
   }
 
-  /*
-     action floating menu
-   */
-  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-  #menu-container {
-    display: flex;
-    flex-direction: column-reverse;
-    width: 56px;
-    position: fixed;
-    top: 60vh;
-    left: 80vw;
-  }
-
-  #menu-container #menu-rotation{
-    background-color: palevioletred;
-    color: #fff;
-    transition: all .6s ease;
-  }
-  #menu-container:hover #menu-rotation{
-    transform: rotate(45deg);
-  }
-  .box-rounded{
-    width: 24px;
-    padding: 8px;
-    margin: 8px;
-    border-radius: 50%;
-  }
-
-  .bg-blue{
-    background-color: #727272;
-    color: #fafafa;
-  }
-  .bg-blue :link{
-    color: #fafafa;
-  }
-  .hideit{
-    opacity: 0;
-    transition: all 1.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  #menu-container:hover .hideit{
-    opacity: 1;
-  }
-
-  /*
-    end action floating menu
-   */
 
 }
 
