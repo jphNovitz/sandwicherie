@@ -11,6 +11,11 @@ decalage vers le bas different enre ingredients et inputs -> checker
  ajouter une fonctionnalité pour categorie :    
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients    
 
+##19 février 2018
+***Avancement***  
+* fait plus ou moins le tour du css (pour l'instant)  
+* début d'ajout d'action suppression -> routes  
+
 ##16 février 2018  
 ***Avancement***  
 L'ajout de lien dans _loop_entity_list et donc l'utilisation de route/path  

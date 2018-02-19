@@ -287,11 +287,9 @@ html, body {
   flex-direction: column-reverse;
   width: 56px;
   position: fixed;
-  top: 60vh;
-  left: 80vw;
+  bottom: 8vh;
+  right: 8vw;
 }
-
-
 
 #menu-container:hover .hideit{
   opacity: 1;
@@ -305,10 +303,24 @@ html, body {
   transform: rotate(45deg);
 }
 .box-rounded{
-  width: 24px;
-  padding: 8px;
-  margin: 8px;
+  width: 2em;
+  height: 2em;
+  padding: 5px;
+  margin: 5px 0;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
+}
+#menu-rotation .material-icons{
+  font-size: 1.5em;
+}
+.bg-blue a:link .material-icons,
+.bg-blue a:hover .material-icons,
+.bg-blue a:active .material-icons,
+.bg-blue a:visited .material-icons{
+  color: #fff;
 }
 
 .bg-blue{
@@ -329,18 +341,17 @@ html, body {
 
 
 @media screen and (max-width: 992px) {
-
   .content {
     margin: 0px;
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: initial;
     justify-content: start;
   }
 
   .content h1 {
-    font-size: 1.8em;
+    font-size: 1.4em;
   }
 .square-group-item {
   width: 16vw;
@@ -389,64 +400,8 @@ html, body {
   /*
  * list display
  */
- /* .list-group{
-    width: 100%;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .list-group .list-group-item{
-    border-bottom: solid 1px #FFB479;
-    border-left: solid 1px #FFB479;
-    border-right: solid 1px #FFB479;
-    -webkit-box-shadow:  4px 3px 18px 0px #cecece;
-    -moz-box-shadow: 4px 3px 18px 0px #cecece;
-    box-shadow: 4px 3px 18px 0px #cecece;
-    display: flex;
-    line-height: 2em;
-    margin: 3px auto;
-    padding: 5px 1em;
-    width: 88%;
-    flex-direction: row;
-    justify-content: space-between;
-    transition: all 1s ease;
-  }
-  .list-group .list-group-item:hover{
 
-    -webkit-box-shadow:  4px 3px 21px 2px #757474;
-    -moz-box-shadow:  4px 3px 21px 2px #757474;
-    box-shadow:  4px 3px 21px 2px #757474;
-  }
 
-  .list-group .list-group-item:hover{
-    background-color: #FFEFE3;
-  }
-  .list-group .list-group-item .actions{
-    width: 18%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 8px 0;
-
-  }
-  .list-group .list-group-item .name{
-    padding: 8px 5px;
-    font-size: 1.2em;
-    width: 80%;
-  }
-  .list-group .list-group-item .name a{
-    text-decoration: none;
-    background-color: inherit;
-    color: black;
-  }
-
-  .list-group .list-group-item .actions .material-icons{
-    border-radius: 25px;
-    padding: 5px;
-    color: #fff;
-  }
-*/
   /*
   * end list display
   */
@@ -454,7 +409,6 @@ html, body {
 }
 
 @media screen and (max-width: 768px) {
-
   .content {
     margin: 0px;
     width: 100vw
@@ -464,7 +418,7 @@ html, body {
   }
   .toolbar #title {
     margin-left: 24px;
-    font-size: 50px;
+    font-size: 30px;
   }
 
   .square-group-item{

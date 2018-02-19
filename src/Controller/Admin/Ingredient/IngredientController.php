@@ -86,6 +86,7 @@ class IngredientController extends Controller
 
     /**
      * @Route("{slug}/update", name="ingredients_update")
+     * @Method({"GET", "POST"})
      */
     public function update(Request $request, Ingredient $ingredient= NULL )
     {
@@ -106,5 +107,17 @@ class IngredientController extends Controller
         return $this->render($this->getParameter('adm_ingredient').'form/ingredient-update.html.twig', [
             'form'=>$form->createView()
         ]);
+    }
+    /**
+     * @Route("{slug}/delete", name="ingredients_delete")
+     * @Method({"GET", "POST"})
+     */
+    public function delete(Request $request, Ingredient $ingredient= NULL )
+    {
+        if (!$ingredient){
+            $this->addFlash("error", "ingrédient inconnu");
+            return $this->redirectToRoute('ingredients_list');
+        }
+        die('delete');
     }
 }
