@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Confirmation</h1>
+
+    <p>Souhaitez-vous supprimer cet élément ?</p>
+    <p>({{ object.id }}) {{ object.name }}</p>
+    {{ form_start(form) }}
+
+    {{ form_end(form) }}
+
+
+{% endblock %}

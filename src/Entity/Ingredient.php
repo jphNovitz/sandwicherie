@@ -59,8 +59,8 @@ class Ingredient
     private $providers;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ingredient", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $components;
 

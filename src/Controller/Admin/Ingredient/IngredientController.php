@@ -10,10 +10,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\SubmitButtonTypeInterface;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\Form\ClickableInterface;
 /**
  * Class IngredientController
  * @package App\Controller\Admin\Ingredient
@@ -118,6 +122,32 @@ class IngredientController extends Controller
             $this->addFlash("error", "ingrédient inconnu");
             return $this->redirectToRoute('ingredients_list');
         }
-        die('delete');
+        $form = $this->createFormBuilder()
+            ->add('oui', SubmitType::class, ['label'=>'oui'])
+            ->add('non', SubmitType::class, ['label'=>'non'])
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()):
+            if ($form->get('oui')->isClicked()) {
+                if ($this->customPersister->delete($ingredient)) {
+                    $this->addFlash('success', 'element supprimé');
+                    $this->redirectToRoute('ingredients_list');
+                }
+                else {
+                    $this->addFlash('error', 'Erreur');
+                    return $this->redirectToRoute('ingredients_list');
+                }
+            }
+            if ($form->get('non')->isClicked())
+                return $this->redirectToRoute('ingredients_list');
+
+        endif;
+
+        return $this->render('Admin/Ingredient/form/ingredient-delete.html.twig',
+            [
+                'object' => $ingredient,
+                'form' => $form->createView()
+                ]);
     }
 }
