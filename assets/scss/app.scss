@@ -30,8 +30,8 @@ html, body {
 .content {
   padding: 8px;
   background-color: $white;
-  width: 100vw;
-  min-height: 100%;
+  //width: 100vw;
+  //min-height: 100%;
   justify-content: center;
 }
 .content h1{
@@ -140,7 +140,7 @@ html, body {
   align-items: center;
   list-style-type: none;
   padding: 6px 24px;
-  font-size: 2em;
+  font-size: 1em;
 }
 #lateral-menu ul li .material-icons{
   margin-right: 1.2rem;
@@ -217,7 +217,7 @@ html, body {
 * display list group
  */
 .list-group{
-  width: 100%;
+  // width: 100%;
   padding: 0;
   display: flex;
   justify-content: center;
@@ -233,7 +233,7 @@ html, body {
   display: flex;
   line-height: 2em;
   margin: 3px auto;
-  padding: 5px 1em;
+  padding: 5px 1.3em;
   width: 88%;
   flex-direction: row;
   justify-content: space-between;
@@ -285,10 +285,10 @@ html, body {
 #menu-container {
   display: flex;
   flex-direction: column-reverse;
-  width: 56px;
+  // width: 56px;
   position: fixed;
-  bottom: 8vh;
-  right: 8vw;
+  bottom: 3vh;
+  right: 1vw;
 }
 
 #menu-container:hover .hideit{
@@ -303,8 +303,8 @@ html, body {
   transform: rotate(45deg);
 }
 .box-rounded{
-  width: 2em;
-  height: 2em;
+ // width: 2em;
+ // height: 2em;
   padding: 5px;
   margin: 5px 0;
   font-size: 2em;
@@ -314,7 +314,7 @@ html, body {
   border-radius: 50%;
 }
 #menu-rotation .material-icons{
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 .bg-blue a:link .material-icons,
 .bg-blue a:hover .material-icons,

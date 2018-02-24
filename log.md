@@ -10,7 +10,10 @@ decalage vers le bas different enre ingredients et inputs -> checker
  bread et sauce dans formulaire ingredient  
  ajouter une fonctionnalité pour categorie :    
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients    
-
+##24 février 2018
+***Avancement***  
+* petits ajustements affichage container list et lateral toolbar
+* correction bd entité ingredient pour éviter erreur contrainte lors de suppression ingrédient -> cascadegit 
 ##19 février 2018
 ***Avancement***  
 * fait plus ou moins le tour du css (pour l'instant)  
