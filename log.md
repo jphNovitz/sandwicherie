@@ -2,14 +2,22 @@
   
  memo / todo  
 
-decalage vers le bas different enre ingredients et inputs -> checker
+decalage vers le bas different entre ingredients et inputs -> checker
 
  adresse media queries https://v4-alpha.getbootstrap.com/layout/overview/
  remplacer les id par les slugs dans les routes  
  separer menu lateral du template -> mettre dans _elements  
  bread et sauce dans formulaire ingredient  
  ajouter une fonctionnalité pour categorie :    
- dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients    
+ dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
+ 
+##26 et 27 février 2018
+***Avancement***
+* modification du controller pour l'action delete  
+ -> trop long, raccourci par la création d'un deleteType pour la création du formulaire.  
+ -> création d'un service pour exécuter l'action de  supprimer.  
+ * debut de création de l'affichage du détail (card) pour un ingrédient.  
+    
 ##24 février 2018
 ***Avancement***  
 * petits ajustements affichage container list et lateral toolbar

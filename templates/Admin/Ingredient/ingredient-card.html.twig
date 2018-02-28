@@ -1,7 +1,20 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Ingredient Card</h1>
-        {{ ingredient.name }}
-
+{% extends '_skeletons/_card.html.twig' %}
+{% set object = ingredient %}
+{#if ingredient.images is not empty %}
+    {% block card_image %} {{ ingredient.image.url|last }}{% endblock %}
+{% endif #}
+{% block card_properties_rest %}
+    <span class="card-property">{% if ingredient.bread %} Pain{% endif %}</span>
+    <span class="card-property">{% if ingredient.sauce %} Sauce{% endif %}</span>
+    <span class="card-property">{% if ingredient.vegetable %} crudité{% endif %}</span>
+{% endblock %}
+{% block card_rest %}
+    {% if ingredient.components is not empty %}
+        <p>Cet ingrédient est complexe, il contient les ingrédients suivants:</p>
+        <ul>
+            {% for component in ingredient.components %}
+                <li><a href="{{ path('ingredients_show', {'id': component.id}) }}"> {{ component }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}

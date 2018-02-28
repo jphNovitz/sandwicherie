@@ -3,9 +3,11 @@
 namespace App\Controller\Admin\Ingredient;
 
 use App\Entity\Ingredient ;
+use App\Form\DeleteType;
 use App\Form\IngredientType;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
+use App\Service\DeleteObject;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -28,11 +30,13 @@ class IngredientController extends Controller
 {
     protected $customPersister;
     protected $customLoader;
+    protected $deleter;
 
-    public function __construct(CustomPersister $customPersister, CustomObjectLoader $customObjectLoader)
+    public function __construct(CustomPersister $customPersister, CustomObjectLoader $customObjectLoader, DeleteObject $deleter)
     {
         $this->customPersister = $customPersister;
         $this->customLoader = $customObjectLoader;
+        $this->deleter = $deleter;
     }
 
     /**
@@ -122,22 +126,26 @@ class IngredientController extends Controller
             $this->addFlash("error", "ingrédient inconnu");
             return $this->redirectToRoute('ingredients_list');
         }
+        $form = $this->createForm(DeleteType::class,null);
+        /*
         $form = $this->createFormBuilder()
             ->add('oui', SubmitType::class, ['label'=>'oui'])
             ->add('non', SubmitType::class, ['label'=>'non'])
             ->getForm();
-
+            */
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()):
             if ($form->get('oui')->isClicked()) {
-                if ($this->customPersister->delete($ingredient)) {
+                return $this->deleter->delete($ingredient);
+
+              /*  if ($this->customPersister->delete($ingredient)) {
                     $this->addFlash('success', 'element supprimé');
-                    $this->redirectToRoute('ingredients_list');
+                    return $this->redirectToRoute('ingredients_list');
                 }
                 else {
                     $this->addFlash('error', 'Erreur');
                     return $this->redirectToRoute('ingredients_list');
-                }
+                }*/
             }
             if ($form->get('non')->isClicked())
                 return $this->redirectToRoute('ingredients_list');

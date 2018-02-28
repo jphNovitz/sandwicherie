@@ -339,6 +339,44 @@ html, body {
   end action floating menu
  */
 
+/*
+cards
+ */
+.card{
+  background: url("../../public/images/common/background-light.png") ;
+  background-position: center;
+  background-size: contain;
+  padding-top: 30vh;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.card-left{
+  flex: 0 0 30vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+}
+.card-left img{
+  width: 60%;
+  border-radius: 50%;
+  margin-top: -30%;
+}
+
+.card-properties{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.card-property{
+  margin: 10px auto;
+}
+.card-right{
+  flex: 1;
+  background-color: #fff;
+}
 
 @media screen and (max-width: 992px) {
   .content {
