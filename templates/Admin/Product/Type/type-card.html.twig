@@ -1,7 +1,2 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Type Card</h1>
-        {{ type.name }}
-
-{% endblock %}
+{% extends '_skeletons/_card.html.twig' %}
+{% set object = type %}

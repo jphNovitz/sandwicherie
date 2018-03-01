@@ -12,6 +12,10 @@
             </div>
         {% endif %}
         <div class="form-row">
+            <label for="form_description" class="custom">Description</label>
+            {{ form_widget(form.description, {"attr": {"class": "custom"}}) }}
+        </div>
+        <div class="form-row">
             {{ form_errors(form.categories) }}
             <label for="form_categories">categories</label>
             {{ form_widget(form.categories,

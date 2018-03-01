@@ -77,11 +77,11 @@ class IngredientController extends Controller
     }
 
     /**
-     * @Route("{id}", name="ingredients_show")
+     * @Route("{slug}", name="ingredients_show")
      */
-    public function show(Request $request, $id = null)
+    public function show(Request $request, $slug = null)
     {
-        $ingredient = $this->customLoader->LoadOne('App:Ingredient', $id);
+        $ingredient = $this->customLoader->LoadOne('App:Ingredient', $slug);
         if (!$ingredient){
             $this->addFlash("error", "ingrédient inconnu");
             return $this->redirectToRoute('ingredients_list');
@@ -116,6 +116,7 @@ class IngredientController extends Controller
             'form'=>$form->createView()
         ]);
     }
+
     /**
      * @Route("{slug}/delete", name="ingredients_delete")
      * @Method({"GET", "POST"})

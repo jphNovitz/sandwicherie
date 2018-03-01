@@ -4,7 +4,7 @@ namespace App\Model;
 
 interface CustomObjectLoaderInterface {
 
-    public function LoadOne(String $objetName, Int $id);
+    public function LoadOne(String $objetName, String $slug);
 
     public function LoadAll(String $objectName);
 

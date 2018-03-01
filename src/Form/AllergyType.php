@@ -16,6 +16,7 @@ class AllergyType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('description', TextType::class)
             ->add('categories', EntityType::class,[
                 'class'=>'App\Entity\Category',
 

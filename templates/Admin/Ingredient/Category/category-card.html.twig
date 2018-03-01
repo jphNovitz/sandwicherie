@@ -1,7 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '_skeletons/_card.html.twig' %}
+{% set object = category %}
 
-{% block body %}
-    <h1>Details sur une categorie</h1>
-        {{ category.name }}
 
-{% endblock %}

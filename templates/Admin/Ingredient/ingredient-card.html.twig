@@ -13,7 +13,7 @@
         <p>Cet ingrédient est complexe, il contient les ingrédients suivants:</p>
         <ul>
             {% for component in ingredient.components %}
-                <li><a href="{{ path('ingredients_show', {'id': component.id}) }}"> {{ component }}</a></li>
+                <li><a href="{{ path('ingredients_show', {'slug': component.slug}) }}"> {{ component }}</a></li>
             {% endfor %}
         </ul>
     {% endif %}

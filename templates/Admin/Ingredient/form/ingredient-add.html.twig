@@ -40,6 +40,15 @@
             <label for="form_components">Crudité</label>
             {{ form_widget(form.vegetable) }}
         </div>
+        <div class="form-row inline">
+            <label for="form_components">code</label>
+            {{ form_widget(form.code) }}
+        </div>
+        <div class="form-row inline">
+            <label for="form_components">reference</label>
+            {{ form_widget(form.ref) }}
+        </div>
+
         <div class="form-row">
                 {% for image in form.images %}
                     {{ form_row(image.imageFile) }}

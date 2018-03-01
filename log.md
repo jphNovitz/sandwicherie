@@ -1,7 +1,7 @@
 # isl ei 2018 : La Clémentine - Log
   
  memo / todo  
-
+! le service delete renvoie vers la liste d'ingredient !!! changer la destination ou mettre un path
 decalage vers le bas different entre ingredients et inputs -> checker
 
  adresse media queries https://v4-alpha.getbootstrap.com/layout/overview/
@@ -11,6 +11,14 @@ decalage vers le bas different entre ingredients et inputs -> checker
  ajouter une fonctionnalité pour categorie :    
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
  
+##28 février 2018
+***Avancement***  
+* Modification Allergy, Category, Type pour:
+** controller -> deleteAction
+** controller -> remplacement id par slug
+** form
+** card  
+
 ##26 et 27 février 2018
 ***Avancement***
 * modification du controller pour l'action delete  

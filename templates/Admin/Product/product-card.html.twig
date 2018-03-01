@@ -1,7 +1,2 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Produit Card</h1>
-        {{ product.name }}
-
-{% endblock %}
+{% extends '_skeletons/_card.html.twig' %}
+{% set object = category %}

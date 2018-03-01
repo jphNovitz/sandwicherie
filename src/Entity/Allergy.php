@@ -29,6 +29,11 @@ class Allergy
      * @Assert\NotBlank(message="Vous avez oubliez de mettre un nom ")
      */
     private $name;
+    /**
+     * @var string
+     * @ORM\Column(name="description", length=255, nullable=true)
+     */
+    private $description;
 
     /**
      * @Gedmo\Slug(fields={"name"})
@@ -215,6 +220,22 @@ class Allergy
         $this->categories->removeElement($category);
         // uncomment if you want to update other side
         //$category->setAllergy(null);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 
 

@@ -6,6 +6,7 @@ use App\Entity\Type ;
 use App\Form\TypeType;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
+use App\Service\DeleteObject;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\DeleteType;
 
 /**
  * Class TypeController
@@ -24,11 +26,15 @@ class TypeController extends Controller
 {
     protected $customPersister;
     protected $customLoader;
+    protected $deleter;
 
-    public function __construct(CustomPersister $customPersister, CustomObjectLoader $customObjectLoader)
+    public function __construct(CustomPersister $customPersister,
+                                CustomObjectLoader $customObjectLoader,
+                                DeleteObject $deleter)
     {
         $this->customPersister = $customPersister;
         $this->customLoader = $customObjectLoader;
+        $this->deleter = $deleter;
     }
 
     /**
@@ -70,11 +76,11 @@ class TypeController extends Controller
     }
 
     /**
-     * @Route("{id}", name="types_show")
+     * @Route("{slug}", name="types_show")
      */
-    public function show(Request $request, $id = null)
+    public function show(Request $request, $slug = null)
     {
-        $type = $this->customLoader->LoadOne('App:Type', $id);
+        $type = $this->customLoader->LoadOne('App:Type', $slug);
         return $this->render($this->getParameter('adm_type').'type-card.html.twig', [
             'type'=>$type
         ]);
@@ -107,5 +113,34 @@ class TypeController extends Controller
         return $this->render($this->getParameter('adm_type').'form/type_update.html.twig', [
             'form'=>$form->createView()
         ]);
+    }
+
+    /**
+     * @Route("{slug}/delete", name="types_delete")
+     * @Method({"GET", "POST"})
+     */
+    public function delete(Request $request, Type $type = NULL )
+    {
+        if (!$type){
+            $this->addFlash("error", "Type de produit inconnu");
+            return $this->redirectToRoute('types_list');
+        }
+        $form = $this->createForm(DeleteType::class,null);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()):
+            if ($form->get('oui')->isClicked()) {
+                return $this->deleter->delete($type);
+            }
+            if ($form->get('non')->isClicked())
+                return $this->redirectToRoute('types_list');
+
+        endif;
+
+        return $this->render('Admin/Product/Type/form/type-delete.html.twig',
+            [
+                'object' => $type,
+                'form' => $form->createView()
+            ]);
     }
 }

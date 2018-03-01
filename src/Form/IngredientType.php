@@ -44,6 +44,8 @@ class IngredientType extends AbstractType
                 'label' => 'Fichier(s) :',
                 'prototype' => true
             ])
+            ->add('code', TextType::class)
+            ->add('ref', TextType::class)
         ;
     }
 
