@@ -6,6 +6,7 @@ use App\Entity\Product ;
 use App\Form\ProductType;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
+use App\Service\DeleteObject;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\DeleteType;
 
 /**
  * Class ProductController
@@ -24,11 +26,15 @@ class ProductController extends Controller
 {
     protected $customPersister;
     protected $customLoader;
+    protected $deleter;
 
-    public function __construct(CustomPersister $customPersister, CustomObjectLoader $customObjectLoader)
+    public function __construct(CustomPersister $customPersister,
+                                CustomObjectLoader $customObjectLoader,
+                                DeleteObject $deleter)
     {
         $this->customPersister = $customPersister;
         $this->customLoader = $customObjectLoader;
+        $this->deleter = $deleter;
     }
 
     /**
@@ -107,5 +113,33 @@ class ProductController extends Controller
         return $this->render($this->getParameter('adm_product').'form/product_update.html.twig', [
             'form'=>$form->createView()
         ]);
+    }
+    /**
+     * @Route("{slug}/delete", name="products_delete")
+     * @Method({"GET", "POST"})
+     */
+    public function delete(Request $request, Product $product = NULL )
+    {
+        if (!$product){
+            $this->addFlash("error", "produit inconnu");
+            return $this->redirectToRoute('products_list');
+        }
+        $form = $this->createForm(DeleteType::class,null);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()):
+            if ($form->get('oui')->isClicked()) {
+                return $this->deleter->delete($product);
+            }
+            if ($form->get('non')->isClicked())
+                return $this->redirectToRoute('products_list');
+
+        endif;
+
+        return $this->render('Admin/Product/form/product-delete.html.twig',
+            [
+                'object' => $product,
+                'form' => $form->createView()
+            ]);
     }
 }

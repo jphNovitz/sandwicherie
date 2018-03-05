@@ -37,7 +37,7 @@ class ProductType extends AbstractType
             ])
             ->add('types', EntityType::class, [
                 'class'=>'App\Entity\Type',
-                'required'=>true,
+                'required'=>false,
                 'multiple'=>true
             ])
             ->add('isActive', CheckboxType::class)

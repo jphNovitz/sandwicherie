@@ -5,6 +5,8 @@
     <h1> {%  block title %}skeleton list {% endblock %} </h1>
     <div class="list-group">
         {% for object in list %}
+            {{ dump(object) }}
+
             <div class="list-group-item">
                     <div class="name"> <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}">{{ object.name }}</a> </div>
                 <div class="actions">

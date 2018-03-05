@@ -20,7 +20,7 @@
             {{ form_widget(form.types,
                 {"attr": {"class": "dropdown"}}) }}
         </div>
-        {% if form.types.vars.errors|length %}
+        {%  if form.types.vars.errors|length %}
             <div class="form-errors">
                 {{ form_errors(form.types, {"attr": {"class": "form-error"}}) }}
             </div>

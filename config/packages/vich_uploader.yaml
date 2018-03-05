@@ -13,9 +13,12 @@ vich_uploader:
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
-        products:
+        product:
             uri_prefix: /images/products
             upload_destination: '%kernel.project_dir%/public/images/products'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
         ingredient:
             uri_prefix: /images/ingredients
             upload_destination: '%kernel.project_dir%/public/images/ingredients'

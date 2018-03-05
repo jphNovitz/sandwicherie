@@ -20,6 +20,11 @@ class AppExtension extends AbstractExtension
     public function entityFilter($classname)
     {
          $chain =  explode("\\",get_class($classname));
-         return strtolower($chain[2]).'s'   ;
+         if (substr($chain[2],-1) === 'y'):
+             $word = substr($chain[2],0, -1)."ie";
+         else:
+             $word = $chain[2];
+         endif;
+         return strtolower($word.'s')   ;
     }
 }
