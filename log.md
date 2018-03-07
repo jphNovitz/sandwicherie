@@ -10,7 +10,21 @@ decalage vers le bas different entre ingredients et inputs -> checker
  bread et sauce dans formulaire ingredient  
  ajouter une fonctionnalité pour categorie :    
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
- 
+
+## 7 mars 2018
+***Avancement***
+* Refactor css pour certains formats écrans qui posaient problèmes
+* Mise en place du composant sécurité: installation, configuration de base, controller, formulaire login
+
+## 5 et 6 mars 2018
+***Avancement***
+* Modification Product et Provider pour:
+** controller -> deleteAction
+** controller -> remplacement id par slug
+** form
+** card  
+* modificatin/menu floatin pour avoir un différent dans les card (detail) + ajoutt/changement des liens.
+
 ##28 février 2018
 ***Avancement***  
 * Modification Allergy, Category, Type pour:

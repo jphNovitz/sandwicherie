@@ -25,7 +25,7 @@ html, body {
   width: 100vw;
   min-width: 100vw;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
   }
 .content {
   padding: 8px;
@@ -345,7 +345,8 @@ cards
 .card{
   background: url("../../public/images/common/background-light.png") ;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
   padding-top: 30vh;
   display: flex;
   min-height: 100vh;
@@ -377,8 +378,112 @@ cards
   flex: 1;
   background-color: #fff;
 }
+.inline {
+  display: inline;
+}
+form{
+  margin: 0 20px;
+}
 
+.content form .form-row{
+  position: relative;
+  margin: 10px 0;
+  line-height: 4.5em;
+}
+.content form .form-row input,
+.content form .form-row input{
+
+}
+.content form .form-row label .custom{
+  display: inherit;
+  font-size: 1.2em;
+}
+.content form .form-row input.custom{
+  background-color: inherit;
+  border: 0;
+  position: absolute;
+  left: 0;
+  bottom: 26px;
+  opacity: 0.6;
+  border-bottom: solid 1px #000;
+  width: 90vw;
+  font-size: 1.2em;
+  transition: all .25s ease-out;
+}
+
+.content form .form-row input:focus{
+  border-bottom: solid 1px $darkOrange;
+  bottom: -2px;
+  outline: none ;
+  opacity: 1;
+}
+
+.content form .form-row .dropdown{
+  font-size: 1.1rem;
+  line-height: 1.4rem;
+  width: 100%;
+  padding: 5px;
+  margin-top: -12px;
+  margin-bottom: 12px;
+  background-color: darkorange;
+}
+.content form .form-row .dropdown :hover{
+  background-color: $lightOrange;
+  color: $white;
+}
+.content form .form-row .dropdown input :checked{
+  background-color:  black;
+  color: $lightOrange;
+  font-style: oblique;
+}
+
+.content form .form-row .dropdown option[selected=selected] {
+  background-color: #000000;
+  color: $white;
+}
+.vich-image{
+  display: flex;
+  flex-direction: column;
+}
+.vich-image img{
+
+}
+
+.content form .submit{
+  font-size: 1.1rem;
+  transition: all .2s ease;
+}
+.content form .submit:hover{
+  background-color: #315182 ;
+}
+
+.content form .table-presentation{
+  position: static !important;
+  width: 45% !important;
+  display: inline-block !important;
+  margin: 0px auto;
+  line-height: 1em;
+  padding: 12px 2px 2px 2px;
+}
+[id^=input_lines_] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+[id^=input_lines_] > div{
+  display: inline-flex;
+  border: solid 1px white;
+  width: 46%;
+  border: solid 1px white;
+}
+[id^=input_lines_]  > div .table-presentation{
+  width: 99% !important;
+}
 @media screen and (max-width: 992px) {
+  .container {
+    width: 100%;
+    min-width: 100%;
+  }
   .content {
     margin: 0px;
     width: 100%;
@@ -449,7 +554,7 @@ cards
 @media screen and (max-width: 768px) {
   .content {
     margin: 0px;
-    width: 100vw
+    width: 100%;
   }
   .toolbar #menu-icon .material-icons {
     font-size: 29px;
@@ -639,14 +744,14 @@ cards
 */
   /*
    * END square list display
-   */
-
+   *//*
+    .inline {
+      display: inline;
+    }
   form{
     margin: 0 20px;
   }
-  .inline {
-    display: inline;
-  }
+
   .content form .form-row{
     position: relative;
     margin: 10px 0;
@@ -740,7 +845,7 @@ cards
   }
   [id^=input_lines_]  > div .table-presentation{
     width: 99% !important;
-  }
+  } */
   .btn{
     padding: 1.5%;
     border-radius: 10px;

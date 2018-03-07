@@ -12,7 +12,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;use App\Service\DeleteObject;
+use App\Form\DeleteType;
 
 /**
  * Class ProviderController
@@ -24,11 +25,15 @@ class ProviderController extends Controller
 {
     protected $customPersister;
     protected $customLoader;
+    protected $deleter;
 
-    public function __construct(CustomPersister $customPersister, CustomObjectLoader $customObjectLoader)
+    public function __construct(CustomPersister $customPersister,
+                                CustomObjectLoader $customObjectLoader,
+                                DeleteObject $deleter)
     {
         $this->customPersister = $customPersister;
         $this->customLoader = $customObjectLoader;
+        $this->deleter = $deleter;
     }
 
     /**
@@ -68,7 +73,7 @@ class ProviderController extends Controller
     }
 
     /**
-     * @Route("{id}", name="providers_show")
+     * @Route("{slug}", name="providers_show")
      */
     public function show(Request $request, Provider $provider=null)
     {
@@ -106,5 +111,32 @@ class ProviderController extends Controller
             'form'=>$form->createView()
         ]);
     }
+    /**
+     * @Route("{slug}/delete", name="providers_delete")
+     * @Method({"GET", "POST"})
+     */
+    public function delete(Request $request, Provider $provider = NULL )
+    {
+        if (!$provider){
+            $this->addFlash("error", "fournisseur inconnu");
+            return $this->redirectToRoute('providers_list');
+        }
+        $form = $this->createForm(DeleteType::class,null);
 
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()):
+            if ($form->get('oui')->isClicked()) {
+                return $this->deleter->delete($provider);
+            }
+            if ($form->get('non')->isClicked())
+                return $this->redirectToRoute('providers_list');
+
+        endif;
+
+        return $this->render('Admin/Provider/form/provider-delete.html.twig',
+            [
+                'object' => $provider,
+                'form' => $form->createView()
+            ]);
+    }
 }

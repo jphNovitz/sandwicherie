@@ -93,18 +93,16 @@ class Product
    /**
     * @var ArrayCollection
     * @ORM\ManyToMany(targetEntity="App\Entity\Type")
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\JoinColumn(nullable=true)
     * @ORM\JoinTable(name="product_types")
-    * @Assert\Collection(fields={"name" = {
-    *     @Assert\NotBlank(message=" "),
-    *     @Assert\NotNull(message=" ")}})
+    * }})
     */
    private $types;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="product", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $images;

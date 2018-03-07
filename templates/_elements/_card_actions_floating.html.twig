@@ -1,0 +1,7 @@
+{% extends '_elements/_action_floating_menu.html.twig' %}
+    {% block actions %}
+        <div class="box-rounded bg-blue"> <a href="{{ path(object|entity ~ '_update', {'slug': object.slug}) }}"> <i class="material-icons">mode_edit</i></a></div>
+        <div class="box-rounded bg-blue"> <a href="{{ path(object|entity ~ '_delete', {'slug': object.slug}) }}"> <i class="material-icons">delete</i></a></div>
+        <div class="box-rounded bg-blue"> <a href="{{ path(object|entity ~ '_add') }}"> <i class="material-icons">note_add</i></a></div>
+        <div class="box-rounded bg-blue">  <a href="{{ path(object|entity ~ '_list') }}"> <i class="material-icons">view_list</i></a></div>
+    {% endblock %}

@@ -76,11 +76,11 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("{id}", name="products_show")
+     * @Route("{slug}", name="products_show")
      */
-    public function show(Request $request, $id = null)
+    public function show(Request $request, $slug = null)
     {
-        $product = $this->customLoader->LoadOne('App:Product', $id);
+        $product = $this->customLoader->LoadOne('App:Product', $slug);
         return $this->render($this->getParameter('adm_product').'product-card.html.twig', [
             'product'=>$product
         ]);
