@@ -41,7 +41,7 @@ class Cart
 
     /**
      * @var string $user
-     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     * @ORM\OneToOne(targetEntity="ParentUser")
      */
     private $client;
     /**

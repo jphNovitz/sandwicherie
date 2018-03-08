@@ -16,12 +16,14 @@
 </head>
 <body>
 <div class="container">
-    <div class="toolbar">
-        <span id="menu-icon">
-            <i class="material-icons" id="menu">menu</i>
-        </span>
-        <span id="title">La Clémentine</span>
-    </div>
+    {% block toolbar %}
+        <div class="toolbar">
+            <span id="menu-icon">
+                <i class="material-icons" id="menu">menu</i>
+            </span>
+            <span id="title">La Clémentine</span>
+        </div>
+    {% endblock %}
 
     <div id="lateral-menu">
         <ul>
