@@ -5,6 +5,7 @@ namespace App\Controller\Security;
 use App\Entity\UserTemp;
 use App\Form\UserTempType;
 use App\Service\CustomPersister;
+use App\Service\SendConfirmation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,8 +44,11 @@ class SecurityController extends Controller {
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request)
+    public function register(Request $request, SendConfirmation $confirmation)
     {
+        $confirmation->send('sour@ce.com','dest@ina.tion','test', 'Security/register-confirmation.html.twig');
+        return $this->render('Security/register-confirmation.html.twig');
+
         $userTemp = new UserTemp();
         $form = $this->createForm(UserTempType::class,$userTemp);
         $form->handleRequest($request);
