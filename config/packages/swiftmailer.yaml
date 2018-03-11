@@ -1,6 +1,6 @@
 swiftmailer:
     url: '%env(MAILER_URL)%'
-    spool: { type: 'memory' }
+    #spool: { type: 'memory' }
     transport: smtp
     host:      smtp.mailtrap.io
     username:  d8c729a478ccd2
