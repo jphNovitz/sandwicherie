@@ -13,7 +13,10 @@ Encore
     // uncomment to define the assets of the project
     // .addEntry('js/app', './assets/js/app.js')
      .addStyleEntry('css/app', './assets/scss/app.scss')
+     .addStyleEntry('css/sui', './node_modules/semantic-ui-css/semantic.css')
      .addEntry('js/app', './assets/js/app.js')
+    .addEntry('main', './assets/vue/main.js')
+    .enableVueLoader()
 
     // uncomment if you use Sass/SCSS files
      .enableSassLoader()
