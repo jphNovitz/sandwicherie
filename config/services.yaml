@@ -9,8 +9,6 @@ parameters:
     adm_ingredient: Admin/Ingredient/
     adm_input: Admin/Input/
 
-
-
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -37,5 +35,10 @@ services:
     App\EventListener\MailerExceptionListener:
             tags:
                 - { name: kernel.event_listener, event: kernel.exception }
+
+    App\Doctrine\:
+            resource: '../src/Doctrine'
+            public: true
+            tags: ['doctrine.event_subscriber']
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class SecurityController extends Controller {
 
@@ -46,17 +47,23 @@ class SecurityController extends Controller {
      */
     public function register(Request $request, SendConfirmation $confirmation)
     {
-        $confirmation->send('sour@ce.com','dest@ina.tion','test', 'Security/register-confirmation.html.twig');
-        return $this->render('Security/register-confirmation.html.twig');
-
         $userTemp = new UserTemp();
+
         $form = $this->createForm(UserTempType::class,$userTemp);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()):
+
             if ($this->persister->insert($userTemp)){
                 $this->addFlash('info', 'Inscription réussie, vous allez recevoir un mail de confirmation');
-                return $this->render('Security/register-confirmation.html.twig');
+                $confirmation->send(
+                    'info@laclementine.be',
+                    $userTemp->getEmail(),
+                    'Confirmation inscription',
+                    'Security/emails/register-confirmation.html.twig',
+                    $userTemp->getUniqId());
+
+                return $this->redirectToRoute('admin_default');
             } else {
                 $this->addFlash('error', 'Il y a eu problème avec votre inscription');
                 return $this->render('Security/register.html.twig');
@@ -67,5 +74,11 @@ class SecurityController extends Controller {
         ]);
     }
 
+    /**
+     * @Route("/confirmation/{uid}", name="confirmation")     */
+    public function confirmation()
+    {
+        die();
+    }
 
 }

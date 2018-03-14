@@ -44,9 +44,19 @@ class UserTemp implements UserInterface, \Serializable
      */
     private $email;
 
+    /**
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $uniqId;
+
+    /**
+     * UserTemp constructor.
+     */
+
     public function __construct()
     {
-
+    $this->uniqId = uniqId('',false);
     }
 
     /**
@@ -203,6 +213,14 @@ class UserTemp implements UserInterface, \Serializable
     public function unserialize($serialized)
     {
         // TODO: Implement unserialize() method.
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUniqId()
+    {
+        return $this->uniqId;
     }
 
 }

@@ -1,6 +1,11 @@
 security:
     # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
+        chain_provider:
+            chain:
+                providers: [in_memory, userTemp_db]
+        userTemp_db:
+            entity: { class: AppBundle\Entity\UserTemp, property: username}
         in_memory:
             memory:
                 users:
@@ -16,8 +21,9 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+            provider: chain_provider
     encoders:
-        Symfony\Component\Security\Core\User\User:
+        Symfony\Component\Security\Core\User\UserInterface:
             algorithm: bcrypt
             cost: 12
     access_control:
