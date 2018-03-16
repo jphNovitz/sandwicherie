@@ -3,7 +3,9 @@ security:
     providers:
         chain_provider:
             chain:
-                providers: [in_memory, userTemp_db]
+                providers: [in_memory, userTemp_db, user_db]
+        user_db:
+            entity: { class: AppBundle\Entity\User, property: username}
         userTemp_db:
             entity: { class: AppBundle\Entity\UserTemp, property: username}
         in_memory:

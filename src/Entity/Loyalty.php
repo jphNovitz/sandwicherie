@@ -44,8 +44,8 @@ class Loyalty
     private $points;
 
     /**
-     * @var ParentUser $customer
-     * @ORM\OneToOne(targetEntity="ParentUser", inversedBy="loyalty");
+     * @var User $customer
+     * @ORM\OneToOne(targetEntity="User", inversedBy="loyalty");
      */
     private $customer;
 
@@ -107,17 +107,17 @@ class Loyalty
     }
 
     /**
-     * @return ParentUser
+     * @return User
      */
-    public function getCustomer(): ParentUser
+    public function getCustomer(): User
     {
         return $this->customer;
     }
 
     /**
-     * @param ParentUser $customer
+     * @param User $customer
      */
-    public function setCustomer(ParentUser $customer): void
+    public function setCustomer(User $customer): void
     {
         $this->customer = $customer;
     }

@@ -3,7 +3,7 @@
 namespace App\Doctrine;
 
 use App\Entity\UserTemp;
-use App\Entity\ParentUser;
+use App\Entity\User;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -26,7 +26,7 @@ class EncodePwdListener implements EventSubscriber
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        if ((!$entity instanceof UserTemp) && (!$entity instanceof ParentUser) ) return;
+        if ((!$entity instanceof UserTemp) && (!$entity instanceof User) ) return;
         $this->encodePwd($entity);
     }
 

@@ -146,17 +146,14 @@ class UserTemp implements UserInterface, \Serializable
     }
 
     /**
-     * Returns the password used to authenticate the user.
-     *
-     * This should be the encoded password. On authentication, a plain-text
-     * password will be salted, encoded, and then compared to this value.
-     *
-     * @return string The password
+     * @return mixed
      */
     public function getPassword()
     {
-        // TODO: Implement getPassword() method.
+        return $this->password;
     }
+
+
 
     /**
      * Returns the salt that was originally used to encode the password.

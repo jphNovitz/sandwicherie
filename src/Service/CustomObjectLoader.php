@@ -15,11 +15,11 @@ class CustomObjectLoader implements CustomObjectLoaderInterface {
         $this->entityManager = $entityManager;
     }
 
-    public function LoadOne(String $objectname, int $id)
+    public function LoadOne(String $objectname, String $slug)
     {
         return $this->entityManager
             ->getRepository($objectname)
-            ->findOneBy(['id' => $id]);
+            ->findOneBy(['slug' => $slug]);
     }
 
     public function LoadAll(String $objectname)

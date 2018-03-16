@@ -24,6 +24,8 @@ class CustomPersister implements CustomPersisterInterface
             $this->entityManager->flush();
             return true;
         } catch (\Exception $e) {
+            var_dump($e);
+            die();
 
             return false;
         }
@@ -38,5 +40,18 @@ class CustomPersister implements CustomPersisterInterface
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    public function delete($obj)
+    {
+        try{
+            $this->entityManager->remove($obj);
+            $this->entityManager->flush();
+            return true;
+        } catch (\Exception $e) {
+            var_dump($e);
+            return false;
+        }
+
     }
 }

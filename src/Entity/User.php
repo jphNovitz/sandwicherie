@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\BooleanType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class ParentUser implements UserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -18,26 +21,52 @@ class ParentUser implements UserInterface
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=25, unique=true)
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Assert\Length(min="5", max="20", minMessage="Username au moins cinq caractères", maxMessage="trop looongs")
+     */
+    private $username;
+
+    /**
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Assert\Length(min=5, max=4096,  minMessage="Au moins cinq caractères")
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="string", length=200)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=60, unique=true)
+     * @Assert\Email(message="Cet email ne semble pas valide")
+     */
+    private $email;
+
+    /**
      * @var String
      * @ORM\Column(name="last_name", type="string", length=100, nullable=false)
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
      private $lastName;
 
     /**
      * @var String
      * @ORM\Column(name="first_name", type="string", length=100, nullable=false)
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
      private $firstName;
 
     /**
      * @var String
-     * @ORM\Column(name="street", type="string", length=100, nullable=false)
+     * @ORM\Column(name="street", type="string", length=100, nullable=true)
      */
      private $street;
 
     /**
      * @var String
-     * @ORM\Column(name="street_nr", type="string", length=5, nullable=false)
+     * @ORM\Column(name="street_nr", type="string", length=5, nullable=true)
      */
      private $streetNr;
 
@@ -48,16 +77,21 @@ class ParentUser implements UserInterface
      private $phone;
 
     /**
-     * @var String
-     * @ORM\Column(name="email", type="string", length=100, nullable=false)
-     */
-     private $email;
-
-    /**
      * @var Loyalty $loyalty
      * @ORM\OneToOne(targetEntity="App\Entity\Loyalty", mappedBy="customer")
      */
      private $loyalty;
+
+    /**
+     * @var boolean $isActive
+     * @ORM\Column(name="isActive", type="boolean", nullable=false)
+     */
+    private $isActive;
+
+    public function __construct()
+    {
+        $this->setIsActive(false);
+    }
 
     /**
      * @return mixed
@@ -76,9 +110,25 @@ class ParentUser implements UserInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
      * @return String
      */
-    public function getLastName(): String
+    public function getLastName(): ?String
     {
         return $this->lastName;
     }
@@ -94,7 +144,7 @@ class ParentUser implements UserInterface
     /**
      * @return String
      */
-    public function getFirstName(): String
+    public function getFirstName(): ?String
     {
         return $this->firstName;
     }
@@ -110,7 +160,7 @@ class ParentUser implements UserInterface
     /**
      * @return String
      */
-    public function getStreet(): String
+    public function getStreet(): ?String
     {
         return $this->street;
     }
@@ -126,7 +176,7 @@ class ParentUser implements UserInterface
     /**
      * @return String
      */
-    public function getStreetNr(): String
+    public function getStreetNr(): ?String
     {
         return $this->streetNr;
     }
@@ -147,7 +197,7 @@ class ParentUser implements UserInterface
     /**
      * @return String
      */
-    public function getPhone(): String
+    public function getPhone(): ?String
     {
         return $this->phone;
     }
@@ -163,7 +213,7 @@ class ParentUser implements UserInterface
     /**
      * @return String
      */
-    public function getEmail(): String
+    public function getEmail(): ?String
     {
         return $this->email;
     }
@@ -232,17 +282,22 @@ class ParentUser implements UserInterface
     }
 
     /**
-     * Returns the password used to authenticate the user.
-     *
-     * This should be the encoded password. On authentication, a plain-text
-     * password will be salted, encoded, and then compared to this value.
-     *
-     * @return string The password
+     * @param mixed $password
+     */
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return mixed
      */
     public function getPassword()
     {
-        // TODO: Implement getPassword() method.
+        return $this->password;
     }
+
+
 
     /**
      * Returns the salt that was originally used to encode the password.
@@ -254,6 +309,14 @@ class ParentUser implements UserInterface
     public function getSalt()
     {
         // TODO: Implement getSalt() method.
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username): void
+    {
+        $this->username = $username;
     }
 
     /**
@@ -276,4 +339,22 @@ class ParentUser implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+
+    /**
+     * @return bool
+     */
+    public function getIsActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param bool $isActive
+     */
+    public function setIsActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
+    }
+
+
 }
