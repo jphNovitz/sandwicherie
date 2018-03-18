@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\BooleanType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -82,6 +83,19 @@ class User implements UserInterface
      */
      private $loyalty;
 
+
+    /**
+     * @var ArrayCollection
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = array();
+
+    /**
+     * @var  int $tries
+     * @ORM\Column(name="tries", type="integer", length=1, nullable=false)
+     */
+    private $tries;
+
     /**
      * @var boolean $isActive
      * @ORM\Column(name="isActive", type="boolean", nullable=false)
@@ -90,7 +104,9 @@ class User implements UserInterface
 
     public function __construct()
     {
+        $this->roles = ["ROLE_USER"];
         $this->setIsActive(false);
+        $this->setTries(0);
     }
 
     /**
@@ -258,28 +274,34 @@ class User implements UserInterface
         $this->loyalty = $loyalty;
     }
 
-
-
     /**
-     * Returns the roles granted to the user.
-     *
-     * <code>
-     * public function getRoles()
-     * {
-     *     return array('ROLE_USER');
-     * }
-     * </code>
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return (Role|string)[] The user roles
+     * @return mixed
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        return $this->roles;
     }
+
+    /**
+     * @param mixed $role
+     */
+    public function addRole($role)
+    {
+        $this->roles->add($role);
+        // uncomment if you want to update other side
+        //$role->setUser($this);
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function removeRole($role)
+    {
+        $this->roles->removeElement($role);
+        // uncomment if you want to update other side
+        //$role->setUser(null);
+    }
+
 
     /**
      * @param mixed $password
@@ -326,7 +348,7 @@ class User implements UserInterface
      */
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return $this->username;
     }
 
     /**
@@ -355,6 +377,23 @@ class User implements UserInterface
     {
         $this->isActive = $isActive;
     }
+
+    /**
+     * @return int
+     */
+    public function getTries(): int
+    {
+        return $this->tries;
+    }
+
+    /**
+     * @param int $tries
+     */
+    public function setTries(int $tries): void
+    {
+        $this->tries = $tries;
+    }
+
 
 
 }

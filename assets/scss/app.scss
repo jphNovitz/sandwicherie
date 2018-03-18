@@ -79,6 +79,11 @@ html, body {
   background-color: #efbe80;
   border: solid 2px #fb8b00;
 }
+.alert-info {
+  color: blue;
+  background-color: lightsteelblue;
+  border: solid 2px blue;
+}
 .alert-success {
   color: $green;
   background-color: $greenPastel;
