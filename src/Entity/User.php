@@ -392,6 +392,7 @@ class User implements UserInterface
     public function setTries(int $tries): void
     {
         $this->tries = $tries;
+        if ($this->tries >= 3) $this->setIsActive(false);
     }
 
 

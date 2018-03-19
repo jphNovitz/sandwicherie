@@ -11,6 +11,14 @@ decalage vers le bas different entre ingredients et inputs -> checker
  ajouter une fonctionnalité pour categorie :    
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
 
+## 8 au 19 mars 2018
+* Correction de diverses erreurs  
+* mise en place du securityController (register et confirmation)
+* envoie de mail pour register
+* mise en place de deux EventListener:
+** AfterAuthenticationSuccess
+** AfterAuthenticationFailure
+
 ## 7 mars 2018
 ***Avancement***
 * Refactor css pour certains formats écrans qui posaient problèmes

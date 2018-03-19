@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
@@ -42,8 +41,15 @@ class AfterFailureLoginListener implements AuthenticationFailureHandlerInterface
     {
         $failedUser = $this->loader->getRepository('App:User')
             ->findOneBy(['username'=>$exception->getToken()->getUser()]);
+        if ($failedUser->getIsActive()):
         $failedUser->setTries($failedUser->getTries()+1);
-         $this->persister->insert($failedUser);
-         return new RedirectResponse($this->router->generate('login'));
+        $this->persister->insert($failedUser);
+        $this->session->getFlashBag()->add("error","Mauvais login");
+        return new RedirectResponse($request->headers->get('referer'));
+        else:
+
+            $this->session->getFlashBag()->add("error","Votre compte est bloqué !");
+            return new RedirectResponse($this->router->generate('register'));
+        endif;
     }
 }
