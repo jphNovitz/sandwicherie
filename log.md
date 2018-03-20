@@ -10,6 +10,11 @@ decalage vers le bas different entre ingredients et inputs -> checker
  bread et sauce dans formulaire ingredient  
  ajouter une fonctionnalité pour categorie :    
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
+ 
+## 20 mars 2018 
+***recover***  
+Demande de reinitialisation de mot de passe 
+controller, formulaire, envoie email, page confirmation
 
 ## 8 au 19 mars 2018
 * Correction de diverses erreurs  

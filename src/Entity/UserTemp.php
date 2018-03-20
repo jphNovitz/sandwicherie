@@ -174,7 +174,7 @@ class UserTemp implements UserInterface, \Serializable
      */
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return $this->username;
     }
 
     /**

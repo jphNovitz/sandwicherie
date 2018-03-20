@@ -15,7 +15,7 @@ class SendConfirmation
                          String $to,
                          String $subject,
                          String $view,
-                         String $uid,
+                         String $uid='',
                          String $contentType='text/html')
     {
             $message = (new \Swift_Message($subject))

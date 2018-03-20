@@ -2,8 +2,10 @@
 
 namespace App\Controller\Security;
 
+use App\Entity\Recover;
 use App\Entity\User;
 use App\Entity\UserTemp;
+use App\Form\RecoverType;
 use App\Form\UserTempType;
 use App\Form\UserType;
 use App\Service\CustomPersister;
@@ -21,9 +23,11 @@ class SecurityController extends Controller {
 
     protected $persister;
     protected $encoder;
-    public function __construct(CustomPersister $persister)
+    protected $sendConfirmation ;
+    public function __construct(CustomPersister $persister, SendConfirmation $sendConfirmation)
     {
         $this->persister = $persister;
+        $this->sendConfirmation = $sendConfirmation;
     }
 
     /**
@@ -57,7 +61,6 @@ class SecurityController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()):
-
             if ($this->persister->insert($userTemp)){
                 $this->addFlash('info', 'Inscription réussie, vous allez recevoir un mail de confirmation');
                 $confirmation->send(
@@ -81,7 +84,7 @@ class SecurityController extends Controller {
     /**
      * @Route("/confirmation/{uniqId}", name="confirmation")
      */
-    public function confirmation(Request $request, UserTemp $user, UserValidation $userValidation, CustomPersister $persister, DeleteObject $deleter)
+    public function confirmation(Request $request, UserTemp $user, UserValidation $userValidation, CustomPersister $persister, DeleteObject $deleter, SendConfirmation $sendConfirmation)
     {
         if (!$user) {
             $this->addFlash("error", "utilisateur inconnu");
@@ -96,8 +99,15 @@ class SecurityController extends Controller {
                 $test->setIsActive(true);
                 if ($persister->insert($test)) {
                     $deleter->delete($user);
+                    $sendConfirmation->send(
+                        'info@laclementine.be',
+                        $test->getEmail(),
+                        'Compte activé',
+                        'Security/emails/confirmation-notification.html.twig',
+                        '');
+
                     $this->addFlash("success","Bienvenue parmis nos utilisateurs");
-                    $this->redirectToRoute('login');
+                    $this->redirectToRoute('default');
                 } else {
                     $this->addFlash("error", "Votre compte n'a pas pu être validé à cause d'une etteur interne.");
                     $this->redirectToRoute('register');
@@ -112,6 +122,38 @@ class SecurityController extends Controller {
         return $this->render('User/update-form.html.twig', [
             'form'=>$form->createView()
         ]);
+
+    }
+
+    /**
+     * @Route("/recover", name="recover_pwd_ask")
+     */
+    public function reset(Request $request){
+
+        $recover = new Recover();
+        $form = $this->createForm(RecoverType::class,$recover);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()):
+            if ($lost_user = $this->get('doctrine.orm.entity_manager')
+                ->getRepository('App:User')
+                ->findOneBy(['email'=>$form['email']->getData()])) {
+                $this->sendConfirmation->send('info@laclementine.be',
+                    $lost_user->getEmail(),
+                    'Mot de passe perdu',
+                    'Security/emails/recover-demand.html.twig',
+                    $recover->getUniqId());
+                $this->addFlash("info", "Vous allez revevoir un email");
+                return $this->render('Security/emails/recover-message.html.twig');
+
+            }
+
+            return $this->redirectToRoute('default');
+
+
+        endif;
+
+        return $this->render('Security/recover.html.twig', ['form'=>$form->createView()]);
 
     }
 

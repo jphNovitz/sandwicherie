@@ -1,0 +1,15 @@
+{%  extends 'base.html.twig' %}
+{% block toolbar %}
+{% endblock %}
+{% block body %}
+
+
+<p>Vous avez perdu votre mot de passe
+<br /> Entrez votre adresse email</p>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_rest(form) }}
+    <button type="button">Demander</button>
+    {{ form_end(form) }}
+{% endblock %}
