@@ -1,6 +1,8 @@
 # isl ei 2018 : La Clémentine - Log
   
  memo / todo  
+ modifier listener email -> trouver les erreurs swift
+ modifier service persister -> pouvoir ne pas afficher message flash
 ! le service delete renvoie vers la liste d'ingredient !!! changer la destination ou mettre un path
 decalage vers le bas different entre ingredients et inputs -> checker
 
@@ -11,6 +13,10 @@ decalage vers le bas different entre ingredients et inputs -> checker
  ajouter une fonctionnalité pour categorie :    
  dans le formulaire de modification: ajouter la possibilité d'ajouter les ingrédients   
  
+## 21 mars 2018  
+***reset***  
+etape de reinitialisation
+formulaire -> encode mot de passe ->update user 
 ## 20 mars 2018 
 ***recover***  
 Demande de reinitialisation de mot de passe 

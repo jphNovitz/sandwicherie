@@ -6,6 +6,7 @@ use App\Entity\Recover;
 use App\Entity\User;
 use App\Entity\UserTemp;
 use App\Form\RecoverType;
+use App\Form\ResetType;
 use App\Form\UserTempType;
 use App\Form\UserType;
 use App\Service\CustomPersister;
@@ -16,6 +17,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -24,10 +28,11 @@ class SecurityController extends Controller {
     protected $persister;
     protected $encoder;
     protected $sendConfirmation ;
-    public function __construct(CustomPersister $persister, SendConfirmation $sendConfirmation)
+    public function __construct(CustomPersister $persister, SendConfirmation $sendConfirmation, UserPasswordEncoderInterface $encoder)
     {
         $this->persister = $persister;
         $this->sendConfirmation = $sendConfirmation;
+        $this->encoder = $encoder;
     }
 
     /**
@@ -126,9 +131,9 @@ class SecurityController extends Controller {
     }
 
     /**
-     * @Route("/recover", name="recover_pwd_ask")
+     * @Route("/recover", name="recover_pwd_recover")
      */
-    public function reset(Request $request){
+    public function recover(Request $request){
 
         $recover = new Recover();
         $form = $this->createForm(RecoverType::class,$recover);
@@ -143,6 +148,7 @@ class SecurityController extends Controller {
                     'Mot de passe perdu',
                     'Security/emails/recover-demand.html.twig',
                     $recover->getUniqId());
+                $this->persister->insert($recover);
                 $this->addFlash("info", "Vous allez revevoir un email");
                 return $this->render('Security/emails/recover-message.html.twig');
 
@@ -155,6 +161,35 @@ class SecurityController extends Controller {
 
         return $this->render('Security/recover.html.twig', ['form'=>$form->createView()]);
 
+    }
+
+    /**
+     * @Route("/reset/{uniqId}", name="pwd_reset")
+     */
+    public function reset(Request $request, Recover $recover )
+    {
+
+        $user = $this->get('doctrine.orm.entity_manager')->getRepository('App:User')
+        ->findOneBy(['email'=>$recover->getEmail()]);
+
+        //
+
+
+        $reset = ['message'=>'entrez votre nouveau mot de passe'];
+        $form = $this->createForm(ResetType::class, $reset);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()):
+
+            $user->setPassword($this->encoder->encodePassword($user, $form->getData()['plainPassword']));
+            $this->persister->update($user);
+            $this->addFlash("success","Votre mot de passe a été mis à jour ");
+            return $this->redirectToRoute('login');
+
+        endif;
+
+        return $this->render('Security/reset-form.html.twig', ['form'=>$form->createView()]);
     }
 
 }

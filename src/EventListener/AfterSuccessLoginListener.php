@@ -38,7 +38,7 @@ class AfterSuccessLoginListener implements AuthenticationSuccessHandlerInterface
     {
         $user = $token->getUser();
         $username = $user->getUsername();
-        if ($user->getIsActive ) :
+        if ($user->getIsActive() ) :
             $user->setTries(0);
             $this->persister->insert($user);
             $this->session->getFlashBag()->add("info","bonjour ".$username);
