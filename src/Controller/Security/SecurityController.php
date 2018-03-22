@@ -17,8 +17,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -27,38 +25,22 @@ class SecurityController extends Controller {
 
     protected $persister;
     protected $encoder;
-    protected $sendConfirmation ;
-    public function __construct(CustomPersister $persister, SendConfirmation $sendConfirmation, UserPasswordEncoderInterface $encoder)
+    protected $confirmationSender ;
+
+    public function __construct(CustomPersister $persister,
+                                SendConfirmation $confirmationSender,
+                                UserPasswordEncoderInterface $encoder)
     {
         $this->persister = $persister;
-        $this->sendConfirmation = $sendConfirmation;
+        $this->confirmationSender = $confirmationSender;
         $this->encoder = $encoder;
     }
 
-    /**
-     * @Route("/login", name="login")
-     */
-    public function login(Request $request, AuthenticationUtils $authUtils)
-    {
-        $error = $authUtils->getLastAuthenticationError();
-        $lastUsername = $authUtils->getLastUsername();
-
-        return $this->render('Security/login.html.twig', array(
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ));
-    }
-    /**
-     * @Route("/logout", name="logout")
-     */
-    public function logout(Request $request)
-    {
-    }
 
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request, SendConfirmation $confirmation)
+    public function register(Request $request)
     {
         $userTemp = new UserTemp();
 
@@ -68,8 +50,8 @@ class SecurityController extends Controller {
         if ($form->isSubmitted() && $form->isValid()):
             if ($this->persister->insert($userTemp)){
                 $this->addFlash('info', 'Inscription réussie, vous allez recevoir un mail de confirmation');
-                $confirmation->send(
-                    'info@laclementine.be',
+                $this->confirmationSender->send(
+                    $this->getParameter('email_from'),
                     $userTemp->getEmail(),
                     'Confirmation inscription',
                     'Security/emails/register-confirmation.html.twig',
@@ -89,7 +71,11 @@ class SecurityController extends Controller {
     /**
      * @Route("/confirmation/{uniqId}", name="confirmation")
      */
-    public function confirmation(Request $request, UserTemp $user, UserValidation $userValidation, CustomPersister $persister, DeleteObject $deleter, SendConfirmation $sendConfirmation)
+    public function confirmation(Request $request,
+                                 UserTemp $user,
+                                 UserValidation $userValidation,
+                                 CustomPersister $persister,
+                                 DeleteObject $deleter)
     {
         if (!$user) {
             $this->addFlash("error", "utilisateur inconnu");
@@ -104,8 +90,8 @@ class SecurityController extends Controller {
                 $test->setIsActive(true);
                 if ($persister->insert($test)) {
                     $deleter->delete($user);
-                    $sendConfirmation->send(
-                        'info@laclementine.be',
+                    $this->confirmationSender->send(
+                        $this->getParameter('email_from'),
                         $test->getEmail(),
                         'Compte activé',
                         'Security/emails/confirmation-notification.html.twig',
@@ -143,7 +129,8 @@ class SecurityController extends Controller {
             if ($lost_user = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('App:User')
                 ->findOneBy(['email'=>$form['email']->getData()])) {
-                $this->sendConfirmation->send('info@laclementine.be',
+                $this->confirmationSender->send(
+                    $this->getParameter('email_from'),
                     $lost_user->getEmail(),
                     'Mot de passe perdu',
                     'Security/emails/recover-demand.html.twig',

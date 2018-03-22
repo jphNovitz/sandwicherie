@@ -2,10 +2,33 @@
 {% block toolbar %}
 {% endblock %}
 {% block body %}
+    {% block title %}Réinitialisation de votre mot de passe{% endblock %}
 
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {% block form_details %}
+        <div class="form-row">
+            <label for="form.plainPassword.first" class="custom">Mot de passe</label>
+            {{ form_widget(form.plainPassword.first, {"attr": {"class": "custom"}}) }}
+        </div>
+        {% if form.plainPassword.first.vars.errors|length %}
+            <div class="form-errors">
+                {{ form_errors(form.plainPassword.first, {"attr": {"class": "form-error"}}) }}
+            </div>
+        {% endif %}
+        <div class="form-row">
+            <label for="form.plainPassword.seconde" class="custom">Mot de passe</label>
+            {{ form_widget(form.plainPassword.second, {"attr": {"class": "custom"}}) }}
+        </div>
+        {% if form.plainPassword.second.vars.errors|length %}
+            <div class="form-errors">
+                {{ form_errors(form.plainPassword.second, {"attr": {"class": "form-error"}}) }}
+            </div>
+        {% endif %}
+
+    {% endblock %}
+
     {{ form_rest(form) }}
+
     <button type="submit">Go</button>
     {{ form_end(form) }}
 {% endblock %}
