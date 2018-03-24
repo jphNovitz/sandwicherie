@@ -1,0 +1,61 @@
+body{
+    width: 100%;
+    height: 100%; 
+    margin: 0;
+    background-color: #fff;
+    color: #000;
+    font-size: 1.1rem;
+    line-height: 1.5em;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+section{
+    padding: 1em;
+}
+.total-width{
+    width: 100%;
+}
+.circular{
+    border-radius: 50% !important;
+}
+
+h1, h2{
+    font-family: 'Pacifico', cursive !important;
+}
+h2 {
+    margin-top: 2rem !important;
+    border-bottom: solid 1px rgba(0, 128, 0, .1) !important;
+}
+.ui.card>.image, .ui.cards>.card>.image{
+    background-color: rgba(242, 113, 28, .05)
+}
+.oranged{
+    background-color: rgba(242, 113, 28, .07);
+    color: rgb(242, 91, 28);
+}
+
+.bg{
+    width: 100%;
+    background-image: url(images/background-burger_01.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+.header-content{
+    background-color: rgba(255, 255, 255,.8);
+    width: 100%;
+    height: 100%;
+    padding-bottom: 1rem;
+
+}
+
+#front-img{
+    width: 50vw;
+}
