@@ -15,6 +15,18 @@ body{
     box-sizing: border-box;
 }
 
+.toolbar{
+    background-color: rgba(242, 113, 28, .07);
+}
+
+#nav-h{
+    display: none;
+}
+
+#nav-v{
+    display:block;
+}
+
 section{
     padding: 1em;
 }
@@ -45,17 +57,35 @@ h2 {
     background-image: url(images/background-burger_01.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    background-position-x: center;
+    background-position: center;
 }
 
 .header-content{
-    background-color: rgba(255, 255, 255,.8);
+    background-color: rgba(255, 255, 255,.9);
     width: 100%;
     height: 100%;
     padding-bottom: 1rem;
 
 }
 
-#front-img{
-    width: 50vw;
+.header-card{
+    width: 70% !important;
 }
+.ui.header>.image:not(.icon), .ui.header>img {
+width: 5em;
+}
+
+@media (min-width: 502px) { 
+   
+
+#nav-h{
+    display: inline;
+}
+
+#nav-v{
+    display:none;
+}
+
+
+ }
+
