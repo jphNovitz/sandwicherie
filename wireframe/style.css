@@ -23,8 +23,18 @@ body{
     display: none;
 }
 
+#nav-h .item{
+    font-size: 1.2rem;
+}
+
 #nav-v{
     display:block;
+}
+
+#nav-v .bars{
+    font-size: 3rem;
+    cursor: pointer;
+    
 }
 
 section{
@@ -37,7 +47,11 @@ section{
     border-radius: 50% !important;
 }
 
-h1, h2{
+.spaced{
+    padding: .8em;
+}
+
+h1, h2, h3{
     font-family: 'Pacifico', cursive !important;
 }
 h2 {
@@ -77,15 +91,20 @@ width: 5em;
 
 @media (min-width: 502px) { 
    
+    #nav-h{
+        display: inline;
+    }
 
-#nav-h{
-    display: inline;
+    #nav-v{
+        display:none;
+    }
+
 }
 
-#nav-v{
-    display:none;
+@media (min-width: 690px) { 
+    #nav-h .item{
+        font-size: 1.5rem;
+    }
+
 }
-
-
- }
 
