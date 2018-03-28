@@ -89,6 +89,26 @@ h2 {
 width: 5em;
 }
 
+#slider{
+    border:  solid 1px;
+    width: 90vw;
+    margin:  auto;
+    height: 45vw;
+    overflow: hidden;
+    position: relative;
+}
+
+#slider .image{
+    width: 100%;
+}
+#slider .cta{
+    position: absolute;
+    background-color: rgba(188, 189, 189, .4);
+    bottom: 45;
+    right: 45%;
+    padding: 2em;
+}
+
 @media (min-width: 502px) { 
    
     #nav-h{
@@ -99,6 +119,10 @@ width: 5em;
         display:none;
     }
 
+    #slider{
+        width: 80vw;
+        height: 35vw;
+    }
 }
 
 @media (min-width: 690px) { 
