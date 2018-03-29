@@ -93,14 +93,14 @@ width: 5em;
     border:  solid 1px;
     width: 90vw;
     margin:  auto;
-    height: 45vw;
-    overflow: hidden;
-    position: relative;
+   /*  height: 47.1vw; */
+    /*overflow: hidden;
+    position: relative; */
 }
 
-#slider .image{
+/*#slider .image{
     width: 100%;
-}
+}*/
 #slider .cta{
     position: absolute;
     background-color: rgba(188, 189, 189, .4);
@@ -121,7 +121,7 @@ width: 5em;
 
     #slider{
         width: 80vw;
-        height: 35vw;
+      /*  height: 35vw; */
     }
 }
 
