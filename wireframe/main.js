@@ -1,4 +1,21 @@
+/**
+ * 
+ * @desc this file helps to display the right nav element depending of the screen width 
+ * 
+ * @author Novitz Jean-Philippe (jphNovitz)
+ *  
+ */
 
+/**
+ *  FUNCTIONS LIBRARY
+ */
+
+/**
+ * @function request
+ * @param string $url
+ * @description instanciate a XLMHTTP object, send a GET request using the $url parameter
+ * 
+ */
 var request = function (url) {
   return new Promise(function (resolve, reject){
     var client = new XMLHttpRequest();
@@ -17,32 +34,47 @@ var request = function (url) {
   })     
 }
 
-var getTemplates = function (){
-  return new Promise(function(resolve, reject){
-    request('nav_v.html').then(function(response){
-      var nav = []
-      nav['v']=response
-      request('nav_h.html').then(function(response){
-        nav['h']=response
-        resolve(nav)
-      })
-      .catch(function(){
-        console.log(error)
-      })
-    }).catch(function(){
-      console.log('erreur')
-    })
-  })
-
+/**
+ * @function getSize
+ * @description check the screen width, if it's bigger than 502 -> return 0 else return 1
+ * 0 and 1 is good because there are two templates available in an array
+ * 
+ */
+function getSize() {
+  screenWidth = window.screen.width
+    if (screenWidth < 502){
+      return 0
+    }else{
+      return 1
+    }
 }
 
-getTemplates().then(function(response){
- nav_v = response['v']
- nav_h = response['h']
 
-document.getElementsByTagName('NAV')[0].innerHTML = nav_v
+/**
+ * @function displayTemplate
+ * @param array $template
+ * @param integer $id
+ * @description receive a templates which is an array of (2) tempaltes and an id, modify the <nav> </nav> element
+ * 
+ * 
+ */
+var displayTemplate = function (templates, id) {
+  document.getElementsByTagName('NAV')[0].innerHTML = templates[id]
+}
 
-}).catch(function(){
-  console.log('erreur')
-})
 
+/**
+ *  main
+ */
+
+Promise.all([
+    request('nav_v.html'),
+    request('nav_h.html')
+  ]).then((templates) => {
+    displayTemplate(templates, getSize())
+   
+    addEventListener('resize', function(){
+      displayTemplate(templates, getSize())
+    })
+
+  })
