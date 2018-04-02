@@ -62,6 +62,25 @@ var displayTemplate = function (templates, id) {
   document.getElementsByTagName('NAV')[0].innerHTML = templates[id]
 }
 
+/**
+ * @description manage click on the hamburger button
+ */
+function manageButtonClick(){
+  let clicked = 0 // flag 0/1 clicked/not clicked
+  let button = document.getElementById('menu-button')
+  button.addEventListener('click', function(e){
+    let menu = document.getElementsByClassName("menu-wrap")[0]
+    if (!clicked){
+      menu.style.opacity=1
+      menu.style.height="200px"
+      clicked = 1
+    } else {
+      menu.style.opacity=0
+      menu.style.height="1px"
+      clicked = 0
+    }
+  })
+} 
 
 /**
  *  main
@@ -71,10 +90,13 @@ Promise.all([
     request('nav_v.html'),
     request('nav_h.html')
   ]).then((templates) => {
-    displayTemplate(templates, getSize())
+    displayTemplate(templates, getSize()) // get screen width
    
-    addEventListener('resize', function(){
+    addEventListener('resize', function(){  // listen to the resize event
       displayTemplate(templates, getSize())
     })
 
+    manageButtonClick() //listen to the click
   })
+
+

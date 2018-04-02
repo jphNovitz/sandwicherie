@@ -19,8 +19,10 @@ body{
     background-color: rgba(242, 113, 28, .07);
 }
 
-#nav-h{
-    display: none;
+#nav-v .menu-wrap{
+    opacity: 0;
+    height: 0px;
+    transition: height linear .6s, opacity linear .8s ;
 }
 
 #nav-h .item{
@@ -32,7 +34,8 @@ body{
 }
 
 #nav-v .bars{
-    font-size: 3rem;
+    line-height: inherit;
+    font-size: 2.5rem;
     cursor: pointer;
     
 }
@@ -65,6 +68,11 @@ h2 {
     background-color: rgba(242, 113, 28, .07);
     color: rgb(242, 91, 28);
 }
+.oranged-darker{
+    background-color:rgba(238, 107, 20, 0.2);
+    color: rgb(136, 0, 0);
+}
+
 
 .bg{
     width: 100%;
@@ -109,16 +117,9 @@ width: 5em;
     padding: 2em;
 }
 
+
+
 @media (min-width: 502px) { 
-   
-    #nav-h{
-        display: inline;
-    }
-
-    #nav-v{
-        display:none;
-    }
-
     #slider{
         width: 80vw;
       /*  height: 35vw; */
