@@ -16,7 +16,7 @@ body{
 }
 
 .toolbar{
-    background-color: rgba(242, 113, 28, .07);
+    background-color: rgba(255 , 255, 255, .7);
 }
 
 #nav-v .menu-wrap{
@@ -40,8 +40,16 @@ body{
     
 }
 
+.emph{
+    font-family: 'Pacifico', cursive !important;
+    font-size: 4rem;
+    line-height: 6rem;
+}
+
 section{
+    margin: 2rem !important;
     padding: 1em;
+    border: solid 1px rgba(255,236,229, .9); 
 }
 .total-width{
     width: 100%;
@@ -76,10 +84,8 @@ h2 {
 
 .bg{
     width: 100%;
-    /*background-image: url(images/background-burger_01.jpg);*/
-    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center bottom;
 }
 
 .header-content{
@@ -100,6 +106,8 @@ width: 5em;
 #cta-wrapper{
     background-image: url(images/citrus_01.png);
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;   
 }
 #slider{
     border:  solid 1px;
