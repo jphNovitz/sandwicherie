@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,63 +10,73 @@
     <link rel="stylesheet" href="style.css">
     <title>La Clémentine wireframe 1</title>
 </head>
-<body>
-<script src="main.js"  async></script>
-<!-- contact block-->
-    <div class="ui padded stackable grid">
-        <div class="green row">
-                <div class="sixteen wide column">
-                    <div class="ui large celled horizontal list">
-                        <div class="item"> <i class="phone icon"></i>0468538605 </div>
-                        <div class="item"> <i class="mail icon"></i>
-                            <a href="mailto:info@laclementine.be">info@laclementine.be</a></div>
-                        <div class="item"> <i class="shopping cart icon"></i>Panier</div>
-                        <div class="item"> <i class="user icon"></i>Mon compte</div>
-                    </div>
-                </div>
-           </div>   
-        </div>
-<!-- header-->
-    <header>
-        <div class="bg">
-            <div class="header-content">
-                    <div class="ui sixteen wide column spaced">
-                        <h3>Sandwicherie, petite restauration, Traiteur, Salon de dégustation</h3>
-                    </div>
-                    <nav></nav>
-            
-<!-- card with call to action -->
 
-                <div class="ui stackable centered grid" id="cta-wrapper">
+<body>
+    <script src="main.js" async></script>
+    <!-- contact block-->
+    <div class="ui padded stackable grid" style="border-top: solid 2px orangered">
+        <div class="green row">
+            <div class="sixteen wide column">
+                <div class="ui large celled horizontal list">
+                    <div class="item">
+                        <i class="phone icon"></i>0468538605 </div>
+                    <div class="item">
+                        <i class="mail icon"></i>
+                        <a href="mailto:info@laclementine.be">info@laclementine.be</a>
+                    </div>
+                    <div class="item">
+                        <i class="shopping cart icon"></i>Panier</div>
+                    <div class="item">
+                        <i class="user icon"></i>Mon compte</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header-->
+    <header>
+
+        <div class="header-content">
+            <div class="ui sixteen wide column spaced">
+                <h3>Sandwicherie, petite restauration, Traiteur, Salon de dégustation</h3>
+            </div>
+            <nav></nav>
+
+            <!-- card with call to action -->
+
+            <div class="ui stackable centered grid" id="cta-wrapper">
+                <div class="ui row bg ">
                     <div class="eight wide column">
                         <div class="ui centered rounded card" id="slider">
                             <div class="content">
-                                    Le Burger
+                                Le Burger
                             </div>
 
                             <div class="image">
-                                <img src="images/burger_big_02.png" class="ui fluid image"/>
+                                <img src="images/burger_big_02.png" class="ui fluid image" />
                             </div>
-                           
-                          <!--  <div class="ui attached positive massive button">-->
-                              <div class="extra content" id="action">
-                                    <button class="positive ui huge button">J'achète !</button>
+
+                            <!--  <div class="ui attached positive massive button">-->
+                            <div class="extra content" id="action">
+                                <button class="positive ui huge button">J'achète !</button>
                             </div>
-            
-                         </div>
-                
-                    </div>
-                    <!--<div class="six wide column">
+
+                        </div><!-- slider -->
+                    </div><!-- eight col -->
+
+                </div> <!-- bg -->
+                <!--<div class="six wide column">
                         <h2>Chez nous tout est fait maison</h2>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique, incidunt.
                             <br />Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae.
             
                         </p>
                     </div>-->
+            </div>
+            <!-- cta wrapper -->
 
-
-                </div>
-                <!--
+        </div>
+        <!-- header content -->
+        <!--
                 <div class="ui centered card" id="slider">
                     <div class="image">
                         <img src="images/burger_big_02.png" class="ui fluid image"/>
@@ -79,129 +90,156 @@
 
                 </div>
             -->
-            </div>
-        </div>
+
+
     </header>
 
-    <section class="ui centered grid">
-        <aside class="five wide column">
-            <p> <span class="emph">Chez nous,<br /> tout est fait maison</span> </p> 
+    <section class="ui stackable centered  middle aligned grid">
+        <aside class="five wide column ">
+            <p class="text-center">
+                <span class="emph">
+                    <i class="ui quote left icon"></i>
+                        Chez nous,
+                    <br /> tout est fait maison
+                    <i class="ui quote right icon"></i>
+                </span>
+                
+            </p>
         </aside>
-         
-        <article class="ten wide  column" id="intro" >
-            <p> <strong>Nous vous offrons un menu diversifié avec un maximum de produits faits maison, à base d'ingrédients locaux.
-                Le seul concept, un accueil chaleureux, de la générosité et des prix abordables.</strong>
-            </p>        
-                <p> La sandwicherie 'La Clémentine' vous reçoit de 8:30 à 15:00 du lundi au vendredi et de 11:30 à 15h le samedi.
-                    <br />Le parking est aisé, vous avez la possibilité de payer par bancontact
-                </p>
 
+        <article class="ten wide column" id="intro">
+            <p class="text-center">
+                <strong>Nous vous offrons un menu diversifié avec un maximum de produits faits maison, à base d'ingrédients locaux.
+                    Le seul concept, un accueil chaleureux, de la générosité et des prix abordables.
+                    <button class="positive ui mini button">dépliant</button>
+                </strong>
             </p>
         </article>
-     <article class="fourteen wide column">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.013517432005!2d5.521294099999987!3d50.64544010000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x79875640011ac917!2sLa+Cl%C3%A9mentine!5e0!3m2!1sfr!2sbe!4v1521985204963" width="90%" height="auto" frameborder="0" style="border:0 ; border-radius: 15px ; margin-bottom: 2rem" allowfullscreen></iframe>
+        <article class="fourteen wide column">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.013517432005!2d5.521294099999987!3d50.64544010000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x79875640011ac917!2sLa+Cl%C3%A9mentine!5e0!3m2!1sfr!2sbe!4v1521985204963"
+                width="90%" height="auto" frameborder="0" style="border:0 ; border-radius: 15px ; margin-bottom: 2rem" allowfullscreen></iframe>
         </article>
 
-        <article class="ui grid" >
-                <div class="stackable three column row ">
-                    <div class="column">
-                        <h2>Produits de saison</h2>
-                            <p>Chaque saison nous apporte ses bonnes choses, la nature est bien faite. 
-                             <br />Un produit hors saison coûte cher à la nature, 
-                             il n'a aucun goût et zéro intéret.</p>
+        <article class="ui grid">
+            <div class="stackable three column row ">
+                <div class="column">
+                    <h2>Produits de saison</h2>
+                    <p>Chaque saison nous apporte ses bonnes choses, la nature est bien faite.
+                        <br />Un produit hors saison coûte cher à la nature, il n'a aucun goût et zéro intéret.</p>
+                </div>
+                <div class="column">
+                    <h2>Produits originaux</h2>
+                    <p>Comme nous vous aimez les choses originales ?
+                        <br />Nous proposons un maximum de plats originaux, les classics sont souvent revisités. </p>
+                </div>
+                <div class="column">
+                    <h2>Produits Locaux</h2>
+                    <p>A chaque fois que possible, nous travaillons avec des producteurs de la région. Local avant tout ! </p>
+                </div>
+            </div>
+        </article>
+        <article class="ten wide  column" id="intro">
+            <p> La sandwicherie 'La Clémentine' vous reçoit de 8:30 à 15:00 du lundi au vendredi,
+                <br /> de 11:30 à 15h le samedi.
+            </p>
+            <p>
+                Le parking est aisé, vous avez la possibilité de payer par bancontact
+            </p>
+        </article>
+        <aside class="five wide column">
+            <p>
+                <i class="ui quote left icon"></i>
+                <span class="emph">Ouvert 6 jours
+                    <br /> jusque 15h</span>
+                <i class="ui quote right icon"></i>
+            </p>
+        </aside>
+        <article class="ui grid">
+            <div class="ui four stackable doubling cards">
+                <div class="card">
+                    <div class="content"> Le Burger</div>
+                    <div class="image">
+                        <img src="images/burger_big_02.png">
                     </div>
-                    <div class="column"><h2>Produits originaux</h2>
-                        <p>Comme nous vous aimez les choses originales ? 
-                            <br />Nous proposons un maximum de plats originaux, les classics sont souvent revisités. </p>
-                    </div>
-                    <div class="column"><h2>Produits Locaux</h2>
-                        <p>A chaque fois que possible, nous travaillons avec des producteurs de la région. Local avant tout ! </p>
+                    <div class="extra content">
+                        <div class="right floated meta">
+                            <i class="heart outline icon"></i>
+                        </div>
+                        <div class="right floated meta">
+                            <i class="heart cart icon"></i>
+                        </div>
                     </div>
                 </div>
-        </article>
-        <article class="ui grid" >
-                <div class="ui four stackable doubling cards">
-                        <div class="card">
-                            <div class="content"> Le Burger</div>
-                            <div class="image">
-                                <img src="images/burger_big_02.png">
-                            </div>
-                            <div class="extra content">
-                                    <div class="right floated meta">    
-                                        <i class="heart outline icon"></i>
-                                    </div>
-                                    <div class="right floated meta">    
-                                            <i class="heart cart icon"></i>
-                                    </div> 
-                            </div>
+                <div class="card">
+                    <div class="content"> Le Burger</div>
+                    <div class="image">
+                        <img src="images/burger_big_02.png">
+                    </div>
+                    <div class="extra content">
+                        <div class="right floated meta">
+                            <i class="heart outline icon"></i>
                         </div>
-                        <div class="card">
-                          <div class="content"> Le Burger</div>
-                          <div class="image">
-                                <img src="images/burger_big_02.png">
-                          </div>
-                          <div class="extra content">
-                                <div class="right floated meta">    
-                                    <i class="heart outline icon"></i>
-                                </div>
-                                <div class="right floated meta">    
-                                        <i class="heart cart icon"></i>
-                                </div> 
-                        </div>
-                        </div>
-                        <div class="card">
-                            <div class="content"> Le Burger</div>
-                            <div class="image">
-                                <img src="images/burger_big_02.png">
-                            </div>
-                            <div class="extra content">
-                                    <div class="right floated meta">    
-                                        <i class="heart outline icon"></i>
-                                    </div>
-                                    <div class="right floated meta">    
-                                            <i class="heart cart icon"></i>
-                                    </div> 
-                            </div>
-                        </div>
-                        <div class="card">
-                                <div class="content"> Le Burger</div>
-                            <div class="image">
-                                <img src="images/burger_big_02.png">
-                            </div>
-                            <div class="extra content">
-                                    <div class="right floated meta">    
-                                        <i class="heart outline icon"></i>
-                                    </div>
-                                    <div class="right floated meta">    
-                                            <i class="heart cart icon"></i>
-                                    </div> 
-                            </div>
+                        <div class="right floated meta">
+                            <i class="heart cart icon"></i>
                         </div>
                     </div>
+                </div>
+                <div class="card">
+                    <div class="content"> Le Burger</div>
+                    <div class="image">
+                        <img src="images/burger_big_02.png">
+                    </div>
+                    <div class="extra content">
+                        <div class="right floated meta">
+                            <i class="heart outline icon"></i>
+                        </div>
+                        <div class="right floated meta">
+                            <i class="heart cart icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content"> Le Burger</div>
+                    <div class="image">
+                        <img src="images/burger_big_02.png">
+                    </div>
+                    <div class="extra content">
+                        <div class="right floated meta">
+                            <i class="heart outline icon"></i>
+                        </div>
+                        <div class="right floated meta">
+                            <i class="heart cart icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </article>
     </section>
-    
+
     <footer class="ui grid">
-        <section class="ui orange row">
-        <article class="eight wide column">
-            <h3 class="ui header">Contacter <em>La Clémentine</em></h2>
-            
-                        <p>Chaussée Roosvelt 101 b 
-                            <br />4420 Saint-Nicolas (Liège)                   
-                        </p>
-                        <p>
-                            Tél: 0486538605
-                            <br />email: info@laclementine.be 
-        
-                        </p>
-                    </article>
-                    <article class="eight wide column">
-                        <h3 class="ui headerS">Réseaux sociaux</h3>
-                        <p>Facebook
-                            <br />Instagram
-                    </article>
-                </section>
+        <section class="ui green row">
+            <article class="eight wide column">
+                <h3 class="ui header">Contacter
+                    <em>La Clémentine</em>
+                    </h2>
+
+                    <p>Chaussée Roosvelt 101 b
+                        <br />4420 Saint-Nicolas (Liège)
+                    </p>
+                    <p>
+                        Tél: 0486538605
+                        <br />email: info@laclementine.be
+
+                    </p>
+            </article>
+            <article class="eight wide column">
+                <h3 class="ui headerS">Réseaux sociaux</h3>
+                <p>Facebook
+                    <br />Instagram
+            </article>
+        </section>
     </footer>
 </body>
+
 </html>
