@@ -43,9 +43,18 @@
 
             <!-- card with call to action -->
 
-            <div class="ui stackable centered grid" id="cta-wrapper">
+            <div class="ui stackable  grid" id="cta-wrapper">
                 <div class="ui row bg ">
-                    <div class="eight wide column">
+                    <div class="sixteen wide middle aligned centered column">
+                    <h1 class="ui sizer header">Le Burger</h1>
+                    </div>
+                    <div class="five wide middle aligned centered column">
+                    <button class="ui orange basic button">
+                        <i class="cart plus icon"></i>
+                        Je Commande
+                    </button>
+                    </div>
+                    <!-- <div class="eight wide column">
                         <div class="ui centered rounded card" id="slider">
                             <div class="content">
                                 Le Burger
@@ -55,13 +64,13 @@
                                 <img src="images/burger_big_02.png" class="ui fluid image" />
                             </div>
 
-                            <!--  <div class="ui attached positive massive button">-->
+                           
                             <div class="extra content" id="action">
                                 <button class="positive ui huge button">J'achète !</button>
                             </div>
 
-                        </div><!-- slider -->
-                    </div><!-- eight col -->
+                        </div>
+                    </div> -->
 
                 </div> <!-- bg -->
                 <!--<div class="six wide column">
@@ -93,8 +102,8 @@
 
 
     </header>
-
-    <section class="ui stackable centered  middle aligned grid">
+    
+    <section class="ui middle aligned stackable grid container">
         <aside class="five wide column ">
             <p class="text-center">
                 <span class="emph">
@@ -111,30 +120,37 @@
             <p class="text-center">
                 <strong>Nous vous offrons un menu diversifié avec un maximum de produits faits maison, à base d'ingrédients locaux.
                     Le seul concept, un accueil chaleureux, de la générosité et des prix abordables.
-                    <button class="positive ui mini button">dépliant</button>
                 </strong>
             </p>
+            <p> <button class="ui basic blue button">dépliant</button></p>
         </article>
-        <article class="fourteen wide column">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.013517432005!2d5.521294099999987!3d50.64544010000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x79875640011ac917!2sLa+Cl%C3%A9mentine!5e0!3m2!1sfr!2sbe!4v1521985204963"
-                width="90%" height="auto" frameborder="0" style="border:0 ; border-radius: 15px ; margin-bottom: 2rem" allowfullscreen></iframe>
-        </article>
-
+        </section>
+        <section class="ui middle aligned stackable grid">
+            <div class="ui white row">
+                <article class="fourteen wide column">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.013517432005!2d5.521294099999987!3d50.64544010000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x79875640011ac917!2sLa+Cl%C3%A9mentine!5e0!3m2!1sfr!2sbe!4v1521985204963"
+                        width="90%" height="auto" frameborder="0" style="border:0 ; border-radius: 15px ; margin-bottom: 2rem" allowfullscreen></iframe>
+                </article>
+            </div>
+        </section>
+        <section class="ui middle aligned stackable grid container">
         <article class="ui grid">
+            <span class="emph">Clémentine ... j'ai faim !</span>
             <div class="stackable three column row ">
                 <div class="column">
-                    <h2>Produits de saison</h2>
+                        <h3>N'attendez pas !</h3>
+                        <p>Commandez avant 11h30 par sms venez chercher votre.
+                            <br /><strong>0468 53 86 05</strong> </p>
+                </div>
+                <div class="column">
+                    <h3>Produits de saison</h3>
                     <p>Chaque saison nous apporte ses bonnes choses, la nature est bien faite.
                         <br />Un produit hors saison coûte cher à la nature, il n'a aucun goût et zéro intéret.</p>
                 </div>
                 <div class="column">
-                    <h2>Produits originaux</h2>
+                    <h3>Produits originaux</h3>
                     <p>Comme nous vous aimez les choses originales ?
                         <br />Nous proposons un maximum de plats originaux, les classics sont souvent revisités. </p>
-                </div>
-                <div class="column">
-                    <h2>Produits Locaux</h2>
-                    <p>A chaque fois que possible, nous travaillons avec des producteurs de la région. Local avant tout ! </p>
                 </div>
             </div>
         </article>
@@ -154,7 +170,15 @@
                 <i class="ui quote right icon"></i>
             </p>
         </aside>
-        <article class="ui grid">
+        <article class="sixteen wide  column shadow">
+            <span class="emph">
+                <p>Rejoingnez-nous
+                <br /><i class="facebook square icon"></i>
+                 <i class="instagram icon"></i>
+            </span>
+        </article>
+        <article class="row">
+            <h2>Quelques propositions</h2>
             <div class="ui four stackable doubling cards">
                 <div class="card">
                     <div class="content"> Le Burger</div>
@@ -218,7 +242,7 @@
     </section>
 
     <footer class="ui grid">
-        <section class="ui green row">
+        <section class="ui green row" style="border-top: solid 2px orangered">
             <article class="eight wide column">
                 <h3 class="ui header">Contacter
                     <em>La Clémentine</em>

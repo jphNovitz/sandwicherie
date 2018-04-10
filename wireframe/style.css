@@ -2,8 +2,8 @@ body{
     width: 100%;
     height: 100%; 
     margin: 0;
-    background-color: #fff;
-    color: #000;
+    background-color:#F7F7F7;
+    color:#000;
     font-size: 1.1rem;
     line-height: 1.5em;
     text-align: center;
@@ -110,12 +110,28 @@ width: 5em;
 }
 
 #cta-wrapper{
-    background-image: url(images/tomates-bg_04.png);
+    height: calc(100vw/1.91);
+   background-image: url(images/burger_big_02.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;   
     
 }
+
+#cta-wrapper .header{
+    background-color: inherit;
+    color: #fff;
+    font-weight: strong;
+    text-shadow: 2px 2px orange;
+}
+   #cta-wrapper .ui.button{
+    background-color: rgba(255, 255, 255, .6) !important;
+    font-weight: bold;
+    border-radius: 20px;
+    color: orangered !important;
+   }
+   
+
 #slider{
     border:  solid 1px;
     width: 90vw;
@@ -135,7 +151,7 @@ width: 5em;
     right: 45%;
     padding: 2em;
 }
-
+/*
 #action{
     position: absolute;
     left: 50%;
@@ -146,13 +162,29 @@ width: 5em;
     margin-top: -50%;
     border-radius: 10px;
 }
-
+*/
 #intro {
     padding: 2rem 0;
     font-size: large;
 }
+.white {
+    background-color: #fff;
+}
 
-@media (min-width: 502px) { 
+.shadow{
+    background-color: rgba(255,69,0, .1);
+    color: orangered;
+    box-shadow: 8px 8px 8px -8px orangered;
+}
+@media (min-width: 502px) {
+    #cta-wrapper .header{
+        font-size: 2.8rem;
+    }
+
+    #cta-wrapper .ui.button{
+        font-size: 1.8rem ;
+    }
+
     #slider{
         width: 80vw;
       /*  height: 35vw; */
@@ -165,6 +197,13 @@ width: 5em;
 }
 
 @media (min-width: 690px) { 
+    #cta-wrapper .header{
+        font-size: 3.8rem;
+    }
+    #cta-wrapper .ui.positive.button, .ui.positive.buttons .button{
+        
+        font-size: 2.5rem ;
+    }
     #nav-h .item{
         font-size: 1.5rem;
     }
@@ -174,5 +213,15 @@ width: 5em;
         line-height: 4rem;
     }
 
+}
+
+@media (min-width: 1200px) { 
+    #cta-wrapper .header{
+        font-size: 4.8rem;
+    }
+
+    #cta-wrapper .ui.positive.button, .ui.positive.buttons .button{   
+        font-size: 3rem ;
+    }
 }
 
