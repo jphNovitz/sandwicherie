@@ -170,11 +170,15 @@ width: 5em;
 .white {
     background-color: #fff;
 }
+.green-spring{
+    background-color: #D2DF9A;
+    color: orangered;
+}
 
 .shadow{
-    background-color: rgba(255,69,0, .1);
+    background-color: #fff;
     color: orangered;
-    box-shadow: 8px 8px 8px -8px orangered;
+    box-shadow: 0px 0px 24px #ff45004d;
 }
 @media (min-width: 502px) {
     #cta-wrapper .header{
