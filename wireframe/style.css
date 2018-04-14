@@ -121,7 +121,7 @@ width: 5em;
 #cta-wrapper .header{
     background-color: inherit;
     color: #fff;
-    font-weight: strong;
+    font-weight: bolder;
     text-shadow: 2px 2px orange;
 }
    #cta-wrapper .ui.button{

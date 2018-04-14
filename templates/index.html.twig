@@ -5,16 +5,21 @@
     {% block stylesheets %}
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
         <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
-        <link href="{{ asset('build/main.css') }}" rel="stylesheet">
+        <link href="{{ asset('build/css/front.css') }}" rel="stylesheet">
+        <link href="{{ asset('build/css/main.css') }}" rel="stylesheet">
     {% endblock %}
 </head>
 <body >
+<div id="test" data-vars="{{ front_image|json_encode|e('html_attr') }}"></div>
+{{ front_image|json_encode|e('html_attr') }}
     <div id="app">
 
     </div>
 
 {% block javascripts %}
+    <script src="{{ asset('build/manifest.json') }}"></script>
     <script src="{{ asset('build/main.js') }}"></script>
+    <script src="{{ asset('build/js/app.js') }}"></script>
 {% endblock %}
 
 </body>

@@ -1,8 +1,9 @@
+
 import Vue from 'vue';
 import SuiVue from 'semantic-ui-vue';
 import 'semantic-ui-css/semantic.css';
 
-
+Vue.config.extractCss = true
 import App from './App'
 Vue.use(SuiVue)
 

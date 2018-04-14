@@ -14,9 +14,15 @@ Encore
     // .addEntry('js/app', './assets/js/app.js')
      .addStyleEntry('css/app', './assets/scss/app.scss')
      .addStyleEntry('css/sui', './node_modules/semantic-ui-css/semantic.css')
+     .addStyleEntry('css/front', './assets/scss/front.scss')
      .addEntry('js/app', './assets/js/app.js')
     .addEntry('main', './assets/vue/main.js')
-    .enableVueLoader()
+    //.enableVueLoader()
+    .enableVueLoader(function(options) {
+        // https://vue-loader.vuejs.org/en/configurations/advanced.html
+
+        options.loaders = [ "style-loader", "css-loader", "sass-loader" ]
+    })
 
     // uncomment if you use Sass/SCSS files
      .enableSassLoader()
