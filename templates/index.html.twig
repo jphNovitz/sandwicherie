@@ -10,8 +10,8 @@
     {% endblock %}
 </head>
 <body >
-<div id="test" data-vars="{{ front_image|json_encode|e('html_attr') }}"></div>
-{{ front_image|json_encode|e('html_attr') }}
+<div id="featured_products" data-vars="{{ featured_products|json_encode()|e('html_attr') }}"></div>
+
     <div id="app">
 
     </div>

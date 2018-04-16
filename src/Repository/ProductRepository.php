@@ -25,4 +25,15 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function FindFeatured()
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.images', 'images')
+            ->addSelect('p, images')
+            ->where('p.featured = :value')
+            ->setParameter('value', true)
+            ->getQuery()
+           ->getArrayResult()
+            ;
+    }
 }

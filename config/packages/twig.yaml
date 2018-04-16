@@ -9,3 +9,5 @@ twig:
         adm_input: '%adm_input%'
         adm_allergy: Admin/Allergy/
         domain: http://localhost:8000
+        featured_products: "@app.featured_products"
+

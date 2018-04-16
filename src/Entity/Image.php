@@ -23,7 +23,6 @@ class Image
     private $id;
 
     /**
-     * @var ArrayCollection
      * @Assert\Image()
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="images")
@@ -109,13 +108,20 @@ class Image
     }
 
     /**
-     * @return ArrayCollection
+     * @param mixed $product
      */
-    public function getProduct(): ArrayCollection
+    public function setProduct($product): void
+    {
+        $this->product = $product;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProduct()
     {
         return $this->product;
     }
-
 
 
 }

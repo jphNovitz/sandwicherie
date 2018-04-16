@@ -16,6 +16,11 @@
             PageHeader,
             Top,
             CallToAction
+        },
+        computed: {
+            featured_products: function () {
+                return document.getElementById('featured_products').dataset.vars
+            }
         }
     }
 </script>

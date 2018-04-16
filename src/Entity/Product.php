@@ -58,6 +58,12 @@ class Product
    private $isActive;
 
    /**
+    * @var boolean
+    * @ORM\Column(name="featured", type="boolean", length=1, nullable=true)
+    */
+   private $featured;
+
+   /**
     * @var ArrayCollection
     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
     * @ORM\JoinColumn(nullable=true)
@@ -116,6 +122,7 @@ class Product
        $this->types = new ArrayCollection();
        $this->images = new ArrayCollection();
        $this->isActive = true;
+       $this->featured = false;
    }
 
     /**
@@ -212,6 +219,22 @@ class Product
     public function setIsActive(bool $isActive): void
     {
         $this->isActive = $isActive;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFeatured(): bool
+    {
+        return $this->featured;
+    }
+
+    /**
+     * @param bool $featured
+     */
+    public function setFeatured(bool $featured): void
+    {
+        $this->featured = $featured;
     }
 
     /**
@@ -368,8 +391,7 @@ class Product
     public function addImage($image)
     {
         $this->images->add($image);
-        // uncomment if you want to update other side
-        //$image->setProduct($this);
+        $image->setProduct($this);
     }
 
     /**

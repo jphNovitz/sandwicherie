@@ -41,5 +41,10 @@ services:
             resource: '../src/Doctrine'
             public: true
             tags: ['doctrine.event_subscriber']
+
+    app.featured_products:
+            class: '\stdClass'
+            public: true
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
