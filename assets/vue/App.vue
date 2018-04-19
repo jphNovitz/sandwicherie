@@ -8,20 +8,14 @@
 <script>
     //import 'semantic-ui-css/semantic.css';
     import  Top from './components/Top/Top'
-    import  CallToAction from './components/CallToAction/CallToAction'
     import PageHeader from "./components/PageHeader/PageHeader";
     export default {
         name: 'App',
         components: {
             PageHeader,
-            Top,
-            CallToAction
+            Top
         },
-        computed: {
-            featured_products: function () {
-                return document.getElementById('featured_products').dataset.vars
-            }
-        }
+        computed: {}
     }
 </script>
 

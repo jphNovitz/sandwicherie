@@ -110,8 +110,8 @@
                 <nav></nav>
 
                 <!-- card with call to action -->
-
-                <div class="ui stackable  grid" id="cta-wrapper">
+                <call-to-action> </call-to-action>
+                <!-- <div class="ui stackable  grid" id="cta-wrapper">
                     <div class="ui row bg ">
                         <div class="sixteen wide middle aligned centered column">
                             <h1 class="ui sizer header">Le Burger</h1>
@@ -124,16 +124,18 @@
                         </div>
 
                 </div>
-                <!-- cta wrapper -->
-                </div>
+
+                </div> -->
             </div>
         </header>
     </div>
 </template>
 
 <script>
+    import CallToAction from '../CallToAction/CallToAction'
     export default {
         name: "pageHeader",
+        components: {CallToAction},
         replace: false
     }
 </script>
