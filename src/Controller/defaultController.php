@@ -17,15 +17,9 @@ class defaultController extends Controller {
      * @Route("/", name="default")
      */
     public function index(FeaturedProducts $featured){
-      /*  $toto='toto';*/
-
        $featured_products = $featured->getFeatured();
-
-       //dump($featured_products);
-       // $this->get('app.front_image')->testo =  (array)(object)$test;
-        $this->get('app.featured_products')->list =  $featured_products;
-        // dump($this->get('app.front_image')->testo);
-        return $this->render('index.html.twig');
+       $this->get('app.products')->featured =  $featured_products;
+       return $this->render('index.html.twig');
 
     }
 

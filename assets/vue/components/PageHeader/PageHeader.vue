@@ -110,8 +110,10 @@
                 <nav></nav>
 
                 <!-- card with call to action -->
-                <call-to-action> </call-to-action>
-                <!-- <div class="ui stackable  grid" id="cta-wrapper">
+                <transition>
+                    <call-to-action> </call-to-action>
+                </transition>
+                    <!-- <div class="ui stackable  grid" id="cta-wrapper">
                     <div class="ui row bg ">
                         <div class="sixteen wide middle aligned centered column">
                             <h1 class="ui sizer header">Le Burger</h1>

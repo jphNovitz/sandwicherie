@@ -42,7 +42,7 @@ services:
             public: true
             tags: ['doctrine.event_subscriber']
 
-    app.featured_products:
+    app.products:
             class: '\stdClass'
             public: true
 
