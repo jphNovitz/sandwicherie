@@ -76,6 +76,13 @@
             width: 80vw;
             /*  height: 35vw; */
         }
+
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
     }
     @media (min-width: 690px) {
         #cta-wrapper .header{
@@ -110,9 +117,7 @@
                 <nav></nav>
 
                 <!-- card with call to action -->
-                <transition>
                     <call-to-action> </call-to-action>
-                </transition>
                     <!-- <div class="ui stackable  grid" id="cta-wrapper">
                     <div class="ui row bg ">
                         <div class="sixteen wide middle aligned centered column">
