@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -20,6 +21,7 @@ class ProductType extends AbstractType
             ->add('name', TextType::class)
             ->add('description', TextType::class)
             ->add('price', NumberType::class)
+            ->add('featured', CheckboxType::class)
             ->add('vegetables', EntityType::class, [
                 'class'=>'App\Entity\Ingredient',
                 'required'=>false,

@@ -1,12 +1,11 @@
 <template>
     <div>
         <!-- card with call to action -->
-
         <div class="ui stackable  grid" id="cta-wrapper" :style="cta_background">
             <div class="ui row bg ">
                 <div class="sixteen wide middle aligned centered column">
                     <transition name="fade">
-                    <h1 class="ui sizer header" v-if="change">{{featured_products.name}}</h1>
+                    <h1 class="ui sizer header" v-if="change">{{featured_product.name}}<br />{{featured_product.price}} €</h1>
                     </transition>
                 </div>
                 <div class="five wide middle aligned centered column">
@@ -29,43 +28,28 @@
         data (){
             return {
                 change: true,
-               /* featured_products: {},*/
-                cta_background: '',
-                name :  '',
-                test : ''
+               featured_product: {},
+                cta_background: {
+                    transition: 'all ease .9s' ,
+                },
+                name :  ''
             }
         },
         mounted: function () {
- /*           this.featured_products = this.parsed[1]
-            let name = this.parsed[1].images[0].imageName;*/
             this.set_featured(1)
-            this.cta_background = 'background-image: url(./images/products/' + this.name + ')'
-            /* let raw =  document.getElementById('products').dataset.vars
-            const parsed = JSON.parse(raw).featured */
+            this.cta_background.backgroundImage = 'url(./images/products/' + this.name + ')'
             const that = this
-           /* for (let i = 0 ; i < parsed.length ; i++ ){*/
             let i = 0
                 setInterval(function () {
                     if (i > that.parsed.length-1) i=0
                     that.change = true
                     that.set_featured(i)
-                  /*  that.featured_products = that.parsed[i]
-                    let name = that.parsed[i].images[0].imageName; */
-                    that.cta_background = 'background-image: url(./images/products/' + that.name + ')'
+                    that.cta_background.backgroundImage = 'url(./images/products/' + that.name + ')'
                     setTimeout(function () {
                         that.change = false
                     }, 11000)
                     i++
-
                 }, 12000)
-                    /*setTimeout (function () {
-                        that.change = true
-                        that.featured_products = parsed[i]
-                        let name = parsed[i].images[0].imageName;
-                        that.cta_background = 'background-image: url(./images/products/' + name + ')'
-                        that.change = false
-                    }, 10000 * i)*/
-         /*       }*/
         },
         computed: {
             parsed: function() {
@@ -75,20 +59,11 @@
         },
         methods: {
           set_featured: function (count=0) {
-              this.featured_products = this.parsed[count]
+              this.featured_product = this.parsed[count]
               this.name = this.parsed[count].images[0].imageName;
           }
         },
-        watch: {
-         /*   featured_products: function () {
-                let raw =  document.getElementById('products').dataset.vars
-                return JSON.parse(raw).featured[0]
-            },*/
-         cta_background: function () {
-             this.test = 'background-image: url(./images/products/' + this.name + ')'
-            }
-
-        }
+        watch: {}
     }
 </script>
 <style scoped>
