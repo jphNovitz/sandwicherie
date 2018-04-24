@@ -1,3 +1,46 @@
+<template>
+    <div>
+
+        <!-- header-->
+        <header>
+
+            <div class="header-content">
+                <div class="ui sixteen wide column spaced">
+                    <h3>Sandwicherie, petite restauration, Traiteur, Salon de dégustation</h3>
+                </div>
+                    <!-- menu -->
+                    <TopMenu> </TopMenu>
+
+                <!-- card with call to action -->
+                    <call-to-action> </call-to-action>
+                    <!-- <div class="ui stackable  grid" id="cta-wrapper">
+                    <div class="ui row bg ">
+                        <div class="sixteen wide middle aligned centered column">
+                            <h1 class="ui sizer header">Le Burger</h1>
+                        </div>
+                        <div class="five wide middle aligned centered column">
+                            <button class="ui orange basic button">
+                                <i class="cart plus icon"></i>
+                                Je Commande
+                            </button>
+                        </div>
+
+                </div>
+
+                </div> -->
+            </div>
+        </header>
+    </div>
+</template>
+
+<script>
+    import CallToAction from '../CallToAction/CallToAction'
+    import TopMenu from '../Menu/Menu'
+    export default {
+        name: "pageHeader",
+        components: {CallToAction, TopMenu}
+    }
+</script>
 
 <style scoped>
     .bg{
@@ -104,45 +147,3 @@
     }
 
 </style>
-<template>
-    <div>
-
-        <!-- header-->
-        <header>
-
-            <div class="header-content">
-                <div class="ui sixteen wide column spaced">
-                    <h3>Sandwicherie, petite restauration, Traiteur, Salon de dégustation</h3>
-                </div>
-                <nav></nav>
-
-                <!-- card with call to action -->
-                    <call-to-action> </call-to-action>
-                    <!-- <div class="ui stackable  grid" id="cta-wrapper">
-                    <div class="ui row bg ">
-                        <div class="sixteen wide middle aligned centered column">
-                            <h1 class="ui sizer header">Le Burger</h1>
-                        </div>
-                        <div class="five wide middle aligned centered column">
-                            <button class="ui orange basic button">
-                                <i class="cart plus icon"></i>
-                                Je Commande
-                            </button>
-                        </div>
-
-                </div>
-
-                </div> -->
-            </div>
-        </header>
-    </div>
-</template>
-
-<script>
-    import CallToAction from '../CallToAction/CallToAction'
-    export default {
-        name: "pageHeader",
-        components: {CallToAction},
-        replace: false
-    }
-</script>
