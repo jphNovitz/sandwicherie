@@ -1,8 +1,8 @@
 <template>
     <div class="ui padded middle aligned grid toolbar" id="nav-h">
         <div class="row">
-            <div class="three wide column">  <img src="./logo.png"  class="ui medium image"/></div>
-            <div class=" thirteen wide column  ui medium celled horizontal list">
+            <div class="three wide column">  <img src="./logo.png"  class="ui small image"/></div>
+            <div class=" thirteen wide column  ui medium celled horizontal list right aligned">
                 <div class="item">Accueil</div>
                 <div class="item">Produits</div>
                 <div class="item">Allergies</div>

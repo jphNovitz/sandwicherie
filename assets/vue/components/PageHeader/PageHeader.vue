@@ -12,22 +12,10 @@
                     <TopMenu> </TopMenu>
 
                 <!-- card with call to action -->
+                <div class="ui one column stackable center aligned grid">
                     <call-to-action> </call-to-action>
-                    <!-- <div class="ui stackable  grid" id="cta-wrapper">
-                    <div class="ui row bg ">
-                        <div class="sixteen wide middle aligned centered column">
-                            <h1 class="ui sizer header">Le Burger</h1>
-                        </div>
-                        <div class="five wide middle aligned centered column">
-                            <button class="ui orange basic button">
-                                <i class="cart plus icon"></i>
-                                Je Commande
-                            </button>
-                        </div>
-
                 </div>
 
-                </div> -->
             </div>
         </header>
     </div>

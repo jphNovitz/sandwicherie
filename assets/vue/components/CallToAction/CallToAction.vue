@@ -117,6 +117,11 @@
         }
     }
     @media (min-width: 1200px) {
+
+        #cta-wrapper {
+            height: 65vh;
+            width: calc(65vh*1.908);
+        }
         #cta-wrapper .header{
             font-size: 4.8rem;
         }
