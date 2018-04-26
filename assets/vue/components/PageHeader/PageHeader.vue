@@ -5,9 +5,7 @@
         <header>
 
             <div class="header-content">
-                <div class="ui sixteen wide column spaced">
-                    <h3>Sandwicherie, petite restauration, Traiteur, Salon de dégustation</h3>
-                </div>
+
                     <!-- menu -->
                     <TopMenu> </TopMenu>
 
