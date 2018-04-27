@@ -38,9 +38,6 @@
                 if (test.getBoundingClientRect().y < - 2){
                     test.style.transform= "scale(.1)"
                     test.style.display='none'
-                } else {
-                    test.style.transform= "scale(1)"
-                    test.style.opacity=1
                 }
             })
 

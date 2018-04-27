@@ -1,8 +1,11 @@
 <template>
+    <div>
+    <span id="test"></span>
     <nav id="menu">
         <MenuMobile v-if="mobile"> </MenuMobile>
         <MenuDesktop v-else> </MenuDesktop>
     </nav>
+    </div>
 </template>
 
 <script>
@@ -15,7 +18,8 @@
             return {
                 screen: {
                     width: 0
-                }
+                },
+                testPos: null
             }
         },
         mounted() {
@@ -24,16 +28,14 @@
             window.addEventListener('resize', function () {
                 that.getWidth()
             })
-            document.addEventListener('scroll', function () {
+            window.addEventListener('scroll', function () {
+                that.scrollTest()
                 const menu = document.getElementById('menu')
-
                 if (menu.getBoundingClientRect().y < 5) {
-                    console.log(menu.getBoundingClientRect().y)
                     menu.style.position = 'sticky'
                     menu.style.top = '0px'
                     menu.style.margin = '0'
                 }
-                
             })
         },
         computed: {
@@ -45,7 +47,21 @@
         methods: {
             getWidth: function () {
                 this.screen.width = screen.width
+            },
+            scrollTest: function (){
+                let test = document.getElementById('test')
+                let position = test.getBoundingClientRect().y
+                if (position ==0 && this.testPos<0){
+                    menu.style.position = 'static'
+                    const top = document.getElementById('top')
+                    top.style.transform= "scale(1)"
+                    top.style.display='block'
+                }
+                this.testPos = position
             }
+        },
+        watch: {
+
         }
     }
 
