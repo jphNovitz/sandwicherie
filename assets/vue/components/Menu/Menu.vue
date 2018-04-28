@@ -1,7 +1,7 @@
 <template>
     <div>
     <span id="test"></span>
-    <nav id="menu">
+    <nav id="menu" v-bind:class="{stuck: isStuck}">
         <MenuMobile v-if="mobile"> </MenuMobile>
         <MenuDesktop v-else> </MenuDesktop>
     </nav>
@@ -19,7 +19,8 @@
                 screen: {
                     width: 0
                 },
-                testPos: null
+                testPos: null,
+                isStuck: null
             }
         },
         mounted() {
@@ -29,13 +30,11 @@
                 that.getWidth()
             })
             window.addEventListener('scroll', function () {
-                that.scrollTest()
                 const menu = document.getElementById('menu')
                 if (menu.getBoundingClientRect().y < 5) {
-                    menu.style.position = 'sticky'
-                    menu.style.top = '0px'
-                    menu.style.margin = '0'
+                    that.isStuck = true
                 }
+                that.scrollTest()
             })
         },
         computed: {
@@ -51,11 +50,11 @@
             scrollTest: function (){
                 let test = document.getElementById('test')
                 let position = test.getBoundingClientRect().y
-                if (position ==0 && this.testPos<0){
-                    menu.style.position = 'static'
+                if (position === -14 && this.testPos<-14){
                     const top = document.getElementById('top')
-                    top.style.transform= "scale(1)"
-                    top.style.display='block'
+                    top.style.transform = "scale(1)"
+                    top.style.display = "block"
+                    this.isStuck = false
                 }
                 this.testPos = position
             }
@@ -72,5 +71,12 @@ nav{
     margin: 1.5em auto;
     background-color: #fff;
     z-index: 10;
+}
+nav.stuck{
+    position: fixed;
+    top: 0px;
+    margin: 0;
+    width: 100%;
+
 }
 </style>
