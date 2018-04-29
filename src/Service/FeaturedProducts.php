@@ -15,6 +15,10 @@ class FeaturedProducts{
        return $this->manager->getRepository('App:Product')
            ->FindFeatured()
             ;
-
+    }
+    public function getLast($n){
+       return $this->manager->getRepository('App:Product')
+           ->FindLast($n)
+            ;
     }
 }

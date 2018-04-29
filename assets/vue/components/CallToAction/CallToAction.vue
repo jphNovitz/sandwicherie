@@ -14,7 +14,8 @@
                             <i class="cart plus icon"></i>
                             Je Commande
                         </button>
-                    </transition>
+                    </transition>,
+
                 </div>
 
             </div>
@@ -27,9 +28,9 @@
         name: "call-to-action",
         data (){
             return {
-                change: true,
+               change: true,
                featured_product: {},
-                cta_background: {
+               cta_background: {
                     transition: 'all ease .9s' ,
                 },
                 name :  ''
@@ -52,7 +53,7 @@
                 }, 12000)
         },
         computed: {
-            parsed: function() {
+           parsed: function() {
                 let raw =  document.getElementById('products').dataset.vars
                 return JSON.parse(raw).featured
             }

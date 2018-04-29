@@ -36,4 +36,14 @@ class ProductRepository extends ServiceEntityRepository
            ->getArrayResult()
             ;
     }
+    public function FindLast($n)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.images', 'images')
+            ->addSelect('p, images')
+            ->setMaxResults($n)
+            ->getQuery()
+           ->getArrayResult()
+            ;
+    }
 }
