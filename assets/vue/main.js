@@ -6,7 +6,6 @@ Vue.config.extractCss = true
 import App from './App'
 Vue.use(SuiVue)
 
-
 /**
  * Create a fresh Vue Application instance
  */

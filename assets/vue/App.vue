@@ -2,7 +2,25 @@
     <div>
        <top> </top>
         <page-header> </page-header>
-        <Map> </Map>
+        <section  class="ui stackable grid">
+            <aside class="five wide column middle aligned">
+                <p>
+                <span class="emph">
+                    <i class="ui quote left icon"></i>
+                        Ouvert 6 jours sur sept
+                        <br /> jusque 15h
+                    <i class="ui quote right icon"></i>
+                </span>
+                </p>
+                <p> La sandwicherie 'La Clémentine' vous reçoit de 8:30 à 15:00 du lundi au vendredi,
+                    de 11:30 à 15h le samedi.
+                </p>
+                <p>
+                    Le parking est aisé, vous avez la possibilité de payer par bancontact
+                </p>
+            </aside>
+            <Map class="ten wide column middle aligned" > </Map>
+        </section>
         <section class="ui middle aligned grid container">
             <Search-Product></Search-Product>
         </section><section class="ui middle aligned grid container">
@@ -29,7 +47,13 @@
             SearchProduct,
             Map
         },
-        computed: { }
+        data () {
+          return {}
+        },
+        mounted () {},
+        computed: { },
+        methods: {
+        }
     }
 </script>
 

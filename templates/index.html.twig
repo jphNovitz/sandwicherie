@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}La Clémentine{% endblock %}</title>
     <meta name=viewport content="width=device-width, initial-scale=1">
+
     {% block stylesheets %}
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
         <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
@@ -12,6 +13,7 @@
 
 </head>
 <body >
+<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyD8VwmSjvYXfjvMFZ9lH2-6vlGI_0-gjS0'></script>
 <div id="products" data-vars="{{ products|json_encode()|e('html_attr') }}"></div>
 
     <div id="app">
@@ -21,8 +23,10 @@
 {% block javascripts %}
     <script src="{{ asset('build/manifest.json') }}"></script>
     <script src="{{ asset('build/main.js') }}"></script>
+
    {# <script src="{{ asset('build/js/app.js') }}"></script> #}
 {% endblock %}
 
+<!--<script  src=”https://maps.googleapis.com/maps/api/js?key=AIzaSyD8VwmSjvYXfjvMFZ9lH2-6vlGI_0-gjS0” async defer ></script>-->
 </body>
 </html>
