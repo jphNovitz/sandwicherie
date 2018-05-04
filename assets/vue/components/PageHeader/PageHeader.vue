@@ -37,7 +37,7 @@
 
     .header-content{
         width: 100%;
-        min-height: 100%;
+        min-height: calc(100vw/1.2);
         padding-bottom: 1rem;
 
     }

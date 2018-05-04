@@ -1,8 +1,10 @@
 <template>
-<div>
-    <div class="emph"> Tu manges quoi à midi ?</div>
+<article class="ui stackable row">
+    <div class="ui six wide column stackable">
+        <div class="emph"> Tu manges quoi à midi ?</div>
         <sui-input placeholder="Choisi ton repas " icon="search" v-model="typing" />
-    <div class="ui left aligned selection massive list container">
+    </div>
+    <div class="ui ten wide column stackable left aligned selection small list">
         <div class="item" v-for="product in products">
             <img class="ui avatar image" :src="'/images/products/'+product.images[0].imageName">
             <div class="content">
@@ -11,7 +13,7 @@
             </div>
      </div>
     </div>
-</div>
+</article>
 </template>
 
 <script>

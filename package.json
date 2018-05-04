@@ -24,7 +24,6 @@
     "dependencies": {
         "css-loader": "^0.28.11",
         "semantic-ui-css": "^2.3.0",
-        "semantic-ui-vue": "^0.2.5",
-        "vue2-google-maps": "^0.9.6"
+        "semantic-ui-vue": "^0.2.5"
     }
 }

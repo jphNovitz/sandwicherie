@@ -19,12 +19,12 @@
                             <sui-icon name="cart plus icon" />
                         </sui-button-content>
                     </sui-button>
-                <sui-button animated="vertical" color="blue">
+             <!--   <sui-button animated="vertical" color="blue">
                         <sui-button-content hidden>detail</sui-button-content>
                         <sui-button-content visible>
                             <sui-icon name="zoom in icon" />
                         </sui-button-content>
-                    </sui-button>
+                    </sui-button> -->
                 <sui-button animated="vertical" color="pink">
                         <sui-button-content hidden>j'aime</sui-button-content>
                         <sui-button-content visible>

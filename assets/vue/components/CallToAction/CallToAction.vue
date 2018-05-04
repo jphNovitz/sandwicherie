@@ -69,8 +69,8 @@
 </script>
 <style scoped>
     #cta-wrapper{
+        width: 100vw;
         height: calc(100vw/1.91);
-        /*ackground-image: url(images/burger_big_02.png);*/
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -119,10 +119,10 @@
     }
     @media (min-width: 1200px) {
 
-        #cta-wrapper {
+       /* #cta-wrapper {
             height: 65vh;
             width: calc(65vh*1.908);
-        }
+        }*/
         #cta-wrapper .header{
             font-size: 4.8rem;
         }

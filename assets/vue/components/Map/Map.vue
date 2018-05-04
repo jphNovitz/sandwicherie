@@ -118,9 +118,17 @@
 </script>
 
 <style scoped>
+
     .google-map {
-        width: 100%;
-        height: calc(60vw/1.5) ;
-        margin: 3rem auto;
+        width: 100vw;
+        height: 100vh ;
+        /*margin: 3rem auto;*/
     }
+    @media (min-width: 502px) {
+            .google-map {
+                width: 100%;
+                height: calc(60vw/1.5) ;
+                margin: 3rem auto;
+            }
+        }
 </style>

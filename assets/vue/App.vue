@@ -3,7 +3,7 @@
        <top> </top>
         <page-header> </page-header>
         <section  class="ui stackable grid">
-            <aside class="five wide column middle aligned">
+            <aside class="six wide column middle aligned">
                 <p>
                 <span class="emph">
                     <i class="ui quote left icon"></i>
@@ -23,7 +23,6 @@
         </section>
         <section class="ui middle aligned grid container">
             <Search-Product></Search-Product>
-        </section><section class="ui middle aligned grid container">
             <Suggestions> </Suggestions>
         </section>
 
