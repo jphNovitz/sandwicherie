@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Security{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
+    <link href="{{ asset('build/css/security.css') }}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<div  class="ui centered grid container">
+    <div class="bg"> </div>
+        <div class="fourteen wide mobile six wide tablet four wide large screen middle aligned column content">
+
+            {%  block body %}
+
+            {% endblock %}
+        </div>
+
+</div>
+<script src=""></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

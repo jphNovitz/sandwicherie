@@ -15,6 +15,7 @@ Encore
      .addStyleEntry('css/app', './assets/scss/app.scss')
      .addStyleEntry('css/sui', './node_modules/semantic-ui-css/semantic.css')
      .addStyleEntry('css/front', './assets/scss/front.scss')
+     .addStyleEntry('css/security', './assets/scss/security.scss')
      .addEntry('js/app', './assets/js/app.js')
     .addEntry('main', './assets/vue/main.js')
     //.enableVueLoader()
@@ -31,6 +32,7 @@ Encore
      //.enablePostCssLoader()
     // uncomment for legacy applications that require $/jQuery as a global variable
     // .autoProvidejQuery()
+
 ;
 
 module.exports = Encore.getWebpackConfig();
