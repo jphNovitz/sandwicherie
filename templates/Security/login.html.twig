@@ -5,22 +5,21 @@
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
-<h1>La Clémentine :: Connexion</h1>
-<form action="{{ path('login') }}" method="post">
-    <div class="form-row" >
+    <h1 class="ui icon header">
+        <img src="{{asset('/images/common/logo.png') }}" class="ui large image"  />
+        <div class="content">
+            Connexion
+            <div class="sub header"><a href="{{ path('register') }}"> Pas encore inscrit ?</a></div>
+        </div>
+    </h1>
+<form action="{{ path('login') }}" method="post" class="ui form">
+    <div class="field" >
     <label for="username"  class="custom">Nom d'utilisateur:</label>
-        <div class="ui fluid icon input">
-            <input type="text" id="username" name="_username" value="{{ last_username }}"  />
-        </div>
-
+        <input type="text" id="username" name="_username" value="{{ last_username }}"  />
     </div>
-    <div class="form-row ">
-    <label for="password"  class="custom">Mot de passe:</label>
-        <div class="ui fluid icon input">
-            <input type="password" id="password" name="_password"  />
-        </div>
-
-
+    <div class="field" >
+        <label for="password"  class="custom">Mot de passe:</label>
+        <input type="password" id="password" name="_password"  />
     </div>
     {#
         If you want to control the URL the user
@@ -28,7 +27,7 @@
         <input type="hidden" name="_target_path" value="/account" />
     #}
     <div class="one wide column">
-        <button class="ui circular positive button">
+        <button class="ui circular positive massive button">
             Login
         </button>
     </div>

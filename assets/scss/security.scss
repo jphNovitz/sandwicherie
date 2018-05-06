@@ -19,6 +19,18 @@ body{
 * {
     box-sizing: border-box;
 }
+.ui.icon.header .content{
+    background-color: transparent;
+}
+.ui.header > .image:not(.icon), .ui.header > img {
+    width: 7em;
+}
+.sub.header {
+    font-size: 1.5rem;
+}
+.sub.header a{
+    color: orangered
+}
 .bg{
     position: absolute;
     z-index: -2;
@@ -38,3 +50,26 @@ body{
     background-color: rgba(255, 255, 255,.4);
 }
 
+/*.ui form {
+    font-size: 2rem;
+    margin: 2rem auto;
+    line-height: 2.5rem;
+}*/
+.ui.form .field > label,
+.ui.form .field > input {
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+
+@media (min-width: 768px) {
+    .bg{
+        background-position-y: -310px;
+    }
+}
+
+@media (min-width: 768px) {
+    .bg{
+        background-image: url("../../public/images/common/background_lights_1-91.png");
+        background-position: 0px;
+    }
+}

@@ -38,21 +38,24 @@ class AfterSuccessLoginListener implements AuthenticationSuccessHandlerInterface
     {
         $user = $token->getUser();
         $username = $user->getUsername();
-        if ($user->getIsActive() ) :
-            $user->setTries(0);
-            $this->persister->insert($user);
-            $this->session->getFlashBag()->add("info","bonjour ".$username);
-            if (in_array('ROLE_ADMIN', $user->getRoles())) :
-                return new RedirectResponse($this->router->generate('admin_default'));
-            elseif (in_array('ROLE_MEMBER', $user->getRoles())) :
-                return new RedirectResponse($this->router->generate('admin_default'));
-            elseif (in_array('ROLE_USER', $user->getRoles())) :
-                return new RedirectResponse($this->router->generate('default'));
+        if ($username != 'admin') {
+            if ($user->getIsActive()) :
+                $user->setTries(0);
+                $this->persister->insert($user);
+                $this->session->getFlashBag()->add("info", "bonjour " . $username);
+                if (in_array('ROLE_ADMIN', $user->getRoles())) :
+                    return new RedirectResponse($this->router->generate('admin_default'));
+                elseif (in_array('ROLE_MEMBER', $user->getRoles())) :
+                    return new RedirectResponse($this->router->generate('admin_default'));
+                elseif (in_array('ROLE_USER', $user->getRoles())) :
+                    return new RedirectResponse($this->router->generate('default'));
+                endif;
+            else:
+                $this->session->getFlashBag()->add("error", "Votre compte a été désactivé");
+                return new RedirectResponse($this->router->generate('register'));
             endif;
-        else:
-            $this->session->getFlashBag()->add("error","Votre compte a été désactivé");
-            return new RedirectResponse($this->router->generate('register'));
-        endif;
+        }
+        return new RedirectResponse($this->router->generate('admin_default'));
 
     }
 

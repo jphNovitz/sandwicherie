@@ -41,6 +41,11 @@ class AfterFailureLoginListener implements AuthenticationFailureHandlerInterface
     {
         $failedUser = $this->loader->getRepository('App:User')
             ->findOneBy(['username'=>$exception->getToken()->getUser()]);
+        if (!$failedUser) {
+
+            $this->session->getFlashBag()->add("error","Mauvais login ");
+            return new RedirectResponse($this->router->generate('login'));
+        }
         if ($failedUser->getIsActive()):
         $failedUser->setTries($failedUser->getTries()+1);
         $this->persister->insert($failedUser);
