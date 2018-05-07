@@ -92,7 +92,7 @@ Promise.all([
   ]).then((templates) => {
     displayTemplate(templates, getSize()) // get screen width
    
-    addEventListener('resize', function(){  // listen to the resize event
+    window.addEventListener('resize', function(){  // listen to the resize event
       displayTemplate(templates, getSize())
     })
 
