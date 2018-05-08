@@ -11,22 +11,48 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
             crossorigin="anonymous"></script>
-    <link href="{{ asset('build/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
+    <link href="{{ asset('build/css/back.css') }}" rel="stylesheet">
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-<div class="container">
+<div  class="ui grid" id="app">
+    <div class="row">
     {% block toolbar %}
-        <div class="toolbar">
+        <div class="ui top fixed fluid menu">
+            <a class="item" id="button">
+                <i class="centered bars white huge icon"></i>
+            </a>
+            <div class="ui huge header item">
+                La Clémentine
+            </div>
+
+            <a class="item">
+                voir le site
+            </a>
+        </div>
+
+        {#<div class="toolbar">
             <span id="menu-icon">
                 <i class="material-icons" id="menu">menu</i>
             </span>
             <span id="title">La Clémentine</span>
-        </div>
+        </div>#}
     {% endblock %}
+    </div>
+    <div class="ui huge vertical inverted orange menu" id="lateral-menu" style="z-index: 200" :class="{blabla: show}">
 
-    <div id="lateral-menu">
-        <ul>
+        <div class="left aligned item">
+            <div class="header">Aliments</div>
+            <div class="menu">
+                <a class="huge item" href="{{ path('products_list') }}"> Produits </a>
+                <a class="item" href="{{ path('types_list') }}"> Types de produits</a>
+                <a class="item" href="{{ path('ingredients_list') }}"> Ingredients </a>
+                <a class="item" href="{{ path('categories_list') }}"> Catégories d'ingrédient </a>
+
+            </div>
+        </div>
+        {#<ul>
             <li><i class="material-icons">input</i> <a href="{{ path('inputs_list') }}">Entrée marchandises</a></li>
             <li><i class="material-icons">shopping_cart</i><a href=""> Commandes </a></li>
             <hr class="separation">
@@ -39,12 +65,14 @@
             <li><i class="material-icons">assignment</i> <a href="{{ path('types_list') }}"> Types</a></li>
             <hr class="separation">
         </ul>
-
+#}
     </div>
-    <div class="content">
+    <div class="ui sixteen wide column container" style="margin-top: 8rem">
     {% block body %}{% endblock %}
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+<script src="{{ asset('build/js/vue.js') }}"></script>
 <script src="{{ asset('build/js/app.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
