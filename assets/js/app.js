@@ -1,7 +1,7 @@
 new Vue({
         el: '#app',
         data: {
-            show: true,
+            show: false,
 
         },
         computed:    {
@@ -12,10 +12,9 @@ new Vue({
         mounted() {
             const that = this
             document.addEventListener('click', (e) =>{
-                console.log(this.show)
                if (e.target === this.button){
                    this.show = !this.show
-               }  else if (this.show === false) {
+               }  else if (this.show === true) {
                    this.show = !this.show
                }
             })

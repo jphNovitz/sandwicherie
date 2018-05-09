@@ -17,7 +17,7 @@
 </head>
 <body>
 <div  class="ui grid" id="app">
-    <div class="row">
+    <div class="">
     {% block toolbar %}
         <div class="ui top fixed fluid menu">
             <a class="item" id="button">
@@ -40,8 +40,7 @@
         </div>#}
     {% endblock %}
     </div>
-    <div class="ui huge vertical inverted orange menu" id="lateral-menu" style="z-index: 200" :class="{blabla: show}">
-
+    <div class="ui huge vertical inverted orange menu" id="lateral-menu" style="z-index: 200"   :class="[show ? 'showit' : 'hide' ]">
         <div class="left aligned item">
             <div class="header">Aliments</div>
             <div class="menu">
@@ -67,7 +66,7 @@
         </ul>
 #}
     </div>
-    <div class="ui sixteen wide column container" style="margin-top: 8rem">
+    <div class="ui fourteen wide column container" style="margin-top: 8rem">
     {% block body %}{% endblock %}
     </div>
 </div>
