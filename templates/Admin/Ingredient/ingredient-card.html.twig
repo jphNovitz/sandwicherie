@@ -3,6 +3,13 @@
 {#if ingredient.images is not empty %}
     {% block card_image %} {{ ingredient.image.url|last }}{% endblock %}
 {% endif #}
+    {% block object_image  %}
+        {% if object.images is defined %}
+            {% for image in object.images %}
+            <img src="{{ asset('images/'~object|entity~'/'~imageName) }}">
+            {% endfor %}
+        {% endif%}
+    {% endblock %}
 {% block card_properties_rest %}
     <span class="card-property">{% if ingredient.bread %} Pain{% endif %}</span>
     <span class="card-property">{% if ingredient.sauce %} Sauce{% endif %}</span>

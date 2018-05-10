@@ -1,40 +1,51 @@
-{% extends 'base.html.twig' %}
+{% extends '_bases/_admin_base.html.twig' %}
 
 {% block body %}
-    <div class="card">
-        <div class="card-left">
-            <img src="{% block card_image%}{{ asset('images/common/no-photo.jpg') }} {% endblock %}" />
-            <div class="card-properties">
-                <span class="card-property">id: {{object.id  }}</span>
-                {% block card_properties_rest %} {% endblock %}
+    <div class="ui stackable grid">
+        <div class="five wide column"></div>
+        <div class="six wide column">
+            <div class="ui centered fluid card">
+                <div class="image">
+                    {% block object_image  %}
+                        {#  is case of one to many relation this have to be overidden #}
+                        {% if object.images is not null %}
+                            <img src="{{ asset('images/'~object|entity~'/'~object.images[0].imageName) }}">
+                        {% endif%}
+                    {% endblock %}
+
+                </div>
+                <div class="content">
+                    <a class="header">
+                        {% if object.name is defined %}
+                        {{ object.name }}
+                        {% endif%}
+
+                    {% if object.price is defined %}
+                    ({{ object.price }} €)
+                    {% endif%}
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="card-right">
-            <h1>{% block card_title %}
-                    {% if object.name is defined %}
-                        {{ object.name }}
-                    {% else%}
-                    Title
-                    {%  endif%}
-                {% endblock %}
-            </h1>
-            {% block card_description %}
-                {% if object.description is defined %}
-                    <p>{{ object.description }}</p>
-                {%  endif%}
-            {% endblock %}
-            {% block card_comment %}
-                {% if object.comment is defined %}
-                    <p>{{ object.comment }}</p>
-                {%  endif%}
-            {% endblock %}
-
-            {% block card_rest %}
-
-            {% endblock %}
+        <div class="five wide middle aligned column">
+            <a href="" class="ui attached primary button"> Voir</a>
+            <a href="" class="ui attached positive button"> modifier</a>
+            <a href="" class="ui attached negative button"> supprimer</a>
         </div>
-
-        {% include '_elements/_card_actions_floating.html.twig' %}
+        <div class="ui stackable grid">
+            <div class="sixteen wide column">
+                {% if object.description is defined %}
+                    <h2>Description</h2>
+                    {{ object.description }}
+                {% else%}
+                <em>Pas de description</em>
+                {% endif %}
+            </div>
+        </div>
     </div>
+
+    {% block card_rest %}
+
+    {% endblock %}
 
 {% endblock %}
