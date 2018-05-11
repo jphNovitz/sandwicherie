@@ -1,4 +1,4 @@
-{%  extends 'base.html.twig' %}
+{%  extends '_bases/_admin_base.html.twig' %}
 
 {% block body %}
 
@@ -6,7 +6,9 @@
 
     <h1>{%  block title %} Category  Form {% endblock %} </h1>
 
-    {{ form_start(form, {attr:{novalidate : 'novalidate'}}) }}
+    {{ form_start(form, {attr:{
+        class: 'ui form',
+        novalidate : 'novalidate'}}) }}
     {{ form_errors(form) }}
         {#if not form.vars.valid %}
             <div class="form-errors">
@@ -16,8 +18,11 @@
     {% block form_details %}
         {{ form_widget(form) }}
     {% endblock %}
-    <button type="submit" class="btn btn-primary submit">Envoi</button>
+
     {% block other_buttons %} {% endblock %}
+
+        <p> <button class="ui orange button" type="submit" style="margin-top: 1rem">Envoi</button></p>
+
     {{ form_end(form) }}
 
 

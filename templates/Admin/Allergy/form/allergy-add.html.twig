@@ -2,36 +2,44 @@
 
 {% block title %}Ajout d'une allergie{% endblock %}
     {% block form_details %}
-        <div class="form-row">
-            <label for="form_name" class="custom">Nom</label>
-            {{ form_widget(form.name, {"attr": {"class": "custom"}}) }}
+        <div class="ui stackable grid">
+            <div class="eight wide column">
+                <div class="field">
+                    <label for="form_name">Nom</label>
+                    {{ form_widget(form.name) }}
+                </div>
+                <div class="field">
+                    {% if form.name.vars.errors|length %}
+                        <div class="ui pointing red basic label">
+                            {{ form_errors(form.name, {"attr": {"class": "form-error"}}) }}
+                        </div>
+                    {% endif %}
+                </div>
+
+        <div class="field">
+            <label for="form_description" >Description</label>
+            {{ form_widget(form.description) }}
         </div>
-        {% if form.name.vars.errors|length %}
-            <div class="form-errors">
-                {{ form_errors(form.name, {"attr": {"class": "form-error"}}) }}
             </div>
-        {% endif %}
-        <div class="form-row">
-            <label for="form_description" class="custom">Description</label>
-            {{ form_widget(form.description, {"attr": {"class": "custom"}}) }}
-        </div>
-        <div class="form-row">
-            {{ form_errors(form.categories) }}
-            <label for="form_categories">categories</label>
-            {{ form_widget(form.categories,
-                {"attr": {"class": "dropdown"}}) }}
-        </div>
-        <div class="form-row">
+        <div class="eight wide column">
+            <div class="field">
+                {{ form_errors(form.categories) }}
+                <label for="form_categories">categories</label>
+                {{ form_widget(form.categories,
+                    {"attr": {"class": "dropdown"}}) }}
+            </div>
+        <div class="field">
             <label for="form_ingredients">ingredients</label>
             {{ form_widget(form.ingredients, {"attr": {
                 "class": "dropdown"
             }}) }}
         </div>
-        <div class="form-row">
+        <div class="field">
             <label for="form_imageFile">Logo</label>
             {{ form_widget(form.imageFile,
                 {"attr": {"class": ""}}) }}
         </div>
+    </div>
 
 
 
