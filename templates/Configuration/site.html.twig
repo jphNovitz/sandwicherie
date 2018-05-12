@@ -1,0 +1,50 @@
+{% extends '_bases/_admin_base.html.twig' %}
+{% block body %}
+    <div class="">
+
+        {% include '_elements/_flash_messages.html.twig' %}
+
+        {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
+        <div class="field">
+            {{ form_label(form.title)}}
+            {{ form_widget(form.title)}}
+        </div>
+        <div class="field">
+            {{ form_label(form.subTitle)}}
+            {{ form_widget(form.subTitle)}}
+        </div>
+        <div class="fields">
+            <div class="six wide field">
+                {{ form_label(form.adress)}}
+                {{ form_widget(form.adress)}}
+            </div>
+            <div class="six wide field">
+                {{ form_label(form.city)}}
+                {{ form_widget(form.city)}}
+            </div>
+            <div class="four wide field">
+                {{ form_label(form.phone)}}
+                {{ form_widget(form.phone)}}
+            </div>
+        </div>
+        <div class="field">
+            {{ form_label(form.tva)}}
+            {{ form_widget(form.tva)}}
+        </div>
+        <div class="two fields">
+            <div class="field">
+                {{ form_label(form.socialFacebook)}}
+                {{ form_widget(form.socialFacebook)}}
+            </div>
+            <div class="field">
+                {{ form_label(form.socialInstagram)}}
+                {{ form_widget(form.socialInstagram)}}
+            </div>
+        </div>
+    <div class="field">
+        <button type="submit" class="ui primary button ">go</button>
+    </div>
+
+    {{ form_end(form) }}
+    </div>
+{% endblock %}

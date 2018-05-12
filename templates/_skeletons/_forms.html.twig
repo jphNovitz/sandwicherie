@@ -19,9 +19,12 @@
         {{ form_widget(form) }}
     {% endblock %}
 
-    {% block other_buttons %} {% endblock %}
 
-        <p> <button class="ui orange button" type="submit" style="margin-top: 1rem">Envoi</button></p>
+
+        <p style="margin-top: 1rem">
+            <button class="ui orange button" type="submit" >Envoi</button>
+            {% block other_buttons %} {% endblock %}
+        </p>
 
     {{ form_end(form) }}
 

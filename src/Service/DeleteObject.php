@@ -21,13 +21,15 @@ class DeleteObject{
     }
 
     public function delete($obj){
+        $claspath = explode('\\',get_class($obj));
+        $class = strtolower($claspath[2]);
         if ($this->customPersister->delete($obj)) {
             $this->session->getFlashBag()->add('success', 'element supprimé');
-            return new RedirectResponse($this->router->generate('ingredients_list'));
+            return new RedirectResponse($this->router->generate($class.'s_list'));
         }
         else {
             $this->session->getFlashBag()->add('error', 'Erreur');
-            return new RedirectResponse($this->router->generate('ingredients_list'));
+            return new RedirectResponse($this->router->generate($class.'s_list'));
         }
     }
 }

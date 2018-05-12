@@ -2,4 +2,8 @@
 
 {% block title %}Modification d'un produit{% endblock %}
 {% block other_buttons %}
+    <a href="{{ path('products_delete', {'slug' : form.vars.value.slug}) }}" class="ui red button">
+        <i class="trash icon"></i>
+    </a>
+
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends '_skeletons/_forms.html.twig' %}
+
+{% block title %}Ajout d'un service{% endblock %}
+    {% block form_details %}
+        <div class="">
+            <div class="field">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+                {% if form.name.vars.errors|length %}
+                    <div class="ui pointing red basic label">
+                        {{ form_errors(form.name, {"attr": {"class": "form-error"}}) }}
+                    </div>
+                {% endif %}
+            </div>
+
+        <div class="field">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+        </div>
+        <div class="field">
+            {{ form_label(form.price) }}
+            {{ form_widget(form.price) }}
+        </div>
+
+
+    {% endblock %}

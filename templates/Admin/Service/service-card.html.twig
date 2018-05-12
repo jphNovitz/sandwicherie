@@ -1,0 +1,31 @@
+{% extends '_skeletons/_card.html.twig' %}
+{% set object = allergy %}
+{% if allergy.imageName is not empty %}
+    {% block card_image %}
+        {{ asset('images/allergies/'~allergy.imageName) }}
+    {% endblock %}
+{% endif %}
+{% block card_properties_rest %}
+{% endblock %}
+{%  block card_rest %}
+    {% if allergy.ingredients is not empty %}
+        <p>Cette allergie est provoquée par les ingrédients suivants:</p>
+        <ul>
+            {% for ingredient in allergy.ingredients %}
+                <li><a href="{{ path('ingredients_show', {'slug': ingredient.slug}) }}">
+                        {{ ingredient.name }}
+                    </a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if allergy.categories is not empty %}
+        <p>Cette allergie est provoquée par les ingrédients suivants:</p>
+        <ul>
+            {% for category in allergy.categories %}
+                <li><a href="{{ path('categories_show', {'slug': category.slug}) }}">
+                        {{ ingredient.name }}
+                    </a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
