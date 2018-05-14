@@ -76,9 +76,9 @@
 
             </div>
             <div class="sixteen wide column">
-                <div class="ui six doubling cards">
+                <div class="ui cards">
                     {% for image in form.images %}
-                        <div class="card">
+                        <div class="ui one wide column card" >
                             <div class="image">
                                 {{ form_row(image.imageFile) }}
                             </div>

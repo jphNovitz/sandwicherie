@@ -23,6 +23,11 @@ class Site
     /**
      * @var String
      */
+    private $introduction;
+
+    /**
+     * @var String
+     */
     private $adress;
 
     /**
@@ -81,6 +86,24 @@ class Site
     {
         $this->subTitle = $subTitle;
     }
+
+    /**
+     * @return String
+     */
+    public function getIntroduction(): ?String
+    {
+        return $this->introduction;
+    }
+
+    /**
+     * @param String $introduction
+     */
+    public function setIntroduction(String $introduction): void
+    {
+        $this->introduction = $introduction;
+    }
+
+
 
     /**
      * @return String

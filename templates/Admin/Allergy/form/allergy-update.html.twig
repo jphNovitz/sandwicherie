@@ -2,5 +2,8 @@
 
 {% block title %}Modification  d'une allergie {% endblock %}
 {% block other_buttons %}
+    {% set entity = "allergies" %}
+    {% set slug = form.vars.value.slug %}
 
+    {% include '_elements/_other_buttons.html.twig' %}
 {% endblock %}

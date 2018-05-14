@@ -2,5 +2,10 @@
 
 {% block title %}Modification  d'un type de produit{% endblock %}
 {% block other_buttons %}
-    <button>DEL</button>
+    {% set entity = "types" %}
+
+    {% set slug = form.vars.value.slug %}
+
+    {% include '_elements/_other_buttons.html.twig' %}
+
 {% endblock %}
