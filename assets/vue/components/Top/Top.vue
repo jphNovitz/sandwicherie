@@ -30,18 +30,33 @@
         name: "top",
         data() {
           return {
+              testPos: null
           }
-        },
+        }/*,
         mounted: function () {
-            document.addEventListener('scroll', function(){
-                const test = document.getElementById('top')
-                if (test.getBoundingClientRect().y < - 2){
-                    test.style.transform= "scale(.1)"
-                    test.style.display='none'
-                }
+            const that = this
+            window.addEventListener('scroll', function () {
+             that.scrollTest()
             })
+        },
+        methods: {
+            getWidth: function () {
+                this.screen.width = screen.width
+            },
+        scrollTest: function (){
+            let test = document.getElementById('test')
+            console.log(position = test.getBoundingClientRect().y)
+            let position = test.getBoundingClientRect().y
+            if (position === 0 && this.testPos < 0){
 
+                menu.style.position = 'static'
+                const top = document.getElementById('top')
+                top.style.transform= "scale(1)"
+                top.style.display='block'
+            }
+        this.testPos = position
         }
+    }*/
     }
 </script>
 

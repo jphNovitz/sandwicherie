@@ -11,6 +11,6 @@ Vue.use(SuiVue)
  */
 new Vue({
     el: '#app',
-    components: { App },
-    template: '<App/>'
+    template: '<App/>',
+    components: { App }
 })

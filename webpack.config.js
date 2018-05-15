@@ -13,9 +13,12 @@ Encore
     // uncomment to define the assets of the project
     // .addEntry('js/app', './assets/js/app.js')
      .addStyleEntry('css/app', './assets/scss/app.scss')
-     .addStyleEntry('css/sui', './node_modules/semantic-ui-css/semantic.css')
+     .addStyleEntry('css/sui', './assets/semantic/dist/semantic.min.css')
+     //.addStyleEntry('css/sui', './node_modules/semantic-ui-css/semantic.css')
      .addStyleEntry('css/front', './assets/scss/front.scss')
+     .addStyleEntry('css/back', './assets/scss/back.scss')
      .addStyleEntry('css/security', './assets/scss/security.scss')
+     .addEntry('js/vue', './assets/js/vue.min.js')
      .addEntry('js/app', './assets/js/app.js')
     .addEntry('main', './assets/vue/main.js')
     //.enableVueLoader()

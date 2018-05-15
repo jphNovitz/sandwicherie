@@ -50,7 +50,8 @@
             scrollTest: function (){
                 let test = document.getElementById('test')
                 let position = test.getBoundingClientRect().y
-                if (position === -14 && this.testPos<-14){
+                console.log(position)
+                if (position > 105 && this.testPos < 105){
                     const top = document.getElementById('top')
                     top.style.transform = "scale(1)"
                     top.style.display = "block"
