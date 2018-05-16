@@ -8,15 +8,15 @@
 <!-- Flash message display module -->
 {% for label, messages in app.flashes %}
     {%  for message in messages %}
-        <div class="alert alert-{{ label }}">
+        <div class="ui {{ label }} message">
             {% if label == 'error' %}
-                <i class="material-icons">error</i> {{ message }}
+                <i class="times icon"></i> {{ message }}
             {% elseif label == 'notice' %}
-                <i class="material-icons">warning</i> {{ message }}
+                <i class="exclamation icon"></i> {{ message }}
             {% elseif label == 'info' %}
-                <i class="material-icons">message</i> {{ message }}
+                <i class="info icon"></i> {{ message }}
             {% elseif label == 'success' %}
-                <i class="material-icons">check</i> {{ message }}
+                <i class="thumbs up icon"></i> {{ message }}
             {% endif %}
         </div>
     {% endfor %}
