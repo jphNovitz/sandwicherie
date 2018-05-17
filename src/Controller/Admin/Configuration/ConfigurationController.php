@@ -52,8 +52,5 @@ class ConfigurationController extends Controller {
         return $this->render('Configuration/site.html.twig', ['form'=>$form->createView()]);
 
 
-
-
-
     }
 }

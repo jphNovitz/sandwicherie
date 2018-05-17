@@ -10,4 +10,5 @@ twig:
         adm_allergy: Admin/Allergy/
         domain: http://localhost:8000
         products: "@app.products"
+        site: "@app.site"
 

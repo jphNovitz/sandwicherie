@@ -20,6 +20,7 @@ class SiteType extends AbstractType
                 'label'=>'Présentation',
                 'attr'=>['class'=>'tinymce']])
             ->add('adress', TextType::class, ['label'=>'Adresse'])
+            ->add('email', TextType::class, ['label'=>'Email'])
             ->add('city', TextType::class, ['label'=>'Localité'])
             ->add('tva', TextType::class, ['label'=>'N° TVA'])
             ->add('phone', TextType::class, ['label'=>'Téléphone'])

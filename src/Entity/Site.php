@@ -33,6 +33,11 @@ class Site
     /**
      * @var String
      */
+    private $email;
+
+    /**
+     * @var String
+     */
     private $city;
 
     /**
@@ -120,6 +125,24 @@ class Site
     {
         $this->adress = $adress;
     }
+
+    /**
+     * @return String
+     */
+    public function getEmail(): ?String
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param String $email
+     */
+    public function setEmail(String $email): void
+    {
+        $this->email = $email;
+    }
+
+
 
     /**
      * @return String

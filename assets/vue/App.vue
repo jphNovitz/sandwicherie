@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <top> </top>
         <page-header> </page-header>
         <router-view> </router-view>
@@ -19,12 +20,21 @@
             Top
         },
         data () {
-          return {}
+          return {
+              site: ''
+          }
         },
-        mounted () {},
-        computed: { },
-        methods: {
-        }
+        mounted () {
+            this.$store.commit('SET_SITE', this.parsed.site)
+        },
+        computed: {
+            parsed: function() {
+                let raw =  document.getElementById('site').dataset.vars
+                return JSON.parse(raw)
+
+            }
+        },
+        methods: {}
     }
 </script>
 

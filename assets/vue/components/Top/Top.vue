@@ -6,10 +6,10 @@
                 <div class="sixteen wide column">
                     <div class="ui large celled horizontal relaxed list ">
                         <div class="item">
-                            <i class="phone icon"></i> 0468538605 </div>
+                            <i class="phone icon"></i> {{site.phone}} </div>
                         <div class="item">
                             <i class="mail icon"></i>
-                            <a href="mailto:info@laclementine.be"> info@laclementine.be </a>
+                            <a href="mailto:info@laclementine.be"> {{site.email}} </a>
                         </div>
                         <div class="item">
                             <i class="shopping cart icon"></i> Panier </div>
@@ -32,7 +32,13 @@
           return {
               testPos: null
           }
-        }/*,
+        },
+        computed: {
+            site: function () {
+                return this.$store.getters.site
+            }
+        }
+        /*,
         mounted: function () {
             const that = this
             window.addEventListener('scroll', function () {

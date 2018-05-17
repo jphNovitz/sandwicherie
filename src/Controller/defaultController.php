@@ -16,11 +16,13 @@ class defaultController extends Controller {
     /**
      * @Route("/", name="default")
      */
-    public function index(FeaturedProducts $featured){
+    public function index(){
+        /*
        $featured_products = $featured->getFeatured();
        $lastProducts = $featured->getLast(3);
        $this->get('app.products')->featured =  $featured_products;
        $this->get('app.products')->last =  $lastProducts;
+        */
        return $this->render('index.html.twig');
 
     }

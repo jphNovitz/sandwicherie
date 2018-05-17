@@ -34,9 +34,14 @@ services:
     App\Twig\:
         resource: '../src/Twig'
         tags: ['twig.extension', '@service_container']
+
     App\EventListener\MailerExceptionListener:
             tags:
                 - { name: kernel.event_listener, event: kernel.exception }
+
+    App\EventListener\IndexListener:
+            tags:
+                - { name: kern, event: kernel.controller }
 
     App\Doctrine\:
             resource: '../src/Doctrine'
@@ -44,6 +49,10 @@ services:
             tags: ['doctrine.event_subscriber']
 
     app.products:
+            class: '\stdClass'
+            public: true
+
+    app.site:
             class: '\stdClass'
             public: true
 
