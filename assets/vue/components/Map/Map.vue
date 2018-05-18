@@ -84,7 +84,6 @@
                 if (navigator.geolocation) {
                     let that=this
                     navigator.geolocation.getCurrentPosition(function (position) {
-
                         marker.latitude = position.coords.latitude
                         marker.longitude = position.coords.longitude
 
