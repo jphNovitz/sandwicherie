@@ -6,3 +6,7 @@ acme_privacy:
     controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
     defaults:
         template: static/privacy.html.twig
+
+allergies:
+    resource: App\Controller\Api\Allergy\AllergyController
+    prefix:   /api/

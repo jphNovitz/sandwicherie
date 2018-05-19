@@ -7,12 +7,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AllergyRepository")
  * @Vich\Uploadable
+ *
+ * @Serializer\XmlRoot("Allergy")
+ * @Hateoas\Relation("self", href = "expr('/api/allergies/' ~ object.getSlug())")
  */
 class Allergy
 {

@@ -26,6 +26,7 @@
           }
         },
         mounted () {
+            this.$store.dispatch('call_allergies')
             this.$store.commit('SET_SITE', this.parsed.site)
         },
         computed: {
