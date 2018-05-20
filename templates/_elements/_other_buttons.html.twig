@@ -1,0 +1,12 @@
+{#
+    this block include two button to update form
+    * delete button
+    * list link button
+#}
+
+<a href="{{ path(entity~'_list') }}" class="ui blue button">
+    <i class="list icon"></i>
+</a>
+<a href="{{ path(entity~'_delete', {'slug': form.vars.value.slug}) }}" class="ui negative button">
+    <i class="trash icon"></i>
+</a>

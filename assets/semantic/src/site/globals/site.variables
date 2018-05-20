@@ -1,0 +1,8 @@
+/*******************************
+     User Global Variables
+*******************************/
+@headerFont        : 'Pacifico', 'cursive';
+@importGoogleFonts : true;
+@googleFontName    : 'Pacifico';
+@googleFontSizes   : '400,700,400italic,700italic';
+@googleFontFamily  : '@{googleFontName}:@{googleFontSizes}';
