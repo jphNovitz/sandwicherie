@@ -1,7 +1,7 @@
 <template>
 <div>
         <sui-list>
-                <sui-list-item v-for="product in products">{{product.name}}</sui-list-item>
+                <sui-list-item v-for="product in products">{{product.nam}}</sui-list-item>
         </sui-list>
 </div>
 </template>
