@@ -7,6 +7,8 @@
             content="Certains produits peuvent contenir des ingrédients provoquant des allergies alimentaires.  N'hésitez pas
 à demander une information."
    class="orange" />
+    
+
     <sui-list>
         <sui-list-item v-for="allergy in allergies">{{allergy.name}}</sui-list-item>
     </sui-list>

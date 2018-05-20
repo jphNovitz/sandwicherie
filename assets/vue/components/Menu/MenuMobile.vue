@@ -12,11 +12,14 @@
         </div>
         <div class="row menu-wrap"  v-bind:class="on ? 'menu-wrap-on' : ''" >
             <div class="ui fourteen wide column divided relaxed link list">
-                <div class="item">Accueil</div>
+                <div class="item"><router-link :to="{name: 'home'}">Accueil</router-link></div>
                 <div class="item">Produits</div>
-                <div class="item">Allergies</div>
                 <div class="item">Horaires</div>
-                <div class="item">Contact</div>
+                <div class="item"><router-link :to="{name: 'contact'}">Contact</router-link>
+                    <router-link :to="{ name: 'allergies'}" class="ui circular" >
+                        <sui-button circular icon="info" size="mini"/>
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>
@@ -28,6 +31,11 @@ export default {
     data () {
         return {
             on: false
+        }
+    },
+    watch:{
+        $route (to, from){
+            this.on = false;
         }
     },
     computed: {
