@@ -47,11 +47,13 @@ class AllergyController extends FOSRestController
      */
     public function getAllergies()
     {
-        $list = $this->customLoader->LoadAll('App:Allergy');
+        //$list = $this->customLoader->LoadAll('App:Allergy');
+        $list = $this->customLoader->CreateJsonResponse('App:Allergy');
         if (!$list) {
             $this->addFlash("notice", "Aucun allergie trouvé, ajoutez-en un ");
             return $this->redirectToRoute('allergies_add');
         }
+        /*
         $hateoas = HateoasBuilder::create()->build();
         $json = $hateoas->serialize($list,'json');
         $response = new Response($json, 200, array('application/json'));
@@ -60,5 +62,7 @@ class AllergyController extends FOSRestController
         $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
 
         return ($response);
+        */
+        return ($list);
     }
 }

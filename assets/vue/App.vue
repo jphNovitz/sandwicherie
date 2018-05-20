@@ -27,6 +27,7 @@
         },
         mounted () {
             this.$store.dispatch('call_allergies')
+            this.$store.dispatch('call_products')
             this.$store.commit('SET_SITE', this.parsed.site)
         },
         computed: {

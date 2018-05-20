@@ -6,11 +6,13 @@ Vue.use(Vuex)
 
 Vue.prototype.$http = axios
 
-const url = "http://localhost:8000/api/allergies"
+const url_allergies = "http://localhost:8000/api/allergies"
+const url_products = "http://localhost:8000/api/products"
 export const store = new Vuex.Store({
     state: {
         site: {},
-        allergies: []
+        allergies: [],
+        products: []
     },
     mutations: {
         SET_SITE(state, infos){
@@ -19,16 +21,25 @@ export const store = new Vuex.Store({
         SET_ALLERGIES(state, infos){
             state.allergies = infos
         },
+        SET_PRODUCTS(state, infos){
+            state.products = infos
+        },
 
     },
     getters: {
         site : state => state.site,
-        allergies : state => state.allergies
+        allergies : state => state.allergies,
+        products : state => state.products
     },
     actions: {
         call_allergies ({commit}){
-            axios.get(url).then((response) => {
+            axios.get(url_allergies).then((response) => {
                 commit('SET_ALLERGIES', response.data)
+            })
+        },
+        call_products ({commit}){
+            axios.get(url_products).then((response) => {
+                commit('SET_PRODUCTS', response.data)
             })
         }
     }
