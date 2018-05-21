@@ -69,8 +69,8 @@
 </script>
 <style scoped>
     #cta-wrapper{
-        width: 100vw;
-        height: calc(100vw/1.91);
+        width: 90vw;
+        height: calc(90vw/1.91);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

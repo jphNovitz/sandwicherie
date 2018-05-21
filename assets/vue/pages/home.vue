@@ -1,9 +1,9 @@
 <template>
 <div>
-    <section class="ui one column stackable center aligned grid">
+    <section class="ui middle aligned centered grid container">
         <call-to-action> </call-to-action>
     </section>
-    <section  class="ui stackable grid">
+   <!-- <section  class="ui stackable grid">
         <aside class="six wide column middle aligned">
             <p>
                     <span class="emph">
@@ -21,7 +21,7 @@
             </p>
         </aside>
         <Map class="ten wide column middle aligned" > </Map>
-    </section>
+    </section> -->
     <section class="ui middle aligned grid container">
         <Search-Product></Search-Product>
         <Suggestions> </Suggestions>
