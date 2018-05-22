@@ -1,7 +1,19 @@
-{%  extends 'base.html.twig' %}
+{%  extends '_bases/_security_base.html.twig' %}
 {% block toolbar %}
 {% endblock %}
 {% block body %}
 
-    <p>Surveillez votre boîte mail, si cet utilisateur a été trouvé un courrier électronic a été envoyé.</p>
+    <h1 class="ui icon header">
+        <img src="{{asset('/images/common/logo.png') }}" class="ui large image"  />
+        <div class="content">
+            <div class="sub header" style="background-color: white"> </div>
+        </div>
+    </h1>
+
+    <div class="ui message">
+        <div class="header">
+            Opération réussie
+        </div>
+    Surveillez votre boîte mail, si cet utilisateur a été trouvé un courrier électronic a été envoyé.
+    </div>
 {% endblock %}

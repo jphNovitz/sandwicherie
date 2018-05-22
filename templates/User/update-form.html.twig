@@ -1,59 +1,99 @@
-{%  extends 'base.html.twig' %}
+{% extends '_bases/_security_base.html.twig' %}
 {% block toolbar %}
 {% endblock %}
 {% block body %}
+    <h1 class="ui icon header">
+        <img src="{{asset('/images/common/logo.png') }}" class="ui large image"  />
+        <div class="content">
+            Profil utilisateur
+            <div class="sub header" style="background-color: white">
+            </div>
+        </div>
+    </h1>
     {% include '_elements/_flash_messages.html.twig' %}
-    {{ form_start(form) }}
-    <div class="form-row">
-    <label for="form.username" class="custom">Nom d'utilisateur</label>
-        {{ form_widget(form.username, {"attr": {"class": "custom"}}) }}
-        {{ form_errors(form.username) }}
+    {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
+    <div class="three fields">
+        <div class="field">
+            <label for="form.username" class="custom">Nom d'utilisateur</label>
+            {{ form_widget(form.username, {"attr": {"class": ""}}) }}
+            {% if form.username.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.username, {"attr": {"class": ""}}) }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="field">
+            <label for="form.email" class="custom">Email</label>
+            {{ form_widget(form.email, {"attr": {"class": ""}}) }}
+            {% if form.email.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.email, {"attr": {"class": ""}}) }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="field">
+            <label for="form.plainPassword" class="custom">Mot de passe</label>
+            {{ form_widget(form.plainPassword, {"attr": {"class": ""}}) }}
+            {% if form.plainPassword.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.plainPassword, {"attr": {"class": ""}}) }}
+                </div>
+            {% endif %}
+        </div>
     </div>
-    <div class="form-row">
-    <label for="form.email" class="custom">Email</label>
-        {{ form_widget(form.email, {"attr": {"class": "custom"}}) }}
-        {{ form_errors(form.email) }}
+    <div class="two fields">
+        <div class="field">
+            <label for="form.lastName" class="custom">Nom</label>
+            {{ form_widget(form.lastName, {"attr": {"class": ""}}) }}
+            {% if form.lastName.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.lastName, {"attr": {"class": ""}}) }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="field">
+            <label for="form.firstName" class="custom">Prénom</label>
+            {{ form_widget(form.firstName, {"attr": {"class": ""}}) }}
+            {% if form.firstName.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.firstName, {"attr": {"class": ""}}) }}
+                </div>
+            {% endif %}
+        </div>
     </div>
-
-    <div class="form-row">
-        <label for="form.plainPassword.first" class="custom">Mot de passe</label>
-        {{ form_widget(form.plainPassword.first, {"attr": {"class": "custom"}}) }}
-        {{ form_errors(form.plainPassword.first) }}
+    <div class="fields">
+        <div class="five wide field">
+            <label for="form.phone" class="custom">Téléphone</label>
+            {{ form_widget(form.phone, {"attr": {"class": ""}}) }}
+            {% if form.phone.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.phone, {"attr": {"class": ""}}) }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="ten wide field">
+            <label for="form.street" class="custom">Rue</label>
+            {{ form_widget(form.street, {"attr": {"class": ""}}) }}
+            {% if form.street.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.street, {"attr": {"class": ""}}) }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="one wide field">
+            <label for="form.streetNr" class="custom">N°</label>
+            {{ form_widget(form.streetNr, {"attr": {"class": ""}}) }}
+            {% if form.streetNr.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.streetNr, {"attr": {"class": ""}}) }}
+                </div>
+            {% endif %}
+        </div>
     </div>
-    <div class="form-row">
-        <label for="form.plainPassword.second" class="custom">Mot de passe (verification)</label>
-        {{ form_widget(form.plainPassword.second, {"attr": {"class": "custom"}}) }}
-        {{ form_errors(form.plainPassword.second) }}
-    </div>
-
-    <div class="form-row">
-    <label for="form.lastName" class="custom">Nom</label>
-        {{ form_widget(form.lastName, {"attr": {"class": "custom"}}) }}
-        {{ form_errors(form.lastName) }}
-    </div>
-    <div class="form-row">
-    <label for="form.firstName" class="custom">Prenom</label>
-        {{ form_widget(form.firstName, {"attr": {"class": "custom"}}) }}
-        {{ form_errors(form.firstName) }}
-    </div>
-    <div class="form-row">
-    <label for="form.phone" class="custom">Téléphone</label>
-        {{ form_widget(form.phone, {"attr": {"class": "custom"}}) }}
-        {{ form_errors(form.phone) }}
-    </div>
-    <div class="form-row">
-    <label for="form.street" class="custom">Rue</label>
-        {{ form_widget(form.street, {"attr": {"class": "custom"}}) }}
-        {{ form_errors(form.street) }}
-    </div>
-    <div class="form-row">
-    <label for="form.streetNr" class="custom">N°</label>
-        {{ form_widget(form.streetNr, {"attr": {"class": "custom"}}) }}
-        {{ form_errors(form.streetNr) }}
-    </div>
-
-    <div class="form-row">
-        <button type="submit">Go</button>
+    <div class="one wide column">
+        <button class="ui circular positive huge button">
+            Envoi
+        </button>
     </div>
     {{ form_end(form) }}
 {% endblock %}

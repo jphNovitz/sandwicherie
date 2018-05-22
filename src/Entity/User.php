@@ -22,7 +22,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=40, unique=true)
      * @Assert\NotBlank(message="Ce champs est obligatoire")
      * @Assert\Length(min="5", max="20", minMessage="Username au moins cinq caractères", maxMessage="trop looongs")
      */
@@ -40,7 +40,9 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @ORM\Column(type="string", length=60, unique=true, nullable=false)
+     * @Assert\NotNull(message="Ce champs est obligatoire")
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      * @Assert\Email(message="Cet email ne semble pas valide")
      */
     private $email;
@@ -394,6 +396,9 @@ class User implements UserInterface
         $this->tries = $tries;
         if ($this->tries >= 3) $this->setIsActive(false);
     }
+
+
+
 
 
 

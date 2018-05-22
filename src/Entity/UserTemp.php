@@ -21,7 +21,7 @@ class UserTemp implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=45, unique=true)
      * @Assert\NotBlank(message="Ce champs est obligatoire")
      * @Assert\Length(min="5", max="20", minMessage="Username au moins cinq caractères", maxMessage="trop looongs")
      */
@@ -39,7 +39,8 @@ class UserTemp implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @ORM\Column(type="string", length=60, unique=true, nullable=false)
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      * @Assert\Email(message="Cet email ne semble pas valide")
      */
     private $email;

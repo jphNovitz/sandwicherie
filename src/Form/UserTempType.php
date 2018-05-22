@@ -18,12 +18,12 @@ class UserTempType extends AbstractType
         $builder
             ->add('email', EmailType::class)
             ->add('username', TextType::class)
-            ->add('plainPassword', RepeatedType::class,[
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => 'Les deux mots de passes ne correspondent pas',
-                'options' => ['attr' => array('class' => 'password-field')],
-                'required' => true
-            ])
+                'invalid_message' => 'Les mots passe ne correspondent pas',
+                'first_options' => array('label' => 'Mot de Passe',
+                    'error_bubbling' => true),
+                'second_options' => array('label' => 'Verification'),])
         ;
     }
 

@@ -72,14 +72,14 @@ class SecurityController extends Controller {
      * @Route("/confirmation/{uniqId}", name="confirmation")
      */
     public function confirmation(Request $request,
-                                 UserTemp $user,
+                                 UserTemp $user=null,
                                  UserValidation $userValidation,
                                  CustomPersister $persister,
                                  DeleteObject $deleter)
     {
         if (!$user) {
             $this->addFlash("error", "utilisateur inconnu");
-            $this->redirectToRoute('register');
+            return $this->redirectToRoute('register');
         }
         $test = new User();
         $form = $this->createForm(UserType::class, $test);
@@ -120,30 +120,22 @@ class SecurityController extends Controller {
      * @Route("/recover", name="recover_pwd_recover")
      */
     public function recover(Request $request){
-
         $recover = new Recover();
         $form = $this->createForm(RecoverType::class,$recover);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()):
-            if ($lost_user = $this->get('doctrine.orm.entity_manager')
-                ->getRepository('App:User')
-                ->findOneBy(['email'=>$form['email']->getData()])) {
+            $recover->setEmail($form['email']->getData())  ;
+            $this->persister->insert($recover);
+
                 $this->confirmationSender->send(
                     $this->getParameter('email_from'),
-                    $lost_user->getEmail(),
+                    $recover->getEmail(),
                     'Mot de passe perdu',
                     'Security/emails/recover-demand.html.twig',
                     $recover->getUniqId());
                 $this->persister->insert($recover);
                 $this->addFlash("info", "Vous allez revevoir un email");
                 return $this->render('Security/emails/recover-message.html.twig');
-
-            }
-
-            return $this->redirectToRoute('default');
-
-
         endif;
 
         return $this->render('Security/recover.html.twig', ['form'=>$form->createView()]);
@@ -158,9 +150,6 @@ class SecurityController extends Controller {
 
         $user = $this->get('doctrine.orm.entity_manager')->getRepository('App:User')
         ->findOneBy(['email'=>$recover->getEmail()]);
-
-        //
-
 
         $reset = ['message'=>'entrez votre nouveau mot de passe'];
         $form = $this->createForm(ResetType::class, $reset);

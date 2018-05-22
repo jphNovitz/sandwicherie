@@ -1,15 +1,32 @@
-{%  extends 'base.html.twig' %}
-{% block toolbar %}
-{% endblock %}
-{% block body %}
+{%  extends '_bases/_security_base.html.twig' %}
 
+{% block body %}
+    <h1 class="ui icon header">
+        <img src="{{asset('/images/common/logo.png') }}" class="ui large image"  />
+        <div class="content">
+            Recupération mot de passe
+            <div class="sub header" style="background-color: white"></div>
+        </div>
+    </h1>
 
 <p>Vous avez perdu votre mot de passe
 <br /> Entrez votre adresse email</p>
 
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-    {{ form_rest(form) }}
-    <button type="button">Demander</button>
+    {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
+    <div class="field">
+        <label for="form.email" class="custom">Email</label>
+        {{ form_widget(form.email, {"attr": {"class": ""}}) }}
+        {% if form.email.vars.errors|length %}
+            <div class="ui pointing red basic label">
+                {{ form_errors(form.email, {"attr": {"class": ""}}) }}
+            </div>
+        {% endif %}
+
+    </div>
+    <div class="one wide column">
+        <button class="ui circular positive large button">
+            Envoi
+        </button>
+    </div>
     {{ form_end(form) }}
 {% endblock %}

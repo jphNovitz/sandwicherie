@@ -1,39 +1,51 @@
-{%  extends '_bases/_security_base.html.twig' %}
+{% extends '_bases/_security_base.html.twig' %}
 {% block toolbar %}
 {% endblock %}
 {% block body %}
-
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    <div class="field" >
-        <label for="username"  class="custom">Nom d'utilisateur:</label>
-        <input type="text" id="username" name="_username"  />
-    </div>
-    <div class="field" >
+    <h1 class="ui header"> La Clémentine .::. Enregistrement </h1>
+    {% include '_elements/_flash_messages.html.twig' %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'ui form'}}) }}
+    <div class="two fields">
+        <div class="field">
             <label for="form.username" class="custom">Nom d'utilisateur</label>
             {{ form_widget(form.username, {"attr": {"class": ""}}) }}
+            {% if form.username.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.username, {"attr": {"class": ""}}) }}
+                </div>
+            {% endif %}
         </div>
-    <div class="ui red message">{{ form_errors(form.username, {"attr": {"class": "ui red message"}}) }}</div>
-        <div class="form-row">
+        <div class="field">
             <label for="form.email" class="custom">Email</label>
-            {{ form_widget(form.email, {"attr": {"class": "custom"}}) }}
-            {{ form_errors(form.email) }}
+            {{ form_widget(form.email, {"attr": {"class": ""}}) }}
+            {% if form.email.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.email, {"attr": {"class": ""}}) }}
+                </div>
+            {% endif %}
         </div>
-        <div class="form-row">
-            <label for="form.plainPassword.first" class="custom">Mot de passe</label>
-            {{ form_widget(form.plainPassword.first, {"attr": {"class": "custom"}}) }}
-            {{ form_errors(form.plainPassword.first) }}
-        </div>
-        <div class="form-row">
-            <label for="form.plainPassword.second" class="custom">Mot de passe (verification)</label>
-            {{ form_widget(form.plainPassword.second, {"attr": {"class": "custom"}}) }}
-            {{ form_errors(form.plainPassword.second) }}
-        </div>
-
-        <div class="form-row">
-            <button type="submit">Go</button>
-        </div>
-        {{ form_end(form) }}
     </div>
-</div>
+    <div class="two fields">
+        <div class="field">
+            <label for="form.plainPassword.first" class="custom">Mot de passe</label>
+            {{ form_widget(form.plainPassword.first, {"attr": {"class": ""}}) }}
+        </div>
+        <div class="field">
+            <label for="form.email" class="custom">Verification</label>
+            {{ form_widget(form.plainPassword.second, {"attr": {"class": ""}}) }}
+            {% if form.plainPassword.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.plainPassword, {"attr": {"class": ""}}) }}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="form-row">
+        <button class=" ui positive button" type="submit">Envoi</button>
+    </div>
+    {{ form_end(form) }}
+    </div>
+    </div>
 
 {% endblock %}
