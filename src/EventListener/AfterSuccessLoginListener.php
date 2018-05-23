@@ -55,6 +55,7 @@ class AfterSuccessLoginListener implements AuthenticationSuccessHandlerInterface
                 return new RedirectResponse($this->router->generate('register'));
             endif;
         }
+
         return new RedirectResponse($this->router->generate('admin_default'));
 
     }

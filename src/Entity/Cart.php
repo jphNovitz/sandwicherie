@@ -63,7 +63,7 @@ class Cart
     /**
      * @return datetime
      */
-    public function getCreated(): datetime
+    public function getCreated(): \datetime
     {
         return $this->created;
     }
@@ -71,7 +71,7 @@ class Cart
     /**
      * @param datetime $created
      */
-    public function setCreated(datetime $created): void
+    public function setCreated(\datetime $created): void
     {
         $this->created = $created;
     }
@@ -79,7 +79,7 @@ class Cart
     /**
      * @return datetime
      */
-    public function getUpdated(): datetime
+    public function getUpdated(): \datetime
     {
         return $this->updated;
     }
@@ -87,7 +87,7 @@ class Cart
     /**
      * @param datetime $updated
      */
-    public function setUpdated(datetime $updated): void
+    public function setUpdated(\datetime $updated): void
     {
         $this->updated = $updated;
     }

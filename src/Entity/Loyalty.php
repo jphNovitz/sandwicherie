@@ -18,14 +18,14 @@ class Loyalty
     private $id;
 
     /**
-     * @var datetime $created
+     * @var \datetime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $created;
     /**
-     * @var datetime $created
+     * @var \datetime $created
      *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
@@ -33,7 +33,7 @@ class Loyalty
     private $updated;
 
     /**
-     * @var  datetime $date
+     * @var  \datetime $date
      * @ORM\Column(type="date", nullable=false)
      */
     private $date;
@@ -75,17 +75,17 @@ class Loyalty
     }
 
     /**
-     * @return datetime
+     * @return \datetime
      */
-    public function getDate(): datetime
+    public function getDate(): \datetime
     {
         return $this->date;
     }
 
     /**
-     * @param datetime $date
+     * @param \datetime $date
      */
-    public function setDate(datetime $date): void
+    public function setDate(\datetime $date): void
     {
         $this->date = $date;
     }
