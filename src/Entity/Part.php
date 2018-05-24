@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\PartRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"part" = "Part", "item" = "Item", "line" = "Line"})
+ * @ORM\DiscriminatorMap({"part" = "Part", "item" = "Item"})
  */
 class Part
 {

@@ -80,13 +80,6 @@ class User implements UserInterface
      private $phone;
 
     /**
-     * @var Loyalty $loyalty
-     * @ORM\OneToOne(targetEntity="App\Entity\Loyalty", mappedBy="customer")
-     */
-     private $loyalty;
-
-
-    /**
      * @var ArrayCollection
      * @ORM\Column(name="roles", type="array")
      */
@@ -259,23 +252,7 @@ class User implements UserInterface
     {
         $this->city = $city;
     }
-
-    /**
-     * @return Loyalty
-     */
-    public function getLoyalty(): Loyalty
-    {
-        return $this->loyalty;
-    }
-
-    /**
-     * @param Loyalty $loyalty
-     */
-    public function setLoyalty(Loyalty $loyalty): void
-    {
-        $this->loyalty = $loyalty;
-    }
-
+    
     /**
      * @return mixed
      */

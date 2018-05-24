@@ -25,7 +25,6 @@ class AdminController extends Controller {
         $products = $loader->LoadAll('App:Product');
         $types = $loader->LoadAll('App:Type');
         $providers = $loader->LoadAll('App:Product');
-        $inputs = $loader->LoadAll('App:Input');
 
         return $this->render('Admin/index.html.twig', [
             'ingredients'=>$ingredients,
@@ -33,8 +32,7 @@ class AdminController extends Controller {
             'allergies' => $allergies,
             'products' => $products,
             'types' => $types,
-            'providers' => $providers,
-            'inputs' => $inputs,
+            'providers' => $providers
         ]);
 
     }
