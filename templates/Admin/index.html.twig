@@ -3,55 +3,54 @@
 {%  block body %}
     {% include '_elements/_flash_messages.html.twig' %}
     <h1>Admininistration</h1>
-    <div class="square-group">
-    <div class="square-group-item">
-        <a href="{{ path('ingredients_list') }}">
-            <i class="material-icons">input</i>
-            <span class="link-name">Entrées</span>
-        </a>
+    <div class="ui three stackable cards">
+    <div class="card">
+        <h2 class="ui header">
+            <i class="puzzle piece icon"></i>
+            <div class="content">
+                <a href="{{ path('ingredients_list') }}">
+                Ingrédients
+                </a>
+            </div>
+        </h2>
+
         {% include '_elements/_loop_entity_list.html.twig' with {'objects': ingredients} %}
     </div>
-        <div class="square-group-item">
+        <div class="card">
             <a href="{{ path('categories_list') }}">
                 <i class="material-icons">local_offer</i>
                 <span class="link-name">Categorie</span>
             </a>
             {%  include '_elements/_loop_entity_list.html.twig' with {'objects': categories} %}
         </div>
-        <div class="square-group-item">
+        <div class="card">
             <a href="{{ path('products_list') }}">
                 <i class="material-icons">restaurant</i>
                 <span class="link-name">Products</span>
             </a>
             {% include '_elements/_loop_entity_list.html.twig' with {'objects': products} %}
         </div>
-        <div class="square-group-item">
+        <div class="card">
             <a href="{{ path('types_list') }}">
                 <i class="material-icons">event_note</i>
                 <span class="link-name">Types</span>
             </a>
             {% include '_elements/_loop_entity_list.html.twig' with {'objects': types} %}
         </div>
-        <div class="square-group-item">
+        <div class="card">
             <a href="{{ path('providers_list') }}">
                 <i class="material-icons">store_mall_directory</i>
                 <span class="link-name">Fournisseurs</span>
             </a>
             {% include '_elements/_loop_entity_list.html.twig' with {'objects': providers} %}
         </div>
-        <div class="square-group-item">
+        <div class="card">
             <a href="{{ path('allergies_list') }}">
                 <i class="material-icons">assignment_late</i>
                 <span class="link-name">Allergies</span>
             </a>
             {%  include '_elements/_loop_entity_list.html.twig' with {'objects': allergies} %}
         </div>
-        <div class="square-group-item">
-            <a href="{{ path('inputs_list') }}">
-                <i class="material-icons">input</i>
-                <span class="link-name">Entrées</span>
-            </a>
-            {% include '_elements/_loop_entity_list.html.twig' with {'objects': inputs} %}
-        </div>
+    <div>
     <div>
 {% endblock %}
