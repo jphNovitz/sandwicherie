@@ -14,7 +14,10 @@ export const store = new Vuex.Store({
         site: {},
         allergies: [],
         categories: [],
-        products: []
+        products: [],
+        cart: {
+            'items': []
+        }
     },
     mutations: {
         SET_SITE(state, infos){
@@ -29,7 +32,17 @@ export const store = new Vuex.Store({
         SET_PRODUCTS(state, infos){
             state.products = infos
         },
+        ADD_PRODUCT_CART(state, p) {
+            
+                let qty = 1
 
+            let line = {
+                'qty': qty,
+                'product': p
+            }
+
+            state.cart.items.push(line)
+        }
     },
     getters: {
         site : state => state.site,
@@ -52,6 +65,10 @@ export const store = new Vuex.Store({
             axios.get(url_products).then((response) => {
                 commit('SET_PRODUCTS', response.data)
             })
+        },
+        add_cart (context, payload){
+console.log(payload)
+            this.commit('ADD_PRODUCT_CART', payload.item)
         }
     }
 })

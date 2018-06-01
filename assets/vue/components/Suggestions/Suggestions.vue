@@ -13,7 +13,7 @@
                 </sui-card-content>
                 <sui-card-content extra>
 
-                    <sui-button animated="vertical" color="orange">
+                    <sui-button animated="vertical" color="orange" @click="add_cart(suggestion)">
                         <sui-button-content hidden>ajouter</sui-button-content>
                         <sui-button-content visible>
                             <sui-icon name="cart plus icon" />
@@ -32,13 +32,13 @@
                         </sui-button-content>
                     </sui-button>
 
-                    </sui-card-content extra>
+                    </sui-card-content >
             </sui-card>
         </sui-card-group>
 
 
 
-    </article class="row">
+    </article>
 </template>
 <script>
 
@@ -58,6 +58,9 @@ export default {
         return_name: function (elm) {
              let imageName = elm.images[0].imageName
             return "/images/products/" + imageName
+        },
+        add_cart: function (p) {
+            this.$store.dispatch('add_cart', {'item': p})
         }
     }
 }
