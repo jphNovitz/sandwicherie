@@ -33,7 +33,14 @@ export const store = new Vuex.Store({
             state.products = infos
         },
         ADD_PRODUCT_CART(state, p) {
-            
+            let flag = false
+            state.cart.items.map(c => {
+                if (c.product.slug ===p.slug){
+                    c.qty ++
+                    flag = true
+                }
+            })
+            if (!flag){
                 let qty = 1
 
             let line = {
@@ -42,13 +49,15 @@ export const store = new Vuex.Store({
             }
 
             state.cart.items.push(line)
+            }
         }
     },
     getters: {
         site : state => state.site,
         allergies : state => state.allergies,
         categories : state => state.categories,
-        products : state => state.products
+        products : state => state.products,
+        cart: state => state.cart
     },
     actions: {
         call_allergies ({commit}){
@@ -67,7 +76,6 @@ export const store = new Vuex.Store({
             })
         },
         add_cart (context, payload){
-console.log(payload)
             this.commit('ADD_PRODUCT_CART', payload.item)
         }
     }
