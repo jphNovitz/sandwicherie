@@ -25,6 +25,7 @@ class Cart
      * @ORM\Column(type="datetime")
      */
     private $created;
+
     /**
      * @var datetime $created
      *
@@ -35,15 +36,22 @@ class Cart
 
     /**
      * @var ArrayCollection $items
-     * @ORM\ManyToMany(targetEntity="App\Entity\Item", mappedBy="cart")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Item", cascade={"persist", "remove"})
      */
     private $items;
 
     /**
      * @var string $user
-     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="cart_client", referencedColumnName="id")
      */
     private $client;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
+
     /**
      * @return mixed
      */
@@ -106,7 +114,6 @@ class Cart
     public function addItem($item)
     {
         $this->items->add($item);
-        $item->setCart($this);
     }
 
     /**
@@ -115,7 +122,6 @@ class Cart
     public function removeItem($item)
     {
         $this->items->removeElement($item);
-        $item->setCart(null);
     }
 
     /**
@@ -129,7 +135,7 @@ class Cart
     /**
      * @param string $client
      */
-    public function setClient(string $client): void
+    public function setClient(User $client): void
     {
         $this->client = $client;
     }

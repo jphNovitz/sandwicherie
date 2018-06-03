@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,24 +19,25 @@ class Item extends Part
     private $id;
 
     /**
-     * @var Product
+     * @var integer
      *
+     * @ORM\Column(type="integer", length=2, nullable=false)
+     */
+    private $qty;
+
+    /**
+     * @var Product
      * @ORM\OneToOne(targetEntity="App\Entity\Product", cascade={"persist"})
      *
      */
     private $product;
 
+
+
     public function __construct()
     {
-        $this->cart = new ArrayCollection();
+        $this->qty=1;
     }
-
-    /**
-     *
-     * @var ArrayCollection $cart
-     * @ORM\ManyToMany(targetEntity="App\Entity\Cart", inversedBy="items")
-     */
-    private $cart;
 
     /**
      * @return mixed
@@ -70,31 +72,19 @@ class Item extends Part
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getCart(): string
+    public function getQty(): int
     {
-        return $this->cart;
+        return $this->qty;
     }
 
     /**
-     * @param mixed $cart
+     * @param int $qty
      */
-    public function addCart($cart)
+    public function setQty(int $qty): void
     {
-        $this->cart->add($cart);
-        // uncomment if you want to update other side
-        //$cart->setItem($this);
-    }
-
-    /**
-     * @param mixed $cart
-     */
-    public function removeCart($cart)
-    {
-        $this->cart->removeElement($cart);
-        // uncomment if you want to update other side
-        //$cart->setItem(null);
+        $this->qty = $qty;
     }
 
 
