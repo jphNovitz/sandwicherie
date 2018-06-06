@@ -11,6 +11,7 @@ const url_categories = "http://localhost:8000/api/categories"
 const url_products = "http://localhost:8000/api/products"
 export const store = new Vuex.Store({
     state: {
+        post_cart: 'http://localhost:8000/api/cart',
         site: {},
         allergies: [],
         categories: [],
@@ -53,6 +54,8 @@ export const store = new Vuex.Store({
         }
     },
     getters: {
+        post_cart: state => state.post_cart,
+        lenght_cart: state => state.cart.items.length,
         site : state => state.site,
         allergies : state => state.allergies,
         categories : state => state.categories,

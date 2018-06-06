@@ -3,6 +3,8 @@
         <top> </top>
         <page-header> </page-header>
         <div class="ui container">
+
+
             <router-view> </router-view>
         </div>
     </div>
@@ -22,11 +24,13 @@
         },
         data () {
           return {
-              site: ''
+              site: '',
+              isConnected: false,
           }
         },
         mounted () {
             this.$store.dispatch('call_allergies')
+            this.$store.dispatch('call_categories')
             this.$store.dispatch('call_products')
             this.$store.commit('SET_SITE', this.parsed.site)
         },
@@ -36,8 +40,30 @@
                 return JSON.parse(raw)
 
             }
+        }/*,
+        sockets: {
+            connect() {
+                // Fired when the socket connects.
+                this.isConnected = true;
+            },
+
+            disconnect() {
+                this.isConnected = false;
+            },
+
+            // Fired when the server sends something on the "messageChannel" channel.
+            messageChannel(data) {
+                this.socketMessage = data
+            }
         },
-        methods: {}
+
+        methods: {
+            pingServer() {
+                // Send the "pingServer" event to the server.
+                this.$socket.emit('pingServer', 'PING!')
+            }
+        }*/
+
     }
 </script>
 
