@@ -4,7 +4,7 @@
             <div class="three wide column">  <img src="./logo.png"  class="ui tiny image"/></div>
             <div class=" thirteen wide column  ui medium celled horizontal list right aligned">
                 <div class="item"><router-link :to="{name: 'home'}">Accueil</router-link></div>
-                <div class="item">Produits</div>
+                <div class="item"><router-link :to="{name: 'menu'}">Produits</router-link></div>
                 <div class="item">Horaires</div>
                 <div class="item"><router-link :to="{name: 'contact'}">Contact</router-link></div>
                 <router-link :to="{ name: 'allergies'}" class="ui circular" >

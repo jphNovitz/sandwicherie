@@ -12,7 +12,14 @@
                             <a href="mailto:info@laclementine.be"> {{site.email}} </a>
                         </div>
                         <div class="item">
-                            <i class="shopping cart icon"></i> Panier </div>
+                            <router-link :to="{name: 'cart'}">
+                            <i class="shopping cart icon"></i> Panier
+                            </router-link>
+                                <span class="ui circular mini label" style="color: #000">
+                                    {{cart_lenght}}
+                                </span>
+
+                        </div>
                         <div class="item">
                             <i class="user icon"></i> Mon compte </div>
                     </div>
@@ -36,6 +43,9 @@
         computed: {
             site: function () {
                 return this.$store.getters.site
+            },
+            cart_lenght: function () {
+                return this.$store.getters.cart.items.length
             }
         }
         /*,
