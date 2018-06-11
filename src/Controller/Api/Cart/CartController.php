@@ -61,7 +61,7 @@ class CartController extends FOSRestController
         if ($this->customPersister->insert($cart)){
             $result=$cart;
             $status = 200;
-            $this->notifier->notify('notification', ['commande'=>$cart]);
+            //$this->notifier->notify('notification', ['commande'=>$cart]);
         } else {
             $result = ['message'=>'erreur serveur'];
             $status = 500;
@@ -69,6 +69,7 @@ class CartController extends FOSRestController
 
         $hateoas = HateoasBuilder::create()->build();
         $json = $hateoas->serialize($result, 'json');
+        $this->notifier->notify('notification', ['commande'=>$json]);
         $response = new Response($json, $status, array('application/json'));
         $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
         $response->headers->set('Access-Control-Allow-Origin', '*');
