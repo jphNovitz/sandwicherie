@@ -98,11 +98,23 @@ class User implements UserInterface, EquatableInterface
      */
     private $isActive;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="likedBy")
+     * @ORM\JoinTable(name="products_likes")
+     */
+    private $likes;
+
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->roles = ["ROLE_USER"];
         $this->setIsActive(false);
         $this->setTries(0);
+        $this->likes = new ArrayCollection();
     }
 
     /**
@@ -393,7 +405,36 @@ class User implements UserInterface, EquatableInterface
         // TODO: Implement isEqualTo() method.
     }
 
-   public function __toString()
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes(): ArrayCollection
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param mixed $like
+     */
+    public function addLike($like)
+    {
+        $this->likes->add($like);
+        // uncomment if you want to update other side
+        //$like->setUser($this);
+    }
+
+    /**
+     * @param mixed $like
+     */
+    public function removeLike($like)
+    {
+        $this->likes->removeElement($like);
+        // uncomment if you want to update other side
+        //$like->setUser(null);
+    }
+
+
+    public function __toString()
    {
        return $this->getUsername();
    }

@@ -113,6 +113,17 @@ class Product
      */
     private $images;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="likes")
+     */
+    private $likedBy;
+
+    /**
+     * Product constructor.
+     */
+
    public function __construct()
    {
        $this->ingredients = new ArrayCollection();
@@ -123,6 +134,7 @@ class Product
        $this->images = new ArrayCollection();
        $this->isActive = true;
        $this->featured = false;
+       $this->likedBy = new ArrayCollection();
    }
 
     /**
@@ -402,6 +414,32 @@ class Product
         $this->images->removeElement($image);
         // uncomment if you want to update other side
         //$image->setProduct(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikedBy(): ArrayCollection
+    {
+        return $this->likedBy;
+    }
+
+    /**
+     * @param mixed $likedBy
+     */
+    public function addLikedBy($likedBy)
+    {
+        $this->likedBy->add($likedBy);
+        $likedBy->setProduct($this);
+    }
+
+    /**
+     * @param mixed $likedBy
+     */
+    public function removeLikedBy($likedBy)
+    {
+        $this->likedBy->removeElement($likedBy);
+        $likedBy->setProduct(null);
     }
 
 

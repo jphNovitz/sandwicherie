@@ -25,7 +25,8 @@
                             <sui-icon name="zoom in icon" />
                         </sui-button-content>
                     </sui-button> -->
-                <sui-button animated="vertical" color="pink">
+            <sui-button color="red" content="Two" basic v-if="likes(suggestion.liked_by)"/>
+                <sui-button animated="vertical" color="pink" v-if="!likes(suggestion.liked_by)">
                         <sui-button-content hidden>j'aime</sui-button-content>
                         <sui-button-content visible>
                             <sui-icon name="like icon" />
@@ -61,6 +62,16 @@ export default {
         },
         add_cart: function (p) {
             this.$store.dispatch('add_cart', {'item': p})
+        },
+        likes: function (likes) {
+            // this must be changed
+
+            let userID = 1;
+            if (typeof(likes) === 'undefined' || (likes.indexOf(userID) === -1 )){
+               return false;
+            } else {
+                return likes.length;
+            }
         }
     }
 }
