@@ -29,7 +29,8 @@ class ProductRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->leftJoin('p.images', 'images')
-            ->addSelect('p, images')
+            ->leftJoin('p.likedBy', 'l')
+            ->addSelect('p, images, l')
             ->where('p.featured = :value')
             ->setParameter('value', true)
             ->getQuery()
@@ -40,7 +41,8 @@ class ProductRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->leftJoin('p.images', 'images')
-            ->addSelect('p, images')
+            ->leftJoin('p.likedBy', 'l')
+            ->addSelect('p, images, partial l.{id}')
             ->setMaxResults($n)
             ->getQuery()
            ->getArrayResult()

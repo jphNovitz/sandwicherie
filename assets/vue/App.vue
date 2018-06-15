@@ -29,6 +29,8 @@
           }
         },
         mounted () {
+            let raw = document.getElementById('products').dataset.vars
+            this.$store.commit('SET_SUGGESTIONS', JSON.parse(raw).last)
             this.$store.dispatch('call_allergies')
             this.$store.dispatch('call_categories')
             this.$store.dispatch('call_products')

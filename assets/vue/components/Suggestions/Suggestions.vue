@@ -25,14 +25,16 @@
                             <sui-icon name="zoom in icon" />
                         </sui-button-content>
                     </sui-button> -->
-            <sui-button color="red" content="Two" basic v-if="likes(suggestion.liked_by)"/>
+                    <sui-button color="grey" content="j'aime" basic v-if="!likes(suggestion)" @click="likeAction(suggestion)" />
+                    <sui-button color="pink" content="j'aime"  v-if="likes(suggestion)" @click="likeAction(suggestion)" />
+         <!--   <sui-button color="red" content="Two" basic v-if="likes(suggestion.liked_by)"/>
                 <sui-button animated="vertical" color="pink" v-if="!likes(suggestion.liked_by)">
                         <sui-button-content hidden>j'aime</sui-button-content>
                         <sui-button-content visible>
                             <sui-icon name="like icon" />
                         </sui-button-content>
                     </sui-button>
-
+-->
                     </sui-card-content >
             </sui-card>
         </sui-card-group>
@@ -43,16 +45,18 @@
 </template>
 <script>
 
+    import axios from 'axios'
+
 export default {
     name: 'Suggestions',
     data () {
         return{
+            base_api: 'http://localhost:8000/api/'
         }
     },
     computed: {
        suggestions: function () {
-            let raw = document.getElementById('products').dataset.vars
-            return JSON.parse(raw).last
+            return this.$store.getters.suggestions
         }
     },
     methods: {
@@ -63,15 +67,20 @@ export default {
         add_cart: function (p) {
             this.$store.dispatch('add_cart', {'item': p})
         },
-        likes: function (likes) {
+        likes: function (s) {
             // this must be changed
-
             let userID = 1;
-            if (typeof(likes) === 'undefined' || (likes.indexOf(userID) === -1 )){
-               return false;
-            } else {
-                return likes.length;
-            }
+            return s.likedBy.filter(like => {
+                return like.id === userID
+            }).length
+        },
+        likeAction: function (p) {
+            let userID = 1;
+            let slug='totolehero'  // this MUST BE CHANGED
+            axios.patch(this.base_api+'products/'+p.slug+'/like/'+slug).then((response) => {
+                let obj = this.suggestions.filter(p=> p.slug === slug)
+                this.$store.dispatch('call_products')
+            })
         }
     }
 }

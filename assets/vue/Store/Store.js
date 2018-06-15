@@ -16,6 +16,7 @@ export const store = new Vuex.Store({
         allergies: [],
         categories: [],
         products: [],
+        suggestions: [],
         cart: {
             'items': []
         }
@@ -32,6 +33,9 @@ export const store = new Vuex.Store({
         },
         SET_PRODUCTS(state, infos){
             state.products = infos
+        },
+        SET_SUGGESTIONS(state, infos){
+            state.suggestions = infos
         },
         ADD_PRODUCT_CART(state, p) {
             let flag = false
@@ -60,6 +64,7 @@ export const store = new Vuex.Store({
         allergies : state => state.allergies,
         categories : state => state.categories,
         products : state => state.products,
+        suggestions : state => state.suggestions,
         cart: state => state.cart
     },
     actions: {
@@ -81,5 +86,6 @@ export const store = new Vuex.Store({
         add_cart (context, payload){
             this.commit('ADD_PRODUCT_CART', payload.item)
         }
+
     }
 })

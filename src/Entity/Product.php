@@ -419,7 +419,7 @@ class Product
     /**
      * @return ArrayCollection
      */
-    public function getLikedBy(): ArrayCollection
+    public function getLikedBy(): ?Collection
     {
         return $this->likedBy;
     }
@@ -430,7 +430,7 @@ class Product
     public function addLikedBy($likedBy)
     {
         $this->likedBy->add($likedBy);
-        $likedBy->setProduct($this);
+        $likedBy->addLike($this);
     }
 
     /**
@@ -439,7 +439,7 @@ class Product
     public function removeLikedBy($likedBy)
     {
         $this->likedBy->removeElement($likedBy);
-        $likedBy->setProduct(null);
+        $likedBy->removeLike($this);
     }
 
 
