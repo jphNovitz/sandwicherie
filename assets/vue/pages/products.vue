@@ -1,28 +1,37 @@
 <template>
 <div>
        <sui-card-group :items-per-row="3">
-           <sui-card v-for="product in products">
+           <card-product v-for="product in products"
+                         :product="product" :group="'products'">
+
+           </card-product>
+          <!-- <sui-card v-for="product in products">
                <sui-image :src="return_name(product)"/>
                <sui-card-content>
                    <sui-card-header>{{product.name}}</sui-card-header>
-                   <sui-card-meta>Friends</sui-card-meta>
+                   <sui-card-meta>{{product.type}}</sui-card-meta>
                    <sui-card-description>
-                       Matthew is an interior designer living in New York.
+                       {{product.description}}
                    </sui-card-description>
                </sui-card-content>
                <sui-card-content extra>
                    <sui-icon name="user" /> 75 Friends
                    <span slot="right">Joined in 2013</span>
                </sui-card-content>
-           </sui-card>
+           </sui-card>-->
        </sui-card-group>
 </div>
 </template>
 
 <script>
+
+    import  cardProduct from '../components/Cards/CardProduct';
+
     export default {
         name: 'products',
-        components: { },
+        components: {
+            'card-product': cardProduct
+        },
         data(){
             return {}
         },

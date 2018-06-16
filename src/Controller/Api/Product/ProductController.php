@@ -31,6 +31,7 @@ class ProductController extends FOSRestController{
         return  $this->customLoader->CreateJsonResponse('App:Product');
     }
 
+
     /**
      * @Patch("products/{slug}/like/{user}", name="like_products")
      */
