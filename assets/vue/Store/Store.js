@@ -36,7 +36,7 @@ export const store = new Vuex.Store({
         },
         SET_SUGGESTIONS(state, infos){
             state.suggestions = infos
-        },
+        },/*
         ADD_PRODUCT_CART(state, p) {
             let flag = false
             state.cart.items.map(c => {
@@ -55,11 +55,30 @@ export const store = new Vuex.Store({
 
             state.cart.items.push(line)
             }
+        },*/
+        UPDATE_PRODUCT_CART(state, datasObj) {
+            /*console.log(datasObj)*/
+
+                let found = state.cart.items.findIndex(line => {
+                    return (line.item.slug === datasObj.item.slug)
+                })
+
+                if(found === -1){
+                   state.cart.items.push(datasObj)
+                }else {
+                    Object.assign(state.cart.items[found], datasObj)
+                }
+
         }
     },
     getters: {
         post_cart: state => state.post_cart,
-        lenght_cart: state => state.cart.items.length,
+        length_cart: state => {
+            let total = state.cart.items.reduce(function(prev, current) {
+                return prev + current.qty ;
+            }, 0 )
+            return total;
+        },
         site : state => state.site,
         allergies : state => state.allergies,
         categories : state => state.categories,
@@ -85,6 +104,10 @@ export const store = new Vuex.Store({
         },
         add_cart (context, payload){
             this.commit('ADD_PRODUCT_CART', payload.item)
+        },
+        update_cart (context, payload){
+
+            this.commit('UPDATE_PRODUCT_CART', {'item': payload.item, 'qty': payload.qty})
         }
 
     }

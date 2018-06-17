@@ -16,7 +16,7 @@
                             <i class="shopping cart icon"></i> Panier
                             </router-link>
                                 <span class="ui circular mini label" style="color: #000">
-                                    {{cart_lenght}}
+                                    {{cart_length}}
                                 </span>
 
                         </div>
@@ -40,12 +40,14 @@
               testPos: null
           }
         },
+        watch: {
+        },
         computed: {
             site: function () {
-                return this.$store.getters.site
+                return this.$store.getters.site;
             },
-            cart_lenght: function () {
-                return this.$store.getters.cart.items.length
+            cart_length: function (){
+                return this.$store.getters.length_cart;
             }
         }
         /*,

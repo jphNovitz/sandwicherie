@@ -43,7 +43,7 @@
 
             },
             add_cart: function () {
-                this.$store.dispatch('add_cart', {'item': this.product});
+                this.$store.dispatch('update_cart', {'item': this.product, 'qty': this.in_cart});
             },
             likes: function () {
                 // this must be changed
