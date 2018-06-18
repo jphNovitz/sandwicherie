@@ -9,6 +9,7 @@ Vue.prototype.$http = axios
 const url_allergies = "http://localhost:8000/api/allergies"
 const url_categories = "http://localhost:8000/api/categories"
 const url_products = "http://localhost:8000/api/products"
+const url_types = "http://localhost:8000/api/types"
 export const store = new Vuex.Store({
     state: {
         post_cart: 'http://localhost:8000/api/cart',
@@ -16,6 +17,7 @@ export const store = new Vuex.Store({
         allergies: [],
         categories: [],
         products: [],
+        types: [],
         suggestions: [],
         cart: {
             'items': []
@@ -33,6 +35,9 @@ export const store = new Vuex.Store({
         },
         SET_PRODUCTS(state, infos){
             state.products = infos
+        },
+        SET_TYPES(state, infos){
+            state.types = infos
         },
         SET_SUGGESTIONS(state, infos){
             state.suggestions = infos
@@ -83,6 +88,7 @@ export const store = new Vuex.Store({
         allergies : state => state.allergies,
         categories : state => state.categories,
         products : state => state.products,
+        types : state => state.types,
         suggestions : state => state.suggestions,
         cart: state => state.cart
     },
@@ -100,6 +106,11 @@ export const store = new Vuex.Store({
         call_products ({commit}){
             axios.get(url_products).then((response) => {
                 commit('SET_PRODUCTS', response.data)
+            })
+        },
+        call_types ({commit}){
+            axios.get(url_types).then((response) => {
+                commit('SET_TYPES', response.data)
             })
         },
         add_cart (context, payload){

@@ -34,6 +34,7 @@
             this.$store.dispatch('call_allergies')
             this.$store.dispatch('call_categories')
             this.$store.dispatch('call_products')
+            this.$store.dispatch('call_types')
             this.$store.commit('SET_SITE', this.parsed.site)
         },
         computed: {

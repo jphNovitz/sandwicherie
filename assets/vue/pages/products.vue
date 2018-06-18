@@ -1,25 +1,22 @@
 <template>
 <div>
-       <sui-card-group :items-per-row="3">
-           <card-product v-for="product in products"
-                         :product="product" :group="'products'">
+    <sui-menu secondary>
+        <sui-menu-item  link
+                       @click="selected=null"
+                       :class="{active: selected === null}">Tout</sui-menu-item>
+        <sui-menu-item link v-for="type in types"
+                       :key="type.slug"
+                       @click="selected=type.id"
+                       :class="{active: type.id === selected}">{{type.name}}
 
-           </card-product>
-          <!-- <sui-card v-for="product in products">
-               <sui-image :src="return_name(product)"/>
-               <sui-card-content>
-                   <sui-card-header>{{product.name}}</sui-card-header>
-                   <sui-card-meta>{{product.type}}</sui-card-meta>
-                   <sui-card-description>
-                       {{product.description}}
-                   </sui-card-description>
-               </sui-card-content>
-               <sui-card-content extra>
-                   <sui-icon name="user" /> 75 Friends
-                   <span slot="right">Joined in 2013</span>
-               </sui-card-content>
-           </sui-card>-->
-       </sui-card-group>
+        </sui-menu-item>
+    </sui-menu>
+
+    <sui-card-group :items-per-row="3">
+       <card-product v-for="product in products"
+                     :product="product" :group="'products'">
+       </card-product>
+    </sui-card-group>
 </div>
 </template>
 
@@ -33,17 +30,41 @@
             'card-product': cardProduct
         },
         data(){
-            return {}
+            return {
+                activeType: '',
+                selected: null
+            }
         },
         computed: {
-            products: function () {
+            all_products: function () {
                 return this.$store.getters.products
+            },
+            products: function () {
+                var stack = [];
+                if (this.selected === null) {
+                    return this.all_products;
+                } else {
+                    this.all_products.map(item=>{
+                        item.types.map(type=>{
+                            if (type.id  === this.selected) {
+                                stack.push(item);
+                            }
+                        })
+                    })
+                }
+                return stack ;
+            },
+            types: function() {
+                return this.$store.getters.types
             }
         },
         methods: {
             return_name: function (elm) {
                 let imageName = elm.images[0].image_name
                 return "/images/products/" + imageName
+            },
+            select: function (t) {
+                this.selection = t;
             }
         }
     }
