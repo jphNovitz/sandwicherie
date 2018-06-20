@@ -56,6 +56,15 @@
                     </div>
                 {% endif %}
                 <div class="field">
+                    <label for="form_ingredients">Ingredients</label>
+                    {{ form_widget(form.ingredients) }}
+                </div>
+                {% if form.vegetables.vars.errors|length %}
+                    <div class="ui pointing red basic label">
+                        {{ form_errors(form.vegetables) }}
+                    </div>
+                {% endif %}
+                <div class="field">
                     <label for="form_vegetables">Crudités disponibles</label>
                     {{ form_widget(form.vegetables) }}
                 </div>

@@ -49,10 +49,7 @@ class AllergyController extends FOSRestController
     {
         //$list = $this->customLoader->LoadAll('App:Allergy');
         $list = $this->customLoader->CreateJsonResponse('App:Allergy');
-        if (!$list) {
-            $this->addFlash("notice", "Aucun allergie trouvé, ajoutez-en un ");
-            return $this->redirectToRoute('allergies_add');
-        }
+
         /*
         $hateoas = HateoasBuilder::create()->build();
         $json = $hateoas->serialize($list,'json');

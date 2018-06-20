@@ -32,7 +32,7 @@ class ProductType extends AbstractType
                 'required'=>false,
                 'multiple'=>true
             ])
-            ->add('breads', EntityType::class, [
+            ->add('ingredients', EntityType::class, [
                 'class'=>'App\Entity\Ingredient',
                 'required'=>false,
                 'multiple'=>true

@@ -59,11 +59,43 @@
                 return this.$store.getters.products
             },
             products: function () {
+                let base = this.all_products.filter(ap=>{
+                    let list = []
+                    ap.ingredients.map(ing=>{
+                        if (this.blacklist.indexOf(ing.slug) > -1){
+                            list.push(ing.slug)
+                        }
+                        for (var i in ing) {
+                            for (var cat in i.categories) {
+                                if (this.blacklist.indexOf(cat.slug) > -1) {
+                                    list.push(cat.slug)
+                                }
+                            }
+                        }
+                    })
+                    return list.length  === 0
+                })
                 var stack = [];
                 if (this.selected === null) {
-                    return this.all_products;
+                    return base /*this.all_products.filter(ap=>{
+                        let list = []
+                        ap.ingredients.map(ing=>{
+                            if (this.blacklist.indexOf(ing.slug) > -1){
+                                list.push(ing.slug)
+                            }
+                            for (var i in ing) {
+                                for (var cat in i.categories) {
+                                    if (this.blacklist.indexOf(cat.slug) > -1) {
+                                        list.push(cat.slug)
+                                    }
+                                }
+                            }
+                        })
+                        return list.length  === 0
+                    })*/
+                    //return this.all_products;
                 } else {
-                    this.all_products.map(item=>{
+                     this.all_products.map(item=>{
                         item.types.map(type=>{
                             if (type.id  === this.selected) {
                                 stack.push(item);
