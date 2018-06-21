@@ -95,7 +95,7 @@
                     })*/
                     //return this.all_products;
                 } else {
-                     this.all_products.map(item=>{
+                     base.map(item=>{
                         item.types.map(type=>{
                             if (type.id  === this.selected) {
                                 stack.push(item);
