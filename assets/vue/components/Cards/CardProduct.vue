@@ -2,7 +2,11 @@
              <sui-card >
                <sui-image :src="return_name()"/>
                 <sui-card-content>
-                    <sui-card-header>{{product.name}}</sui-card-header>
+                    <router-link :to="{ name: 'detail', params: { slug: product.slug }}">
+                        <sui-card-header>
+                             {{product.name}}
+                        </sui-card-header>
+                    </router-link>
                     <sui-card-meta>{{product.price}} €</sui-card-meta>
                     <sui-card-description>
                         {{product.description}}
