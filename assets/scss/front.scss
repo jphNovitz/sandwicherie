@@ -22,12 +22,16 @@ body{
   padding: .8em;
 }
 
-h1, h2, h3{
-  font-family: 'Pacifico', cursive !important;
+h1, h2, h3, h4, h5{
+  font-family: 'Cuprum', sans-serif !important;
 }
 h2 {
   margin-top: 2rem !important;
   border-bottom: solid 1px rgba(0, 128, 0, .1) !important;
+}
+.ui .header{
+  font-family: 'Cuprum', sans-serif;
+  color: green;
 }
 .emph{
   color: orangered;
