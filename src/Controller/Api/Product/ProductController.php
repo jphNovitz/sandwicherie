@@ -29,6 +29,9 @@ class ProductController extends FOSRestController{
     public function getProducts()
     {
 
+        $test = $this->customLoader->CreateJsonResponse('App:Product');
+        die('hello world');
+        $this->customLoader->CreateJsonResponse('App:Product');
         return  $this->customLoader->CreateJsonResponse('App:Product');
     }
 
