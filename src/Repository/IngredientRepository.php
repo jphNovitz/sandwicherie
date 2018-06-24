@@ -13,6 +13,49 @@ class IngredientRepository extends ServiceEntityRepository
         parent::__construct($registry, Ingredient::class);
     }
 
+    // this function is used in the productType form
+    public function findGeneralIngredients()
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.vegetable = :value')->setParameter('value', false)
+            ->andWhere('i.bread = :value')->setParameter('value', false)
+            ->andWhere('i.sauce = :value')->setParameter('value', false)
+            ->orderBy('i.slug', 'ASC')
+
+            ;
+    }
+
+    // this function is used in the productType form
+    public function findVegetables()
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.vegetable = :value')->setParameter('value', true)
+            ->orderBy('i.slug', 'ASC')
+
+            ;
+    }
+
+    // this function is used in the productType form
+    public function findBreads()
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.bread = :value')->setParameter('value', true)
+            ->orderBy('i.slug', 'ASC')
+
+            ;
+    }
+
+
+    // this function is used in the productType form
+    public function findSauces()
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.sauce = :value')->setParameter('value', true)
+            ->orderBy('i.slug', 'ASC')
+
+            ;
+    }
+
     /*
     public function findBySomething($value)
     {

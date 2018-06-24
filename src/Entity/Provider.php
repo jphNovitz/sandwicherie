@@ -5,12 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProviderRepository")
- *
+ * @Vich\Uploadable
  */
 class Provider
 {
@@ -64,11 +65,19 @@ class Provider
 
 
 
-    /**     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
+    /**
+     * @Vich\UploadableField(mapping="provider8", fileNameProperty="imageName")
+     *
+     * @var File
      */
-    private $image;
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $imageName;
 
 
     public function __construct()
@@ -190,27 +199,48 @@ class Provider
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getImage()
+    public function getImageName(): ?string
     {
-        return $this->image;
+        return $this->imageName;
     }
 
     /**
-     * @param mixed $image
+     * @param string $imageName
      */
-    public function setImage($image): void
+    public function setImageName(string $imageName): void
     {
-        $this->image = $image;
+        $this->imageName = $imageName;
     }
 
+    /**
+     * @return File
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     */
+    public function setImageFile(?File $image = null): void
+    {
+        $this->imageFile = $image;
+
+        if (null !== $image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
 
 
 
     public function __toString()
     {
-        return $this->name;
+        return $this->imageName;
     }
 
 }

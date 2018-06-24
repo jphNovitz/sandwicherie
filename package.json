@@ -8,6 +8,8 @@
         "postcss-loader": "^2.0.9",
         "run": "^1.4.0",
         "sass-loader": "^6.0.6",
+        "uglify-es": "git://github.com/mishoo/UglifyJS2#harmony",
+        "uglifyjs-webpack-plugin": "^1.2.6",
         "vue": "^2.5.16",
         "vue-loader": "^14.2.2",
         "vue-template-compiler": "^2.5.16",
@@ -23,11 +25,17 @@
     },
     "dependencies": {
         "axios": "^0.18.0",
+        "babel-preset-es2017": "^6.24.1",
+        "babel-preset-es2018": "^1.0.0",
         "css-loader": "^0.28.11",
+        "presets": "es2015",
         "semantic-ui": "^2.3.1",
         "semantic-ui-css": "^2.3.0",
         "semantic-ui-vue": "^0.2.5",
+        "socket.io-client": "^2.1.1",
+        "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
         "vue-router": "^3.0.1",
+        "vue-socket.io": "^2.1.1-b",
         "vuex": "^3.0.1"
     }
 }

@@ -1,8 +1,13 @@
 {% extends '_skeletons/_card.html.twig' %}
 {% set object = provider %}
-{% if object.image is not empty %}
-    {% block card_image %} {{ asset('images/providers/'~object.image.imageName) }}{% endblock %}
-{% endif %}
+{% block object_image  %}
+    {% if object.image is not empty %}
+        {% block card_image %}
+            <img src="{{ asset('images/providers/'~object.image.imageName) }}" />
+        {% endblock %}
+    {% endif %}
+{% endblock %}
+
 
 {% block card_rest %}
     <p>{{ object.email }}
