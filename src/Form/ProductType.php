@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\ORM\EntityRepository;
 
 class ProductType extends AbstractType
 {
@@ -22,18 +23,35 @@ class ProductType extends AbstractType
             ->add('description', TextType::class)
             ->add('price', NumberType::class)
             ->add('featured', CheckboxType::class)
+            ->add('sauces', EntityType::class, [
+                'class'=>'App\Entity\Ingredient',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->findSauces();
+                },
+                'required'=>false,
+                'multiple'=>true
+            ])
             ->add('vegetables', EntityType::class, [
                 'class'=>'App\Entity\Ingredient',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->findVegetables();
+                },
                 'required'=>false,
                 'multiple'=>true
             ])
             ->add('breads', EntityType::class, [
                 'class'=>'App\Entity\Ingredient',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->findBreads();
+                },
                 'required'=>false,
                 'multiple'=>true
             ])
             ->add('ingredients', EntityType::class, [
                 'class'=>'App\Entity\Ingredient',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->findGeneralIngredients();
+                },
                 'required'=>false,
                 'multiple'=>true
             ])
