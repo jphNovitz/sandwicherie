@@ -77,15 +77,6 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.31"
     },
-    "guzzlehttp/guzzle": {
-        "version": "6.3.2"
-    },
-    "guzzlehttp/promises": {
-        "version": "v1.3.1"
-    },
-    "guzzlehttp/psr7": {
-        "version": "1.4.2"
-    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -107,12 +98,6 @@
             "ref": "fe60ce509ef04a3f40da96e3979bc8d9b13b2372"
         }
     },
-    "knpuniversity/oauth2-client-bundle": {
-        "version": "v1.18.0"
-    },
-    "league/oauth2-client": {
-        "version": "2.3.0"
-    },
     "monolog/monolog": {
         "version": "1.23.0"
     },
@@ -121,9 +106,6 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
-    },
-    "paragonie/random_compat": {
-        "version": "v2.0.12"
     },
     "phpcollection/phpcollection": {
         "version": "0.5.0"
@@ -136,9 +118,6 @@
     },
     "psr/container": {
         "version": "1.0.0"
-    },
-    "psr/http-message": {
-        "version": "1.0.1"
     },
     "psr/log": {
         "version": "1.0.2"

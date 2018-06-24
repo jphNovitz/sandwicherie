@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>a0655468-01aa-4d12-a738-7fa1c52c8c24.SCHEMA:jphn_clementine</OriginalElement>
+  <nodes>
+    <node x="289.38214285714275" y="1088.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient_category</node>
+    <node x="20.5" y="560.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.cart</node>
+    <node x="2256.2571428571428" y="1088.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_vegetables</node>
+    <node x="907.2571428571428" y="1088.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_ingredients</node>
+    <node x="116.20252100840344" y="799.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.category</node>
+    <node x="40.080462184873795" y="1088.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.allergy_category</node>
+    <node x="301.75" y="584.5">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_types</node>
+    <node x="673.5804621848739" y="1088.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.allergy_ingredient</node>
+    <node x="1345.2571428571428" y="1088.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient_ingredient</node>
+    <node x="256.0" y="1213.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.service</node>
+    <node x="241.0" y="263.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.type</node>
+    <node x="525.2025210084033" y="787.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.allergy</node>
+    <node x="0.0" y="155.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.user</node>
+    <node x="494.0" y="1213.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.recover</node>
+    <node x="2037.2571428571428" y="1088.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient_provider</node>
+    <node x="1818.2571428571428" y="1088.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient_image</node>
+    <node x="1126.2571428571428" y="1088.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_sauces</node>
+    <node x="1909.0071428571428" y="572.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.image</node>
+    <node x="2068.5071428571428" y="751.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.provider</node>
+    <node x="1344.7025210084034" y="739.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient</node>
+    <node x="0.0" y="1213.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.user_temp</node>
+    <node x="502.75" y="560.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.part</node>
+    <node x="348.2025210084033" y="823.5">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.item_cart</node>
+    <node x="1206.3275210084034" y="0.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.city</node>
+    <node x="1599.2571428571428" y="1088.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_breads</node>
+    <node x="1063.5071428571428" y="227.0">a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient_image" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.image">
+      <point x="49.75" y="-40.0" />
+      <point x="-58.5" y="52.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient_category" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient">
+      <point x="49.75" y="-40.0" />
+      <point x="438.63214285714275" y="1028.0" />
+      <point x="1355.3025210084033" y="1028.0" />
+      <point x="-95.40000000000009" y="124.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_breads" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient">
+      <point x="-49.75" y="-40.0" />
+      <point x="1649.0071428571428" y="1058.0" />
+      <point x="1482.5025210084032" y="1058.0" />
+      <point x="31.799999999999955" y="124.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient_ingredient" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient">
+      <point x="-58.5" y="-40.0" />
+      <point x="1403.7571428571428" y="1068.0" />
+      <point x="1440.1025210084035" y="1068.0" />
+      <point x="-10.599999999999909" y="124.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_types" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.type">
+      <point x="-45.25" y="-40.0" />
+      <point x="0.0" y="64.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient_provider" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient">
+      <point x="-49.75" y="-40.0" />
+      <point x="2087.0071428571428" y="1038.0" />
+      <point x="1524.9025210084033" y="1038.0" />
+      <point x="74.19999999999982" y="124.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient_category" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.category">
+      <point x="-49.75" y="-40.0" />
+      <point x="339.13214285714275" y="1008.0" />
+      <point x="275.20252100840344" y="1008.0" />
+      <point x="53.0" y="64.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.item_cart" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.cart">
+      <point x="-39.25" y="-40.0" />
+      <point x="387.4525210084033" y="714.0" />
+      <point x="110.5" y="714.0" />
+      <point x="0.0" y="64.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.allergy_ingredient" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient">
+      <point x="49.75" y="-40.0" />
+      <point x="822.8304621848739" y="1038.0" />
+      <point x="1376.5025210084032" y="1038.0" />
+      <point x="-74.20000000000005" y="124.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.allergy_ingredient" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.allergy">
+      <point x="-49.75" y="-40.0" />
+      <point x="723.3304621848739" y="1018.0" />
+      <point x="700.7025210084033" y="1018.0" />
+      <point x="58.5" y="76.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_ingredients" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product">
+      <point x="-49.75" y="-40.0" />
+      <point x="957.0071428571428" y="1018.0" />
+      <point x="942.3304621848739" y="1018.0" />
+      <point x="942.3304621848739" y="540.0" />
+      <point x="1143.8642857142856" y="540.0" />
+      <point x="-32.14285714285711" y="100.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.provider" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.city">
+      <point x="59.0" y="-112.5" />
+      <point x="2245.5071428571428" y="130.0" />
+      <point x="1343.5775210084034" y="130.0" />
+      <point x="45.75" y="52.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_breads" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product">
+      <point x="49.75" y="-40.0" />
+      <point x="1748.5071428571428" y="540.0" />
+      <point x="1208.1499999999999" y="540.0" />
+      <point x="32.14285714285711" y="100.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.cart" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.user">
+      <point x="0.0" y="-64.5" />
+      <point x="0.0" y="172.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_sauces" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product">
+      <point x="-49.75" y="-40.0" />
+      <point x="1176.0071428571428" y="1018.0" />
+      <point x="1161.3304621848738" y="1018.0" />
+      <point x="1161.3304621848738" y="540.0" />
+      <point x="1176.0071428571428" y="540.0" />
+      <point x="0.0" y="100.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient_image" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient">
+      <point x="-49.75" y="-40.0" />
+      <point x="1868.0071428571428" y="1048.0" />
+      <point x="1503.7025210084034" y="1048.0" />
+      <point x="53.0" y="124.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_vegetables" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient">
+      <point x="-49.75" y="-40.0" />
+      <point x="2306.0071428571428" y="1028.0" />
+      <point x="1546.1025210084035" y="1028.0" />
+      <point x="95.40000000000009" y="124.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.provider" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.image">
+      <point x="-59.0" y="-112.5" />
+      <point x="2127.5071428571428" y="714.0" />
+      <point x="2084.5071428571428" y="714.0" />
+      <point x="58.5" y="52.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_sauces" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient">
+      <point x="49.75" y="-40.0" />
+      <point x="1275.5071428571428" y="1058.0" />
+      <point x="1418.9025210084033" y="1058.0" />
+      <point x="-31.799999999999955" y="124.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.allergy_category" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.category">
+      <point x="-47.0" y="-40.0" />
+      <point x="87.0804621848738" y="1068.0" />
+      <point x="169.20252100840344" y="1068.0" />
+      <point x="-53.0" y="64.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.allergy_category" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.allergy">
+      <point x="47.0" y="-40.0" />
+      <point x="181.0804621848738" y="1018.0" />
+      <point x="583.7025210084033" y="1018.0" />
+      <point x="-58.5" y="76.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient_provider" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.provider">
+      <point x="49.75" y="-40.0" />
+      <point x="0.0" y="112.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.part" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product">
+      <point x="0.0" y="-64.5" />
+      <point x="593.25" y="530.0" />
+      <point x="1111.7214285714285" y="530.0" />
+      <point x="-64.28571428571422" y="100.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.user" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.city">
+      <point x="0.0" y="-172.5" />
+      <point x="110.5" y="130.0" />
+      <point x="1252.0775210084034" y="130.0" />
+      <point x="-45.75" y="52.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_vegetables" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product">
+      <point x="49.75" y="-40.0" />
+      <point x="2405.5071428571428" y="520.0" />
+      <point x="1272.435714285714" y="520.0" />
+      <point x="96.42857142857133" y="100.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_ingredients" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.ingredient">
+      <point x="49.75" y="-40.0" />
+      <point x="1056.5071428571428" y="1048.0" />
+      <point x="1397.7025210084034" y="1048.0" />
+      <point x="-53.0" y="124.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product_types" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product">
+      <point x="45.25" y="-40.0" />
+      <point x="437.5" y="520.0" />
+      <point x="1079.5785714285712" y="520.0" />
+      <point x="-96.42857142857156" y="100.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.image" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.product">
+      <point x="0.0" y="-52.5" />
+      <point x="2026.0071428571428" y="530.0" />
+      <point x="1240.292857142857" y="530.0" />
+      <point x="64.28571428571422" y="100.5" />
+    </edge>
+    <edge source="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.item_cart" target="a0655468-01aa-4d12-a738-7fa1c52c8c24.TABLE:jphn_clementine.part">
+      <point x="39.25" y="-40.0" />
+      <point x="465.9525210084033" y="714.0" />
+      <point x="593.25" y="714.0" />
+      <point x="0.0" y="64.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.591768826619965" x="547.9152392724706" y="400.772417875111" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+
