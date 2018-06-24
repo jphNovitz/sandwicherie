@@ -28,6 +28,7 @@ class ProductController extends FOSRestController{
      */
     public function getProducts()
     {
+        die();
         return  $this->customLoader->CreateJsonResponse('App:Product');
     }
 
@@ -44,7 +45,6 @@ class ProductController extends FOSRestController{
         } else {
             $product->addLikedBy($user);
         }
-
 
         $this->customPersister->update($product);
         $response = new Response('ok', 200, array('application/json'));
