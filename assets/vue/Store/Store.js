@@ -41,29 +41,8 @@ export const store = new Vuex.Store({
         },
         SET_SUGGESTIONS(state, infos){
             state.suggestions = infos
-        },/*
-        ADD_PRODUCT_CART(state, p) {
-            let flag = false
-            state.cart.items.map(c => {
-                if (c.product.slug ===p.slug){
-                    c.qty ++
-                    flag = true
-                }
-            })
-            if (!flag){
-                let qty = 1
-
-            let line = {
-                'qty': qty,
-                'product': p
-            }
-
-            state.cart.items.push(line)
-            }
-        },*/
+        },
         UPDATE_PRODUCT_CART(state, datasObj) {
-            /*console.log(datasObj)*/
-
                 let found = state.cart.items.findIndex(line => {
                     return (line.item.slug === datasObj.item.slug)
                 })
@@ -88,6 +67,11 @@ export const store = new Vuex.Store({
         allergies : state => state.allergies,
         categories : state => state.categories,
         products : state => state.products,
+        /*product: (state) => (slug) => {
+            return state.products.find(product => {
+                return product.slug === slug
+            })
+        },*/
         types : state => state.types,
         suggestions : state => state.suggestions,
         cart: state => state.cart
