@@ -1,10 +1,11 @@
 var Encore = require('@symfony/webpack-encore');
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 Encore
     // the project directory where compiled assets will be stored
     .setOutputPath('public/build/')
     // the public path used by the web server to access the previous directory
-    .setPublicPath('/build')
+    .setPublicPath('/public/build')
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
     // uncomment to create hashed filenames (e.g. app.abc123.css)
@@ -20,12 +21,12 @@ Encore
      .addStyleEntry('css/security', './assets/scss/security.scss')
      .addEntry('js/vue', './assets/js/vue.min.js')
      .addEntry('js/app', './assets/js/app.js')
-    .addEntry('main', './assets/vue/main.js')
+     .addEntry('main', './assets/vue/main.js')
     //.enableVueLoader()
     .enableVueLoader(function(options) {
         // https://vue-loader.vuejs.org/en/configurations/advanced.html
 
-        options.loaders = [ "style-loader", "css-loader", "sass-loader" ]
+        options.loaders = [ "style-loader", "css-loader", "sass-loader", "file-loader" ]
     })
 
     // uncomment if you use Sass/SCSS files
@@ -36,6 +37,9 @@ Encore
     // uncomment for legacy applications that require $/jQuery as a global variable
     // .autoProvidejQuery()
 
+    //.configureBabel(function(babelConfig) {
+        // add additional presets
+      //  babelConfig.presets.push('es2017');
+    //})
 ;
-
 module.exports = Encore.getWebpackConfig();
