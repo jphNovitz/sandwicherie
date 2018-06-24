@@ -37,6 +37,7 @@ class CustomObjectLoader implements CustomObjectLoaderInterface {
         $raw = $this->entityManager
             ->getRepository($objectname)
             ->findAll();
+        var_dump($raw); die();
         if (!$raw) {
             $json = $hateoas->serialize('Sorry no '.$objectname.' found','json');
             $response = new Response($json, 404, array('application/json'));

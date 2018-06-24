@@ -28,7 +28,7 @@ class ProductController extends FOSRestController{
      */
     public function getProducts()
     {
-        die();
+
         return  $this->customLoader->CreateJsonResponse('App:Product');
     }
 
