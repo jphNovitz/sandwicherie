@@ -15,18 +15,18 @@
 </head>
 <body >
 <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyD8VwmSjvYXfjvMFZ9lH2-6vlGI_0-gjS0'></script>
-<div id="products" data-vars="{{ products|json_encode()|e('html_attr') }}"></div>
+{#<div id="products" data-vars="{{ products|json_encode()|e('html_attr') }}"></div>
 <div id="site" data-vars="{{ site|json_encode()|e('html_attr') }}"></div>
-
+#}
     <div id="app" style="width: 100%">
 
     </div>
 
 {% block javascripts %}
-    <script src="{{ asset('build/manifest.json') }}"></script>
-    <script src="{{ asset('build/main.js') }}"></script>
+     <script src="{{ asset('build/manifest.json') }}"></script>
+      <script src="{{ asset('build/main.js') }}"></script>
 
-   {# <script src="{{ asset('build/js/app.js') }}"></script> #}
+     {# <script src="{{ asset('build/js/app.js') }}"></script> #}
 {% endblock %}
 
 <!--<script  src=”https://maps.googleapis.com/maps/api/js?key=AIzaSyD8VwmSjvYXfjvMFZ9lH2-6vlGI_0-gjS0” async defer ></script>-->
