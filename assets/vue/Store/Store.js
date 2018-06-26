@@ -13,7 +13,7 @@ const url_types =  "/api/types"
 
 export const store = new Vuex.Store({
     state: {
-        post_cart: baseURl+'/api/cart',
+        post_cart: '/api/cart',
         site: {},
         allergies: [],
         categories: [],
