@@ -26,7 +26,7 @@ Encore
     .enableVueLoader(function(options) {
         // https://vue-loader.vuejs.org/en/configurations/advanced.html
 
-        options.loaders = [ "style-loader", "css-loader", "sass-loader", "file-loader" ]
+        options.loaders = [ "style-loader", "css-loader", "sass-loader", "file-loader", "image-loader" ]
     })
 
     // uncomment if you use Sass/SCSS files
