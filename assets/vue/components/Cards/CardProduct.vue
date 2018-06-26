@@ -43,7 +43,7 @@
             return_name: function () {
                 let elm = this.product;
                 let imageName = elm.images[0].image_name;
-                return "/images/products/" + imageName;
+                return "./images/products/" + imageName;
 
             },
             add_cart: function () {
