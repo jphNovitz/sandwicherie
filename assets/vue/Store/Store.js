@@ -6,12 +6,11 @@ Vue.use(Vuex)
 
 Vue.prototype.$http = axios
 //const baseURl = "http://localhost:8000"
-const baseURl = "http://v2.jphnovitz.be/public/index.php"
+const url_allergies = "/api/allergies"
+const url_categories =  "/api/categories"
+const url_products =  "/api/products"
+const url_types =  "/api/types"
 
-const url_allergies = baseURl+"/api/allergies"
-const url_categories = baseURl+"/api/categories"
-const url_products = baseURl+"/api/products"
-const url_types = baseURl+"/api/types"
 export const store = new Vuex.Store({
     state: {
         post_cart: baseURl+'/api/cart',

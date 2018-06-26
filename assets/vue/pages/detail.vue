@@ -6,7 +6,7 @@
                 <sui-grid-column :width="6">
                     <sui-grid>
                         <sui-grid-column :width="16">
-                            <img :src="images[0]" :alt="product.name" style="width: 100%"/>
+                            <img :src="'../'+images[0]" :alt="product.name" style="width: 100%"/>
                         </sui-grid-column>
                     </sui-grid>
 
