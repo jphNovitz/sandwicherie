@@ -1,6 +1,5 @@
 <template>
     <div>
-        {{slug}}<br />
         {{zoomImage}}<br />
         {{images}}<br />
         {{zoomImage}}<br />
@@ -36,6 +35,7 @@
                             <sui-list horizontal>
                                 <sui-list-item
                                         v-for="ingredient in product.ingredients"
+                                        :key="ingredient.id"
                                         >
                                     {{ingredient.name}}
                                 </sui-list-item>
