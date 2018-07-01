@@ -38,14 +38,14 @@
         },
         mounted: function () {
             this.set_featured(1)
-            this.cta_background.backgroundImage = 'url(./images/products/' + this.name + ')'
+            this.cta_background.backgroundImage = 'url(../images/products/' + this.name + ')'
             const that = this
             let i = 0
                 setInterval(function () {
                     if (i > that.parsed.length-1) i=0
                     that.change = true
                     that.set_featured(i)
-                    that.cta_background.backgroundImage = 'url(./images/products/' + that.name + ')'
+                    that.cta_background.backgroundImage = 'url(../images/products/' + that.name + ')'
                     setTimeout(function () {
                         that.change = false
                     }, 11000)
@@ -61,10 +61,10 @@
         methods: {
           set_featured: function (count=0) {
               this.featured_product = this.parsed[count]
+              console.log(this.parsed[count])
               this.name = this.parsed[count].images[0].imageName;
           }
-        },
-        watch: {}
+        }
     }
 </script>
 <style scoped>

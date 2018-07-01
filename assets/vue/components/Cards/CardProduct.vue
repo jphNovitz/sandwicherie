@@ -1,6 +1,8 @@
 <template>
              <sui-card >
-               <sui-image :src="return_name()"/>
+
+
+               <sui-image :src="imageName" />
                 <sui-card-content>
                     <router-link :to="{ name: 'detail', params: { slug: product.slug }}">
                         <sui-card-header>
@@ -22,7 +24,7 @@
                     </sui-button>
 
                    <sui-button color="grey" content="j'aime" basic v-if="!likes()" @click="likeAction()" />
-                    <sui-button color="pink" content="j'aime"  v-if="likes()" @click="likeAction()" />
+                   <sui-button color="pink" content="j'aime"  v-if="likes()" @click="likeAction()" />
                  </sui-card-content >
        </sui-card>
 
@@ -34,16 +36,24 @@
         props: ['product', 'group'],
         data() {
             return {
-                base_api: 'http://localhost:8000/api/',
+               // base_api: 'http://localhost:8000/api/',
+               // only for dev remove if data exist on server
                 in_cart: 0
             }
         },
-        computed: {},
+        computed: {
+            imageName: function (){
+                let elm = this.product;
+                let imageName = elm.images[0].image_name;
+                console.log(imageName)
+                return  'images/products/' + imageName;
+            }
+        },
         methods: {
             return_name: function () {
                 let elm = this.product;
                 let imageName = elm.images[0].image_name;
-                return "/images/products/" + imageName;
+                return  'images/products/' + imageName;
 
             },
             add_cart: function () {
@@ -60,7 +70,7 @@
             likeAction: function () {
                 let userID = 1;
                 let username='totolehero'  // this MUST BE CHANGED
-                axios.patch(this.base_api+'products/'+this.product.slug+'/like/'+username).then((response) => {
+                axios.patch(/*this.base_api+*/'/api/products/'+this.product.slug+'/like/'+username).then((response) => {
                     //let obj = this.group.filter(p=> p.slug === this.product.slug)
 
                     this.$store.dispatch('call_products')

@@ -1,55 +1,50 @@
 <template>
     <div>
-
-        <div v-if="product">
+        {{slug}}<br />
+        {{zoomImage}}<br />
+        {{images}}<br />
+        {{zoomImage}}<br />
             <sui-grid>
-                <sui-grid-column :width="6">
+                <sui-grid-column :width="6" >
                     <sui-grid>
+                        {{zoomImage}}
                         <sui-grid-column :width="16">
-                            <img :src="'../'+images[0]" :alt="product.name" style="width: 100%"/>
+                            <img :src="'images/products/' + zoomImage"
+                                 :alt="product.name"
+                                 v-if="zoomImage"
+                                 style="width: 100%" />
                         </sui-grid-column>
                     </sui-grid>
-
-                    <sui-grid :columns="2" divided>
+                 <sui-grid :columns="2" divided>
                         <sui-grid-row v-for="(i) in rows" :key="i">
-                            <sui-grid-column v-for="(col, j) in images" :key="j">
-                                <img :src="col" :alt="product.name" style="width: 100%" @click="sortImages(j)"/>
+                            <sui-grid-column v-for="(col, j) in images" :key="col.id">
+                                <img  :src="'images/products/'+col.image_name"
+                                      @click="selectImage(col.image_name)"
+                                      :alt="product.name"
+                                      style="width: 100%"/>
                             </sui-grid-column>
                         </sui-grid-row>
                     </sui-grid>
                 </sui-grid-column>
                 <sui-grid-column :width="10">
-
-
-                    <sui-segment raised>
-                        <sui-header size="huge"> {{product.name}}
-                            <sui-header-subheader>{{product.types[0].name}}</sui-header-subheader>
-                        </sui-header>
-                        <p>{{product.description}}</p>
+                   <p>
+                      <span class="green"> {{product.name}} </span> .::.{{product.description}}
+                   </p>
+                    <sui-segment v-if="product.ingredients">
+                        <p>
+                            Les ingrédients principaux sont :
+                            <sui-list horizontal>
+                                <sui-list-item
+                                        v-for="ingredient in product.ingredients"
+                                        >
+                                    {{ingredient.name}}
+                                </sui-list-item>
+                            </sui-list>
+                        </p>
                     </sui-segment>
-
-                    <sui-header size="normal">Plusieurs sortes de pains vous sont proposées: </sui-header>
-                    <sui-list >
-                        <sui-list-item v-for="bread in product.breads">{{bread.name}}</sui-list-item>
-                    </sui-list>
-                    <sui-header size="normal">crudités: </sui-header>
-                    <sui-list >
-                        <sui-list-item v-for="vege in product.vegetables">{{vege.name}}</sui-list-item>
-                    </sui-list>
-
-
-                    <div class="horizontal">
-                    <h5 is="sui-header" >Ingrédients</h5>
-                    <sui-list horizontal>
-                        <sui-list-item v-for="ingredient in product.ingredients">{{ingredient.name}}</sui-list-item>
-                    </sui-list>
-                    </div>
                 </sui-grid-column>
             </sui-grid>
-        </div>
-        <div v-else>
-            <sui-icon name="notched circle" loading/>
-        </div>
+
     </div>
 </template>
 
@@ -59,57 +54,51 @@
         data() {
             return {
                 slug: '',
-                loading: true,
-                rows: 0,
-                images: ''
+                zoomImage: null,
+                images: null,
+
             }
+        },
+        created: function () {
+            this.slug = this.$route.params.slug
         },
         mounted: function () {
-            this.slug = this.$route.params.slug
-            setTimeout(() => {
-                this.fetch_images()
-            }, 2000)
+          //  this.images = this.product.images
+            //this.zoomImage = this.images[0].image_name
 
+            setTimeout(() => {
+                    this.images = this.product.images
+                    this.zoomImage = this.images[0].image_name
+
+
+            },1000)
         },
         computed: {
-           product: function () {
-                return this.$store.getters.products.find(p => {
-                    return p.slug === this.slug
+            product: function () {
+                return this.$store.getters.products.find(product => {
+                    return product.slug === this.slug
                 })
-
             }/*,
             images: function () {
-                let imgs = []
-                this.product.images.map(i => {
-                    imgs.push("/images/products/" + i.image_name)
-                });
-                this.rows = imgs.length / 2
-                return imgs
-            }*/
+                setTimeout(()=>{
+                    return this.product.images
+                }, 5000)
+            }*/,
+            rows: function () {
+                if (this.zoomImage) {
+                    return this.images.length/2 ;
+                } else {
+                    return 0 ;
+                }
+
+            }
         },
         methods: {
-            fetch_product: function () {
-                this.product = this.$store.getters.products.find(p => {
-                    return p.slug === this.slug
-                })
-            },
-            fetch_images: function () {
-
-                let imgs = []
-                this.product.images.map(i => {
-                    imgs.push("/images/products/" + i.image_name)
-                });
-                this.rows = imgs.length / 2
-                this.images = imgs
+            selectImage: function (image){
+                this.zoomImage = image ;
             }
-            ,
-            sortImages: function (pos) {
-                let temp = this.images[pos]
-                this.images.splice(pos,1)
-                this.images.unshift(temp)
+        },
 
-            }
-        }
 
     }
 
@@ -117,12 +106,19 @@
 
 <style scoped>
     p {
+        font-family: 'Cuprum', sans-serif !important;
         text-align: left
     }
+    .green {
+        font-weight: bold;
+        color: green;
+    }
+
     .horizontal {
         text-align: left;
     }
-    .horizontal h5{
+
+    .horizontal h5 {
         display: inline;
         color: green;
     }
