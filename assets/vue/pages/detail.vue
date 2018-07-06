@@ -1,101 +1,131 @@
 <template>
     <div>
-        {{zoomImage}}<br />
-        {{images}}<br />
-        {{zoomImage}}<br />
-            <sui-grid>
-                <sui-grid-column :width="6" >
+       <!-- {{rows}}
+        <ul>
+            <li v-for="image in images" :key="image.id"><img :src="'images/products/'+image.image_name" /></li>
+        </ul>
+        -->
+        <sui-grid stackable>
+            <sui-grid-row v-if="product">
+            <sui-grid-column :width="16" >
+                <h1 is="sui-header" size="huge" style="margin-bottom: 5rem;" >
+                    {{product.name}}
+                </h1>
+
+            </sui-grid-column>
+             <sui-grid-column :width="6" >
+                 <div v-if="images">
                     <sui-grid>
-                        {{zoomImage}}
                         <sui-grid-column :width="16">
-                            <img :src="'images/products/' + zoomImage"
+                            <img :src="'images/products/' + zoom_image"
                                  :alt="product.name"
-                                 v-if="zoomImage"
+                                 v-if="zoom_image"
                                  style="width: 100%" />
+
                         </sui-grid-column>
                     </sui-grid>
-                 <sui-grid :columns="2" divided>
-                        <sui-grid-row v-for="(i) in rows" :key="i">
-                            <sui-grid-column v-for="(col, j) in images" :key="col.id">
-                                <img  :src="'images/products/'+col.image_name"
-                                      @click="selectImage(col.image_name)"
-                                      :alt="product.name"
-                                      style="width: 100%"/>
-                            </sui-grid-column>
-                        </sui-grid-row>
-                    </sui-grid>
-                </sui-grid-column>
-                <sui-grid-column :width="10">
-                   <p>
-                      <span class="green"> {{product.name}} </span> .::.{{product.description}}
-                   </p>
-                    <sui-segment v-if="product.ingredients">
-                        <p>
-                            Les ingrédients principaux sont :
-                            <sui-list horizontal>
-                                <sui-list-item
-                                        v-for="ingredient in product.ingredients"
-                                        :key="ingredient.id"
-                                        >
-                                    {{ingredient.name}}
-                                </sui-list-item>
-                            </sui-list>
-                        </p>
-                    </sui-segment>
-                </sui-grid-column>
-            </sui-grid>
+                    <sui-grid :columns="2" divided>
+                    <sui-grid-row v-for="(i) in rows" :key="i">
+                        <sui-grid-column v-for="(col, j) in images" :key="col.id">
+                            <img  :src="'images/products/'+col.image_name"
+                                  @click="selectImage(col.image_name)"
+                                  :alt="product.name"
+                                  style="width: 90%"/>
+                        </sui-grid-column>
+                    </sui-grid-row>
+                </sui-grid>
+                 </div>
+            </sui-grid-column>
+            <sui-grid-column :width="10">
 
+                <p class="emph">
+                    {{product.description}}
+                </p>
+                <sui-segment v-if="product.ingredients">
+                    <p>
+                        <sui-list horizontal>
+                            <sui-list-item
+                                    v-for="ingredient in product.ingredients"
+                                    :key="ingredient.id"
+                            >
+                                {{ingredient.name}}
+                                <span v-if="ingredient.components.length > 0">
+                                    (<sui-list horizontal>
+                                        <sui-list-item v-for="component in ingredient.components"
+                                        :key="component.id">
+                                        {{component.name}}
+                                        </sui-list-item>
+                                    </sui-list>
+                                )</span>
+                            </sui-list-item>
+                        </sui-list>
+                    </p>
+                </sui-segment>
+                <div style="margin-top: 2em" v-if="product.breads.length > 0">
+                    <h3 is="sui-header">pains disponibles</h3>
+                    <sui-list>
+                        <sui-list-item
+                                v-for="bread in product.breads"
+                                :key="bread.id">
+                            {{bread.name}}
+                        </sui-list-item>
+                    </sui-list>
+                </div>
+                <div style="margin-top: 2em" v-if="product.vegetables.length > 0" >
+                    <h3 is="sui-header">Les crudités suivantes peuvent accompagner votre repas :</h3>
+                    <sui-list>
+                        <sui-list-item
+                                v-for="vegetable in product.vegetables"
+                                :key="vegetable.id">
+                            {{vegetable.name}}
+                        </sui-list-item>
+                    </sui-list>
+                </div>
+            </sui-grid-column>
+            </sui-grid-row>
+        </sui-grid>
+        <allergies-finder :product="product"></allergies-finder>
     </div>
 </template>
 
 <script>
+
+    import AllergiesFinder from '../components/AllergiesFinder/AllergiesFinder'
     export default {
         name: 'detail',
+        components: {AllergiesFinder},
         data() {
             return {
                 slug: '',
-                zoomImage: null,
+                zoom_image: '',
                 images: null,
-
+                rows: 1
             }
         },
         created: function () {
             this.slug = this.$route.params.slug
-        },
-        mounted: function () {
-          //  this.images = this.product.images
-            //this.zoomImage = this.images[0].image_name
-
-            setTimeout(() => {
-                    this.images = this.product.images
-                    this.zoomImage = this.images[0].image_name
-
-
-            },1000)
         },
         computed: {
             product: function () {
                 return this.$store.getters.products.find(product => {
                     return product.slug === this.slug
                 })
-            }/*,
-            images: function () {
-                setTimeout(()=>{
-                    return this.product.images
-                }, 5000)
-            }*/,
-            rows: function () {
-                if (this.zoomImage) {
-                    return this.images.length/2 ;
-                } else {
-                    return 0 ;
-                }
-
             }
+        },
+        watch: {
+          product: function(){
+              if (this.product.images.length > 0 ){
+                  this.images = this.product.images
+                  this.zoom_image = this.product.images[0].image_name
+/*                  if (this.images.length  > 0){
+                      this.rows = Math.ceil(this.images.length/2)
+                  }*/
+              }
+          }
         },
         methods: {
             selectImage: function (image){
-                this.zoomImage = image ;
+                this.zoom_image = image ;
             }
         },
 
@@ -104,15 +134,37 @@
 
 </script>
 
-<style scoped>
-    p {
-        font-family: 'Cuprum', sans-serif !important;
-        text-align: left
-    }
+<style>
+
+    @import url('https://fonts.googleapis.com/css?family=Cuprum');
+
     .green {
         font-weight: bold;
         color: green;
     }
+
+    .emph {
+        font-size: 1.6em;
+    }
+    .emph:before {
+        content: "\f10d";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.8em;
+        text-decoration: inherit;
+        color: #cecece;
+    }
+    .emph:after {
+        content: "\f10e";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.8em;
+        text-decoration: inherit;
+        color: #cecece;
+    }
+
 
     .horizontal {
         text-align: left;
