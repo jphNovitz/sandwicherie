@@ -21,7 +21,9 @@
 
                         </div>
                         <div class="item">
-                            <i class="user icon"></i> Mon compte </div>
+                            <connect />
+                            <!-- <i class="user icon"></i> Mon compte -->
+                            </div>
                     </div>
                 </div>
             </div>
@@ -33,8 +35,10 @@
 </template>
 
 <script>
+    import connect from '../Connect/Connect'
     export default {
         name: "top",
+        components: {connect},
         data() {
           return {
               testPos: null

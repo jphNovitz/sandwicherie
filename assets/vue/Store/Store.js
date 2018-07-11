@@ -13,6 +13,8 @@ const url_types =  "/api/types"
 
 export const store = new Vuex.Store({
     state: {
+        logged: '',
+        auth: {},
         post_cart: '/api/cart',
         site: {},
         allergies: [],
@@ -25,6 +27,12 @@ export const store = new Vuex.Store({
         }
     },
     mutations: {
+        SET_LOGGED(state, status){
+            state.logged = status
+        },
+        SET_AUTH(state, inputs){
+            state.auth = inputs
+        },
         SET_SITE(state, infos){
             state.site = infos
         },
@@ -57,6 +65,8 @@ export const store = new Vuex.Store({
         }
     },
     getters: {
+        is_logged: state => state.logged,
+        get_auth: state =>state.auth,
         post_cart: state => state.post_cart,
         length_cart: state => {
             let total = state.cart.items.reduce(function(prev, current) {
@@ -78,6 +88,12 @@ export const store = new Vuex.Store({
         cart: state => state.cart
     },
     actions: {
+        update_logged(context, payload){
+          this.commit('SET_LOGGED', payload)
+        },
+        set_aut(context, payload){
+          this.commit('SET_AUTH', payload)
+        },
         call_allergies ({commit}){
             axios.get(url_allergies).then((response) => {
                 commit('SET_ALLERGIES', response.data)

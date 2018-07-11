@@ -34,8 +34,10 @@
         "semantic-ui-vue": "^0.2.5",
         "socket.io-client": "^2.1.1",
         "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
+        "vue-resource": "^1.5.1",
         "vue-router": "^3.0.1",
         "vue-socket.io": "^2.1.1-b",
+        "vue-token": "https://github.com/jphNovitz/vue-token",
         "vuex": "^3.0.1"
     }
 }

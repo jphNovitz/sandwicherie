@@ -18,6 +18,24 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        login:
+            pattern:  ^/api/login
+            stateless: true
+            anonymous: true
+            provider: chain_provider
+            form_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
+        api:
+            pattern: ^/api/s/
+            #anonymous: true
+            stateless: true
+            provider: chain_provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         main:
             anonymous: ~
             form_login:
@@ -26,6 +44,7 @@ security:
                 use_referer: true
                 success_handler: App\EventListener\AfterSuccessLoginListener
                 failure_handler: App\EventListener\AfterFailureLoginListener
+                provider: chain_provider
             logout:
                 path:   /logout
                 target: /
@@ -36,6 +55,7 @@ security:
             cost: 12
     access_control:
             - { path: ^/admin, roles: ROLE_ADMIN }
+            - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
             # activate different ways to authenticate
 

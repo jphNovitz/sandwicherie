@@ -6,6 +6,9 @@ import products from '../pages/products'
 import detail from '../pages/detail'
 import allergies from '../pages/allergies'
 import cart from '../pages/cart'
+import login from '../pages/login'
+import profile from '../pages/profile'
+
 Vue.use(Router)
 
 
@@ -40,6 +43,16 @@ export default new Router({
             name: 'cart',
             path: '/panier-achats',
             component: cart
+        },
+        {
+            name: 'login',
+            path: '/login',
+            component: login
+        },
+        {
+            name: 'profile',
+            path: '/profil',
+            component: profile
         }
     ]
 })
