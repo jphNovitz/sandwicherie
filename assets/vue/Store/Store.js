@@ -15,6 +15,7 @@ export const store = new Vuex.Store({
     state: {
         logged: '',
         auth: {},
+        user: {},
         post_cart: '/api/cart',
         site: {},
         allergies: [],
@@ -32,6 +33,9 @@ export const store = new Vuex.Store({
         },
         SET_AUTH(state, inputs){
             state.auth = inputs
+        },
+        SET_USER(state, infos){
+            state.user = infos
         },
         SET_SITE(state, infos){
             state.site = infos
@@ -91,8 +95,11 @@ export const store = new Vuex.Store({
         update_logged(context, payload){
           this.commit('SET_LOGGED', payload)
         },
-        set_aut(context, payload){
+        set_auth(context, payload){
           this.commit('SET_AUTH', payload)
+        },
+        set_user(context, payload){
+          this.commit('SET_USER', payload)
         },
         call_allergies ({commit}){
             axios.get(url_allergies).then((response) => {

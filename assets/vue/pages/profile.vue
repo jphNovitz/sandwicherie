@@ -22,10 +22,10 @@
             if (this.$auth.check()){
                 this.$http.get('http://localhost:8000/api/s/profile').then(response => {
                     console.log(response)
-                    console.log('ok')
-                    let user = {}
-                    user.username= response.body.username;
+                    let user = response.bodyText
+                    console.log('******* '+user+' *********')
                     this.user = user
+                    this.$store.dispatch('set_user', user)
 
                 }, response => {
                     console.log(response)
@@ -35,18 +35,19 @@
                             {
                                 this.$auth.login(this, this.input, "menu", (errors) => {
                                     console.log(errors);
-                                    router.push({ name: 'login', params: {}})
+                                    this.$store.dispatch('update_logged', false)
+                                    router.push({ name: 'login', params: {destination: 'profil'}})
                                 })
                             }
                             router.push({ name: 'profile', params: {}})
                         } else {
-                            this.$router.push({ name: 'login', params: {destination: 'profile'}})
+
+                            this.$store.dispatch('update_logged', false)
+                            this.$router.push({ name: 'login', params: {destination: 'profil'}})
                         }
                     }
             });
             } else {
-                console.log('pas de token') ;
-                console.log('redirection') ;
                 this.$router.push({name: 'login', params: {destination: 'profil'}}) ;
 
             }
