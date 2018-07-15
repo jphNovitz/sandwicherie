@@ -1,17 +1,28 @@
 <template>
     <div>
-        {{user.username}}
+        <p>
+        {{user.username}} <br />
+            {{user.last_name}} {{user.first_name}}
+        </p>
     </div>
 
 </template>
 <script>
+    import securityCheck from '../mixins/securityCheck'
     export default {
         name: 'profile',
+        mixins: [securityCheck],
         data (){
             return{
-                user: ''
+                user: {}
             }
         },
+        watch: {
+            mixin_user: function () {
+                this.user =  JSON.parse(this.mixin_user)
+            }
+        }
+            /*,
         computed: {
             auth: function () {
                 return this.$store.getters.get_auth;
@@ -58,7 +69,7 @@
                   console.log(errors);
               })
       }
-     }
+     }*/
     }
 </script>
 <style>
