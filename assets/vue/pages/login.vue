@@ -29,16 +29,7 @@
                 destination: 'menu'
             }
         },
-        mounted() {
-           /*if (this.$auth.check()){
-
-                this.$http.get('http://localhost:8000/api/products/').then(response => {
-                    console.log(response)
-                }, response => {
-                    console.log(response)
-                });
-            }*/
-        },
+        mounted() {},
         created() {
             this.destination = this.$route.params.destination ;
         },
@@ -48,29 +39,11 @@
                     console.log(errors);
                     this.error = true
                 })
-                setTimeout( () =>{
+                setTimeout( function() {
                     this.$store.dispatch('update_logged', this.$auth.check())
                 }, 1000)
                 this.$store.dispatch('set_auth', this.input)
             }
-             /*  this.$http.post('/api/login_check',
-                    {
-                        '_username': this.username,
-                        '_password': this.password }
-                ).catch(error=>{
-
-                    console.log('***************** ' + error + ' ******************')
-                    this.error= true
-                })
-                    .then(response=>{
-                        this.error=false ;
-                    if (response.status === 200){
-                        console.log('connexion ok (' + response.status + ')')
-                        console.log('** ' + response.data.token + ' **')
-                        this.$store.dispatch('login', response.data.token)
-                    }
-                })
-            }*/
         }
     }
 

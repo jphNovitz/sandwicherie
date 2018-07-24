@@ -4,6 +4,9 @@
         {{user.username}} <br />
             {{user.last_name}} {{user.first_name}}
         </p>
+        <p>
+            {{user.phone}}
+        </p>
     </div>
 
 </template>

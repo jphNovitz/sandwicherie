@@ -100,8 +100,14 @@
         opacity: 0;
     }
     @media (min-width: 502px) {
+        #cta-wrapper {
+            height: calc(50vw / 1.91);
+            width: 50vw;
+        }
+
         #cta-wrapper .header{
             font-size: 2.8rem;
+
         }
 
         #cta-wrapper .ui.button{
@@ -117,18 +123,18 @@
             font-size: 2.5rem ;
         }
     }
-    @media (min-width: 1200px) {
+  /*  @media (min-width: 1200px) {*/
 
        /* #cta-wrapper {
             height: 65vh;
             width: calc(65vh*1.908);
         }*/
-        #cta-wrapper .header{
+/*        #cta-wrapper .header{
             font-size: 4.8rem;
         }
 
         #cta-wrapper .ui.positive.button, .ui.positive.buttons .button{
             font-size: 3rem ;
         }
-    }
+    }*/
 </style>
