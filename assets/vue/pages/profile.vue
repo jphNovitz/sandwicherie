@@ -1,80 +1,75 @@
 <template>
     <div>
-        <p>
-        {{user.username}} <br />
-            {{user.last_name}} {{user.first_name}}
-        </p>
-        <p>
-            {{user.phone}}
-        </p>
+        <flash-message />
+        <sui-list horizontal>
+            <sui-list-item >
+                <a @click="setComponent('userDetails'), setActive('userDetails')"
+                   :class="{ active: isActive('userDetails') }" >
+                    Mon Profil
+                </a>
+            </sui-list-item>
+            <sui-list-item>
+                <a @click="setComponent('userFavorites'), setActive('userFavorites')"
+                   :class="{ active: isActive('userFavorites') }">
+                Mes favoris
+                </a>
+            </sui-list-item>
+            <sui-list-item>
+                <a @click="setComponent('userDiscoveries'), setActive('userDiscoveries')"
+                    :class="{ active: isActive('userDiscoveries') }">
+                    Mes découvertes
+                </a>
+            </sui-list-item>
+            <sui-list-item>
+                <a @click="setComponent('userOrders'), setActive('userOrders')"
+                :class="{ active: isActive('userOrders') }">
+                    mes commandes
+                </a> </sui-list-item>
+        </sui-list>
+
+        <component :is="userComponent" :user="user"></component>
     </div>
 
 </template>
 <script>
-    import securityCheck from '../mixins/securityCheck'
+    import flashMessage from '../components/Messages/flashMessage' ;
+    import securityCheck from '../mixins/securityCheck' ;
+    import userDetails from '../components/User/userDetails'
+    import userFavorites from '../components/User/userFavorites'
+    import userDiscoveries from '../components/User/userdiscoveries'
+    import userOrders from '../components/User/userOrders'
+
     export default {
         name: 'profile',
         mixins: [securityCheck],
+        components: {flashMessage, userDetails, userFavorites, userDiscoveries, userOrders},
         data (){
             return{
-                user: {}
+               userComponent: 'userDetails',
+                active: null
             }
         },
-        watch: {
-            mixin_user: function () {
-                this.user =  JSON.parse(this.mixin_user)
+        computed: {
+            // user: function () {
+            //     return this.mixin_user;
+            // }
+    },
+        methods: {
+            setComponent: function (name) {
+                this.userComponent = name ;
+            },
+            isActive: function (item) {
+                return this.active === item
+            },
+            setActive: function (item) {
+                this.active = item
             }
         }
-            /*,
-        computed: {
-            auth: function () {
-                return this.$store.getters.get_auth;
-            },
-
-        },
-        mounted () {
-            if (this.$auth.check()){
-                this.$http.get('http://localhost:8000/api/s/profile').then(response => {
-                    console.log(response)
-                    let user = response.bodyText
-                    console.log('******* '+user+' *********')
-                    this.user = user
-                    this.$store.dispatch('set_user', user)
-
-                }, response => {
-                    console.log(response)
-                    if (response.status === 401) {
-                        if (this.auth.length > 0){
-                            send()
-                            {
-                                this.$auth.login(this, this.input, "menu", (errors) => {
-                                    console.log(errors);
-                                    this.$store.dispatch('update_logged', false)
-                                    router.push({ name: 'login', params: {destination: 'profil'}})
-                                })
-                            }
-                            router.push({ name: 'profile', params: {}})
-                        } else {
-
-                            this.$store.dispatch('update_logged', false)
-                            this.$router.push({ name: 'login', params: {destination: 'profil'}})
-                        }
-                    }
-            });
-            } else {
-                this.$router.push({name: 'login', params: {destination: 'profil'}}) ;
-
-            }
-        },
-      methods: {
-          send(input, destination = null) {
-              this.$auth.login(this, input, destination , (errors) => {
-                  console.log(errors);
-              })
-      }
-     }*/
     }
 </script>
 <style>
-
+.active{
+    background-color: #cecece;
+    color: floralwhite;
+}
 </style>
