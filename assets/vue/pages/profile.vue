@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <sui-container>
+
         <flash-message />
         <sui-list horizontal>
             <sui-list-item >
@@ -27,8 +28,8 @@
                 </a> </sui-list-item>
         </sui-list>
 
-        <component :is="userComponent" :user="user"></component>
-    </div>
+        <component :is="userComponent" :user="user" class="sixteen wide column"></component>
+    </sui-container>
 
 </template>
 <script>

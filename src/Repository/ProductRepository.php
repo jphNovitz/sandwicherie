@@ -48,4 +48,15 @@ class ProductRepository extends ServiceEntityRepository
            ->getArrayResult()
             ;
     }
+
+    public function findFavorites($id){
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.images', 'images')
+            ->leftJoin('p.likedBy', 'l')
+            ->addSelect('p, images, partial l.{id}')
+            ->andWhere('l.id = :user')
+            ->setParameter('user', $id)
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

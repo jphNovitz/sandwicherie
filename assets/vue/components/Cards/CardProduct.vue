@@ -2,19 +2,20 @@
              <sui-card >
 
 
-               <sui-image :src="imageName" />
+               <sui-image :src="imageName" v-if="imageName"/>
+               <img src="./no-photo-01.png" class="ui image" v-else/>
                 <sui-card-content>
                     <router-link :to="{ name: 'detail', params: { slug: product.slug }}">
                         <sui-card-header>
                              {{product.name}}
                         </sui-card-header>
                     </router-link>
-                    <sui-card-meta>{{product.price}} €</sui-card-meta>
+                    <sui-card-meta huge class="orange">{{product.price}} €</sui-card-meta>
                     <sui-card-description>
                         {{product.description}}
                     </sui-card-description>
                 </sui-card-content>
-                 <sui-card-content extra>
+                 <sui-card-content extra v-if="userID">
                      <input v-model.number="in_cart" type="number" @click="add_cart()"  style="width: 2rem" v-if="in_cart"/>
                     <sui-button animated="vertical" color="orange"  @click="in_cart++ ; add_cart()" v-if="!in_cart">
                         <sui-button-content hidden>ajouter</sui-button-content>
@@ -33,7 +34,7 @@
     import  axios from 'axios'
     export default {
         name: 'CardProduct',
-        props: ['product', 'group'],
+        props: ['product', 'group', 'user'],
         data() {
             return {
                // base_api: 'http://localhost:8000/api/',
@@ -45,8 +46,20 @@
             imageName: function (){
                 let elm = this.product;
                 let imageName = elm.images[0].image_name;
-                console.log(imageName)
-                return  'images/products/' + imageName;
+                if ( imageName !== undefined) {
+                    return  'images/products/' + imageName;
+                } else {
+                    return false ;
+                }
+
+            },
+            userID: function(){
+                if (this.user) {
+                    return this.user.userID;
+                }
+            },
+            username: function () {
+                return this.user.username;
             }
         },
         methods: {
@@ -60,25 +73,31 @@
                 this.$store.dispatch('update_cart', {'item': this.product, 'qty': this.in_cart});
             },
             likes: function () {
-                // this must be changed
-                let userID = 1;
-
                 return this.product.liked_by.filter(like => {
-                    return like.id === userID
+                    return like.id === this.userID
                 }).length
             },
             likeAction: function () {
-                let userID = 1;
-                let username='totolehero'  // this MUST BE CHANGED
-                axios.patch(/*this.base_api+*/'/api/products/'+this.product.slug+'/like/'+username).then((response) => {
+                axios.patch(/*this.base_api+*/'/api/products/'+this.product.slug+'/like/'+this.username).then((response) => {
                     //let obj = this.group.filter(p=> p.slug === this.product.slug)
-
                     this.$store.dispatch('call_products')
                 })
             }
         }
     }
 </script>
-<style>
-
+<style scoped>
+.ui.card {
+        border-radius: 1rem !important;
+}
+.ui.card>.image, .ui.cards>.card>.image {
+        border-radius: 1rem !important;
+}
+.orange {
+    color: orangered !important;
+}
+.meta {
+    font-size: 1.5rem !important;
+    font-weight: bold;
+}
 </style>
