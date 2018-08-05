@@ -1,30 +1,17 @@
 <template>
 <div>
+    <flash-message />
     <section class="ui middle aligned centered grid container">
-        <call-to-action> </call-to-action>
-    </section>
-   <!-- <section  class="ui stackable grid">
-        <aside class="six wide column middle aligned">
-            <p>
-                    <span class="emph">
-                        <i class="ui quote left icon"></i>
-                            Ouvert 6 jours sur sept
-                            <br /> jusque 15h
-                        <i class="ui quote right icon"></i>
-                    </span>
-            </p>
-            <p> La sandwicherie 'La Clémentine' vous reçoit de 8:30 à 15:00 du lundi au vendredi,
-                de 11:30 à 15h le samedi.
-            </p>
-            <p>
-                Le parking est aisé, vous avez la possibilité de payer par bancontact
-            </p>
-        </aside>
-        <Map class="ten wide column middle aligned" > </Map>
-    </section> -->
-    <section class="ui middle aligned grid container">
+       <article class="ui middle aligned centered grid cta-full-width">
+           <call-to-action> </call-to-action>
+       </article>
         <Search-Product></Search-Product>
         <Suggestions> </Suggestions>
+        <introduction></introduction>
+    </section>
+
+    <section class="ui middle aligned grid container">
+
     </section>
 </div>
 </template>
@@ -33,15 +20,17 @@
     import CallToAction from '../components/CallToAction/CallToAction'
     import Suggestions from '../components/Suggestions/Suggestions'
     import SearchProduct from '../components/SearchProduct/SearchProduct'
-    import Map from '../components/Map/Map'
+    import Introduction from '../components/Introduction/Introduction'
+    import FlashMessage from '../components/Messages/flashMessage'
 
     export default {
         name: 'home',
         components: {
+            FlashMessage,
             CallToAction,
             Suggestions,
             SearchProduct,
-            Map
+            Introduction,
         },
         data(){
             return {}
@@ -49,3 +38,22 @@
     }
 
 </script>
+
+<style scoped>
+    @media (min-width: 502px) {
+        .cta-full-width {
+            background-color: #efbc72 ;
+            width: 100vw ;
+            padding: 25vh 0;
+            overflow: -webkit-paged-x;
+            overflow-y: auto;
+            background-image: url("./rawpixel-623444-unsplash.jpg");
+            background-position: bottom left;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    }
+
+
+
+</style>

@@ -17,7 +17,7 @@
                 </sui-table-header>
 
                 <sui-table-body>
-                    <sui-table-row v-for="(key, value) in list">
+                    <sui-table-row v-for="(key, value) in list" :key="key">
                         <sui-table-cell>{{value}}</sui-table-cell>
                         <sui-table-cell><span v-for="item in key"> {{item}}</span></sui-table-cell>
                     </sui-table-row>

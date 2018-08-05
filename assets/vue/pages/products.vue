@@ -1,8 +1,7 @@
 <template>
 <div>
-
-    <sui-grid >
-        <sui-grid-row>
+    <sui-grid container>
+        <sui-grid-row class="stackable">
             <sui-grid-column :width="2">
                 <h3>Allergies</h3>
                 <sui-list>
@@ -10,7 +9,8 @@
                             v-for="allergy in allergies"
                             :key="allergy.id"
                             @click="changeAllergies(allergy.id)">
-                        {{allergy.name}}
+                        <sui-button basic color="green" v-if="!check_allergy(allergy.id)">{{allergy.name}}</sui-button>
+                        <sui-button color="orange" :content="allergy.name" v-else />
                     </sui-list-item>
                 </sui-list>
             </sui-grid-column>
@@ -28,9 +28,14 @@
                 </sui-menu>
 
                 <sui-card-group stackable :items-per-row="3">
-                   <card-product v-for="product in products"
-                                 :product="product" :group="'products'">
+                   <card-product v-if="products.length>0"
+                                 v-for="product in products"
+                                 :product="product"
+                                 :group="'products'"
+                                 :key="product.slug"
+                                 :user="user_cred">
                    </card-product>
+                    <p v-if="products.length===0">Aucun produit trouvé, appelez nous !</p>
                 </sui-card-group>
             </sui-grid-column>
         </sui-grid-row>
@@ -41,9 +46,11 @@
 <script>
 
     import  cardProduct from '../components/Cards/CardProduct';
+    import userCheck from '../mixins/userCheck';
 
     export default {
         name: 'products',
+        mixins: [userCheck],
         components: {
             'card-product': cardProduct
         },
@@ -54,7 +61,23 @@
                 allergiesList: []
             }
         },
+        created() { console.log(Object.keys(this.user).length)},
         computed: {
+            user_cred: function(){
+                if(Object.keys(this.user).length > 0){
+                    return {'userID': this.user.id, 'username': this.user.username }
+                } else {
+                    return false ;
+                }
+            },
+            // user: function (){
+            //     console.log(this.$store.getters.get_user)
+            //     if (Object.keys(this.$store.getters.get_user).length > 0) {
+            //         return this.$store.getters.get_user ;
+            //     } else {
+            //         return {}
+            //     }
+            // },
             all_products: function () {
                 return this.$store.getters.products
             },
@@ -129,6 +152,12 @@
 
         },
         methods: {
+            check_allergy: function(a){
+              // check if allergy is in list
+              if (this.allergiesList.length > 0){
+                  return (this.allergiesList.indexOf(a) > -1) ;
+              } else { return false ; }
+            },
             return_name: function (elm) {
                 let imageName = elm.images[0].image_name
                 return "/images/products/" + imageName
@@ -149,6 +178,9 @@
 
 </script>
 <style scoped>
+    .ui .header {
+        font-size: 1.7rem !important;
+    }
     .ui.card>.image, .ui.cards>.card>.image{
         border-radius: 20% !important;
     }
