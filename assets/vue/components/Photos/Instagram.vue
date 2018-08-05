@@ -22,10 +22,11 @@
 </template>
 
 <script>
-
+import axios from 'axios'
     export default {
         name: 'Instagram',
         props: ['count', 'cols'],
+        components: {axios},
         data() {
             return{
                 access_token: '5919541710.5106335.21ac2fd8bfd644c2a0390d5a081ca6cb',
@@ -38,14 +39,16 @@
         computed: {
         },
         created() {
-            this.$http.get(this.base_url+'users/self/media/recent',
+
+            axios.get(this.base_url+'users/self/media/recent',
                 {params:  {
                         access_token: this.access_token,
-                        count: this.count}} )
+                        count: this.count}
+                } )
                 .then(response => {
                     //this.images =  response.body
                     console.log(response)
-                    let raw = response.body.data
+                    let raw = response.data.data
                     raw.map(object=>{
                         let image ={}
                         image.src = object.images.standard_resolution.url;
@@ -57,7 +60,7 @@
 
                     })
 
-                    console.log(response.body.data)
+                    console.log(response.data.data)
                 }, response => {
                     console.log(response)
                 });
