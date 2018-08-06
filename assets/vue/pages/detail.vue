@@ -35,6 +35,15 @@
                     </sui-grid-row>
                 </sui-grid>
                  </div>
+                     <div v-if="userID">
+                         <input v-model.number="in_cart" type="number" @click="add_cart(product)"  style="width: 4rem" v-if="in_cart"/>
+                         <sui-button  icon="cart plus" content="Ajouter au panier" circular @click="in_cart++ ; add_cart(product)" v-if="!in_cart" />
+
+                        <br /> <sui-button  circular content="J'aime" icon="heart outline"  v-if="!likes()" @click="likeAction()" />
+                        <br /> <sui-button circular content="Je n'aime plus" color="pink" icon="heart" v-if="likes()" @click="likeAction()" />
+                        <br /> <sui-button circular content="A découvrir" icon="thumbtack"  />
+                     </div >
+
             </sui-grid-column>
             <sui-grid-column :width="10">
 
@@ -89,10 +98,12 @@
 </template>
 
 <script>
-
+    import usercheck from '../mixins/userCheck'
+    import order from '../mixins/order'
     import AllergiesFinder from '../components/AllergiesFinder/AllergiesFinder'
     export default {
         name: 'detail',
+        mixins: [usercheck, order],
         components: {AllergiesFinder},
         data() {
             return {
