@@ -15,10 +15,10 @@
                     </sui-table-row>
                 </sui-table-header>
                 <sui-table-body>
-                    <sui-table-row v-for="item in cart.items"  :key="item.id">
-                        <sui-table-cell>{{item.qty}}</sui-table-cell>
-                        <sui-table-cell>{{item.product.name}}</sui-table-cell>
-                        <sui-table-cell>{{item.product.price}}</sui-table-cell>
+                    <sui-table-row v-for="element in this.cart.items"  :key="element.id">
+                        <sui-table-cell>{{element.qty}}</sui-table-cell>
+                        <sui-table-cell>{{element.item.name}}</sui-table-cell>
+                        <sui-table-cell>{{element.item.price}}</sui-table-cell>
                         <sui-table-cell>-</sui-table-cell>
                     </sui-table-row>
                 </sui-table-body>
@@ -73,7 +73,7 @@ export default {
                     .catch(function (error) {
                         console.log(error);
                     });
-            }  
+            }
         }
     }
 
