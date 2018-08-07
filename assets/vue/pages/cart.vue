@@ -11,18 +11,35 @@
                         <sui-table-header-cell>Qté</sui-table-header-cell>
                         <sui-table-header-cell>Produit</sui-table-header-cell>
                         <sui-table-header-cell>P.U</sui-table-header-cell>
-                        <sui-table-header-cell>Total</sui-table-header-cell>
+                        <sui-table-header-cell>Pain</sui-table-header-cell>
+                        <sui-table-header-cell>Crudités</sui-table-header-cell>
+                        <sui-table-header-cell>Halal</sui-table-header-cell>
                     </sui-table-row>
                 </sui-table-header>
                 <sui-table-body>
-                    <sui-table-row v-for="element in this.cart.items"  :key="element.id">
-                        <sui-table-cell>{{element.qty}}</sui-table-cell>
-                        <sui-table-cell>{{element.item.name}}</sui-table-cell>
-                        <sui-table-cell>{{element.item.price}}</sui-table-cell>
-                        <sui-table-cell>-</sui-table-cell>
+                    <sui-table-row v-for="(element, indice) in this.definitive_cart"  :key="indice">
+                        <sui-table-cell>1</sui-table-cell>
+                        <sui-table-cell>{{element.name}}</sui-table-cell>
+                        <sui-table-cell>{{element.price}}</sui-table-cell>
+                        <sui-table-cell v-if="breads[element.slug]">
+                            <select v-model="definitive_cart[indice].bread">
+                                <option disabled value="">Choisissez</option>
+                                <option v-for="(bread, i) in breads[element.slug]" :key="i">{{bread}}</option>
+                            </select>
+                        </sui-table-cell>
+                        <sui-table-cell v-if="vegetables[element.slug]">
+                            <select v-model="definitive_cart[indice].vegetables">
+                                <option disabled value="">Choisissez</option>
+                                <option v-for="(vege, i) in vegetables[element.slug]" :key="i">{{vege}}</option>
+                            </select>
+                        </sui-table-cell>
+                        <sui-table-cell>
+                            <input type="checkbox" id="halal[indice]" v-model="definitive_cart[indice].halal">
+                        </sui-table-cell>
                     </sui-table-row>
                 </sui-table-body>
             </sui-table>
+            <p>total de la commande: {{total}}</p>
 
             <sui-button @click="validate" >Valider  </sui-button>
 
@@ -38,7 +55,13 @@ export default {
         name: 'cart',
         components: {},
         data(){
-            return {}
+            return {
+                definitive_cart: [],
+                breads : {},
+                vegetables: {},
+                total : 0,
+
+            }
         },
         computed: {
             url: function(){
@@ -49,6 +72,31 @@ export default {
                 if (cart.items.length > 0) { return cart }
                 else { return null}
             }
+            // ,
+            // definitive_cart: function () {
+            //     let  definitive= []
+            //     this.cart.items.forEach(it =>{
+            //         let tmp = {} ;
+            //
+            //         it.item.breads.forEach(bread =>{
+            //             this.breads[it.item.slug] =[]
+            //             this.breads[it.item.slug].push(bread.name)
+            //         })
+            //
+            //         for (let i = 0 ; i< it.qty ; i++){
+            //             tmp.slug = it.item.slug ;
+            //             tmp.name = it.item.name ;
+            //             tmp.bread = '' ;
+            //             tmp.price = it.item.price ;
+            //             this.total += it.item.price;
+            //             definitive.push(tmp) ;
+            //         }
+            //         //definitive[it.item.slug]=tmp ;
+            //
+            //     })
+            //     return definitive;
+            // }
+
         },
         methods:{
             validate: function () {
@@ -74,7 +122,36 @@ export default {
                         console.log(error);
                     });
             }
+        },
+        mounted() {
+        let  definitive = [] ;
+        this.cart.items.forEach(it =>{
+            let tmp = {} ;
+            it.item.breads.forEach(bread =>{
+                this.breads[it.item.slug] =[]
+                this.breads[it.item.slug].push(bread.name)
+            })
+
+            it.item.vegetables.forEach(vege =>{
+                this.vegetables[it.item.slug] =[]
+                this.vegetables[it.item.slug].push(vege.name)
+            })
+
+            for (let i = 0 ; i< it.qty ; i++){
+                tmp.slug = it.item.slug ;
+                tmp.name = it.item.name ;
+                tmp.bread = '' ;
+                tmp.vegetables = '' ;
+                tmp.halal = false ;
+                tmp.price = it.item.price ;
+                this.total += it.item.price;
+                definitive.push(tmp) ;
+            }
+
+        })
+        this.definitive_cart =  definitive;
         }
+
     }
 
 </script>
