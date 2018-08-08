@@ -49,10 +49,11 @@
 </template>
 
 <script>
-import axios from 'axios'
+    import userCheck from '../mixins/userCheck'
 
 export default {
         name: 'cart',
+        mixins: [userCheck],
         components: {},
         data(){
             return {
@@ -72,47 +73,15 @@ export default {
                 if (cart.items.length > 0) { return cart }
                 else { return null}
             }
-            // ,
-            // definitive_cart: function () {
-            //     let  definitive= []
-            //     this.cart.items.forEach(it =>{
-            //         let tmp = {} ;
-            //
-            //         it.item.breads.forEach(bread =>{
-            //             this.breads[it.item.slug] =[]
-            //             this.breads[it.item.slug].push(bread.name)
-            //         })
-            //
-            //         for (let i = 0 ; i< it.qty ; i++){
-            //             tmp.slug = it.item.slug ;
-            //             tmp.name = it.item.name ;
-            //             tmp.bread = '' ;
-            //             tmp.price = it.item.price ;
-            //             this.total += it.item.price;
-            //             definitive.push(tmp) ;
-            //         }
-            //         //definitive[it.item.slug]=tmp ;
-            //
-            //     })
-            //     return definitive;
-            // }
-
         },
         methods:{
             validate: function () {
                 const box = {
-                    user: 'totolehero',
-                    items: []
+                    user: this.user,
+                    items: this.definitive_cart
                 }
-                this.cart.items.filter(i=>{
-                    let item_temp = {}
-                    item_temp.slug=  i.product.slug
-                    item_temp.qty = i.qty
-                    box.items.push(item_temp)
-                })
-
                 console.log(JSON.stringify(box))
-                axios.post(this.url, {
+                this.$http.post(this.url).then(response => {
                     cart: JSON.stringify(box)
                 })
                     .then(function (response) {

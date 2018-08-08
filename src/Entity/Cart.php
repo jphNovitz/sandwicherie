@@ -36,9 +36,10 @@ class Cart
 
     /**
      * @var ArrayCollection $items
-     * @ORM\ManyToMany(targetEntity="App\Entity\Item", cascade={"persist", "remove"})
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Item")
      */
-    private $items;
+     private $items ;
 
     /**
      * @var string $user
@@ -101,9 +102,9 @@ class Cart
     }
 
     /**
-     * @return ArrayCollection
+     * @return string
      */
-    public function getItems(): ArrayCollection
+    public function getItems(): string
     {
         return $this->items;
     }
@@ -114,6 +115,8 @@ class Cart
     public function addItem($item)
     {
         $this->items->add($item);
+        // uncomment if you want to update other side
+        //$item->setCart($this);
     }
 
     /**
@@ -122,7 +125,10 @@ class Cart
     public function removeItem($item)
     {
         $this->items->removeElement($item);
+        // uncomment if you want to update other side
+        //$item->setCart(null);
     }
+
 
     /**
      * @return string

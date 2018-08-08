@@ -23,7 +23,7 @@ class UserTemp implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=45, unique=true)
      * @Assert\NotBlank(message="Ce champs est obligatoire")
-     * @Assert\Length(min="5", max="20", minMessage="Username au moins cinq caractères", maxMessage="trop looongs")
+     * @Assert\Length(min="5", max="45", minMessage="Username au moins cinq caractères", maxMessage="trop looongs")
      */
     private $username;
 
