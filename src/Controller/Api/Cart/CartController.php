@@ -5,6 +5,7 @@ namespace App\Controller\Api\Cart;
 
 use App\Entity\Cart;
 use App\Entity\Item;
+use App\Model\CustomPersisterInterface;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
 use App\Service\SocketNotifier;
@@ -26,7 +27,7 @@ class CartController extends FOSRestController
     protected $em;
     protected $notifier;
     public function __construct(CustomObjectLoader $customObjectLoader,
-                                CustomPersister $customPersister,
+                                CustomPersisterInterface $customPersister,
                                 ContainerInterface $container,
                                 EntityManagerInterface $entityManager, SocketNotifier $notifier)
     {
@@ -43,20 +44,34 @@ class CartController extends FOSRestController
     {
 
         $cart = new Cart();
-        $line = new Item();
         $box = json_decode($request->get('cart'));
         $username = $box->user;
         $user = $this->em = $this->get('doctrine.orm.entity_manager')
             ->getRepository('App:User')->loadUserByUsername($username);
 
-            foreach ($box->items  as $item) {
-               $product=$this->customLoader->LoadOne('App:Product', $item->slug);
+            foreach ($box->items  as $item)
+            {
+                $line = new Item();
+                $product=$this->customLoader->LoadOne('App:Product', $item->slug);
                 $line->setProduct($product);
-                $line->setQuantity($item->qty);
+                $line->setPrice($item->price);
+                $line->setBread($item->bread);
+                $line->setHalal($item->halal);
+                $line->setQty(1);
+                if (is_array($item->vegetables))
+                {
+                    foreach ($item->vegetables as $vege) {
+                        $line->addVegetable($vege);
+                        }
+                 }
                 $cart->addItem($line);
             }
 
         $cart->setClient($user);
+//           $em = $this->get('doctrine.orm.default_entity_manager');
+//           $em->persist($cart);
+//           $em->flush();
+//die('hello');
 
         if ($this->customPersister->insert($cart)){
             $result=$cart;
@@ -69,7 +84,7 @@ class CartController extends FOSRestController
 
         $hateoas = HateoasBuilder::create()->build();
         $json = $hateoas->serialize($result, 'json');
-        $this->notifier->notify('notification', ['commande'=>$json]);
+        //$this->notifier->notify('notification', ['commande'=>$json]);
         $response = new Response($json, $status, array('application/json'));
         $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
         $response->headers->set('Access-Control-Allow-Origin', '*');

@@ -43,7 +43,7 @@ class Item
 
     /**
      * @var Product
-     * @ORM\OneToOne(targetEntity="App\Entity\Product", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product", cascade={"persist"})
      *
      */
     private $product;
