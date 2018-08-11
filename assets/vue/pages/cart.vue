@@ -17,24 +17,27 @@
                     </sui-table-row>
                 </sui-table-header>
                 <sui-table-body>
-                    <sui-table-row v-for="(element, indice) in this.definitive_cart"  :key="indice">
+                    <sui-table-row v-for="(element, index) in definitive_cart"  :key="index" >
+
                         <sui-table-cell>1</sui-table-cell>
                         <sui-table-cell>{{element.name}}</sui-table-cell>
                         <sui-table-cell>{{element.price}}</sui-table-cell>
                         <sui-table-cell v-if="breads[element.slug]">
-                            <select v-model="definitive_cart[indice].bread">
+                            <select :options="breads[element.slug]" v-model="definitive_cart[index].bread">
                                 <option disabled value="">Choisissez</option>
                                 <option v-for="(bread, i) in breads[element.slug]" :key="i">{{bread}}</option>
                             </select>
                         </sui-table-cell>
                         <sui-table-cell v-if="vegetables[element.slug]">
-                            <select v-model="definitive_cart[indice].vegetables">
+                            <select id="vagetables[indice]" v-model="definitive_cart[index].vegetables" multiple>
                                 <option disabled value="">Choisissez</option>
                                 <option v-for="(vege, i) in vegetables[element.slug]" :key="i">{{vege}}</option>
                             </select>
                         </sui-table-cell>
                         <sui-table-cell>
-                            <input type="checkbox" id="halal[indice]" v-model="definitive_cart[indice].halal">
+
+                            <input type="checkbox" id="definitive_cart[index].halal" v-model="definitive_cart[index].halal">
+
                         </sui-table-cell>
                     </sui-table-row>
                 </sui-table-body>
@@ -77,25 +80,24 @@ export default {
         methods:{
             validate: function () {
                 const box = {
-                    user: this.user,
+                    user: this.user.username,
                     items: this.definitive_cart
-                }
-                console.log(JSON.stringify(box))
-                this.$http.post(this.url).then(response => {
-                    cart: JSON.stringify(box)
-                })
-                    .then(function (response) {
+                };
+                console.log(JSON.stringify(box)) ;
+                    this.$http.post(this.url, {cart: JSON.stringify(box)}).then(response => {
+                        console.log('order persisted ok');
                         console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
+                        this.$router.push({ name: 'home'})
+                    }, response => {
+                        console.log(response.data);
                     });
             }
         },
         mounted() {
         let  definitive = [] ;
-        this.cart.items.forEach(it =>{
-            let tmp = {} ;
+        let index = 0 ;
+            this.cart.items.map(it =>{
+//        this.cart.items.forEach(it =>{
             it.item.breads.forEach(bread =>{
                 this.breads[it.item.slug] =[]
                 this.breads[it.item.slug].push(bread.name)
@@ -107,20 +109,12 @@ export default {
             })
 
             for (let i = 0 ; i< it.qty ; i++){
-                tmp.slug = it.item.slug ;
-                tmp.name = it.item.name ;
-                tmp.bread = '' ;
-                tmp.vegetables = '' ;
-                tmp.halal = false ;
-                tmp.price = it.item.price ;
-                this.total += it.item.price;
+                let tmp = Object.assign({}, it.item);
                 definitive.push(tmp) ;
             }
-
         })
         this.definitive_cart =  definitive;
         }
-
     }
 
 </script>
