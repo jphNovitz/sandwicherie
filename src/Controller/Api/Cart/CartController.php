@@ -38,6 +38,23 @@ class CartController extends FOSRestController
     }
 
     /**
+     * @Get("orders", name="orders_list")
+     */
+    public function list(Request $request) {
+        $result =  $this->get('doctrine.orm.default_entity_manager')
+                ->getRepository('App:Cart')
+                ->findAllOrders();
+        $status = 200;
+        $hateoas = HateoasBuilder::create()->build();
+        $json = $hateoas->serialize($result, 'json');
+        $response = new Response($json, $status, array('application/json'));
+        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET');
+        return ($response);
+    }
+
+    /**
      * @Post("cart", name="cart_new")
      */
     public function post(Request $request)
@@ -68,10 +85,6 @@ class CartController extends FOSRestController
             }
 
         $cart->setClient($user);
-//           $em = $this->get('doctrine.orm.default_entity_manager');
-//           $em->persist($cart);
-//           $em->flush();
-//die('hello');
 
         if ($this->customPersister->insert($cart)){
             $result=$cart;

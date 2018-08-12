@@ -13,6 +13,21 @@ class CartRepository extends ServiceEntityRepository
         parent::__construct($registry, Cart::class);
     }
 
+    public function findAllOrders(){
+        return $this->createQueryBuilder('c')
+            ->addSelect('partial c.{id}')
+             ->leftJoin('c.items', 'items')
+             ->addSelect('partial items.{id, halal, bread, vegetables}')
+             ->leftJoin('items.product', 'prod')
+             ->addSelect('partial prod.{id, slug, name}')
+             ->leftJoin('c.client', 'client')
+             ->addSelect('partial client.{id, username, firstName, lastName, phone, email, street, streetNr, city}')
+
+            ->getQuery()
+            ->getArrayResult()
+            ;
+
+    }
     /*
     public function findBySomething($value)
     {
