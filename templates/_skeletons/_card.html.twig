@@ -8,8 +8,10 @@
                 <div class="image">
                     {% block object_image  %}
                         {#  is case of one to many relation this have to be overidden #}
-                        {% if object.images is not null %}
+                        {% if (object.images is defined) and (object.images is not null) %}
                             <img src="{{ asset('images/'~object|entity~'/'~object.images[0].imageName) }}">
+                            {%  elseif  object.imageName is not null %}
+                                <img src="{{ asset('images/'~object|entity~'/'~object.imageName) }}" style="width: 125px">
                         {% endif%}
                     {% endblock %}
 

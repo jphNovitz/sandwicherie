@@ -23,7 +23,7 @@
         <ul>
             {% for category in allergy.categories %}
                 <li><a href="{{ path('categories_show', {'slug': category.slug}) }}">
-                        {{ ingredient.name }}
+                        {{ category.name }}
                     </a></li>
             {% endfor %}
         </ul>
