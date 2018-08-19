@@ -6,8 +6,9 @@ import SuiVue from 'semantic-ui-vue';
 import 'semantic-ui-css/semantic.css';
 Vue.config.extractCss = true;
 import Dashboard from './Dashboard';
+import VueResource from 'vue-resource';
 
-
+Vue.prototype.$http = VueResource;
 Vue.use(VueSocketio, 'http://localhost:5000');
 
 //Vue.use(Vuex)

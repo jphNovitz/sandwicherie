@@ -19,10 +19,11 @@ class CartRepository extends ServiceEntityRepository
              ->leftJoin('c.items', 'items')
              ->addSelect('partial items.{id, halal, bread, vegetables}')
              ->leftJoin('items.product', 'prod')
-             ->addSelect('partial prod.{id, slug, name}')
+             ->addSelect('partial prod.{id, slug, name, price}')
              ->leftJoin('c.client', 'client')
              ->addSelect('partial client.{id, username, firstName, lastName, phone, email, street, streetNr, city}')
-
+            ->andWhere('c.done = true')
+            ->addOrderBy('c.created', 'ASC')
             ->getQuery()
             ->getArrayResult()
             ;
