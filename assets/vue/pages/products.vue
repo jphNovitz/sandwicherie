@@ -8,7 +8,7 @@
                     <sui-list-item
                             v-for="allergy in allergies"
                             :key="allergy.id"
-                            @click="changeAllergies(allergy.id)">
+                            @click="changeAllergies(allergy.id, allergy.slug)">
                         <sui-button basic color="green" v-if="!check_allergy(allergy.id)">{{allergy.name}}</sui-button>
                         <sui-button color="orange" :content="allergy.name" v-else />
                     </sui-list-item>
@@ -47,6 +47,7 @@
 
     import  cardProduct from '../components/Cards/CardProduct';
     import userCheck from '../mixins/userCheck';
+    import list_allergies from '../Classes/Allergies_list'
 
     export default {
         name: 'products',
@@ -57,7 +58,7 @@
         data(){
             return {
                 activeType: '',
-                selected: null,
+                selected: [],
                 allergiesList: []
             }
         },
@@ -82,51 +83,85 @@
                 return this.$store.getters.products
             },
             products: function () {
-                let base = this.all_products.filter(ap=>{
-                    let list = []
-                    ap.ingredients.map(ing=>{
-                        if (this.blacklist.indexOf(ing.slug) > -1){
-                            list.push(ing.slug)
+                return this.all_products.filter(product=>{
+                    let flag = true ;
+                    product.ingredients.map(ing=>{
+                        if (this.blacklist.indexOf(ing.slug) > -1) {
+                            flag = false ;
                         }
-                        for (var i in ing) {
-                            for (var cat in i.categories) {
-                                if (this.blacklist.indexOf(cat.slug) > -1) {
-                                    list.push(cat.slug)
-                                }
+                        ing.categories.map(category=>{
+                            if (this.blacklist.indexOf(category.slug) > -1) {
+                                flag = false ;
                             }
+                        })
+                    })
+                    product.breads.map(bread=>{
+                        if (this.blacklist.indexOf(bread.slug) > -1) {
+                            flag = false ;
                         }
                     })
-                    return list.length  === 0
+                    product.vegetables.map(vege=>{
+                        if (this.blacklist.indexOf(vege.slug) > -1) {
+                            flag = false ;
+                        }
+                    })
+                    product.sauces.map(sauce=>{
+                        if (this.blacklist.indexOf(sauce.slug) > -1) {
+                            flag = false ;
+                        }
+                    })
+
+
+                    if (flag) {
+                        return product
+                    }
                 })
-                var stack = [];
-                if (this.selected === null) {
-                    return base /*this.all_products.filter(ap=>{
-                        let list = []
-                        ap.ingredients.map(ing=>{
-                            if (this.blacklist.indexOf(ing.slug) > -1){
-                                list.push(ing.slug)
-                            }
-                            for (var i in ing) {
-                                for (var cat in i.categories) {
-                                    if (this.blacklist.indexOf(cat.slug) > -1) {
-                                        list.push(cat.slug)
-                                    }
-                                }
-                            }
-                        })
-                        return list.length  === 0
-                    })*/
-                    //return this.all_products;
-                } else {
-                     base.map(item=>{
-                        item.types.map(type=>{
-                            if (type.id  === this.selected) {
-                                stack.push(item);
-                            }
-                        })
-                    })
-                }
-                return stack ;
+
+                // let base = this.all_products.filter(ap=>{
+                //     let list = []
+                //     ap.ingredients.map(ing=>{
+                //         if (this.blacklist.indexOf(ing.slug) > -1){
+                //             list.push(ing.slug)
+                //         }
+                //         for (var i in ing) {
+                //             for (var cat in i.categories) {
+                //                 if (this.blacklist.indexOf(cat.slug) > -1) {
+                //                     list.push(cat.slug)
+                //                 }
+                //             }
+                //         }
+                //     })
+                //     return list.length  === 0
+                // })
+                // var stack = [];
+                // if (this.selected === null) {
+                //     return base /*this.all_products.filter(ap=>{
+                //         let list = []
+                //         ap.ingredients.map(ing=>{
+                //             if (this.blacklist.indexOf(ing.slug) > -1){
+                //                 list.push(ing.slug)
+                //             }
+                //             for (var i in ing) {
+                //                 for (var cat in i.categories) {
+                //                     if (this.blacklist.indexOf(cat.slug) > -1) {
+                //                         list.push(cat.slug)
+                //                     }
+                //                 }
+                //             }
+                //         })
+                //         return list.length  === 0
+                //     })*/
+                //     //return this.all_products;
+                // } else {
+                //      base.map(item=>{
+                //         item.types.map(type=>{
+                //             if (type.id  === this.selected) {
+                //                 stack.push(item);
+                //             }
+                //         })
+                //     })
+                // }
+                // return stack ;
             },
             types: function() {
                 return this.$store.getters.types ;
@@ -134,20 +169,24 @@
             allergies: function(){
                 return this.$store.getters.allergies;
             },
-            blacklist: function(){
-                let filtered = this.allergies.filter(a =>{
-                    return  this.allergiesList.indexOf(a.id) > -1
-                })
-                let list =  []
-                filtered.map(fil => {
-                    fil.categories.map(cat =>{
-                        list.push(cat.slug)
-                    });
-                    fil.ingredients.map(ing =>{
-                        list.push(ing.slug)
+            blacklist: function () {
+                let list = [] ;
+                let bad = list_allergies(this.allergies)
+                this.selected.forEach(alist=>{
+                    bad[alist].forEach(i=>{
+                        list.push(i);
                     })
+
                 })
                 return list;
+                // let list = [] ;
+                // this.allergies.map(allergy=>{
+                //     list.push(allergy.slug) ;
+                //     allergy.ingredients.map(ingr=>{
+                //         list.push(ingr.slug)
+                //     })
+                // })
+                // return list;
             }
 
         },
@@ -165,12 +204,16 @@
             select: function (t) {
                 this.selection = t;
             },
-            changeAllergies: function (a) {
-               let pos = this.allergiesList.indexOf(a);
+            changeAllergies: function (id, slug) {
+               let pos = this.allergiesList.indexOf(id);
+               let posSel = this.selected.indexOf(slug);
+               console.log(pos)
                if (pos === -1) {
-                   this.allergiesList.push(a)
+                   this.allergiesList.push(id)
+                   this.selected.push(slug)
                } else {
                    this.allergiesList.splice(pos,1)
+                   this.selected.splice(posSel,1)
                }
             }
         }
