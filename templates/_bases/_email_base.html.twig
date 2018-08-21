@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Email La Clementine{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
+    <link href="{{ asset('build/css/front.css') }}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    <div class="ui sixteen column wide grid>">
+        <div class="centered row">
+            <div class="two column wide centered column">
+                <h2 class="ui icon header">
+                    <img src="{{ asset('images/logo_clementine_02.png') }}" />
+                    <div class="content">
+                        La CLémentine
+                        <div class="sub header">Sandwicherie artisanale</div>
+                    </div>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen wide column">
+                <h1>{% block title %} Title {% endblock %}</h1>
+            </div>
+            <div class="sixteen wide column">
+                {% block body  %} {% endblock %}
+            </div>
+            <div class="fourteen wide column">
+                {% block privacy %}
+                    <strong><u>La Clémentine vous informe concernant vos données personnelles</u></strong>
+                    <p>Vous venez de vous inscrire sur le site: 'La Clémentine'
+                    <br />Nous venons de vous demander un nom d'utilisateur, vos nom, prénom et adresse, un numero de téléphone et une adresse email.
+                    <br />En réalité on a juste besoin d'un nom d'utilisateur et d'une adresse email pour pouvoir vous connecter, un numéro de téléphone
+                        c'est mieux pour vous contacter.  Si on ne vous livre pas et si on ne vous facture pas l'adresse n'est pas nécéssaire et on ne
+                        vous demande pas de photo.</p>
+                    <p>Aucune des informations que vous nous fournissez n'est fournie à d'autre personnes ou entreprise.
+                        Ces données ne nous servirons uniquement à communiquer avec vos concernant vos commandes de sandwiches. A tout moment vous pouvez
+                        demander à supprimer votre profil définitivement. </p>
+
+                {% endblock %}
+            </div>
+            <div class="fourteen wide column">
+                {% block footer %}
+                    <h5>La Clémentine, sandwicherie artisanale
+                    <br />Pensez à nous pour l'organisation de vos énènement, anniversaires ou pour dîner au bureau.
+                    <br />Chaussée Roosvelt 101b (près du Lidl), 4420 Saint-Nicolas (Liège)
+                    <br />email: info@laclementine.be - Tél: +32468538605 - TVA: BE 0681.551.989</h5>
+
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
