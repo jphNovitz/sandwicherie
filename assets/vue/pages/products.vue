@@ -9,8 +9,8 @@
                             v-for="allergy in allergies"
                             :key="allergy.id"
                             @click="changeAllergies(allergy.id, allergy.slug)">
-                        <sui-button basic color="green" v-if="!check_allergy(allergy.id)">{{allergy.name}}</sui-button>
-                        <sui-button color="orange" :content="allergy.name" v-else />
+                        <sui-button fluid basic color="green" v-if="!check_allergy(allergy.id)">{{allergy.name}}</sui-button>
+                        <sui-button fluid color="orange" :content="allergy.name" v-else />
                     </sui-list-item>
                 </sui-list>
             </sui-grid-column>
