@@ -15,10 +15,12 @@ class SocketNotifier {
     }
 
     public function notify(String $type, Array $notification){
-        $client = new Client(new Version2X('http://localhost:5000'));
+
+        $client = new Client(new Version2X('http://localhost:5000') );
         $client->initialize();
-        $client->emit($type, ['notification'=>$notification]);
+        $client->emit($type, [$type=>$notification]);
         $client->close();
+        return true ;
     }
 
 
