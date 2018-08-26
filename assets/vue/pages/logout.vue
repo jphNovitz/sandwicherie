@@ -19,23 +19,15 @@
             }
         },
         mounted () {
-            console.log('***'+this.mixin_user+'******' )
-            if (this.$store.getters.user !== undefined ){
-                this.$store.dispatch('set_user', {})
-            }
-            if (this.$store.getters.is_logged === true){
+            this.$store.dispatch('set_user', {})
+            this.$store.dispatch('update_logged', false)
+            this.$auth.setToken(null);
+            if ((Object.keys(this.$store.getters.get_user).length === 0 ) &&
+                (this.$store.getters.is_logged === false) &&
+                (this.$auth.authenticated === false)){
                 this.$store.dispatch('update_logged', false)
+                this.$router.push({name: 'home', params: {}})
             }
-            if (this.$store.getters.get_auth === true){
-                this.$store.dispatch('set_auth', {})
-            }
-            this.mixin_user = {}
-            this.deconnected = true
-
-            setTimeout(function () {
-                this.$router.push({ name: 'home', params: {}})
-
-            }, 1500)
         }
     }
 </script>

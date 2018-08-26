@@ -25,6 +25,15 @@ class LoginController  extends Controller{
     }
 
     /**
+     * @Route("/api/login_check", name="login_check")
+     */
+    public function loginCheckAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('index.html.twig');
+    }
+
+    /**
      * @Route("/logout", name="logout")
      */
     public function logout(Request $request)

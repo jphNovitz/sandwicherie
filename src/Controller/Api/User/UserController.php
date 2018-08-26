@@ -11,6 +11,8 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Hateoas\Hateoas;
 use Hateoas\HateoasBuilder;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class UserController extends FOSRestController {
 
@@ -18,10 +20,12 @@ class UserController extends FOSRestController {
     protected $objectLoader;
     protected $em;
     protected $hateoas;
+    protected $tokenStorage ;
 
-    public function __construct(CustomObjectLoaderInterface $objectLoader )
+    public function __construct(CustomObjectLoaderInterface $objectLoader, TokenStorageInterface $tokenStorage )
     {
         $this->objectLoader = $objectLoader;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -30,7 +34,7 @@ class UserController extends FOSRestController {
     public function getUser()
     {
         $hateoas = HateoasBuilder::create()->build();
-        $user = $this->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
         $json = $hateoas->serialize($user,'json');
         $response = new Response($json, 200, array('application/json'));
         $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');

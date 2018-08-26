@@ -38,7 +38,7 @@ class SecurityController extends Controller {
 
 
     /**
-     * @Route("/register", name="register")
+     * @Route("/inscription", name="register")
      */
     public function register(Request $request)
     {

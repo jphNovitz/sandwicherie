@@ -9,11 +9,11 @@
                             <i class="phone icon"></i> {{site.phone}} </div>
                         <div class="item">
                             <i class="mail icon"></i>
-                            <a href="mailto:info@laclementine.be"> {{site.email}} </a>
+                            <a href="mailto:info@laclementine.be"> <span class="notPhone"> {{site.email}} </span></a>
                         </div>
                         <div class="item">
                             <router-link :to="{name: 'cart'}">
-                            <i class="shopping cart icon"></i> Panier
+                                <i class="shopping cart icon"></i> <span class="notPhone"> Panier </span>
                             </router-link>
                                 <span class="ui circular mini label" style="color: #000">
                                     {{cart_length}}
@@ -21,16 +21,17 @@
 
                         </div>
                         <div class="item">
-                            <connect />
+                           <connect />
                             <!-- <i class="user icon"></i> Mon compte -->
-                            </div>
+                        </div>
                     </div>
                 </div>
+                <span class="ui sixteen wide column spaced lowPadding">
+                    <h3>{{site.subTitle}}</h3>
+                </span>
             </div>
         </div>
-        <div class="ui sixteen wide column spaced">
-            <h3>Sandwicherie, petite restauration, Traiteur, Salon de dégustation</h3>
-        </div>
+
     </div>
 </template>
 
@@ -41,7 +42,8 @@
         components: {connect},
         data() {
           return {
-              testPos: null
+              testPos: null,
+              logged: false
           }
         },
         watch: {
@@ -53,43 +55,57 @@
             cart_length: function (){
                 return this.$store.getters.length_cart;
             }
-        }
-        /*,
-        mounted: function () {
-            const that = this
-            window.addEventListener('scroll', function () {
-             that.scrollTest()
-            })
         },
-        methods: {
-            getWidth: function () {
-                this.screen.width = screen.width
-            },
-        scrollTest: function (){
-            let test = document.getElementById('test')
-            console.log(position = test.getBoundingClientRect().y)
-            let position = test.getBoundingClientRect().y
-            if (position === 0 && this.testPos < 0){
+        methods: {}
 
-                menu.style.position = 'static'
-                const top = document.getElementById('top')
-                top.style.transform= "scale(1)"
-                top.style.display='block'
-            }
-        this.testPos = position
-        }
-    }*/
     }
 </script>
 
-<style lang="scss">
-     #top{
-         transition: scale .3s ease, display .5s ease;
-     }
-    .site-title{
-        display: none;
-        font-family: 'Pacifico', cursive;
-        background-color: inherit;
-        color: orangered;
+<style lang="scss" >
+    #top {
+        font-family: 'Cuprum', sans-serif;
     }
+    #top h3 {
+        font-size: 1.2rem;
+    }
+
+    .ui.large.horizontal.list>.item {
+        font-size: 1.2rem ;
+    }
+
+    .ui.large.horizontal.list>.item a {
+        color: #fff;
+    }
+    .notPhone {
+        display: none;
+    }
+
+    .lowPadding {
+        padding-top: .5rem !important;
+        padding-bottom: .5rem !important;
+    }
+
+    @media screen and (min-width: 800px)
+    {
+        .ui.large.horizontal.list>.item {
+            font-size: 1.8rem ;
+        }
+
+        #top h3 {
+            font-size: 1.8rem;
+            word-spacing: .8rem;
+            letter-spacing: .2rem;
+        }
+
+        .notPhone {
+            display: inline;
+        }
+
+        .lowPadding {
+            padding-top: .9rem !important;
+            padding-bottom: .9rem !important;
+        }
+
+    }
+
 </style>

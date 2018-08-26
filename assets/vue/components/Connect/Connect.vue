@@ -1,45 +1,55 @@
 <template>
     <div>
         <span v-if="isLogged">
-            <i class="user icon"></i> Mon compte
-            <a  @click="deconnect()"><i class="sign out alternate icon"></i> Déconnexion</a>
+
+            <div class="item" >
+                <router-link :to="{name: 'profile'}">
+                    <i class="user icon"></i> Mon compte
+                </router-link>
+            </div>
+            <div class="item">
+                <router-link :to="{name: 'logout'}">
+                    <i class="sign out alternate icon"></i> <span class="notPhone">Déconnexion </span>
+                </router-link>
+            </div>
+
         </span>
         <span v-else>
-            <i class="sign in alternate icon"></i> <router-link :to="{name: 'login'}">Connexion</router-link>
+            <div class="item">
+                <router-link :to="{name: 'login'}">
+                    <i class="sign in alternate icon"></i> <span class="notPhone">Connexion</span>
+                </router-link>
+            </div>
         </span>
     </div>
 </template>
 
 <script>
+
     export default {
         name: 'connect',
         components: {},
         data (){
-            return {
-                //isLogged: false,
-                test: ''
+            return { 
+                isLogged: false
             }
         },
         created() {
-            this.isToken = this.$auth.check()
-            console.log(this.$auth)
-            //this.$store.dispatch('create_token')
+            this.$store.watch(
+                (state)=>{
+                    return this.$store.getters.is_logged
+                }, (val)=>{
+                    this.isLogged = val ;
+                console.log('---------> ' + val) 
+                }
+            )
         },
-        computed: {
-            isLogged: function() {
-                return this.$store.getters.is_logged
-            }
-        },
-        watch: {
-/*            'this.$store.getters.is_logged': function(val){
-                this.isLogged = val
-            }*/
-        },
+        computed: {},
+        watch: {},
         methods: {
-            deconnect: function () {
-                this.$auth.removeToken()
-                this.$store.dispatch('update_logged', this.$auth.check())
-
+            connectionStatus: function (val) {
+                this.isLogged = val ;
+                console.log('---------> ' + val)
             }
         }
     }

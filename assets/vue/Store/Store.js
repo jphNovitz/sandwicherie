@@ -71,6 +71,7 @@ export const store = new Vuex.Store({
     getters: {
         is_logged: state => state.logged,
         get_auth: state =>state.auth,
+        get_user: state =>state.user,
         post_cart: state => state.post_cart,
         length_cart: state => {
             let total = state.cart.items.reduce(function(prev, current) {
