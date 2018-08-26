@@ -1,12 +1,25 @@
 <template>
-    <div>
-        <form v-on:submit.prevent="login">
-            <label>Utilisateur</label>: <input type="text" v-model="input._username"/>
+    <div id="login" >
+        <h2>Connexion</h2>
+        <sui-grid>
+            <sui-grid-row  :columns="1">
+                <sui-grid-column>
+                    <sui-form  v-on:submit.prevent="login">
+                        <sui-form-field>
+                            <label>Nom d'utilisateur</label>
+                            <input placeholder="nom d'utilisateur" type="text" v-model="input._username" />
+                        </sui-form-field>
 
-            <label>Mot de passe</label>: <input type="password" v-model="input._password" />
-            <button type="submit"> login</button>
-        </form>
+                        <sui-form-field>
+                            <label>Mot de passe</label>
+                            <sui-input type="password" placeholder="choisissez bien votre mot de passe" v-model="input._password" />
+                        </sui-form-field>
+                            <sui-button type="submit"> Se connecter </sui-button>
 
+                    </sui-form>
+                </sui-grid-column>
+            </sui-grid-row>
+        </sui-grid>
         <sui-message v-if="error">
             <sui-message-header>Erreur</sui-message-header>
             <p>
@@ -18,9 +31,10 @@
 <script>
    // import securityCheck from '../mixins/securityCheck'
 
-    export default {
+   export default {
         name: 'login',
-     //   mixins: [securityCheck],
+       components: {},
+       //   mixins: [securityCheck],
         data() {
             return {
                 input: {
@@ -37,7 +51,7 @@
                 if (this.$route.params.destination !== undefined) {
                     this.destination = this.$route.params.destination;
                 } else {
-                    this.destination = 'profile'
+                    this.destination = 'profil'
                 }
                 if (this.user.username !== undefined) {
                     this.$router.push({ name: this.destination, params: {}})
@@ -50,16 +64,14 @@
                     this.error = true
                 })
             }
-        // },
-        // watch: {
-        //     mixin_user: function () {
-        //         this.user =  JSON.parse(this.mixin_user)
-        //     }
-        // }
     }
     }
 
 </script>
-<style>
+<style scoped>
+    #login{
+        text-align: left;
+        width: 50%;
+    }
 
 </style>
