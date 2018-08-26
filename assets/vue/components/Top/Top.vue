@@ -1,52 +1,83 @@
 <template>
     <div id="top">
         <!-- contact block-->
-        <div class="ui padded stackable grid" style="border-top: solid 2px orangered">
-            <div class="green row">
-                <div class="sixteen wide column">
-                    <div class="ui large celled horizontal relaxed list ">
-                        <div class="item">
-                            <i class="phone icon"></i> {{site.phone}} </div>
-                        <div class="item">
-                            <i class="mail icon"></i>
-                            <a href="mailto:info@laclementine.be"> <span class="notPhone"> {{site.email}} </span></a>
-                        </div>
-                        <div class="item">
-                            <router-link :to="{name: 'cart'}">
-                                <i class="shopping cart icon"></i> <span class="notPhone"> Panier </span>
-                            </router-link>
+        <sui-grid>
+            <sui-grid-row  :columns="1" color="green" style="border-top: solid 2px orangered">
+                <sui-grid-column>
+                    <sui-list horizontal>
+                        <sui-list-item>
+                            <a href="sms:+320468538605">
+                            <i class="phone icon"></i> {{site.phone}}
+                            </a>
+                        </sui-list-item>
+                        <sui-list-item>
+                            <a href="mailto:info@laclementine.be">
+                                <i class="mail icon"></i>
+                                <span class="notPhone"> {{site.email}} </span>
+                            </a>
+                        </sui-list-item>
+                        <template v-if="isLogged">
+                            <sui-list-item>
+                                <router-link :to="{name: 'cart'}">
+                                    <i class="shopping cart icon"></i> <span class="notPhone"> Panier </span>
+                                </router-link>
                                 <span class="ui circular mini label" style="color: #000">
                                     {{cart_length}}
                                 </span>
+                            </sui-list-item>
+            <sui-list-item>
+                <router-link :to="{name: 'profile'}">
+                    <i class="user icon"></i> Mon compte
+                </router-link>
+            </sui-list-item>
+            <sui-list-item>
+                <router-link :to="{name: 'logout'}">
+                    <i class="sign out alternate icon"></i> <span class="notPhone">Déconnexion </span>
+                </router-link>
+            </sui-list-item>
 
-                        </div>
-                        <div class="item">
-                           <connect />
-                            <!-- <i class="user icon"></i> Mon compte -->
-                        </div>
-                    </div>
-                </div>
-                <span class="ui sixteen wide column spaced lowPadding">
+        </template>
+        <template v-else>
+            <sui-list-item>
+                <router-link :to="{name: 'login'}">
+                    <i class="sign in alternate icon"></i> <span class="notPhone">Connexion</span>
+                </router-link>
+            </sui-list-item>
+            <sui-list-item>
+                <a href="/inscription">
+                    <i class=""></i> <span class="notPhone">Enregistrement</span>
+                </a>
+            </sui-list-item>
+        </template>
+                    </sui-list>
+                </sui-grid-column>
+            </sui-grid-row>
+            <sui-grid-row :columns="1" style="background-color: #fff; ">
+                <sui-grid-column class="spaced lowPadding">
                     <h3>{{site.subTitle}}</h3>
-                </span>
-            </div>
-        </div>
-
+                </sui-grid-column>
+            </sui-grid-row>
+        </sui-grid>
     </div>
 </template>
 
 <script>
-    import connect from '../Connect/Connect'
     export default {
         name: "top",
-        components: {connect},
+        components: {},
         data() {
           return {
-              testPos: null,
-              logged: false
+              isLogged: false
           }
         },
-        watch: {
+        created() {
+            this.$store.watch(
+                (state)=>{
+                    return this.$store.getters.is_logged
+                }, (val)=>{
+                    this.isLogged = val ;
+                }
+            )
         },
         computed: {
             site: function () {
@@ -56,25 +87,27 @@
                 return this.$store.getters.length_cart;
             }
         },
-        methods: {}
-
+        methods: {
+            connectionStatus: function (val) {
+                this.isLogged = val ;
+            }
+        }
     }
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped >
     #top {
         font-family: 'Cuprum', sans-serif;
     }
     #top h3 {
+        color: green;
         font-size: 1.2rem;
+        border-bottom: 1px solid green
     }
 
-    .ui.large.horizontal.list>.item {
-        font-size: 1.2rem ;
-    }
-
-    .ui.large.horizontal.list>.item a {
+    .ui.horizontal.list>.item a {
         color: #fff;
+        font-size: 1.3rem ;
     }
     .notPhone {
         display: none;
@@ -87,7 +120,7 @@
 
     @media screen and (min-width: 800px)
     {
-        .ui.large.horizontal.list>.item {
+        .ui.horizontal.list>.item {
             font-size: 1.8rem ;
         }
 

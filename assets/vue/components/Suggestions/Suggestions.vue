@@ -5,7 +5,8 @@
         <sui-card-group :items-per-row="3"  stackable>
              <card-product v-for="suggestion in suggestions"
                            :product="suggestion"
-                           :group="'suggestions'">
+                           :group="'suggestions'"
+                           :key="suggestion.slug">
 
              </card-product>
         </sui-card-group>

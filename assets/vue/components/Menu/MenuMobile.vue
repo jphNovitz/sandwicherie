@@ -4,16 +4,18 @@
             <div class="left floated column  ">
                 <img src="./logo.png"  class="ui medium image"/>
             </div>
-            <div class="right floated column">
-                <div class="middle aligned content">
-                    <i   class="bars icon" @click="click"></i>
+            <div class="right floated column" >
+                <div class="middle aligned content" >
+                    <sui-button basic color="black" icon="bars" @click.native="click"  style="cursor: pointer"/>
+
                 </div>
             </div>
         </div>
         <div class="row menu-wrap"  v-bind:class="on ? 'menu-wrap-on' : ''" >
             <div class="ui fourteen wide column divided relaxed link list">
                 <div class="item"><router-link :to="{name: 'home'}">Accueil</router-link></div>
-                <div class="item">Produits</div>
+                <div class="item"><router-link :to="{name: 'products'}">La Carte</router-link></div>
+                <div class="item"><router-link :to="{name: 'photos'}">Photos</router-link></div>
                 <div class="item">Horaires</div>
                 <div class="item"><router-link :to="{name: 'contact'}">Contact</router-link>
                     <router-link :to="{ name: 'allergies'}" class="ui circular" >

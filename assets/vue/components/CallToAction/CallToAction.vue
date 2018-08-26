@@ -103,6 +103,7 @@
         #cta-wrapper {
             height: calc(50vw / 1.91);
             width: 50vw;
+            border-radius: 12px;
         }
 
         #cta-wrapper .header{

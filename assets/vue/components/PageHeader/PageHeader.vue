@@ -5,7 +5,6 @@
             <div class="header-content">
                 <!-- menu -->
                 <TopMenu> </TopMenu>
-                <!-- card with call to action -->
             </div>
         </header>
     </div>
