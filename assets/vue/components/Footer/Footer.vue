@@ -9,7 +9,13 @@
                 <p><sui-icon name="phone alt" />{{site.phone}} <br />
                     <sui-icon name="at" />{{site.email}}</p>
                 <p>TVA: {{site.tva}}</p>
+                <p>
+                    <router-link :to="{ name: 'allergies'}" class="ui circular" >
+                    Info Allergies
+                </router-link>
+                </p>
             </sui-grid-column>
+
 
             <sui-grid-column >
                 <h2>Suivez La Clémentine sur Facebook et Instagram</h2>

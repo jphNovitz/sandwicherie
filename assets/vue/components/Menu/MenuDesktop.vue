@@ -9,9 +9,7 @@
 
                 <div class="item">Horaires</div>
                 <div class="item"><router-link :to="{name: 'contact'}">Contact</router-link></div>
-                <router-link :to="{ name: 'allergies'}" class="ui circular" >
-                    <sui-button circular icon="info" size="mini"/>
-                </router-link>
+
             </div>
         </div>
     </div>
