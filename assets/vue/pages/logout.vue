@@ -24,10 +24,11 @@
             this.$auth.setToken(null);
             if ((Object.keys(this.$store.getters.get_user).length === 0 ) &&
                 (this.$store.getters.is_logged === false) &&
-                (this.$auth.authenticated === false)){
-                this.$store.dispatch('update_logged', false)
-                this.$router.push({name: 'home', params: {}})
+                (this.$auth.authenticated === false))
+            {
+                this.$store.dispatch('update_logged', false) ;
             }
+            this.$router.push({ name: 'home'}) ;
         }
     }
 </script>
