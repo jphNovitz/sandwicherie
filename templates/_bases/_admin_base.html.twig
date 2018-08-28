@@ -16,8 +16,7 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-<div  class="ui grid" id="app">
-    <div class="">
+<div class="ui grid" id="app">
     {% block toolbar %}
         <div class="ui top fixed  fluid menu">
             <a class="orange item" id="button">
@@ -31,54 +30,69 @@
                 voir le site
             </a>
         </div>
-
-        {#<div class="toolbar">
-            <span id="menu-icon">
-                <i class="material-icons" id="menu">menu</i>
-            </span>
-            <span id="title">La Clémentine</span>
-        </div>#}
     {% endblock %}
-    </div>
-    <div class="ui huge vertical inverted orange menu" id="lateral-menu" style="z-index: 200"   :class="[show ? 'showit' : 'hide' ]">
-        <div class="left aligned item">
-            <div class="header">Aliments</div>
-            <div class="menu">
-                <a class="huge item" href="{{ path('products_list') }}"> Produits </a>
-                <a class="item" href="{{ path('types_list') }}"> Types de produits</a>
-                <a class="item" href="{{ path('ingredients_list') }}"> Ingredients </a>
-                <a class="item" href="{{ path('categories_list') }}"> Catégories d'ingrédient </a>
 
-            </div>
-            <div class="header">Configuration</div>
-            <div class="menu">
-                <a class="huge item" href="{{ path('configuration') }}"> Géneral </a>
-                <a class="item" href="{{ path('services_list') }}"> Services</a>
+        <div class="ui huge vertical menu"
+             id="lateral-menu"
+             style="z-index: 200"
+             :class="[show ? 'showit' : 'hide' ]">
+
+            <a href="{{ path('admin_default') }}" class="item" >
+                Accueil
+                {#<div class="ui teal left pointing label">1</div>#}
+            </a>
+            <a class="item">
+                Utilisateurs
+                {#<div class="ui teal left pointing label">1</div>#}
+            </a>
+            <a href="{{ path('products_list') }}" class="item">
+                Produits
+                {#<div class="ui label">51</div>#}
+            </a>
+            <a href="{{ path('types_list') }}" class="item">
+                Types de produits
+            </a>
+            <a href="{{ path('ingredients_list') }}" class="item">
+                Ingrédients
+            </a>
+            <a href="{{ path('categories_list') }}" class="item">
+                Categories d'Ingrédients
+            </a>
+            <a href="{{ path('allergies_list') }}" class="item">
+                Allergies
+            </a>
+            <a class="item">
+                Configuration du site
+            </a>
+            <div class="item">
+                <div class="ui transparent icon input">
+                    <input type="text" placeholder="Search mail...">
+                    <i class="search icon"></i>
+                </div>
             </div>
         </div>
-        {#<ul>
-            <li><i class="material-icons">input</i> <a href="{{ path('inputs_list') }}">Entrée marchandises</a></li>
-            <li><i class="material-icons">shopping_cart</i><a href=""> Commandes </a></li>
-            <hr class="separation">
-            <li><i class="material-icons">free_breakfast</i><a href="{{ path('products_list') }}"> Produits </a></li>
-            <li><i class="material-icons">store</i> <a href="{{ path('providers_list') }}"> Fournisseurs </a></li>
-            <li><i class="material-icons">info</i> <a href="{{ path('allergies_list') }}"> Allergies</a></li>
-            <hr class="separation">
-            <li><i class="material-icons">layers</i> <a href="{{ path('ingredients_list') }}"> Ingredients</a></li>
-            <li><i class="material-icons">local_offer</i> <a href="{{ path('categories_list') }}"> Categories</a></li>
-            <li><i class="material-icons">assignment</i> <a href="{{ path('types_list') }}"> Types</a></li>
-            <hr class="separation">
-        </ul>
-#}
+        {#<div class="left aligned item">#}
+            {#<div class="header">Aliments</div>#}
+            {#<div class="menu">#}
+                {#<a class="huge item" href="{{ path('products_list') }}"> Produits </a>#}
+                {#<a class="item" href="{{ path('types_list') }}"> Types de produits</a>#}
+                {#<a class="item" href="{{ path('ingredients_list') }}"> Ingredients </a>#}
+                {#<a class="item" href="{{ path('categories_list') }}"> Catégories d'ingrédient </a>#}
+            {#</div>#}
+            {#<div class="header">Configuration</div>#}
+            {#<div class="menu">#}
+                {#<a class="huge item" href="{{ path('configuration') }}"> Géneral </a>#}
+                {#<a class="item" href="{{ path('services_list') }}"> Services</a>#}
+            {#</div>#}
+        {#</div>#}
     </div>
     <div class="ui fourteen wide column container" style="margin-top: 8rem">
-    {% block body %}{% endblock %}
+        {% block body %}{% endblock %}
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-<script src="{{ asset('build/js/vue.js') }}"></script>
-<script src="{{ asset('build/js/app.js') }}"></script>
+     <script src="{{ asset('build/js/app.js') }}"></script>
+    {#<script src="{{ asset('build/js/vue.js') }}"></script>#}
 
-{% block javascripts %}{% endblock %}
+    {% block javascripts %}{% endblock %}
 </body>
 </html>

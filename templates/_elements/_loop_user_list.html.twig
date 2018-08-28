@@ -2,7 +2,7 @@
 <div class="ui relaxed divided list">
     {% for object in objects|slice(0, max) %}
         <div class="item">
-            <a href="{{ path(object|entity~'_show', {'slug': object.slug}) }}"><li>{{ object.name }}</li></a>
+            <a href="{{ path(object|entity~'_show', {'username': object.username}) }}"><li>{{ object.username }}</li></a>
         </div>
     {% endfor  %}
 </div>
