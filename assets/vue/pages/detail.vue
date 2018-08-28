@@ -1,16 +1,49 @@
 <template>
     <div>
-       <!-- {{rows}}
-        <ul>
-            <li v-for="image in images" :key="image.id"><img :src="'images/products/'+image.image_name" /></li>
-        </ul>
-        -->
         <sui-grid stackable>
             <sui-grid-row v-if="product">
             <sui-grid-column :width="16" >
-                <h1 is="sui-header" size="huge" style="margin-bottom: 5rem;" >
+                <h1 is="sui-header" size="huge" style="margin-bottom: 2rem;" >
                     {{product.name}}
                 </h1>
+
+                <p class="emph" v-if="product.description.length >0">
+                    {{product.description}}
+                </p>
+                <sui-list horizontal relaxed  v-if="userID">
+                    <sui-list-item>
+                        <sui-button  circular
+                                     icon="cart plus"
+                                     @click="in_cart++ ; add_cart(product)"
+                                     v-if="!in_cart" >
+                            <span class="desktop">Ajouter au panier</span>
+                        </sui-button>
+                        <input v-model.number="in_cart" type="number" @click="add_cart(product)"  style="width: 4rem" v-if="in_cart"/>
+                    </sui-list-item>
+
+                    <sui-list-item>
+                        <sui-button  circular
+                                     icon="heart outline"
+                                     v-if="!likes()"
+                                     @click="likeAction()">
+                            <span class="desktop">J'aime</span>
+                        </sui-button>
+                        <sui-button circular
+                                    color="pink" icon="heart"
+                                    v-if="likes()"
+                                    @click="likeAction()" >
+
+                            <span class="desktop">Je n'aime plus</span>
+                        </sui-button>
+                    </sui-list-item>
+
+                    <sui-list-item>
+                        <sui-button circular fluid
+                                    icon="thumbtack">
+                            <span class="desktop">Je n'aime plus</span>
+                        </sui-button>
+                    </sui-list-item>
+                </sui-list>
 
             </sui-grid-column>
              <sui-grid-column :width="6" >
@@ -21,7 +54,6 @@
                                  :alt="product.name"
                                  v-if="zoom_image"
                                  style="width: 100%" />
-
                         </sui-grid-column>
                     </sui-grid>
                     <sui-grid :columns="2" divided>
@@ -35,29 +67,64 @@
                     </sui-grid-row>
                 </sui-grid>
                  </div>
-                     <div v-if="userID">
-                         <input v-model.number="in_cart" type="number" @click="add_cart(product)"  style="width: 4rem" v-if="in_cart"/>
-                         <sui-button  icon="cart plus" content="Ajouter au panier" circular @click="in_cart++ ; add_cart(product)" v-if="!in_cart" />
-
-                        <br /> <sui-button  circular content="J'aime" icon="heart outline"  v-if="!likes()" @click="likeAction()" />
-                        <br /> <sui-button circular content="Je n'aime plus" color="pink" icon="heart" v-if="likes()" @click="likeAction()" />
-                        <br /> <sui-button circular content="A découvrir" icon="thumbtack"  />
-                     </div >
-
             </sui-grid-column>
-            <sui-grid-column :width="10">
-
-                <p class="emph">
-                    {{product.description}}
-                </p>
-                <sui-segment v-if="product.ingredients">
-                    <p>
+            <sui-grid-column :width="10" class="ui clearing left floated">
+                <!--<div style="margin-top: 2em" v-if="product.breads.length > 0">-->
+                    <!--Pains disponibles-->
+                    <!--<sui-segment class="ui orange rounded">-->
+                        <!--<sui-list horizontal :divided="true">-->
+                            <!--<sui-list-item-->
+                                    <!--v-for="bread in product.breads"-->
+                                    <!--:key="bread.id">-->
+                                <!--{{bread.name}}-->
+                            <!--</sui-list-item>-->
+                        <!--</sui-list>-->
+                    <!--</sui-segment>-->
+                <!--</div>-->
+                <!---->
+                <!---->
+                <!--<div style="margin-top: 2em" v-if="product.vegetables.length > 0" >-->
+                    <!--Les crudités proposées :-->
+                    <!--<sui-segment class="ui green rounded">-->
+                        <!--<sui-list horizontal>-->
+                            <!--<sui-list-item-->
+                                    <!--v-for="vegetable in product.vegetables"-->
+                                    <!--:key="vegetable.id">-->
+                                <!--{{vegetable.name}}-->
+                            <!--</sui-list-item>-->
+                        <!--</sui-list>-->
+                    <!--</sui-segment>-->
+                <!--</div>-->
+                <sui-list left floated>
+                    <sui-list-item v-if="product.breads.length > 0">
+                        Pains disponibles
+                        <sui-list>
+                            <sui-list-item
+                                    v-for="bread in product.breads"
+                                    :key="bread.id">
+                                {{bread.name}}
+                            </sui-list-item>
+                        </sui-list>
+                    </sui-list-item>
+                    <sui-list-item v-if="product.vegetables.length > 0">
+                        Les crudités proposées :
+                        <sui-list>
+                            <sui-list-item
+                                    v-for="vegetable in product.vegetables"
+                                    :key="vegetable.id">
+                                {{vegetable.name}}
+                            </sui-list-item>
+                        </sui-list>
+                    </sui-list-item>
+                </sui-list class>
+                <template v-if="product.ingredients">
+                    <p>Ingrédients:
                         <sui-list horizontal>
                             <sui-list-item
                                     v-for="ingredient in product.ingredients"
                                     :key="ingredient.id"
                             >
-                                {{ingredient.name}}
+                                <em>{{ingredient.name}}</em>
                                 <span v-if="ingredient.components.length > 0">
                                     (<sui-list horizontal>
                                         <sui-list-item v-for="component in ingredient.components"
@@ -69,27 +136,8 @@
                             </sui-list-item>
                         </sui-list>
                     </p>
-                </sui-segment>
-                <div style="margin-top: 2em" v-if="product.breads.length > 0">
-                    <h3 is="sui-header">pains disponibles</h3>
-                    <sui-list>
-                        <sui-list-item
-                                v-for="bread in product.breads"
-                                :key="bread.id">
-                            {{bread.name}}
-                        </sui-list-item>
-                    </sui-list>
-                </div>
-                <div style="margin-top: 2em" v-if="product.vegetables.length > 0" >
-                    <h3 is="sui-header">Les crudités suivantes peuvent accompagner votre repas :</h3>
-                    <sui-list>
-                        <sui-list-item
-                                v-for="vegetable in product.vegetables"
-                                :key="vegetable.id">
-                            {{vegetable.name}}
-                        </sui-list-item>
-                    </sui-list>
-                </div>
+                </template>
+
             </sui-grid-column>
             </sui-grid-row>
         </sui-grid>
@@ -101,6 +149,7 @@
     import usercheck from '../mixins/userCheck'
     import order from '../mixins/order'
     import AllergiesFinder from '../components/AllergiesFinder/AllergiesFinder'
+
     export default {
         name: 'detail',
         mixins: [usercheck, order],
@@ -131,6 +180,8 @@
 /*                  if (this.images.length  > 0){
                       this.rows = Math.ceil(this.images.length/2)
                   }*/
+              } else {
+                  this.zoom_image = '/common/no-photo.jpg'
               }
           }
         },
@@ -145,17 +196,25 @@
 
 </script>
 
-<style>
+<style scoped>
 
     @import url('https://fonts.googleapis.com/css?family=Cuprum');
 
-    .green {
-        font-weight: bold;
-        color: green;
+    .desktop{
+        display: none;
     }
 
+    .ui.segment:last-child.orange{
+        background-color: orange;
+        color: #000;
+
+    }
+    .ui.green.segment:not(.inverted) {
+        background-color: #21ba45 !important ;
+        color: floralwhite;
+    }
     .emph {
-        font-size: 1.6em;
+        font-size: 1.2em;
     }
     .emph:before {
         content: "\f10d";
@@ -184,6 +243,17 @@
     .horizontal h5 {
         display: inline;
         color: green;
+    }
+    @media (min-width: 768px) {
+
+        .desktop{
+            display: inline;
+        }
+        .emph {
+            font-size: 1.6em;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
     }
 
 </style>
