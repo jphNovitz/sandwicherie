@@ -1,70 +1,66 @@
 {% extends '_skeletons/_card.html.twig' %}
-{% block url_show %}http://laclementine.be/#/menu/{{ object.slug }} {% endblock %}
+
 {% set object = product %}
-
-{% block card_rest %}
-    <div class="seven wide column ui raised segment left aligned object-infos">
-        <p>Nom du produit: {{ object.name }}
-            <br/><em>Slug: {{ object.slug }}
-                <br/>Id: {{ object.id }}</em>
-            <br />Mis en avant: {{ object.featured ? '<i class="ui green horizontal label"> oui</i>' : '<i class="ui red horizontal label"> non </i>' }}
-            <br />Actif: {{ object.isActive ? '<i class="ui green horizontal label"> oui</i>' : '<i class="ui red horizontal label"> non </i>' }}
-            <br />Dans les favoris: {{ object.likedBy|length }}
-        </p>
-    </div>
-    <div class="seven wide column">
-    {% if (object.ingredients is not empty) %}
-
-        <h3>Ingrédients:</h3>
-        <div class="ui bulleted animated list">
-            {% for ingredient in object.ingredients %}
-                <div class="item">
-                    <a href="{{ path('ingredients_show', {'slug': ingredient.slug}) }}">
-                        {{ ingredient.name }}
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
-        {% if (object.breads is not empty) %}
-            <h3>Pains:</h3>
-            <div class="ui bulleted animated list">
-                {% for bread in object.breads %}
-                    <div class="item">
-                        <a href="{{ path('ingredients_show', {'slug': bread.slug}) }}">
-                            {{ bread.name }}
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-        {% if (object.vegetables is not empty) %}
-            <h3>Crudités:</h3>
-            <div class="ui bulleted animated list">
-                {% for vegetable in object.vegetables %}
-                    <div class="item">
-                        <a href="{{ path('ingredients_show', {'slug': vegetable.slug}) }}">
-                            {{ vegetable.name }}
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-        {% if (object.sauces is not empty) %}
-            <h3>Sauces:</h3>
-            <div class="ui bulleted animated list">
-                {% for sauce in object.sauces %}
-                    <div class="item">
-                        <a href="{{ path('ingredients_show', {'slug': sauce.slug}) }}">
-                            {{ sauce.name }}
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-            {% else %}
-        {% endif %}
-
-    {% endif %}
-    </div>
-
-
+{% block header_buttons %}
+    <div class="item"><a href="http://laclementine.be/#/menu/{{ object.slug }} " class="ui blue circular button"
+                         style="min-width: 7rem"> Voir</a></div>
 {% endblock %}
+    {% block infos %}
+        <br/>Mis en avant: {{ object.featured ? '<i class="ui green horizontal label"> oui</i>' : '<i class="ui red horizontal label"> non </i>' }}
+        <br/>Actif: {{ object.isActive ? '<i class="ui green horizontal label"> oui</i>' : '<i class="ui red horizontal label"> non </i>' }}
+        <br/>Dans les favoris: {{ object.likedBy|length }}
+    {% endblock %}
+    {% block card_rest %}
+        {% if (object.ingredients is not empty) %}
+
+            <h3>Ingrédients:</h3>
+            <div class="ui bulleted animated list">
+                {% for ingredient in object.ingredients %}
+                    <div class="item">
+                        <a href="{{ path('ingredients_show', {'slug': ingredient.slug}) }}">
+                            {{ ingredient.name }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if (object.breads is not empty) %}
+                <h3>Pains:</h3>
+                <div class="ui bulleted animated list">
+                    {% for bread in object.breads %}
+                        <div class="item">
+                            <a href="{{ path('ingredients_show', {'slug': bread.slug}) }}">
+                                {{ bread.name }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if (object.vegetables is not empty) %}
+                <h3>Crudités:</h3>
+                <div class="ui bulleted animated list">
+                    {% for vegetable in object.vegetables %}
+                        <div class="item">
+                            <a href="{{ path('ingredients_show', {'slug': vegetable.slug}) }}">
+                                {{ vegetable.name }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if (object.sauces is not empty) %}
+                <h3>Sauces:</h3>
+                <div class="ui bulleted animated list">
+                    {% for sauce in object.sauces %}
+                        <div class="item">
+                            <a href="{{ path('ingredients_show', {'slug': sauce.slug}) }}">
+                                {{ sauce.name }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+            {% endif %}
+
+        {% endif %}
+    {% endblock %}
+

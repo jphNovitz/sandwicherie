@@ -1,27 +1,48 @@
-{% extends '_skeletons/_card.html.twig' %}
-{% set object = ingredient %}
-{#if ingredient.images is not empty %}
-    {% block card_image %} {{ ingredient.image.url|last }}{% endblock %}
-{% endif #}
-    {% block object_image  %}
-        {% if object.images is defined %}
-            {% for image in object.images %}
-            <img src="{{ asset('images/'~object|entity~'/'~imageName) }}">
-            {% endfor %}
-        {% endif%}
+{% embed '_skeletons/_card.html.twig' %}
+    {% set object = ingredient %}
+    {% block sub_header %}
+        {% if object.description is defined %}
+            {% if object.description is not empty %}
+                {{ object.description }}
+            {% else %}
+                <em>pas de commentaire</em>
+            {% endif %}
+        {% endif %}
     {% endblock %}
-{% block card_properties_rest %}
-    <span class="card-property">{% if ingredient.bread %} Pain{% endif %}</span>
-    <span class="card-property">{% if ingredient.sauce %} Sauce{% endif %}</span>
-    <span class="card-property">{% if ingredient.vegetable %} crudité{% endif %}</span>
-{% endblock %}
-{% block card_rest %}
-    {% if ingredient.components is not empty %}
-        <p>Cet ingrédient est complexe, il contient les ingrédients suivants:</p>
-        <ul>
-            {% for component in ingredient.components %}
-                <li><a href="{{ path('ingredients_show', {'slug': component.slug}) }}"> {{ component }}</a></li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endblock %}
+    {% block header_image %} {% endblock %}
+    {% block object_image %}  {% endblock %}
+
+    {% block infos %}
+        <br /> Pain: {{ object.bread ? '<i class="ui green horizontal label"> oui</i>' : '<i class="ui red horizontal label"> non </i>' }}
+        <br /> Crudité: {{ object.vegetable ? '<i class="ui green horizontal label"> oui</i>' : '<i class="ui red horizontal label"> non </i>' }}
+        <br /> Sauce: {{ object.sauce ? '<i class="ui green horizontal label"> oui</i>' : '<i class="ui red horizontal label"> non </i>' }}
+    {% endblock %}
+
+    {% block card_rest %}
+        {% if (object.categories is not empty) %}
+            <h3>fait partie des categories :</h3>
+            <div class="ui bulleted animated list">
+                {% for category in object.categories %}
+                    <div class="item">
+                        <a href="{{ path('categories_show', {'slug': category.slug}) }}">
+                            {{ category.name }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if (object.components is not empty) %}
+            <h3>Se compose de :</h3>
+            <div class="ui bulleted animated list">
+                {% for component in object.components %}
+                    <div class="item">
+                        <a href="{{ path('ingredients_show', {'slug': component.slug}) }}">
+                            {{ component.name }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endembed %}
+

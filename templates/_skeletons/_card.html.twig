@@ -4,13 +4,15 @@
     <div class="ui stackable grid">
         <div class="sixteen wide column ui center aligned">
             <h1 class="ui center aligned icon green header">
-                {% if (object.images is defined) and (object.images is not null) %}
-                    <img src="{{ asset('images/'~object|entity~'/'~object.images[0].imageName) }}"
-                         class="ui circular image">
-                {% elseif  (object.imageName is defined) and  (object.imageName is not null) %}
-                    <img src="{{ asset('images/'~object|entity~'/'~object.imageName) }}" class="ui circular image"
-                         style="width: 125px">
-                {% endif %}
+                {% block header_image %}
+                    {% if (object.images is defined) and (object.images is not null) %}
+                        <img src="{{ asset('images/'~object|entity~'/'~object.images[0].imageName) }}"
+                             class="ui circular image">
+                    {% elseif  (object.imageName is defined) and  (object.imageName is not null) %}
+                        <img src="{{ asset('images/'~object|entity~'/'~object.imageName) }}" class="ui circular image"
+                             style="width: 125px">
+                    {% endif %}
+                {% endblock %}
                 <div class="content">
                     {{ object.name }}
                     <div class="sub header">
@@ -27,12 +29,13 @@
 
             </h1>
             <div class="ui  horizontal  aligned list ">
-                <div class="item"><a href="{% block url_show %} {% endblock %}" class="ui blue circular button"
-                                     style="min-width: 7rem"> Voir</a></div>
+                {% block header_buttons %}    {% endblock %}
                 <div class="item"><a href="{{ path(object|entity ~ '_update', {'slug' : object.slug}) }}"
-                                     class="ui  positive circular button" style="min-width: 7rem"> modifier</a></div>
+                                     class="ui  basic secondary circular button" style="min-width: 7rem"> modifier</a>
+                </div>
                 <div class="item"><a href="{{ path(object|entity ~ '_delete', {'slug' : object.slug}) }}"
-                                     class="ui  negative circular button" style="min-width: 7rem"> supprimer</a></div>
+                                     class="ui  basic secondary circular button" style="min-width: 7rem"> supprimer</a>
+                </div>
             </div>
         </div>
         <div class="sixteen wide column ui centered grid">
@@ -40,21 +43,31 @@
                 {% if (object.images is defined) and (object.images is not null) %}
                     {% for image in object.images %}
                         <div class="four wide column">
-                            <img src="{{ asset('images/'~object|entity~'/'~image.imageName) }}" class="ui fluid image">
+                            <img src="{{ asset('images/'~object|entity~'/'~image.imageName) }}" class="ui fluid rounded image">
                         </div>
                     {% endfor %}
                 {% elseif  (object.imageName is defined) and  (object.imageName is not null) %}
                     <div class="center aligned four wide column">
-                        <img src="{{ asset('images/'~object|entity~'/'~object.imageName) }}" class="ui fluid image">
+                        <img src="{{ asset('images/'~object|entity~'/'~object.imageName) }}" class="ui fluid rounded image">
                     </div>
                 {% endif %}
             {% endblock %}
         </div>
-    <div class="fourteen wide column center aligned ui grid">
-        {% block card_rest %}
+        <div class="fourteen wide column center aligned ui grid">
+            <div class="seven wide column ui raised segment left aligned object-infos">
+                <p>nom: {{ object.name }}
+                    <br/><em>Slug: {{ object.slug }}
+                        <br/>Id: {{ object.id }}</em>
+                    {% block infos %}
+                    {% endblock %}
+                </p>
+            </div>
+            <div class="seven wide column left aligned">
+                {% block card_rest %}
 
-        {% endblock %}
-    </div>
+                {% endblock %}
+            </div>
+        </div>
     </div>
 
 {% endblock %}
