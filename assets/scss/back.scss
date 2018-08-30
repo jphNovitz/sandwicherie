@@ -1,9 +1,9 @@
 #app{
   position: relative;
-  min-height: 100vh;
+  //min-height: 100vh;
 }
 #lateral-menu{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   transition: all .6s ease-in-out;
@@ -35,4 +35,15 @@
 
 .vich-image img{
   width: 100%;
+}
+
+/* ui button */
+.ui .button a{
+  color: #fff2f2;
+}
+/* end  ui button */
+
+.object-infos{
+  font-size: 1.4rem !important;
+  line-height: 3rem !important;
 }

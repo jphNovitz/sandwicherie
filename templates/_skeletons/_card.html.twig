@@ -5,55 +5,56 @@
         <div class="sixteen wide column ui center aligned">
             <h1 class="ui center aligned icon green header">
                 {% if (object.images is defined) and (object.images is not null) %}
-                    <img src="{{ asset('images/'~object|entity~'/'~object.images[0].imageName) }}" class="ui circular image">
-                {%  elseif  object.imageName is not null %}
-                    <img src="{{ asset('images/'~object|entity~'/'~object.imageName) }}" class="ui circular image" style="width: 125px">
-                {% endif%}
+                    <img src="{{ asset('images/'~object|entity~'/'~object.images[0].imageName) }}"
+                         class="ui circular image">
+                {% elseif  (object.imageName is defined) and  (object.imageName is not null) %}
+                    <img src="{{ asset('images/'~object|entity~'/'~object.imageName) }}" class="ui circular image"
+                         style="width: 125px">
+                {% endif %}
                 <div class="content">
                     {{ object.name }}
                     <div class="sub header">
                         {% if object.description is defined %}
-                            {{ object.description }}
+                            {% if object.description is not empty %}
+                                {{ object.description }}
                             {% else %}
                                 <em>pas de description</em>
-                        {% endif%}
+                            {% endif %}
+                        {% endif %}
+                        {% block sub_header %} {% endblock %}
                     </div>
                 </div>
 
             </h1>
             <div class="ui  horizontal  aligned list ">
-               <div class="item"> <a href="{% block url_show  %} {% endblock %}" class="ui blue circular button" style="min-width: 7rem"> Voir</a>  </div>
-               <div class="item"> <a href="{{ path(object|entity ~ '_update', {'slug' : object.slug}) }}" class="ui  positive circular button" style="min-width: 7rem"> modifier</a></div>
-               <div class="item"> <a href="{{ path(object|entity ~ '_delete', {'slug' : object.slug}) }}" class="ui  negative circular button" style="min-width: 7rem"> supprimer</a></div>
+                <div class="item"><a href="{% block url_show %} {% endblock %}" class="ui blue circular button"
+                                     style="min-width: 7rem"> Voir</a></div>
+                <div class="item"><a href="{{ path(object|entity ~ '_update', {'slug' : object.slug}) }}"
+                                     class="ui  positive circular button" style="min-width: 7rem"> modifier</a></div>
+                <div class="item"><a href="{{ path(object|entity ~ '_delete', {'slug' : object.slug}) }}"
+                                     class="ui  negative circular button" style="min-width: 7rem"> supprimer</a></div>
             </div>
         </div>
-        <div class="six wide column">
-            <div class="ui centered fluid card">
-                <div class="image">
-                    {% block object_image  %}
-                        {% if (object.images is defined) and (object.images is not null) %}
-                            {% for image in object.images %}
-                            <img src="{{ asset('images/'~object|entity~'/'~image.imageName) }}">
-                            {% endfor %}
-                            {%  elseif  (object.imageName is defined) and  (object.imageName is not null) %}
-                                <img src="{{ asset('images/'~object|entity~'/'~object.imageName) }}" style="width: 125px">
-                        {% endif%}
-                    {% endblock %}
-
-                </div>
-                <div class="content">
-
-                    {% if object.price is defined %}
-                    ({{ object.price }} €)
-                    {% endif%}
-
-                </div>
-            </div>
+        <div class="sixteen wide column ui centered grid">
+            {% block object_image %}
+                {% if (object.images is defined) and (object.images is not null) %}
+                    {% for image in object.images %}
+                        <div class="four wide column">
+                            <img src="{{ asset('images/'~object|entity~'/'~image.imageName) }}" class="ui fluid image">
+                        </div>
+                    {% endfor %}
+                {% elseif  (object.imageName is defined) and  (object.imageName is not null) %}
+                    <div class="center aligned four wide column">
+                        <img src="{{ asset('images/'~object|entity~'/'~object.imageName) }}" class="ui fluid image">
+                    </div>
+                {% endif %}
+            {% endblock %}
         </div>
+    <div class="fourteen wide column center aligned ui grid">
+        {% block card_rest %}
+
+        {% endblock %}
     </div>
-
-    {% block card_rest %}
-
-    {% endblock %}
+    </div>
 
 {% endblock %}
