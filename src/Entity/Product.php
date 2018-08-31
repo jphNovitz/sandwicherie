@@ -20,6 +20,22 @@ class Product
      */
     private $id;
 
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var datetime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+
    /**
     * @var String
     * @ORM\Column(name="name", type="string", length=80, nullable=false)
@@ -152,6 +168,40 @@ class Product
     {
         $this->id = $id;
     }
+
+    /**
+     * @return datetime
+     */
+    public function getCreated(): datetime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param datetime $created
+     */
+    public function setCreated(datetime $created): void
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return datetime
+     */
+    public function getUpdated(): datetime
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param datetime $updated
+     */
+    public function setUpdated(datetime $updated): void
+    {
+        $this->updated = $updated;
+    }
+
+
 
     /**
      * @return String
