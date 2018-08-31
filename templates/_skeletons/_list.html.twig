@@ -5,23 +5,22 @@
     <h1> {% block title %}skeleton list {% endblock %} </h1>
 
     <div class="row">
-        <div class="ui middle aligned divided fluid list">
+        <div class="ui middle aligned divided fluid big list">
             {% for object in list %}
-                <div class="item">
-                    <div class="right floated content">
-                        <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}" class="ui blue button">
+                <div class="item" >
+                    <div class="middle aligned right floated">
+                        <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}" class="ui blue circular tiny icon button">
                              <i class="zoom icon"></i></a>
                         </a>
-                        <a href="{{ path(entity ~ '_update', {'slug' : object.slug}) }}" class="ui olive button">
+                        <a href="{{ path(entity ~ '_update', {'slug' : object.slug}) }}" class="ui olive circular tiny icon button">
                             <i class="edit icon"></i>
                         </a>
-                        <a href="{{ path(entity ~ '_delete', {'slug' : object.slug}) }}" class="ui red button">
+                        <a href="{{ path(entity ~ '_delete', {'slug' : object.slug}) }}" class="ui red circular tiny icon button">
                             <i class="delete icon"></i>
                         </a>
                     </div>
                     {#<img class="ui avatar image" src="/images/~{{ object.images[0].imageName }}">#}
-                    <i class="square icon"></i>
-                    <div class="content">
+                    <div class="middle aligned content" style="line-height: 2rem">
                         <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}">{{ object.name }}</a>
                     </div>
                 </div>
