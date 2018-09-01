@@ -39,7 +39,7 @@
         computed: {
             imageName: function (){
                 let elm = this.product;
-                if ( elm.images !== undefined) {
+                if ( elm.images.length > 0) {
                     let imageName = elm.images[0].image_name;
                     if (imageName !== undefined) {
                         return 'images/products/' + imageName;
