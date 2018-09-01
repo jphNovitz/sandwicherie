@@ -7,7 +7,9 @@ import detail from '../pages/detail'
 import allergies from '../pages/allergies'
 import cart from '../pages/cart'
 import login from '../pages/login'
+import logout from '../pages/logout'
 import profile from '../pages/profile'
+import photos from '../pages/photos'
 
 Vue.use(Router)
 
@@ -50,9 +52,19 @@ export default new Router({
             component: login
         },
         {
+            name: 'logout',
+            path: '/logout',
+            component: logout
+        },
+        {
             name: 'profile',
             path: '/profil',
             component: profile
+        },
+        {
+            name: 'photos',
+            path: '/photos',
+            component: photos
         }
     ]
 })

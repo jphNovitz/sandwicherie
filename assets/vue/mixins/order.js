@@ -16,7 +16,6 @@ export default {
     },
     methods: {
         add_cart: function (product) {
-            console.log('******-***********- '+product)
             this.$store.dispatch('update_cart', {'item': product, 'qty': this.in_cart});
         },
         likes: function () {

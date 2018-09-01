@@ -1,7 +1,6 @@
 <template>
     <sui-container>
-
-        <flash-message />
+        <h2>Espace membre</h2>
         <sui-list horizontal>
             <sui-list-item >
                 <a @click="setComponent('userDetails'), setActive('userDetails')"
@@ -28,7 +27,7 @@
                 </a> </sui-list-item>
         </sui-list>
 
-        <component :is="userComponent" :user="user" class="sixteen wide column"></component>
+        <component :is="userComponent" :user="user"></component>
     </sui-container>
 
 </template>

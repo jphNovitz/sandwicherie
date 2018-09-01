@@ -72,7 +72,6 @@ class ProductController extends Controller
         return $this->render($this->getParameter('adm_product').'form/product_add.html.twig', [
             'form'=>$form->createView()
         ]);
-
     }
 
     /**

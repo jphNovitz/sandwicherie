@@ -1,3 +1,9 @@
+/* Allergies List
+*  Receive allergies as an array of objects
+*  return (array) a list of ingredients and categories to avoid
+*  part of laclementine.be project (2018)  */
+
+
 export default function allergies_list (allergies){
     let list = {};
     allergies.map(al=>{

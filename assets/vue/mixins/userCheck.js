@@ -22,6 +22,8 @@ export default {
                        console.log('cant get the user ==> 401')
                        this.$router.push({name: 'login', params: {destination: this.destination}})
                    }*/);
+           } else {
+               this.user = this.$store.getters.get_user
            }
         }
     }

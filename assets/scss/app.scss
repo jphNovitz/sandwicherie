@@ -121,36 +121,35 @@ html, body {
 }
 
 #lateral-menu{
-  position: absolute;
+  //position: absolute;
   z-index: 100;
   top: 0px;
   margin-top: 0px;
   margin-left: -100vw;
-  height: 100vh;
-  background-color: lighten($darkOrange,40%);
+  //height: 100vh;
   padding: 0;
   transition: margin-left 680ms ease-out;
 }
-
-#lateral-menu, #lateral-menu li a {
-  color: lighten($grey, 20%) ;
-}
-
-#lateral-menu ul{
-  padding-left: 0px;
-}
-
-#lateral-menu ul li{
-  display: flex;
-  align-items: center;
-  list-style-type: none;
-  padding: 6px 24px;
-  font-size: 1em;
-}
-#lateral-menu ul li .material-icons{
-  margin-right: 1.2rem;
-  font-size: 2.2em;
-}
+//
+//#lateral-menu, #lateral-menu li a {
+//  color: lighten($grey, 20%) ;
+//}
+//
+//#lateral-menu ul{
+//  padding-left: 0px;
+//}
+//
+//#lateral-menu ul li{
+//  display: flex;
+//  align-items: center;
+//  list-style-type: none;
+//  padding: 6px 24px;
+//  font-size: 1em;
+//}
+//#lateral-menu ul li .material-icons{
+//  margin-right: 1.2rem;
+//  font-size: 2.2em;
+//}
 
 #lateral-menu ul li:hover{
   background-color: lighten($darkOrange,20%);

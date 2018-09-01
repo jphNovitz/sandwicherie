@@ -49,9 +49,17 @@ class Cart
      */
     private $client;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", length=1, nullable=false)
+     */
+    private $done;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
+        $this->done = true;
     }
 
     /**
@@ -126,8 +134,7 @@ class Cart
     public function removeItem($item)
     {
         $this->items->removeElement($item);
-        // uncomment if you want to update other side
-        //$item->setCart(null);
+        $item->setCart(null);
     }
 
 
@@ -145,6 +152,22 @@ class Cart
     public function setClient(User $client): void
     {
         $this->client = $client;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDone(): bool
+    {
+        return $this->done;
+    }
+
+    /**
+     * @param bool $done
+     */
+    public function setDone(bool $done): void
+    {
+        $this->done = $done;
     }
 
 

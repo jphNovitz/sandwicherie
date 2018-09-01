@@ -10,13 +10,18 @@ use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
 use App\Service\SocketNotifier;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Patch;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\FOSRestController;
 use Hateoas\HateoasBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use ZMQ;
+use ZMQContext;
 
 
 class CartController extends FOSRestController
@@ -35,6 +40,7 @@ class CartController extends FOSRestController
         $this->customLoader= $customObjectLoader;
         $this->serializer = $container->get('jms_serializer');
         $this->notifier = $notifier;
+        $this->em = $entityManager;
     }
 
     /**
@@ -63,33 +69,37 @@ class CartController extends FOSRestController
         $cart = new Cart();
         $box = json_decode($request->get('cart'));
         $username = $box->user;
+
         $user = $this->em = $this->get('doctrine.orm.entity_manager')
             ->getRepository('App:User')->loadUserByUsername($username);
 
+        $cart->setClient($user);
             foreach ($box->items  as $item)
             {
+
                 $line = new Item();
                 $product=$this->customLoader->LoadOne('App:Product', $item->slug);
                 $line->setProduct($product);
                 $line->setPrice($item->price);
                 $line->setBread($item->bread);
-                $line->setHalal($item->halal);
-                $line->setQty(1);
-                if (is_array($item->vegetables))
+                property_exists('item', 'halal') ? $line->setHalal($item->halal) : $line->setHalal(false) ;
+
+                if (property_exists('item', 'vegetables') && is_array($item->vegetables))
                 {
                     foreach ($item->vegetables as $vege) {
                         $line->addVegetable($vege);
                         }
                  }
-                $cart->addItem($line);
-            }
 
+                $cart->addItem($line);
+
+            }
         $cart->setClient($user);
 
         if ($this->customPersister->insert($cart)){
             $result=$cart;
             $status = 200;
-            //$this->notifier->notify('notification', ['commande'=>$cart]);
+           // $this->notifier->notify('new_order', ['commande'=>$cart]);
         } else {
             $result = ['message'=>'erreur serveur'];
             $status = 500;
@@ -97,7 +107,69 @@ class CartController extends FOSRestController
 
         $hateoas = HateoasBuilder::create()->build();
         $json = $hateoas->serialize($result, 'json');
-        //$this->notifier->notify('notification', ['commande'=>$json]);
+
+//        $context = new ZMQContext();
+//        try {
+//            $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
+//            $socket->connect("tcp://localhost:5555");
+//            $socket->send(json_encode($json));
+//        } catch (\ZMQSocketException $e) {
+//        }
+
+
+        $this->notifier->notify('new_order', ['order'=>$json]);
+        $response = new Response($json, $status, array('application/json'));
+        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET');
+        return ($response);
+    }
+
+    /**
+     * @Delete("order/{id}", name="orders_delete")
+     */
+    public function delete(Cart $order, Request $request) {
+
+        $removed = $order->getId();
+        try {
+            $this->em->remove($order);
+            $this->em->flush();
+            $status = 200;
+            $result = $removed ;
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            $status = 500;
+            $result = ['message' => 'erreur de suppression'];
+        }
+
+        $hateoas = HateoasBuilder::create()->build();
+        $json = $hateoas->serialize($result, 'json');
+
+        $this->notifier->notify('remove_order', ['id'=>$removed]);
+        $response = new Response($json, $status, array('application/json'));
+        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET');
+        return ($response);
+    }
+    /**
+     * @Patch("order/{id}/done", name="orders_done")
+     */
+    public function done(Cart $order, Request $request) {
+        try {
+            $order->setDone(true);
+            $this->customPersister->update($order);
+            $status = 200;
+            $result = ['done' => $order->getId()] ;
+            $this->notifier->notify('update_order', $result);
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            $status = 500;
+            $result = ['message' => 'erreur de suppression'];
+        }
+
+        $hateoas = HateoasBuilder::create()->build();
+        $json = $hateoas->serialize($result, 'json');
+
+
         $response = new Response($json, $status, array('application/json'));
         $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
         $response->headers->set('Access-Control-Allow-Origin', '*');

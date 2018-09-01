@@ -7,7 +7,7 @@ body{
   font-size: 1.1rem;
   line-height: 1.5em;
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 
 }
 
@@ -32,9 +32,26 @@ h2 {
 .ui .header{
   font-family: 'Cuprum', sans-serif;
   color: green;
+  font-size: 1.8rem ;
+}
+.ui.card>.content, .ui.cards>.card>.content{
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 1.2rem !important;
 }
 
+.wrapper {
+  margin: 0 auto;
+  display: flex;
+  max-width: 1170px;
+  justify-content: center;
+}
 p {
   font-family: 'Roboto', sans-serif;
   font-size: 1.4rem;
+}
+
+.block-orange{
+  display: inline-block;
+  background-color: orangered;
+  color: white;
 }

@@ -35,9 +35,7 @@
                             </select>
                         </sui-table-cell>
                         <sui-table-cell>
-
                             <input type="checkbox" id="definitive_cart[index].halal" v-model="definitive_cart[index].halal">
-
                         </sui-table-cell>
                     </sui-table-row>
                 </sui-table-body>
@@ -97,6 +95,7 @@ export default {
         let  definitive = [] ;
         let index = 0 ;
             this.cart.items.map(it =>{
+                this.total = it.item.price;
 //        this.cart.items.forEach(it =>{
             it.item.breads.forEach(bread =>{
                 this.breads[it.item.slug] =[]

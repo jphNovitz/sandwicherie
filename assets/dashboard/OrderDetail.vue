@@ -9,7 +9,7 @@
         </h2>
 
         <sui-card-group>
-            <sui-card v-for="item in order.items" class="centered">
+            <sui-card v-for="item in order.items" class="centered" :key="item.id">
                 <p>
                     {{item.product.name}} ({{item.product.price}}) <br />
                     pain: {{item.bread}} <br />

@@ -2,6 +2,7 @@ var Encore = require('@symfony/webpack-encore');
 var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 Encore
+    //.createSharedEntry('vendor', ['babel-polyfill'])
     // the project directory where compiled assets will be stored
     .setOutputPath('public/build/')
     // the public path used by the web server to access the previous directory
@@ -19,9 +20,10 @@ Encore
      .addStyleEntry('css/front', './assets/scss/front.scss')
      .addStyleEntry('css/back', './assets/scss/back.scss')
      .addStyleEntry('css/security', './assets/scss/security.scss')
-     .addEntry('js/vue', './assets/js/vue.min.js')
+     .addEntry('js/vue', './assets/js/vue.js')
      .addEntry('js/app', './assets/js/app.js')
      .addEntry('main', './assets/vue/main.js')
+     .addEntry('dashboard', './assets/dashboard/main.js')
     //.enableVueLoader()
     .enableVueLoader(function(options) {
         // https://vue-loader.vuejs.org/en/configurations/advanced.html
@@ -37,9 +39,44 @@ Encore
     // uncomment for legacy applications that require $/jQuery as a global variable
     // .autoProvidejQuery()
 
-    //.configureBabel(function(babelConfig) {
-        // add additional presets
-      //  babelConfig.presets.push('es2017');
-    //})
+  /*  .configureBabel(function(babelConfig) {
+         //add additional presets
+         babelConfig.presets.push('es2017');
+    })*/
+/*    .configureUglifyJsPlugin(function(options){
+        options = {
+            cache: false,
+            parallel: false,
+            uglifyOptions: {
+                compress: false,
+                ecma: 2017,
+                mangle: false
+            },
+            sourceMap: false
+        }
+    })*/
+    .isProduction(true)
 ;
-module.exports = Encore.getWebpackConfig();
+
+/*if (Encore.isProduction()) {
+    for (const plugin of Encore.getWebpackConfig()) {
+        if (plugin instanceof webpack.optimize.UglifyJsPlugin) {
+            plugin.options.mangle = false;
+        }
+    }
+}*/
+
+const config = Encore.getWebpackConfig();
+for (const rule of config.module.rules) {
+    if (rule.use){
+        for (loader of rule.use){
+            (loader.loader === 'babel-loader')
+            {
+                delete rule.exclude;
+            }
+
+            }
+        }
+}
+
+module.exports = config;

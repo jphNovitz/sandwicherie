@@ -1,8 +1,8 @@
 /*******************************
      User Global Variables
 *******************************/
-@headerFont        : 'Pacifico', 'cursive';
+@headerFont        : 'Cuprum', sans-serif;
 @importGoogleFonts : true;
-@googleFontName    : 'Pacifico';
+@googleFontName    : 'Cuprum';
 @googleFontSizes   : '400,700,400italic,700italic';
 @googleFontFamily  : '@{googleFontName}:@{googleFontSizes}';

@@ -1,28 +1,26 @@
 <template>
-             <sui-card>
-               <sui-image :src="imageName" v-if="imageName"/>
-               <img src="./no-photo-01.png" class="ui image" v-else/>
-                <sui-card-content>
-                    <router-link :to="{ name: 'detail', params: { slug: product.slug }}">
-                        <sui-card-header>
-                             {{product.name}}
-                        </sui-card-header>
-                    </router-link>
-                    <sui-card-meta huge class="orange">{{product.price}} €</sui-card-meta>
-                    <sui-card-description>
-                        {{product.description}}
-                    </sui-card-description>
-                </sui-card-content>
-                 <sui-card-content extra v-if="userID">
-                     <input v-model.number="in_cart" type="number" @click="add_cart(product)"  style="width: 4rem" v-if="in_cart"/>
-                   <sui-button  icon="cart plus" circular @click="in_cart++ ; add_cart(product)" v-if="!in_cart" />
+    <sui-card>
+            <sui-image :src="imageName" />
+        <sui-card-content>
+            <router-link :to="{ name: 'detail', params: { slug: product.slug }}">
+                <sui-card-header>
+                     {{product.name}}
+                </sui-card-header>
+            </router-link>
+            <sui-card-meta huge class="orange">{{product.price}} €</sui-card-meta>
+            <sui-card-description>
+                {{product.description}}
+            </sui-card-description>
+        </sui-card-content>
+         <sui-card-content extra v-if="userID">
+             <input v-model.number="in_cart" type="number" @click="add_cart(product)"  style="width: 4rem" v-if="in_cart"/>
+           <sui-button  icon="cart plus" circular @click="in_cart++ ; add_cart(product)" v-if="!in_cart" />
 
-                   <sui-button  circular  icon="heart outline"  v-if="!likes()" @click="likeAction()" />
-                   <sui-button circular color="pink" icon="heart" v-if="likes()" @click="likeAction()" />
-                   <sui-button circular icon="thumbtack"  />
-                 </sui-card-content >
-       </sui-card>
-
+           <sui-button  circular  icon="heart outline"  v-if="!likes()" @click="likeAction()" />
+           <sui-button circular color="pink" icon="heart" v-if="likes()" @click="likeAction()" />
+           <sui-button circular icon="thumbtack"  />
+         </sui-card-content >
+   </sui-card>
 </template>
 <script>
     import  axios from 'axios'
@@ -41,11 +39,15 @@
         computed: {
             imageName: function (){
                 let elm = this.product;
-                let imageName = elm.images[0].image_name;
-                if ( imageName !== undefined) {
-                    return  'images/products/' + imageName;
+                if ( elm.images !== undefined) {
+                    let imageName = elm.images[0].image_name;
+                    if (imageName !== undefined) {
+                        return 'images/products/' + imageName;
+                    } else {
+                        return  'images/common/image-nophoto-clem.png';
+                    }
                 } else {
-                    return false ;
+                    return  'images/common/image-nophoto-clem.png';
                 }
 
             },

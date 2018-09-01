@@ -5,7 +5,7 @@
             <sui-grid-column :width="2">
                 <h3>Allergies</h3>
                 <sui-list>
-                    <sui-list-item
+                    <sui-list-item horizontal
                             v-for="allergy in allergies"
                             :key="allergy.id"
                             @click="changeAllergies(allergy.id, allergy.slug)">
@@ -28,6 +28,7 @@
                 </sui-menu>
 
                 <sui-card-group stackable :items-per-row="3">
+
                    <card-product v-if="products.length>0"
                                  v-for="product in products"
                                  :product="product"

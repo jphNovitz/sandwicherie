@@ -1,7 +1,5 @@
 <?php
-
 Namespace App\Controller\Api\User ;
-
 
 use App\Model\CustomObjectLoaderInterface;
 use App\Model\CustomPersisterInterface;
@@ -20,14 +18,15 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class UserController extends FOSRestController {
 
-
     protected $objectLoader;
     protected $persister;
     protected $em;
     protected $hateoas;
     protected $tokenStorage ;
 
-    public function __construct(CustomObjectLoaderInterface $objectLoader, TokenStorageInterface $tokenStorage, CustomPersisterInterface $persister )
+    public function __construct(CustomObjectLoaderInterface $objectLoader,
+                                TokenStorageInterface $tokenStorage,
+                                CustomPersisterInterface $persister )
     {
         $this->objectLoader = $objectLoader;
         $this->tokenStorage = $tokenStorage;

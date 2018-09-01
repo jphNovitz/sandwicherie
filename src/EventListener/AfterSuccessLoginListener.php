@@ -38,26 +38,25 @@ class AfterSuccessLoginListener implements AuthenticationSuccessHandlerInterface
     {
         $user = $token->getUser();
         $username = $user->getUsername();
-        if ($username != 'admin') {
-            if ($user->getIsActive()) :
-                $user->setTries(0);
-                $this->persister->insert($user);
-                $this->session->getFlashBag()->add("info", "bonjour " . $username);
-                if (in_array('ROLE_ADMIN', $user->getRoles())) :
-                    return new RedirectResponse($this->router->generate('admin_default'));
-                elseif (in_array('ROLE_MEMBER', $user->getRoles())) :
-                    return new RedirectResponse($this->router->generate('admin_default'));
-                elseif (in_array('ROLE_USER', $user->getRoles())) :
-                    return new RedirectResponse($this->router->generate('default'));
+
+        if ($username === 'admin') {
+              return new RedirectResponse($this->router->generate('admin_default'));
+        } else {
+                if ($user->getIsActive()) :
+                    $user->setTries(0);
+                    $this->persister->insert($user);
+                    $this->session->getFlashBag()->add("info", "bonjour " . $username);
                 endif;
-            else:
-                $this->session->getFlashBag()->add("error", "Votre compte a été désactivé");
-                return new RedirectResponse($this->router->generate('register'));
-            endif;
-        }
+            }
+        $roles = $user->getRoles();
 
-        return new RedirectResponse($this->router->generate('admin_default'));
-
+        if (in_array('ROLE_ADMIN', $roles)) :
+            return new RedirectResponse($this->router->generate('admin_default'));
+        elseif (in_array('ROLE_MEMBER', $user->getRoles())) :
+            return new RedirectResponse($this->router->generate('admin_default'));
+        elseif (in_array('ROLE_USER', $user->getRoles())) :
+            return new RedirectResponse($this->router->generate('default'));
+        endif;
     }
 
 }
