@@ -11,9 +11,10 @@
                                       color="orange"
                                       name="hand point up outline"
                                       style="cursor: pointer"
+                                      class="pointer-on"
                                       @click="setActive(key)"
                             />
-                        <span slot="right">
+                        <span class="centered pointer-off" style="position: absolute ; top: 75%;">
                           <a :href="image.original" target="_blank"
                              class="white">
                               <sui-icon name="instagram"
@@ -24,7 +25,8 @@
                             class="white">
                                  <sui-icon size="large"
                                            color="white"
-                                           name="hand point down outline" />
+                                           name="hand point down outline"
+                                           class="pointer-off"/>
                          </a>
                         </span>
                         <sui-card-description>
@@ -104,6 +106,14 @@ import axios from 'axios'
 </script>
 
 <style scoped>
+
+    .pointer-on{
+        visibility: visible;
+    }
+    .pointer-off{
+        visibility: hidden;
+    }
+
     .ui.five.cards>.card{
         position: relative !important;
         overflow: hidden ;
@@ -113,7 +123,7 @@ import axios from 'axios'
     .ui.card > .content, .ui.cards > .card > .content{
         border: none;
         position: absolute !important;
-        top: 76%;
+        top: 80%;
         height: 150%;
         width: 100%;
         background-color: rgba(255,255,255, .85 );
@@ -122,12 +132,22 @@ import axios from 'axios'
 
     .ui.card>.content>.description, .ui.cards>.card>.content>.description {
         margin-top: 2rem !important;
-        margin-bottom: 2rem !important;
+        margin-bottom: 40% !important;
     }
 
     .contentActive {
         background-color: rgba(0,197,82, .75 ) !important;
-        top: -34% !important;
+        top: 0% !important;
+        height: 110% !important;
+    }
+    .contentActive .pointer-on{
+        visibility: hidden;
+    }
+    .contentActive .pointer-off{
+        visibility: visible;
+    }
+    .contentActive .elipsis{
+        visibility: visible;
     }
 
 
@@ -137,16 +157,27 @@ import axios from 'axios'
     }
 
     .elipsis{
+        visibility: hidden;
         margin: auto;
         /* white-space: nowrap; */
         overflow: hidden;
         text-overflow: ellipsis;
         width: 95%;
-        font-size: 1.1rem;
+        font-size: 2.5rem;
         height: 100px;
         text-align: center !important;
     }
     a.white{
         color: #ffffff;
     }
+@media screen and (min-width: 640px) {
+
+    .ui.card>.content>.description, .ui.cards>.card>.content>.description {
+        margin-top: 1px !important;
+    }
+    .elipsis {
+        font-size: 1rem;
+        height: 80%;
+    }
+}
 </style>

@@ -5,7 +5,7 @@
         <div class="sixteen wide column ui center aligned">
             <h1 class="ui center aligned icon green header">
                 {% block header_image %}
-                    {% if (object.images is defined) and (object.images is not null) %}
+                    {% if (object.images is defined) and (object.images is not empty) %}
                         <img src="{{ asset('images/'~object|entity~'/'~object.images[0].imageName) }}"
                              class="ui circular image">
                     {% elseif  (object.imageName is defined) and  (object.imageName is not null) %}
