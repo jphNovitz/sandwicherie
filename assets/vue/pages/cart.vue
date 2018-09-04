@@ -82,7 +82,7 @@ export default {
                     items: this.definitive_cart
                 };
                 console.log(JSON.stringify(box)) ;
-                    this.$http.post(this.url, {cart: JSON.stringify(box)}).then(response => {
+                    this.$http.post(this.url, JSON.stringify(box)).then(response => {
                         console.log('order persisted ok');
                         console.log(response);
                         this.$router.push({ name: 'home'})
