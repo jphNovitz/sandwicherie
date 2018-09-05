@@ -167,7 +167,7 @@ class Item
     /**
      * @return array
      */
-    public function getVegetables(): array
+    public function getVegetables(): ?array
     {
         return $this->vegetables;
     }

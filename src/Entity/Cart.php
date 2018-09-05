@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -36,7 +38,7 @@ class Cart
     private $updated;
 
     /**
-     * @var ArrayCollection $items
+     * @var Collection $items
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Item", cascade={"persist"})
      */
@@ -59,7 +61,7 @@ class Cart
     public function __construct()
     {
         $this->items = new ArrayCollection();
-        $this->done = true;
+        $this->done = false;
     }
 
     /**
@@ -111,12 +113,13 @@ class Cart
     }
 
     /**
-     * @return string
+     * @return Collection
      */
-    public function getItems(): string
+    public function getItems(): ?Collection
     {
         return $this->items;
     }
+
 
     /**
      * @param mixed $item
