@@ -29,12 +29,19 @@
     <div class="one wide column center aligned ">
     </div>
         <div class="fourteen wide column center aligned ui grid">
-            <div class="six wide column ui raised segment left aligned user-infos">
+            <div class="six wide column ui raised large segment left aligned user-infos">
+                <p>
+                    Id: {{ user.id }}</em>
+                    <br/><em>Utilisateur: </em> <strong>{{ user.username }}</strong>
+                </p>
+                <p>
+                    <em>Email: </em>  {{ user.email }}
+                    <br /><em>Téléphone: </em>  {{ user.phone }}
+                </p>
                 <p>Nom: {{ user.lastName }}
-                <br />Prenom: {{ user.lastName }}
-                    <br/><em>Nom d'utilisateur: <strong>{{ user.username }}</strong>
-                        <br /><em>Email: </em>   {{ user.email }}
-                        <br/>Id: {{ user.id }}</em>
+                    <br />Prenom: {{ user.lastName }}
+                    <br />{{ user.street }} {{ user.streetNr }}
+                    <br />{{ user.city }}
                     {% block infos %}
                         <p>
                             Actif: {{ user.isActive ? '<i class="ui green horizontal label"> oui</i>' : '<i class="ui red horizontal label"> non </i>' }}
@@ -44,13 +51,18 @@
             </div>
             <div class="nine wide column left aligned">
                 {% block card_rest %}
-                <div class="ui list">
+                <div class="ui list items_parent">
                     {% for order in orders %}
-                        <div class="item">
+                        <div class="item" id="id{{ order.id }}" data-done="{{ order.done }}">
                             {{ order.created |date()}}
-                            {{ order.done ? '<i class="ui green horizontal label"> classé</i>' : '<i class="ui red horizontal label"> En cours </i>' }}
-                            <i class="ui caret icon" :class="detailClass({{ order.id }})"  style="display: inline-flex" @click="toggleDetail({{ order.id }})"></i>
-                            {#<button @click="toggleDetail()">ddd</button>#}
+                            <i class="ui green horizontal label" style="width: 4.6rem" v-if="isDone('id'+{{ order.id }})"> classé</i>
+                            <i class="ui red horizontal label" style="width: 4.6rem" v-if="!isDone('id'+{{ order.id }})" > En cours </i>
+                            <a @click="toggleDetail({{ order.id }})">
+                            <i class="ui caret icon" :class="detailClass({{ order.id }})"  style="display: inline-flex" ></i>
+                            </a>
+                            <a @click="doneIt({{ order.id }})" :class="{ghost : isDone('id'+{{ order.id }})}" class="circular ui icon mini green button _action"> <i class="ui check  icon"></i> </a>
+                            <a @click="doneIt({{ order.id }})" :class="{ghost : !isDone('id'+{{ order.id }})}"class="circular ui icon mini red button _action"> <i class="ui times  icon"></i> </a>
+
                             <div class="content" v-if="detailClass({{ order.id }}) === 'down' ">
                                 {% for item in order.items %}
                                 <table class="ui celled table">
@@ -92,6 +104,12 @@
                                 {% endfor %}
                             </div>
                         </div>
+                    {% endfor %}
+                </div>
+                <div v-if="user.likes|length > 0">
+                    <em>Aime les produits suivants:</em>
+                    {% for like in user.likes %}
+                        <i class="ui tag label">New</i>
                     {% endfor %}
                 </div>
                 {% endblock %}
@@ -160,24 +178,27 @@
                 }
             }
         })
+
+
         const global = new Vue({
             el: '#global',
             data(){
                 return {
                     menuActive: 'notVisible',
-                    detailed: []
+                    detailed: [],
+                    done: []
                 }
             },
+            computed: {},
             created(){
-           },
-            methods:{
-                showMenu: function(){
-                    if (this.menuActive === 'notVisible' ){
-                        this.menuActive = 'visible'
-                    } else {
-                        this.menuActive = 'notVisible'
+                let items = document.querySelector('.items_parent').querySelectorAll('.item')
+                items.forEach(item=>{
+                    if (item.dataset.done === '1'){
+                        this.done.push(item.id)
                     }
-                },
+                })
+            },
+            methods:{
                 toggleDetail: function (id) {
                     let i = this.detailed.indexOf(id);
                     if ( i > -1){
@@ -193,6 +214,40 @@
                     } else {
                         return 'right' ;
                     }
+                },
+                isDone: function(id){
+                  if (this.done.indexOf(id) > -1){
+                      return true
+                  }else return false
+                },
+                doneIt: function (id=-1) {
+                    let cid = 'id'+id
+                    {#axios.PATCH({{render(controller("App:Controller:Admin:CartController:setDone", {'id': 1})) }})#}
+                    var url = '{{path("cart_done", {"id": 'cart_id' }) }}'
+                    url = url.replace("cart_id", id)
+                    let that = this
+                    axios.patch(url)
+                        .then(function (response) {
+                            let flag = response.data
+                            console.log(flag)
+                            let pos = that.done.indexOf(cid)
+                            console.log(pos)
+                            if (flag){
+                                if (pos > -1){
+                                    that.done.splice(pos, 1)
+                                    console.log(that.done)
+                                } else {
+                                    that.done.push(cid)
+                                    console.log(that.done)
+                                }
+                            }else {
+                                that.done.splice(pos, 1)
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log('non')
+                            console.log(error)
+                        })
 
                 }
             }

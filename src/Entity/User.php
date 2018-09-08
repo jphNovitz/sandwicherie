@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\BooleanType;
 use Doctrine\ORM\Mapping as ORM;
@@ -99,7 +100,7 @@ class User implements UserInterface, EquatableInterface
     private $isActive;
 
     /**
-     * @var ArrayCollection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="likedBy")
      * @ORM\JoinTable(name="products_likes")
@@ -253,7 +254,7 @@ class User implements UserInterface, EquatableInterface
     /**
      * @return String
      */
-    public function getCity(): String
+    public function getCity(): ?String
     {
         return $this->city;
     }
@@ -408,7 +409,7 @@ class User implements UserInterface, EquatableInterface
     /**
      * @return ArrayCollection
      */
-    public function getLikes(): ArrayCollection
+    public function getLikes(): Collection
     {
         return $this->likes;
     }
