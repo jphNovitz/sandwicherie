@@ -24,7 +24,8 @@ export default {
             }).length
         },
         likeAction: function () {
-            axios.patch(/*this.base_api+*/'/api/products/'+this.product.slug+'/like/'+this.username).then((response) => {
+            this.$http.patch(/*this.base_api+*/'/api/s/products/'+this.product.slug+'/like')
+                .then((response) => {
                 //let obj = this.group.filter(p=> p.slug === this.product.slug)
                 this.$store.dispatch('call_products')
             })
