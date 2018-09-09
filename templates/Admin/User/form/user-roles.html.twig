@@ -1,0 +1,17 @@
+{{ form_start(form, {'attr': {'class': 'ui form'}}) }}
+
+    <div class="">
+        {% for i in 0..form.roles|length-1 %}
+        <div class="fields">
+            {{ form_widget(form.roles[i]) }}
+            {{ form_label(form.roles[i]) }}
+        </div>
+        {% endfor %}
+        <div class="field">
+            <button type="submit" class="ui circular positive button">
+                <i class="ui check icon"></i> Modifier rôles
+            </button>
+        </div>
+</div>
+{{ form_rest(form) }}
+{{ form_end(form) }}

@@ -1,0 +1,26 @@
+{% extends '_skeletons/_delete_confirmation.html.twig' %}
+
+{% block message_infos %}
+    {% block message_title %}
+        <h2>Suppression d'un utilisateur</h2>
+    {% endblock %}
+
+    <p>Vous êtes sur le point de <strong><em> {% block message %}supprimer{% endblock %}</em></strong> l'utilisateur
+        suivant:
+    <div class="ui list">
+        <div class="list item">
+            Utilisateur: {{ object.username }}
+        </div>
+        <div class="list item">
+            Nom: {{ object.lastName }}
+        </div>
+        <div class="list item">
+            Prenom: {{ object.firstName }}
+        </div>
+        <div class="list item">
+            Email: {{ object.email }}
+        </div>
+    </div>
+    </p>
+
+{% endblock %}

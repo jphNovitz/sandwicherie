@@ -2,7 +2,6 @@
 
 {% block body %}
     <div class="ui stackable grid">
-
         <div class="sixteen wide column ui center aligned">
             <h1 class="ui center aligned icon green header">
                 <div class="content">
@@ -19,116 +18,146 @@
                 {% block header_buttons %}    {% endblock %}
                 <div class="item">
                 </div>
-                {#<div class="item"><a href="{{ path(user|entity ~ '_delete', {'slug' : user.slug}) }}"#}
-                                     {#class="ui  basic secondary circular button" style="min-width: 7rem"> supprimer</a>#}
-                </div>
+
             </div>
         </div>
-<div class="ui grid" id="global">
-
-    <div class="one wide column center aligned ">
     </div>
-        <div class="fourteen wide column center aligned ui grid">
-            <div class="six wide column ui raised large segment left aligned user-infos">
-                <p>
-                    Id: {{ user.id }}</em>
-                    <br/><em>Utilisateur: </em> <strong>{{ user.username }}</strong>
-                </p>
-                <p>
-                    <em>Email: </em>  {{ user.email }}
-                    <br /><em>Téléphone: </em>  {{ user.phone }}
-                </p>
-                <p>Nom: {{ user.lastName }}
-                    <br />Prenom: {{ user.lastName }}
-                    <br />{{ user.street }} {{ user.streetNr }}
-                    <br />{{ user.city }}
-                    {% block infos %}
-                        <p>
-                            Actif: {{ user.isActive ? '<i class="ui green horizontal label"> oui</i>' : '<i class="ui red horizontal label"> non </i>' }}
-                        </p>
+    <div class="ui grid" id="global">
+
+        <div class="one wide column center aligned ">
+            {#left always left#}
+        </div>
+        <div class="fourteen wide column center aligned ui stackable grid">
+            <div class="six wide column">
+                <div class="ui raised large segment left aligned user-infos">
+                    <p>
+                        Id: {{ user.id }}</em>
+                        <br/><em>Utilisateur: </em> <strong>{{ user.username }}</strong>
+                    </p>
+                    <p>
+                        <em>Email: </em> {{ user.email }}
+                        <br/><em>Téléphone: </em> {{ user.phone }}
+                    </p>
+                    <p>Nom: {{ user.lastName }}
+                        <br/>Prenom: {{ user.lastName }}
+                        <br/>{{ user.street }} {{ user.streetNr }}
+                        <br/>{{ user.city }}
+                        {% block infos %}
+                    <p>
+                        Actif: {{ user.isActive ? '<i class="ui green horizontal label"> oui</i>' : '<i class="ui red horizontal label"> non </i>' }}
+                    </p>
                     {% endblock %}
-                </p>
+                    </p>
+                </div>
+                {{ render(controller('App\\Controller\\Admin\\User\\UserController::roleUser', {'username': user.username})) }}
             </div>
             <div class="nine wide column left aligned">
                 {% block card_rest %}
-                <div class="ui list items_parent">
-                    {% for order in orders %}
-                        <div class="item" id="id{{ order.id }}" data-done="{{ order.done }}">
-                            {{ order.created |date()}}
-                            <i class="ui green horizontal label" style="width: 4.6rem" v-if="isDone('id'+{{ order.id }})"> classé</i>
-                            <i class="ui red horizontal label" style="width: 4.6rem" v-if="!isDone('id'+{{ order.id }})" > En cours </i>
-                            <a @click="toggleDetail({{ order.id }})">
-                            <i class="ui caret icon" :class="detailClass({{ order.id }})"  style="display: inline-flex" ></i>
-                            </a>
-                            <a @click="doneIt({{ order.id }})" :class="{ghost : isDone('id'+{{ order.id }})}" class="circular ui icon mini green button _action"> <i class="ui check  icon"></i> </a>
-                            <a @click="doneIt({{ order.id }})" :class="{ghost : !isDone('id'+{{ order.id }})}"class="circular ui icon mini red button _action"> <i class="ui times  icon"></i> </a>
+                    <div class="ui list items_parent">
+                        {% for order in orders %}
+                            <div class="item ui sixteen wide column stackable grid" id="id{{ order.id }}"
+                                 data-done="{{ order.done }}">
+                                <div class="ui seven wide column">
+                                    {{ order.created |date("d/m/Y") }}
+                                </div>
+                                <div class="ui eight wide column">
+                                    <i class="ui green horizontal label" style="width: 4.6rem"
+                                       v-if="isDone('id'+{{ order.id }})"> classé</i>
+                                    <i class="ui red horizontal label" style="width: 4.6rem"
+                                       v-if="!isDone('id'+{{ order.id }})"> En cours </i>
+                                    <a @click="toggleDetail({{ order.id }})">
+                                        <i class="ui caret icon" :class="detailClass({{ order.id }})"
+                                           style="display: inline-flex"></i>
+                                    </a>
+                                    <a @click="doneIt({{ order.id }})" :class="{ghost : isDone('id'+{{ order.id }})}"
+                                       class="circular ui icon mini green button _action"> <i
+                                                class="ui check  icon"></i> </a>
+                                    <a @click="doneIt({{ order.id }})" :class="{ghost : !isDone('id'+{{ order.id }})}"
+                                       class="circular ui icon mini red button _action"> <i class="ui times  icon"></i>
+                                    </a>
 
-                            <div class="content" v-if="detailClass({{ order.id }}) === 'down' ">
-                                {% for item in order.items %}
-                                <table class="ui celled table">
-                                    <thead>
-                                    <tr>
-                                        <th>Produit</th>
-                                        <th>Pain</th>
-                                        <th>Crudites</th>
-                                        <th>halal</th>
-                                        <th>prix</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>{{ item.product.name }}</td>
-                                        <td>
-                                            {% if item.bread is not empty %}
-                                                {{ item.bread }}
-                                            {% else %}
-                                                ~
-                                            {% endif %}
-                                        </td>
-                                        <td>
-                                            {% if item.vegetables|length > 0 %}
-                                                {% for vegetable in item.vegetables %}
-                                                    {{ vegetable.name }}
-                                                {% endfor %}
-                                            {%  else %}
-                                                ~
-                                            {% endif %}
-                                        </td>
-                                        <td>
-                                            {{ item.halal ? '<i class="ui olive horizontal label"> Halal</i>' : 'non'}}
-                                        </td>
-                                        <td>{{ item.price }}</td>
-                                    </tr>
-                                 </tbody>
-                                </table>
-                                {% endfor %}
+                                    <div class="content" v-if="detailClass({{ order.id }}) === 'down' ">
+                                        {% for item in order.items %}
+                                            <table class="ui celled table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Produit</th>
+                                                    <th>Pain</th>
+                                                    <th>Crudites</th>
+                                                    <th>halal</th>
+                                                    <th>prix</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>{{ item.product.name }}</td>
+                                                    <td>
+                                                        {% if item.bread is not empty %}
+                                                            {{ item.bread }}
+                                                        {% else %}
+                                                            ~
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if item.vegetables|length > 0 %}
+                                                            {% for vegetable in item.vegetables %}
+                                                                {{ vegetable.name }}
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            ~
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.halal ? '<i class="ui olive horizontal label"> Halal</i>' : 'non' }}
+                                                    </td>
+                                                    <td>{{ item.price }}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        {% endfor %}
+                                    </div>
+                                </div>
                             </div>
+                        {% endfor %}
+                    </div>
+                    {% if user.likes|length > 0 %}
+                        <div>
+                            <p><em>Aime les produits suivants:</em><br/>
+                                {% for like in user.likes %}
+                                    <i class="ui tag olive large label">{{ like.name }}</i>
+                                {% endfor %}
+                            </p>
                         </div>
-                    {% endfor %}
-                </div>
-                <div v-if="user.likes|length > 0">
-                    <em>Aime les produits suivants:</em>
-                    {% for like in user.likes %}
-                        <i class="ui tag label">New</i>
-                    {% endfor %}
-                </div>
+                    {% endif %}
                 {% endblock %}
             </div>
         </div>
         <div class="one wide column center aligned">
             <div class="action" id="action">
                 <div :class="menuActive">
-                {% if user.isActive %}
-                    <button class="ui  circular icon button" title="Désactiver"><i class="user times icon"></i></button>
-                {% else %}
-                    <button class="ui  circular icon button" title="Activer"><i class="user icon"></i></button>
-                {% endif %}
-                <button class="ui negative circular icon button" title="Supprimer"><i class="trash icon"></i></button>
+                    <a href="{{ path('users_list') }}"
+                       class="ui blue circular icon button" title="Liste">
+                        <i class="list icon"></i>
+                    </a>
+                    {% if user.isActive %}
+                        <a href="{{ path('users_desactive', {'username': user.username}) }}"
+                           class="ui  circular icon button" title="Désactiver"><i class="user times icon"></i></a>
+                    {% else %}
+                        <a href="{{ path('users_reactive', {'username': user.username}) }}"
+                           class="ui  circular icon button" title="Activer"><i class="user icon"></i></a>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('users_delete', {'username': user.username}) }}"
+                           class="ui negative circular icon button" title="Supprimer">
+                            <i class="trash icon"></i>
+                        </a>
+                    {% endif %}
                 </div>
-                <button id="menu" class="ui orange circular icon button" @click="showMenu" title="Menu"><i class="plus icon"></i></button>
+                <button id="menu" class="ui orange circular icon button" @click="showMenu" title="Menu"><i
+                            class="plus icon"></i></button>
 
+            </div>
         </div>
-    </div>
     </div>
 
 {% endblock %}
@@ -137,22 +166,22 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     {#<script src="{{ asset('build/js/vue.js') }}"> </script>#}
-<script>
+    <script>
 
-    Vue.config.delimiters= ['${', '}'];
+        Vue.config.delimiters = ['${', '}'];
         const action = new Vue({
             el: '#action',
-            data(){
+            data() {
                 return {
                     menuActive: 'notVisible',
                     detailed: []
                 }
             },
-            created(){
-           },
-            methods:{
-                showMenu: function(){
-                    if (this.menuActive === 'notVisible' ){
+            created() {
+            },
+            methods: {
+                showMenu: function () {
+                    if (this.menuActive === 'notVisible') {
                         this.menuActive = 'visible'
                     } else {
                         this.menuActive = 'notVisible'
@@ -161,18 +190,18 @@
                 toggleDetail: function (id) {
                     alert()
                     let i = this.detailed.indexOf(id);
-                    if ( i > 0){
+                    if (i > 0) {
                         this.detailed.splice(i, 1)
                     } else {
-                        this.detailed.push(id) ;
+                        this.detailed.push(id);
                     }
                     console.log(this.detailed)
                 },
                 detailClass: function (id) {
-                    if (this.detailed.indexOf(id) > -1 ){
-                        return 'down' ;
+                    if (this.detailed.indexOf(id) > -1) {
+                        return 'down';
                     } else {
-                        return 'right' ;
+                        return 'right';
                     }
 
                 }
@@ -182,7 +211,7 @@
 
         const global = new Vue({
             el: '#global',
-            data(){
+            data() {
                 return {
                     menuActive: 'notVisible',
                     detailed: [],
@@ -190,68 +219,66 @@
                 }
             },
             computed: {},
-            created(){
+            created() {
                 let items = document.querySelector('.items_parent').querySelectorAll('.item')
-                items.forEach(item=>{
-                    if (item.dataset.done === '1'){
+                items.forEach(item => {
+                    if (item.dataset.done === '1') {
                         this.done.push(item.id)
                     }
                 })
             },
-            methods:{
+            methods: {
                 toggleDetail: function (id) {
                     let i = this.detailed.indexOf(id);
-                    if ( i > -1){
+                    if (i > -1) {
                         this.detailed.splice(i, 1)
                     } else {
-                        this.detailed.push(id) ;
+                        this.detailed.push(id);
                     }
                     console.log(this.detailed)
                 },
                 detailClass: function (id) {
-                    if (this.detailed.indexOf(id) > -1 ){
-                        return 'down' ;
+                    if (this.detailed.indexOf(id) > -1) {
+                        return 'down';
                     } else {
-                        return 'right' ;
+                        return 'right';
                     }
                 },
-                isDone: function(id){
-                  if (this.done.indexOf(id) > -1){
-                      return true
-                  }else return false
+                isDone: function (id) {
+                    if (this.done.indexOf(id) > -1) {
+                        return true
+                    } else return false
                 },
-                doneIt: function (id=-1) {
-                    let cid = 'id'+id
+                doneIt: function (id = -1) {
+                    let cid = 'id' + id
+
                     {#axios.PATCH({{render(controller("App:Controller:Admin:CartController:setDone", {'id': 1})) }})#}
-                    var url = '{{path("cart_done", {"id": 'cart_id' }) }}'
+                    {#var url = `{{render(controller("App:Controller:Admin:Cart:CartController:setDone", {'id': 301}))}}`#}
+                    var url = '{{ path("cart_done", {"id": 'cart_id' }) }}'
                     url = url.replace("cart_id", id)
                     let that = this
                     axios.patch(url)
                         .then(function (response) {
                             let flag = response.data
-                            console.log(flag)
                             let pos = that.done.indexOf(cid)
-                            console.log(pos)
-                            if (flag){
-                                if (pos > -1){
+
+                            if (flag) {
+                                if (pos > -1) {
                                     that.done.splice(pos, 1)
-                                    console.log(that.done)
                                 } else {
                                     that.done.push(cid)
-                                    console.log(that.done)
                                 }
-                            }else {
+                            } else {
                                 that.done.splice(pos, 1)
                             }
                         })
                         .catch(function (error) {
-                            console.log('non')
                             console.log(error)
                         })
 
                 }
             }
         })
-</script>
+    </script>
 
 {% endblock %}

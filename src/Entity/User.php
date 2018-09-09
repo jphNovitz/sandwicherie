@@ -82,8 +82,7 @@ class User implements UserInterface, EquatableInterface
      private $phone;
 
     /**
-     * @var ArrayCollection
-     * @ORM\Column(name="roles", type="array")
+     * @ORM\Column(type="json_array", nullable=true)
      */
     private $roles = array();
 
@@ -266,7 +265,7 @@ class User implements UserInterface, EquatableInterface
     {
         $this->city = $city;
     }
-    
+
     /**
      * @return mixed
      */
@@ -276,14 +275,13 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * @param mixed $role
+     * @param mixed $roles
      */
-    public function addRole($role)
+    public function setRoles($roles): void
     {
-        $this->roles->add($role);
-        // uncomment if you want to update other side
-        //$role->setUser($this);
+        $this->roles = $roles;
     }
+
 
     /**
      * @param mixed $role

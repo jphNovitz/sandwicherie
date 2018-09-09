@@ -20,17 +20,34 @@
 .action{
   position: absolute;
   bottom: 3rem;
+  /* top: 1rem; */
   right: -1.5em;
+  position: fixed;
+  width: 6rem;
 }
 
 .action .button{
-
   width: 3rem !important;
   height: 3rem !important;
+  transition: all .9s ease;
+  margin-bottom: 2rem;
 }
 
-.action:hover{
-  transform: rotate(50deg);
+.action .button:active{
+  transform: rotate(180deg);
+}
+
+.visible{
+  opacity: 1;
+  transition: opacity .8s ease;
+}
+.notVisible{
+  opacity: 0;
+  transition: opacity .8s ease;
+}
+
+.ghost{
+  display: none !important;
 }
 
 .vich-image img{
