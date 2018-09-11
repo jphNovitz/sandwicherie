@@ -138,6 +138,13 @@ class Product
     private $likedBy;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="discoveries")
+     */
+    private $interestedBy;
+
+    /**
      * Product constructor.
      */
 
@@ -152,6 +159,7 @@ class Product
        $this->isActive = true;
        $this->featured = false;
        $this->likedBy = new ArrayCollection();
+       $this->interestedBy = new ArrayCollection();
    }
 
     /**
@@ -494,6 +502,35 @@ class Product
         $this->likedBy->removeElement($likedBy);
         $likedBy->removeLike($this);
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getInterestedBy(): ?Collection
+    {
+        return $this->interestedBy;
+    }
+
+    /**
+     * @param mixed $interestedBy
+     */
+    public function addInterestedBy($interestedBy)
+    {
+        $this->interestedBy->add($interestedBy);
+        // uncomment if you want to update other side
+        //$interestedBy->setProduct($this);
+    }
+
+    /**
+     * @param mixed $interestedBy
+     */
+    public function removeInterestedBy($interestedBy)
+    {
+        $this->interestedBy->removeElement($interestedBy);
+        // uncomment if you want to update other side
+        //$interestedBy->setProduct(null);
+    }
+
 
     public function __toString()
     {

@@ -18,7 +18,8 @@
 
            <sui-button  circular  icon="heart outline"  v-if="!likes()" @click="likeAction()" />
            <sui-button circular color="pink" icon="heart" v-if="likes()" @click="likeAction()" />
-           <sui-button circular icon="thumbtack"  />
+           <sui-button circular icon="eye"  v-if="discovery()" @click="discoverAction()" />
+           <sui-button circular icon="eye slash" v-if="!discovery()"   @click="discoverAction()" />
          </sui-card-content >
    </sui-card>
 </template>

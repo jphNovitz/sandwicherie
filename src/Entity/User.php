@@ -107,6 +107,14 @@ class User implements UserInterface, EquatableInterface
     private $likes;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="interestedBy")
+     * @ORM\JoinTable(name="products_discoveries")
+     */
+    private $discoveries;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -115,6 +123,7 @@ class User implements UserInterface, EquatableInterface
         $this->setIsActive(false);
         $this->setTries(0);
         $this->likes = new ArrayCollection();
+        $this->discoveries = new ArrayCollection();
     }
 
     /**
@@ -282,7 +291,6 @@ class User implements UserInterface, EquatableInterface
         $this->roles = $roles;
     }
 
-
     /**
      * @param mixed $role
      */
@@ -292,7 +300,6 @@ class User implements UserInterface, EquatableInterface
         // uncomment if you want to update other side
         //$role->setUser(null);
     }
-
 
     /**
      * @param mixed $password
@@ -418,8 +425,7 @@ class User implements UserInterface, EquatableInterface
     public function addLike($like)
     {
         $this->likes->add($like);
-        // uncomment if you want to update other side
-        //$like->setUser($this);
+       $like->setUser($this);
     }
 
     /**
@@ -428,8 +434,37 @@ class User implements UserInterface, EquatableInterface
     public function removeLike($like)
     {
         $this->likes->removeElement($like);
+        $like->setUser(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getDiscoveries(): ?Collection
+    {
+        return $this->discoveries;
+    }
+
+
+
+    /**
+     * @param mixed $discovery
+     */
+    public function addDiscovery($discovery)
+    {
+        $this->discoveries->add($discovery);
         // uncomment if you want to update other side
-        //$like->setUser(null);
+        //$discovery->setUser($this);
+    }
+
+    /**
+     * @param mixed $discovery
+     */
+    public function removeDiscovery($discovery)
+    {
+        $this->discoveries->removeElement($discovery);
+        // uncomment if you want to update other side
+        //$discovery->setUser(null);
     }
 
 

@@ -36,7 +36,7 @@
     import securityCheck from '../mixins/securityCheck' ;
     import userDetails from '../components/User/userDetails'
     import userFavorites from '../components/User/userFavorites'
-    import userDiscoveries from '../components/User/userdiscoveries'
+    import userDiscoveries from '../components/User/userDiscoveries'
     import userOrders from '../components/User/userOrders'
 
     export default {
