@@ -1,0 +1,51 @@
+{% extends '_skeletons/_forms.html.twig' %}
+
+{% block title %}Ajout d'un information sur la confidentialité {% endblock %}
+
+    {% block form_details %}
+        <div class="ui stackable grid">
+        <div class="eight wide column">
+            <div class="field">
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title) }}
+                {% if form.title.vars.errors|length %}
+                    <div class="ui pointing red basic label">
+                        {{ form_errors(form.title) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="field">
+                {{ form_label(form.intro) }}
+                {{ form_widget(form.intro) }}
+                {% if form.intro.vars.errors|length %}
+                    <div class="ui pointing red basic label">
+                        {{ form_errors(form.intro) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="field">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description) }}
+                {% if form.description.vars.errors|length %}
+                    <div class="ui pointing red basic label">
+                        {{ form_errors(form.description) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="field">
+                {{ form_label(form.outro) }}
+                {{ form_widget(form.outro) }}
+                {% if form.outro.vars.errors|length %}
+                    <div class="ui pointing red basic label">
+                        {{ form_errors(form.outro) }}
+                    </div>
+                {% endif %}
+
+            </div>
+            {#{% block submit %}#}
+                {#<button class="ui circular positive button">Ajouter</button>#}
+            {#{% endblock %}#}
+        </div>
+        </div>
+
+    {% endblock %}

@@ -4,7 +4,7 @@
 
 {% include '_elements/_flash_messages.html.twig' %}
 
-    <h1>{%  block title %} Category  Form {% endblock %} </h1>
+    <h1>{%  block title %} Skeleton  Form {% endblock %} </h1>
 
     {{ form_start(form, {attr:{
         class: 'ui form',
@@ -22,7 +22,7 @@
 
 
         <p style="margin-top: 1rem">
-            <button class="ui orange button" type="submit" >Envoi</button>
+            <button class="ui orange positive circular button" type="submit" ><i class="ui check icon"></i> Envoi</button>
             {% block other_buttons %} {% endblock %}
         </p>
 
