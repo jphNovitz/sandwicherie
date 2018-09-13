@@ -8,5 +8,5 @@ interface CustomObjectLoaderInterface {
 
     public function LoadAll(String $objectName);
 
-    public function CreateJsonResponse(String $objectname);
+    public function CreateJsonResponse(String $objectname, Array $property=NULL);
 }

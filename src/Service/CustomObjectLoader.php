@@ -31,12 +31,18 @@ class CustomObjectLoader implements CustomObjectLoaderInterface {
             ->getRepository($objectname)
             ->findAll();
     }
-    public function CreateJsonResponse(String $objectname)
+    public function CreateJsonResponse(String $objectname, Array $property=NULL)
     {
         $hateoas = HateoasBuilder::create()->build();
-        $raw = $this->entityManager
-            ->getRepository($objectname)
-            ->findAll();
+        if (!$property) :
+            $raw = $this->entityManager
+                ->getRepository($objectname)
+                ->findAll();
+        else:
+            $raw = $this->entityManager
+                ->getRepository($objectname)
+                ->findOneBy($property);
+        endif;
 
         if (!$raw) {
             $json = $hateoas->serialize('Sorry no '.$objectname.' found','json');
