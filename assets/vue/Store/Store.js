@@ -8,8 +8,9 @@ Vue.prototype.$http = axios
 //const baseURl = "http://localhost:8000"
 const url_allergies = "/api/allergies"
 const url_categories =  "/api/categories"
-const url_products =  "/api/products"
+const url_products =  "http://v2.jphnovitz.be/api/products"
 const url_types =  "/api/types"
+const url_privacy =  "/api/privacy"
 
 export const store = new Vuex.Store({
     state: {
@@ -25,7 +26,8 @@ export const store = new Vuex.Store({
         suggestions: [],
         cart: {
             'items': []
-        }
+        },
+        privacy: []
     },
     mutations: {
         SET_LOGGED(state, status){
@@ -48,6 +50,9 @@ export const store = new Vuex.Store({
         },
         SET_PRODUCTS(state, infos){
             state.products = infos
+        },
+        SET_PRIVACY(state, infos){
+            state.privacy = infos
         },
         SET_TYPES(state, infos){
             state.types = infos
@@ -88,6 +93,7 @@ export const store = new Vuex.Store({
                 return product.slug === slug
             })
         },*/
+        privacy: state => state.privacy,
         types : state => state.types,
         suggestions : state => state.suggestions,
         cart: state => state.cart
@@ -120,6 +126,11 @@ export const store = new Vuex.Store({
         call_types ({commit}){
             axios.get(url_types).then((response) => {
                 commit('SET_TYPES', response.data)
+            })
+        },
+        call_privacy ({commit}){
+            axios.get(url_privacy).then((response) => {
+                commit('SET_PRIVACY', response.data)
             })
         },
         add_cart (context, payload){

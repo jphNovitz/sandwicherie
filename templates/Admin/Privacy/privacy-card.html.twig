@@ -1,0 +1,19 @@
+{% extends '_skeletons/_card.html.twig' %}
+
+{% set object = privacy %}
+{%  block element_name %} {# this time it's title #}
+    {{ object.title }}
+{% endblock %}
+
+{% block sub_header %} {% endblock %}
+{% block card_infos %}
+  <p>nom: {{ object.title }}
+      <br/><em>Slug: {{ object.slug }}
+          <br/>Id: {{ object.id }}</em>
+      {% block infos %}
+      {% endblock %}
+  </p>
+{% endblock %}
+{% block card_rest %}
+    {{ object.description }}
+{% endblock %}

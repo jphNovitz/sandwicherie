@@ -1,0 +1,10 @@
+{% extends '_skeletons/_list.html.twig' %}
+{% set entity = 'privacies' %}
+
+{% block title %}
+    Liste des informations sur l'utilisation des données
+{% endblock %}
+
+{% block element_title %}
+    <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}">{{ object.title }}</a>
+{% endblock %}

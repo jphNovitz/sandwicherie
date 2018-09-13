@@ -10,6 +10,7 @@ import login from '../pages/login'
 import logout from '../pages/logout'
 import profile from '../pages/profile'
 import photos from '../pages/photos'
+import privacy from '../pages/privacy'
 
 Vue.use(Router)
 
@@ -65,6 +66,11 @@ export default new Router({
             name: 'photos',
             path: '/photos',
             component: photos
+        },
+        {
+            name: 'privacy',
+            path: '/apropos/donnees',
+            component: privacy
         }
     ]
 })

@@ -1,0 +1,5 @@
+{% extends '_skeletons/_delete_confirmation.html.twig' %}
+{% block message_infos %}
+    <p>Souhaitez-vous <strong><em>supprimer</em></strong> cet élément ?</p>
+    <p>({{ object.id }}) {{ object.title }}</p>
+{% endblock %}
