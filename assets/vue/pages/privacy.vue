@@ -2,6 +2,7 @@
     <div>
         <h2>Vie Privée et utilisation de vos données</h2>
         <div class="ui grid">
+            <sui-grid-column column="16">
             <p>
                 <em>
                     La Clémentine souhaite vous informer de manière transparente sur l'utilisation qui est faite de
@@ -9,8 +10,12 @@
                 </em>
             </p>
             <sui-list>
-                <sui-list-item v-for="privacy in privacies" :key="privacy.id">
-                  <a @click="toggleActive(privacy.id)"><i class="ui caret right icon"></i> </a>  {{privacy.title}}
+                <sui-list-item v-for="privacy in privacies" :key="privacy.id" >
+                  <a @click="toggleActive(privacy.id)">
+                      <i class="ui caret icon" :class="[{down:  isActive(privacy.id)}, {right:  !isActive(privacy.id)}]">
+                      </i>
+                  </a>
+                    {{privacy.title}}
                     <div :class="{ onClass: isActive(privacy.id) }" class="offClass">
                         <p>
                             {{privacy.intro}}
@@ -24,7 +29,7 @@
                     </div>
                 </sui-list-item>
             </sui-list>
-
+            </sui-grid-column>
         </div>
     </div>
 
