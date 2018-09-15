@@ -50,9 +50,16 @@ class Input
      */
     private $provider;
 
+    /**
+     * @var ArrayCollection $tags
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag")
+     */
+    private $tags;
+
     public function __construct()
     {
         $this->provider = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -143,6 +150,34 @@ class Input
     {
         $this->provider->removeElement($provider);
         $provider->setInput(null);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTags(): ArrayCollection
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param mixed $tag
+     */
+    public function addTag($tag)
+    {
+        $this->tags->add($tag);
+        // uncomment if you want to update other side
+        //$tag->setInput($this);
+    }
+
+    /**
+     * @param mixed $tag
+     */
+    public function removeTag($tag)
+    {
+        $this->tags->removeElement($tag);
+        // uncomment if you want to update other side
+        //$tag->setInput(null);
     }
 
 
