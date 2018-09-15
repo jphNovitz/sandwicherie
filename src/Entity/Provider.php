@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Form\InputType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -79,9 +80,19 @@ class Provider
      */
     private $imageName;
 
+    /**
+     * @var ArrayCollection $input
+     * @ORM\ManyToMany(targetEntity="App\Entity\Input", mappedBy="provider")
+     */
+    private $input;
+
+    /**
+     * Provider constructor.
+     */
 
     public function __construct()
     {
+        $this->input = new ArrayCollection();
        // $this->images = new ArrayCollection();
     }
 
@@ -236,6 +247,31 @@ class Provider
         }
     }
 
+    /**
+     * @return Input
+     */
+    public function getInput(): Input
+    {
+        return $this->input;
+    }
+
+    /**
+     * @param mixed $input
+     */
+    public function addInput($input)
+    {
+        $this->input->add($input);
+        $input->setProvider($this);
+    }
+
+    /**
+     * @param mixed $input
+     */
+    public function removeInput($input)
+    {
+        $this->input->removeElement($input);
+        $input->setProvider(null);
+    }
 
 
     public function __toString()
