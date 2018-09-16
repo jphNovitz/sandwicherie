@@ -41,7 +41,7 @@ class Tag
     /**
      * @return String
      */
-    public function getName(): String
+    public function getName(): ?String
     {
         return $this->name;
     }

@@ -44,7 +44,7 @@ class Input
     private $comment;
 
     /**
-     * @var ArrayCollection $provider
+     * @var Provider $provider
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="inputs")
      */
@@ -52,13 +52,12 @@ class Input
 
     /**
      * @var ArrayCollection $tags
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", cascade={"persist"})
      */
     private $tags;
 
     public function __construct()
     {
-        $this->provider = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }
 
@@ -113,7 +112,7 @@ class Input
     /**
      * @return string
      */
-    public function getComment(): string
+    public function getComment(): ?string
     {
         return $this->comment;
     }
@@ -126,31 +125,6 @@ class Input
         $this->comment = $comment;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getProvider(): ArrayCollection
-    {
-        return $this->provider;
-    }
-
-    /**
-     * @param mixed $provider
-     */
-    public function addProvider($provider)
-    {
-        $this->provider->add($provider);
-        $provider->setInput($this);
-    }
-
-    /**
-     * @param mixed $provider
-     */
-    public function removeProvider($provider)
-    {
-        $this->provider->removeElement($provider);
-        $provider->setInput(null);
-    }
 
     /**
      * @return ArrayCollection
@@ -166,8 +140,7 @@ class Input
     public function addTag($tag)
     {
         $this->tags->add($tag);
-        // uncomment if you want to update other side
-        //$tag->setInput($this);
+        $tag->setInput($this);
     }
 
     /**
@@ -176,8 +149,23 @@ class Input
     public function removeTag($tag)
     {
         $this->tags->removeElement($tag);
-        // uncomment if you want to update other side
-        //$tag->setInput(null);
+        $tag->setInput(null);
+    }
+
+    /**
+     * @return Provider
+     */
+    public function getProvider(): ?Provider
+    {
+        return $this->provider;
+    }
+
+    /**
+     * @param Provider $provider
+     */
+    public function setProvider(Provider $provider): void
+    {
+        $this->provider = $provider;
     }
 
 

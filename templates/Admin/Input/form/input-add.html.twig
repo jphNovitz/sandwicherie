@@ -2,59 +2,56 @@
 
 {% block title %}Entrée de marchandises{% endblock %}
     {% block form_details %}
-        {{ form_widget(form.dateEntry, {'attr': {
-            'type': 'date'}}) }}
-        <div class="form-row " style="
-                    position: relative; margin: 10px 0;
-                    line-height: 4.5em; display: flex;
-                    flex-direction: row; flex-wrap: wrap;
-        ">
-            {% for line in form.lines %}
-                    <label for="form_ingredient" class="table-presentation custom">Ingredient</label>
-                    <label for="form_provider" class="table-presentation custom">Fournisseur</label>
-                    {{ form_widget(line.ingredient, {'attr': {'class':  'table-presentation custom'}}) }}
-                    {{ form_widget(line.provider, {'attr': {'class':  'table-presentation custom'}}) }}
-                <div style="margin-top: 5px; width:90%"> &nbsp;</div>
-                {% if line.ingredient.vars.errors|length %}
-                    <div class="form-errors">
-                        {{ form_errors(line.ingredient, {"attr": {"class": "form-error"}}) }}
-                    </div>
-                {% endif %}
-                {% if line.provider.vars.errors|length %}
-                    <div class="form-errors">
-                        {{ form_errors(line.provider, {"attr": {"class": "form-error"}}) }}
-                    </div>
-                {% endif %}
-                <label for="form_price" class="table-presentation custom" >Prix</label>
-                <label for="form_quantiy" class="table-presentation custom">Quantité</label>
-                {{ form_widget(line.price, {'attr': {
-                    'class':  'table-presentation custom',
-                    'maxlength' : 3,
-                }}) }}
-                {{ form_widget(line.quantity, {'attr': {
-                    'class':  'table-presentation custom',
-                    'maxlength' : 3 }}) }}
-                {% if line.price.vars.errors|length %}
-                    <div class="form-errors">
-                        {{ form_errors(line.price, {"attr": {"class": "form-error"}}) }}
-                    </div>
-                {% endif %}
-                {% if line.quantity.vars.errors|length %}
-                    <div class="form-errors">
-                        {{ form_errors(line.name, {"attr": {"class": "form-error"}}) }}
-                    </div>
-                {% endif %}
-                <div style="margin-top: 5px; width:90%"> &nbsp;</div>
-                <label for="form_temperature" class="table-presentation custom">Quantité</label>
-                <label for="form_barcode" class="table-presentation custom">Code Bar</label>
-                {{ form_widget(line.temperature, {'attr': {'class':  'table-presentation custom'}}) }}
-                {{ form_widget(line.barcode, {'attr': {'class':  'table-presentation custom'}}) }}
-            {% endfor %}
-
+        <div class="field">
+            {{ form_label(form.provider) }}
+            {{ form_widget(form.provider) }}
+        </div>
+        <div class="field">
+            {{ form_label(form.comment) }}
+            {{ form_widget(form.comment) }}
         </div>
 
-        <div class="lines form-row" data-prototype="{{ form_widget(form.lines.vars.prototype)|e('html_attr') }}">
+        <div   id="tags" class="field"  data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">
+            <ul class="tags">
+            {{ form_label(form.tags) }} <button @click.prevent="plus" class="ui circular icon positive button">+1</button>
+            {{ form_widget(form.comment) }}
+            <div v-for="line in lines">
+                <span v-html="line"></span>
+            </div>
+            {#<add-button @click="test"></add-button>#}
         </div>
-        {% include '_elements/_input_collection.html.twig' %}
+
+{#{% include '_elements/_input_collection.html.twig' %}#}
 
     {% endblock %}
+{% block javascripts %}
+    <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+    <script>
+
+    (function () {
+        Vue.component('add-button', {
+            template: '<div><button >tedst</button></div>'
+        })
+
+        const tags = new Vue({
+            el: '#tags',
+            delimiters: ['${', '}'],
+            components: ['add-button'],
+            data: {
+                line: '',
+                lines:[]
+            },
+            mounted(){
+                this.line = this.$el.dataset.prototype
+                // console.log(test);
+                // this.lines.push(line)
+            },
+            methods:{
+                plus: function () {
+                    this.lines.push(this.line)
+                }
+            }
+        });
+    })();
+</script>
+{% endblock %}

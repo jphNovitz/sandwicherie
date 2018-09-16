@@ -82,9 +82,9 @@ class Provider
 
     /**
      * @var ArrayCollection $input
-     * @ORM\ManyToMany(targetEntity="App\Entity\Input", mappedBy="provider")
+     * @ORM\OneToMany(targetEntity="App\Entity\Input", mappedBy="provider")
      */
-    private $input;
+    private $inputs;
 
     /**
      * Provider constructor.
@@ -276,7 +276,7 @@ class Provider
 
     public function __toString()
     {
-        return $this->imageName;
+        return $this->name;
     }
 
 }
