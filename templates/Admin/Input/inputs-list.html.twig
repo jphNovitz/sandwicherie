@@ -13,13 +13,13 @@
             </a>
         {% endblock %}
         {% block update %}
-            {#<a href="{{ path(entity ~ '_update', {'slug' : object.id}) }}" class="ui olive circular tiny icon button">#}
-                {#<i class="edit icon"></i>#}
-            {#</a>#}
+            <a href="{{ path(entity ~ '_update', {'slug' : object.slug}) }}" class="ui olive circular tiny icon button">
+                <i class="edit icon"></i>
+            </a>
         {% endblock %}
         {% block delete %}
-            {#<a href="{{ path(entity ~ '_delete', {'slug' : object.id}) }}" class="ui red circular tiny icon button">#}
-                {#<i class="delete icon"></i>#}
-            {#</a>#}
+            <a href="{{ path(entity ~ '_delete', {'slug' : object.slug}) }}" class="ui red circular tiny icon button">
+                <i class="delete icon"></i>
+            </a>
         {% endblock %}
 

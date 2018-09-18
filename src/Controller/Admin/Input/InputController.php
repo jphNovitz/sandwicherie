@@ -84,4 +84,19 @@ class InputController extends Controller{
     public function show(){
 
     }
+
+    /**
+     * @Route("{slug}/update", name="inputs_update")
+     */
+    public function update(Request $request, Input $input){
+
+    }
+
+    /**
+     * @Route("{slug}/delete", name="inputs_delete")
+     */
+    public function delete(Request $request, Input $input){
+
+    }
+
 }
