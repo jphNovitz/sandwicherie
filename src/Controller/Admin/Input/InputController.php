@@ -81,7 +81,10 @@ class InputController extends Controller{
     /**
      * @Route("{slug}", name="inputs_show")
      */
-    public function show(){
+    public function show(Input $input){
+        return $this->render('Admin/Input/input-card.html.twig', [
+            'input'=> $input
+        ]);
 
     }
 

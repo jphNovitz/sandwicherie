@@ -1,7 +1,42 @@
-{% extends 'base.html.twig' %}
+{% embed '_skeletons/_card.html.twig' %}
+    {% set object = input %}
+    {% block sub_header %}
+        {% if object.comment is defined %}
+            {% if object.comment is not empty %}
+                {{ object.comment }}
+            {% else %}
+                <em>pas de commentaire</em>
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+    {%  block element_name %}
+        {{ object.title }}
+    {% endblock %}
+    {% block header_image %} {% endblock %}
+    {% block object_image %}  {% endblock %}
+    {% block card_infos %}
+        <p>Nom: {{ object.title }}
+        <br/><em>Slug: {{ object.slug }}
+        <br/>Id: {{ object.id }}</em>
+        </p>
+    {% endblock %}
+    {% block infos %}
+    {% endblock %}
 
-{% block body %}
-    <h1>Entrée de marchandise <br />{{ input.name }}</h1>
+    {% block card_rest %}
+        {% if (object.tags is not empty) %}
+            <h3>Mots clés :</h3>
+            <div class="ui bulleted animated list">
+                {% for tag in object.tags %}
+                    <div class="item">
+                        {{ tag.name }}
+                        {#<a href="{{ path('categories_show', {'slug': category.slug}) }}">#}
+                            {#{{ category.name }}#}
+                        {#</a>#}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endembed %}
 
-
-{% endblock %}

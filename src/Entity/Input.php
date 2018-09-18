@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -146,7 +147,7 @@ class Input
     /**
      * @return ArrayCollection
      */
-    public function getTags(): ArrayCollection
+    public function getTags(): ?Collection
     {
         return $this->tags;
     }
