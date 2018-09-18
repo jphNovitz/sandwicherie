@@ -1,0 +1,32 @@
+{% extends '_bases/_admin_base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des Utilisateurs</h1>
+
+    <div class="row">
+        <div class="ui middle aligned divided fluid big list">
+            {% for user in users %}
+                <div class="item" >
+                    <div class="middle aligned right floated">
+                        <a href="{{ path('users_show', {'username': user.username}) }}"
+                           class="ui blue circular tiny icon button">
+                            <i class=" middle aligned zoom icon"></i>
+                        </a>
+                        {#<a href="{{ path('users_delete', {'username' : user.username}) }}" class="ui red circular tiny icon button">#}
+                            {#<i class="delete icon"></i>#}
+                        {#</a>#}
+                    </div>
+                    <div class="middle aligned content" style="line-height: 2rem">
+                        <a href="{{ path('users_show', {'username' : user.username}) }}">
+                            {{ user.username }}
+                        </a> [{{ user.firstName }} {{ user.lastName }}]
+                        <div class="content">
+                            {{ user.street }} {{ user.streetNr }} - {{ user.city }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

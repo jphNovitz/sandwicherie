@@ -18,7 +18,7 @@ class Tag
 
    /**
     * @var String $name
-    * @ORM\Column(type="string", length=20)
+    * @ORM\Column(type="string", length=20, unique=true)
     */
    private $name;
 
@@ -54,7 +54,10 @@ class Tag
         $this->name = $name;
     }
 
-
+    public function __construct()
+    {
+        return $this->name;
+    }
 
 
 }

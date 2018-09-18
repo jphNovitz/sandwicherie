@@ -90,9 +90,12 @@
         {% block body %}{% endblock %}
     </div>
 </div>
-     <script src="{{ asset('build/js/app.js') }}"></script>
+     <script src="{{ asset('build/js/app.js') }}"> </script>
+
+         {% block javascripts %}{% endblock %}
+
     {#<script src="{{ asset('build/js/vue.js') }}"></script>#}
 
-    {% block javascripts %}{% endblock %}
+
 </body>
 </html>

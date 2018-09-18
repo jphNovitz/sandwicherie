@@ -10,18 +10,20 @@
             {{ form_label(form.comment) }}
             {{ form_widget(form.comment) }}
         </div>
-
-        <div   id="tags" class="field"  data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">
-            <ul class="tags">
-            {{ form_label(form.tags) }} <button @click.prevent="plus" class="ui circular icon positive button">+1</button>
-            {{ form_widget(form.comment) }}
+    <div   id="tags" class="field"  data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">
+            {{ form_label(form.tags) }}
+                <template v-if="index < 0 ">
+                    <button @click.prevent="plus" class="ui circular icon positive button">+1</button>
+                </template>
+                {% for tag in form.tags %}
+                    <span>{{ form_row(tag.name) }}</span>
+                {% endfor %}
+                {{ form_widget(form.tags) }}
             <div v-for="line in lines">
-                <span v-html="line"></span>
+                    <span v-html="line"></span>
+                    <button @click.prevent="plus" class="ui circular icon positive button">+1</button>
             </div>
-            {#<add-button @click="test"></add-button>#}
         </div>
-
-{#{% include '_elements/_input_collection.html.twig' %}#}
 
     {% endblock %}
 {% block javascripts %}
@@ -29,25 +31,21 @@
     <script>
 
     (function () {
-        Vue.component('add-button', {
-            template: '<div><button >tedst</button></div>'
-        })
-
         const tags = new Vue({
             el: '#tags',
             delimiters: ['${', '}'],
-            components: ['add-button'],
             data: {
                 line: '',
-                lines:[]
+                lines:[],
+                index: -1
             },
             mounted(){
-                this.line = this.$el.dataset.prototype
-                // console.log(test);
-                // this.lines.push(line)
+                // this.line = this.$el.dataset.prototype.replace(/__name__/g, this.index)
             },
             methods:{
                 plus: function () {
+                    this.index++
+                    this.line = this.$el.dataset.prototype.replace(/__name__/g, this.index)
                     this.lines.push(this.line)
                 }
             }

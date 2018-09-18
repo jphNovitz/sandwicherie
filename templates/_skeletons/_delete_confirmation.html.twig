@@ -5,15 +5,18 @@
     <div class="ui floating message">
         <h1>Confirmation</h1>
 
+        {% block message_infos %}
+            <p>Souhaitez-vous <strong><em>supprimer</em></strong> cet élément ?</p>
+            <p>({{ object.id }}) {{ object.name }}</p>
+        {% endblock %}
 
-        <p>Souhaitez-vous supprimer cet élément ?</p>
-        <p>({{ object.id }}) {{ object.name }}</p>
+            {{ form_start(form) }}
+                <div class="ui horizontal list" style="display: inline-flex !important;">
+                    {{ form_row(form.oui, {'attr': {'class': 'item ui circular negative icon button '}}) }}
+                    {{ form_row(form.non, {'attr': {'class': 'item ui circular info icon button '}}) }}
 
-
-        {{ form_start(form) }}
-            {{ form_row(form.oui, {'attr': {'class': 'ui negative button '}}) }}
-            {{ form_row(form.non, {'attr': {'class': 'ui primary button '}}) }}
-        {{ form_end(form) }}
+                </div>
+        </div>
     </div>
 
 

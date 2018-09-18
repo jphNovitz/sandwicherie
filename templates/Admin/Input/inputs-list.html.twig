@@ -1,10 +1,16 @@
 {% extends '_skeletons/_list.html.twig' %}
 {% set entity = "inputs" %}
 {%  block title %}Entrées de marchandises {% endblock %}
+     {% block element_title %}
+         <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}">
+             {{ object.provider.name }}
+             ({{ object.created|date('d/m/y') }})
+         </a>
+     {% endblock %}
         {% block show %}
-            {#<a href="{{ path(entity ~ '_show', {'slug' : object.id}) }}" class="ui blue circular tiny icon button">#}
-                {#<i class="zoom icon"></i></a>#}
-            {#</a>#}
+            <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}" class="ui blue circular tiny icon button">
+                <i class="zoom icon"></i>
+            </a>
         {% endblock %}
         {% block update %}
             {#<a href="{{ path(entity ~ '_update', {'slug' : object.id}) }}" class="ui olive circular tiny icon button">#}
@@ -17,6 +23,3 @@
             {#</a>#}
         {% endblock %}
 
-{% block element_title %}
-        {#<a href="{{ path(entity ~ '_show', {'slug' : object.id}) }}">{{ object.id }}</a>#}
-{% endblock %}

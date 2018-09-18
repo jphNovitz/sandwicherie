@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InputRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Input
 {
@@ -44,6 +45,13 @@ class Input
     private $comment;
 
     /**
+     * @var string $title
+     *
+     * @ORM\Column(type="string")
+     */
+    private $title;
+
+    /**
      * @var Provider $provider
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="inputs")
@@ -55,6 +63,15 @@ class Input
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", cascade={"persist"})
      */
     private $tags;
+
+    /**
+     * @Gedmo\Slug(fields={"title", "id"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+    /**
+     * Input constructor.
+     */
 
     public function __construct()
     {
@@ -140,7 +157,6 @@ class Input
     public function addTag($tag)
     {
         $this->tags->add($tag);
-        $tag->setInput($this);
     }
 
     /**
@@ -149,7 +165,6 @@ class Input
     public function removeTag($tag)
     {
         $this->tags->removeElement($tag);
-        $tag->setInput(null);
     }
 
     /**
@@ -168,5 +183,37 @@ class Input
         $this->provider = $provider;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     * @ORM\PostPersist
+     */
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
 
 }

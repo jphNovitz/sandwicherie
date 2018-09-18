@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Input;
 
 use App\Entity\Input;
+use App\Entity\Tag;
 use App\Model\CustomObjectLoaderInterface;
 use App\Model\CustomPersisterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -55,6 +56,19 @@ class InputController extends Controller{
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()):
+            $input->setTitle($input->getProvider()->getName().'_'.date("d-m-Y_H:i:s") );
+        $all_tags = $this->get('doctrine.orm.default_entity_manager')
+            ->getRepository('App:Tag')
+            ->findAll();
+        foreach ($input->getTags() as $tag){
+            foreach ($all_tags as $all){
+
+                if ($all->getName() === $tag->getName()){
+                    $input->removeTag($tag);
+                    $input->addTag($all);
+                }
+            }
+        }
             $this->persister->insert($input);
             return $this->redirectToRoute('inputs_list');
          endif;
@@ -62,5 +76,12 @@ class InputController extends Controller{
          return $this->render('Admin/Input/form/input-add.html.twig', [
              'form'=>$form->createView()
          ]);
+    }
+
+    /**
+     * @Route("{slug}", name="inputs_show")
+     */
+    public function show(){
+
     }
 }
