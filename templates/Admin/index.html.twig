@@ -10,12 +10,12 @@
             <div class="content">
                 <i class="circular right floated shopping cart icon"></i>
                 <div class="header">
-                   Commandes en attente
+                   Commandes
                 </div>
                 <div class="description">
                     ajouter carts dans le controller
-                    {#{% include '_elements/_loop_entity_id_list.html.twig' with {#}
-                        {#'objects': carts, 'max': 25} %}#}
+                    {% include '_elements/_loop_carts_list.html.twig' with {
+                        'objects': carts, 'max': 25} %}
                 </div>
                 <div class="ui basic blue button">Liste</div>
             </div>

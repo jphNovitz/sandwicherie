@@ -1,0 +1,10 @@
+{# receive a list and display each element #}
+<div class="ui relaxed divided list">
+    {% for object in objects|slice(0, max) %}
+        <div class="item">
+            <a href="{{ path(object|entity~'_show', {'id': object.id}) }}">
+                <li>{{ object.client }}</li>
+            </a>
+        </div>
+    {% endfor  %}
+</div>
