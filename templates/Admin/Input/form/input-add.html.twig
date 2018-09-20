@@ -10,43 +10,73 @@
             {{ form_label(form.comment) }}
             {{ form_widget(form.comment) }}
         </div>
-    <div   id="tags" class="field"  data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">
-            {{ form_label(form.tags) }}
+    <div  id="tags" class="field"
+            {% for data in form.tags %}
+                {#data-update[0]="{{ form_widget(data)|e('html_attr') }}"#}
+            {% endfor %}
+          data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">
+
+            {#{{ form_label(form.tags) }}#}
                 <template v-if="index < 0 ">
-                    <button @click.prevent="plus" class="ui circular icon positive button">+1</button>
+                    <button @click.prevent="plus" class="ui circular icon positive mini button">
+                        <i class="ui plus icon"> </i>
+                    </button>
                 </template>
-                {% for tag in form.tags %}
-                    <span>{{ form_row(tag.name) }}</span>
-                {% endfor %}
-                {{ form_widget(form.tags) }}
-            <div v-for="line in lines">
-                    <span v-html="line"></span>
-                    <button @click.prevent="plus" class="ui circular icon positive button">+1</button>
+                {#{% for tag in form.tags %}#}
+                    {#<span>{{ form_row(tag.name) }}</span>#}
+                {#{% endfor %}#}
+                {#{{ form_widget(form.tags) }}#}
+            <div v-for="(line, key) in lines">
+                <span v-html="line"></span>
+                <button @click.prevent="plus" class="ui circular icon positive mini button">
+                    <i class="ui plus icon"> </i>
+                </button>
+                <button @click.prevent="minus(key)" class="ui circular icon negative mini button">
+                    <i class="ui minus icon"> </i>
+                </button>
             </div>
         </div>
-
+        {{ form_row(form.tags, { 'attr': {'style': 'display:none'} }) }}
     {% endblock %}
 {% block javascripts %}
     <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
     <script>
 
     (function () {
+
         const tags = new Vue({
             el: '#tags',
             delimiters: ['${', '}'],
             data: {
                 line: '',
                 lines:[],
-                index: -1
+                index: -1,
+                update: ''
             },
             mounted(){
-                // this.line = this.$el.dataset.prototype.replace(/__name__/g, this.index)
+                const test = document.querySelectorAll('[id^="input_tags_"]')
+                test.forEach(t=>{
+                    if (t.name !== undefined){
+                        this.index++
+                        el = this.$el.dataset.prototype
+                        let line = el.replace(/__name__/g, this.index)
+                        line = line.replace(/required="required"/g, 'required="required" value="'+t.value+'"')
+                        this.lines.push(line)
+                    }
+                })
+
             },
             methods:{
                 plus: function () {
                     this.index++
                     this.line = this.$el.dataset.prototype.replace(/__name__/g, this.index)
                     this.lines.push(this.line)
+                },
+                minus: function (i) {
+                    this.lines.splice(i, 1)
+                    this.index++
+                    // this.line = this.$el.dataset.prototype.replace(/__name__/g, this.index)
+                    // this.lines.push(this.line)
                 }
             }
         });
