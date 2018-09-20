@@ -4,8 +4,10 @@ namespace App\Controller\Admin\Input;
 
 use App\Entity\Input;
 use App\Entity\Tag;
+use App\Form\DeleteType;
 use App\Model\CustomObjectLoaderInterface;
 use App\Model\CustomPersisterInterface;
+use App\Service\DeleteObject;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,14 +22,16 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class InputController extends Controller{
 
-    protected $loader;
-    protected $persister;
+    protected $loader ;
+    protected $persister ;
+    protected $deleter ;
 
     public function __construct(CustomObjectLoaderInterface $loader,
-                                CustomPersisterInterface $persister)
+                                CustomPersisterInterface $persister, DeleteObject $deleter)
     {
         $this->loader = $loader ;
         $this->persister = $persister ;
+        $this->deleter = $deleter ;
     }
 
     /**
@@ -82,6 +86,10 @@ class InputController extends Controller{
      * @Route("{slug}", name="inputs_show")
      */
     public function show(Input $input){
+        if (!$input) {
+            $this->addFlash('error', 'inconnu');
+            return $this->redirectToRoute('inputs_list');
+        }
         return $this->render('Admin/Input/input-card.html.twig', [
             'input'=> $input
         ]);
@@ -90,15 +98,57 @@ class InputController extends Controller{
 
     /**
      * @Route("{slug}/update", name="inputs_update")
+     * @Method({"GET","POST"})
      */
     public function update(Request $request, Input $input){
+        if (!$input) {
+            $this->addFlash('error', 'inconnu');
+            return $this->redirectToRoute('inputs_create');
+        }
 
+        $form = $this->createForm('App\Form\InputType', $input );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()):
+            if ( !$this->persister->update($input)){
+                $this->addFlash('error', 'NON modifié');
+                return $this->redirectToRoute('ingredients_list');
+            }
+            $this->addFlash('success', 'Entrée modifiée');
+            return $this->redirectToRoute('ingredients_update', ['slug', $input->getSlug()]);
+
+        endif;
+
+        return $this->render('Admin/Input/form/input-update.html.twig', [
+            'form'=>$form->createView(),
+            'object'=>$input
+        ]);
     }
 
     /**
      * @Route("{slug}/delete", name="inputs_delete")
      */
     public function delete(Request $request, Input $input){
+        if (!$input) {
+            $this->addFlash('error', 'inconnu');
+            return $this->redirectToRoute('inputs_list');
+        }
+
+        $form = $this->createForm(DeleteType::class, $input);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()):
+            if ($form->get('oui')->isClicked()) {
+                return $this->deleter->delete($input);
+        }
+            if ($form->get('non')->isClicked())
+                return $this->redirectToRoute('inputs_list');
+        endif;
+
+        return $this->render('Admin/Input/form/input-delete.html.twig', [
+            'form'=>$form->createView(),
+            'object'=>$input
+        ]);
 
     }
 
