@@ -70,6 +70,15 @@ class Input
      * @ORM\Column(length=128, unique=true)
      */
     private $slug;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Invoice", mappedBy="input", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $invoices;
+
     /**
      * Input constructor.
      */
@@ -77,6 +86,7 @@ class Input
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->invoices = new ArrayCollection();
     }
 
     /**
@@ -216,5 +226,32 @@ class Input
     {
         $this->title = $title;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getInvoices(): ?Collection
+    {
+        return $this->invoices;
+    }
+
+    /**
+     * @param mixed $invoice
+     */
+    public function addInvoice($invoice)
+    {
+        $this->invoices->add($invoice);
+        $invoice->setInput($this);
+    }
+
+    /**
+     * @param mixed $invoice
+     */
+    public function removeInvoice($invoice)
+    {
+        $this->invoices->removeElement($invoice);
+        $invoice->setInput(null);
+    }
+
 
 }

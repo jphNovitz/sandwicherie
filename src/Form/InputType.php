@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Input;
+use App\Entity\Invoice;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -31,6 +32,14 @@ class InputType extends AbstractType
                 'label' => 'tags :',
                 'prototype' => true,
                 'empty_data' => 'John Doe'
+            ])
+            ->add('invoices', CollectionType::class,[
+                'entry_type'=>InvoiceType::class,
+                'allow_add'  => true,
+                'allow_delete'  => true,
+                'by_reference' => false,
+                'label' => 'factures :',
+                'prototype' => true
             ])
         ;
     }
