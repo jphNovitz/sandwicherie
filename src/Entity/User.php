@@ -54,33 +54,37 @@ class User implements UserInterface, EquatableInterface
      * @ORM\Column(name="last_name", type="string", length=100, nullable=false)
      * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
-     private $lastName;
+    private $lastName;
 
     /**
      * @var String
      * @ORM\Column(name="first_name", type="string", length=100, nullable=false)
      * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
-     private $firstName;
+    private $firstName;
 
     /**
      * @var String
      * @ORM\Column(name="street", type="string", length=100, nullable=true)
      */
-     private $street;
+    private $street;
 
     /**
      * @var String
      * @ORM\Column(name="street_nr", type="string", length=5, nullable=true)
      */
-     private $streetNr;
+    private $streetNr;
 
     /**
      * @var String
      * @ORM\Column(name="phone", type="string", length=13, nullable=false)
      */
-     private $phone;
+    private $phone;
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 //    /**
 //     * @var array
 //     * @ORM\Column(type="json")
@@ -222,6 +226,7 @@ class User implements UserInterface, EquatableInterface
     {
         $this->streetNr = $streetNr;
     }
+
     /**
      * @var String
      * @ORM\OneToOne(targetEntity="App\Entity\City")
@@ -279,29 +284,42 @@ class User implements UserInterface, EquatableInterface
     /**
      * @return mixed
      */
-    public function getRoles()
-    {
-        return $this->roles;
-    }
+//    public function getRoles()
+//    {
+//        return $this->roles;
+//    }
+//
+//    /**
+//     * @param mixed $roles
+//     */
+//    public function setRoles($roles): void
+//    {
+//        $this->roles = $roles;
+//    }
+//
+//    /**
+//     * @param mixed $role
+//     */
+//    public function removeRole($role)
+//    {
+//        $this->roles->removeElement($role);
+//        // uncomment if you want to update other side
+//        //$role->setUser(null);
+//    }
+    public function getRoles(): array
 
-    /**
-     * @param mixed $roles
-     */
-    public function setRoles($roles): void
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+    }
+    public function setRoles(array $roles): self
+
     {
         $this->roles = $roles;
+        return $this;
     }
-
-    /**
-     * @param mixed $role
-     */
-    public function removeRole($role)
-    {
-        $this->roles->removeElement($role);
-        // uncomment if you want to update other side
-        //$role->setUser(null);
-    }
-
     /**
      * @param mixed $password
      */
@@ -317,7 +335,6 @@ class User implements UserInterface, EquatableInterface
     {
         return $this->password;
     }
-
 
 
     /**
@@ -426,7 +443,7 @@ class User implements UserInterface, EquatableInterface
     public function addLike($like)
     {
         $this->likes->add($like);
-       $like->setUser($this);
+        $like->setUser($this);
     }
 
     /**
@@ -445,7 +462,6 @@ class User implements UserInterface, EquatableInterface
     {
         return $this->discoveries;
     }
-
 
 
     /**
@@ -470,7 +486,7 @@ class User implements UserInterface, EquatableInterface
 
 
     public function __toString()
-   {
-       return $this->getUsername();
-   }
+    {
+        return $this->getUsername();
+    }
 }
