@@ -5,7 +5,7 @@
     {% include '_elements/_flash_messages.html.twig' %}
     <h1>Admininistration</h1>
 <div class="ui stackable grid">
-    <div class="four wide column">
+    <div class="stackable four wide column">
         <div class="ui red card">
             <div class="content">
                 <i class="circular right floated shopping cart icon"></i>
@@ -13,11 +13,12 @@
                    Commandes
                 </div>
                 <div class="description">
-                    ajouter carts dans le controller
                     {% include '_elements/_loop_carts_list.html.twig' with {
                         'objects': carts, 'max': 25} %}
                 </div>
-                <div class="ui basic blue button">Liste</div>
+                <a href="{{path('carts_list') }}">
+                    <div class="ui fluid blue button" style="margin-top: 1rem;">Liste</div>
+                </a>
             </div>
         </div>
     </div>

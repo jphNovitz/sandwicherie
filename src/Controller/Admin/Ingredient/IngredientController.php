@@ -79,7 +79,7 @@ class IngredientController extends Controller
     /**
      * @Route("{slug}", name="ingredients_show")
      */
-    public function show(Request $request, $slug = null)
+    public function show(Request $request, $slug = '')
     {
         $ingredient = $this->customLoader->LoadOne('App:Ingredient', $slug);
         if (!$ingredient){
@@ -137,20 +137,9 @@ class IngredientController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()):
             if ($form->get('oui')->isClicked()) {
-                return $this->deleter->delete($ingredient);
-
-              /*  if ($this->customPersister->delete($ingredient)) {
-                    $this->addFlash('success', 'element supprimé');
-                    return $this->redirectToRoute('ingredients_list');
-                }
-                else {
-                    $this->addFlash('error', 'Erreur');
-                    return $this->redirectToRoute('ingredients_list');
-                }*/
-            }
+                return $this->deleter->delete($ingredient);}
             if ($form->get('non')->isClicked())
                 return $this->redirectToRoute('ingredients_list');
-
         endif;
 
         return $this->render('Admin/Ingredient/form/ingredient-delete.html.twig',

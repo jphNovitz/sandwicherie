@@ -67,21 +67,22 @@ class CartController extends FOSRestController
     {
 
         $cart = new Cart();
-        $box = json_decode($request->get('cart'));
-        $username = $box->user;
+    //  $box = json_decode($request->request->get('cart'));
+//       dump($request->request);die();
+       $box = json_decode($request->getContent(), true);
+        $username = $box['user'];
 
         $user = $this->em = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('App:User')->loadUserByUsername($username);
+            ->getRepository('App:User')->findOneBy(['username'=>$username]);
 
         $cart->setClient($user);
-            foreach ($box->items  as $item)
+            foreach ($box['items']  as $item)
             {
-
                 $line = new Item();
-                $product=$this->customLoader->LoadOne('App:Product', $item->slug);
+                $product=$this->customLoader->LoadOne('App:Product', $item['slug']);
                 $line->setProduct($product);
-                $line->setPrice($item->price);
-                $line->setBread($item->bread);
+                $line->setPrice($item['price']);
+                $line->setBread($item['bread']);
                 property_exists('item', 'halal') ? $line->setHalal($item->halal) : $line->setHalal(false) ;
 
                 if (property_exists('item', 'vegetables') && is_array($item->vegetables))

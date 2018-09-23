@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api\Product;
 
+use App\Entity\Product;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -34,34 +35,12 @@ class ProductController extends FOSRestController{
     }
 
 
-    /**
-     * @Patch("products/{slug}/like/{user}", name="like_products")
-     */
-    public function likeProducts($slug, $user)
-    {
-        $product = $this->customLoader->LoadOne('App:Product', $slug);
-        $user = $this->get('doctrine.orm.default_entity_manager')->getRepository('App:User')->loadUserByUsername($user);
-        if ($product->getLikedBy()->contains($user)){
-            $product->removeLikedBy($user);
-        } else {
-            $product->addLikedBy($user);
-        }
-
-        $this->customPersister->update($product);
-        $response = new Response('ok', 200, array('application/json'));
-        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
-        $response->headers->set('Access-Control-Allow-Origin', '*');
-        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
-        return $response;
-    }
-
 
     /**
      * @Patch("s/products/{slug}/like", name="like_product")
      */
-    public function likeProduct($slug)
+    public function likeProduct(Product $product)
     {
-        $product = $this->customLoader->LoadOne('App:Product', $slug);
         $user = $this->getUser();
         if (!$user) return;
 
@@ -99,5 +78,51 @@ class ProductController extends FOSRestController{
 
 
     }
+
+    /**
+     * @Patch("s/products/{slug}/discovery", name="like_product")
+     */
+    public function discoveryProduct(Product $product)
+    {
+        $user = $this->getUser();
+
+        if (!$user) return;
+
+        if ($user->getDiscoveries()->contains($product)){
+            $user->removeDiscovery($product);
+        } else {
+            $user->addDiscovery($product);
+        }
+
+        $this->customPersister->update($product);
+
+
+        $response = new Response('ok', 200, array('application/json'));
+        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
+        return $response;
+    }
+
+    /**
+     * @Get("s/profile/discoveries", name="get_discoveries")
+     */
+    public function getDiscoveries()
+    {
+        $user = $this->getUser();
+        $repo = $this->get('doctrine.orm.default_entity_manager')
+                    ->getRepository('App:Product');
+        $discoveries = $repo->findDiscoveryList($user);
+        $hateoas = HateoasBuilder::create()->build();
+        $json = $hateoas->serialize($discoveries,'json');
+        $response = new Response($json, 200, array('application/json'));
+        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
+        return $response;
+
+
+    }
+
 
 }

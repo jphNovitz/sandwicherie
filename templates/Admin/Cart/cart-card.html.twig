@@ -1,0 +1,47 @@
+{% extends '_skeletons/_card.html.twig' %}
+
+{% set object = cart %}
+{% block header_image %} {% endblock %}
+{% block element_name %} Commande {{ object.id }} ({{ object.client }}) {% endblock %}
+{% block header_buttons %}
+
+    <div class="item">
+        <a href="{{ path(object|entity ~ '_update', {'id' : object.id}) }}" class="ui  basic secondary circular button"
+           style="min-width: 7rem">
+            modifier
+        </a>
+    </div>
+    <div class="item">
+        <a href="{{ path(object|entity ~ '_delete', {'id' : object.id}) }}" class="ui  basic secondary circular button"
+           style="min-width: 7rem">
+            supprimer
+        </a>
+    </div>
+{% endblock %}
+    {% block card_infos %}
+        <p><a href="{{ path('users_show', {'username': object.client}) }}">Client: {{ object.client }}</a>
+            <br/>Commande n°: <em>{{ object.id }}</em> ({{ object.created|date('d/m/Y')}})
+            <br/>Status: {{ object.done ? '<i class="ui green horizontal label"> Classé</i>' : '<i class="ui red horizontal label"> En cours </i>' }}
+        </p>
+    {% endblock %}
+    {% block infos %}
+        <br/>Status: {{ object.done ? '<i class="ui green horizontal label"> Classé</i>' : '<i class="ui red horizontal label"> En cours </i>' }}
+    {% endblock %}
+    {% block card_rest %}
+ {%  for item in object.items %}
+     <h2>Détail</h2>
+     <h3>{{ item.product }}</h3>
+    <p>Id: {{ item.id }}
+        <br />Pain: {{ item.bread }}
+        <br />Crudités:
+            {% for vegetable in item.vegetables %}
+                {{ vegetable.name }}
+                    {% if loop.index < item.vegetables|length %}
+                        ,
+                    {% endif %}
+             {% endfor %}
+        <br />Halal: {{ item.halal ? '<i class="ui red horizontal label"> OUI </i>' : '<i class="ui green horizontal label"> non </i>' }}
+    </p>
+ {% endfor %}
+    {% endblock %}
+
