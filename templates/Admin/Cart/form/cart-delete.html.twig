@@ -1,1 +1,6 @@
 {% extends '_skeletons/_delete_confirmation.html.twig' %}
+
+{% block message_infos %}
+    <p>Souhaitez-vous <strong><em>supprimer</em></strong> cette commande ?</p>
+    <p>(Commande {{ object.id }} encodé le {{ object.created|date('d/m/y') }}) </p>
+{% endblock %}

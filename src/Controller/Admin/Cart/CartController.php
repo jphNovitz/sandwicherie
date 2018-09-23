@@ -4,9 +4,11 @@ namespace App\Controller\Admin\Cart;
 
 use App\Entity\Cart;
 use App\Form\CartType;
+use App\Form\DeleteType;
 use App\Model\CustomObjectLoaderInterface;
 use App\Model\CustomPersisterInterface;
 use App\Service\CustomPersister;
+use App\Service\DeleteObject;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -30,11 +32,15 @@ class CartController extends Controller{
 
     protected $loader ;
     protected $persister;
+    protected $deleter;
 
-    public function __construct(CustomObjectLoaderInterface $loader, CustomPersisterInterface $persister)
+    public function __construct(CustomObjectLoaderInterface $loader,
+                                CustomPersisterInterface $persister,
+                                DeleteObject $deleter)
     {
         $this->loader = $loader;
         $this->persister = $persister;
+        $this->deleter = $deleter;
     }
 
     /**
@@ -141,8 +147,29 @@ class CartController extends Controller{
 
     /**
      * @Route("{id}/delete", name="carts_delete")
+     * @Method({"GET", "DELETE"})
      */
-    public function delete(){
+    public function delete(Request $request, Cart $cart=null){
+        if (!$cart){
+            $this->addFlash('error', 'Commande non trouvée !');
+            return $this->redirectToRoute('carts_list');
+        }
+
+        $form = $this->createForm(DeleteType::class, $cart, ['method'=>'DELETE']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()):
+            if ($form->get('oui')->isClicked()) {
+                return $this->deleter->delete($cart);}
+            if ($form->get('non')->isClicked())
+                return $this->redirectToRoute('carts_list');
+        endif;
+
+        return $this->render('Admin/Cart/form/cart-delete.html.twig',
+            [
+                'object' => $cart,
+                'form' => $form->createView()
+            ]);
 
     }
 

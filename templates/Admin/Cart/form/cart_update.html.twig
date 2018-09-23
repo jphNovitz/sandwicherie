@@ -2,7 +2,9 @@
 
 {% block title %}Modification d'une commande{% endblock %}
 {% block other_buttons %}
+    {% set entity = "carts" %}
+    {% set id = form.vars.value.id %}
 
-    {% set entity = "products" %}
-
+    <a href="{{ path(entity ~ '_delete', {'id' : id}) }}" class="ui negative circular button">
+        <i class="ui trash icon"></i>Supprimer</a>
 {% endblock %}
