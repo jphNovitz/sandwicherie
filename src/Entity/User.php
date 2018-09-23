@@ -81,11 +81,11 @@ class User implements UserInterface, EquatableInterface
      */
      private $phone;
 
-    /**
-     * @var array
-     * @ORM\Column(type="json")
-     */
-    private $roles;
+//    /**
+//     * @var array
+//     * @ORM\Column(type="json")
+//     */
+//    private $roles;
 
     /**
      * @var  int $tries
@@ -120,7 +120,6 @@ class User implements UserInterface, EquatableInterface
      */
     public function __construct()
     {
-        $this->roles = [];
         $this->roles = ["ROLE_USER"];
         $this->setIsActive(false);
         $this->setTries(0);
