@@ -144,7 +144,7 @@ class Cart
     /**
      * @return string
      */
-    public function getClient(): string
+    public function getClient(): ?string
     {
         return $this->client;
     }

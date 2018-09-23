@@ -6,6 +6,11 @@ acme_privacy:
     controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
     defaults:
         template: static/privacy.html.twig
+dashboard:
+    path:         /admin/dashboard
+    controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    defaults:
+        template: Admin/Dashboard/dashboard.html.twig
 
 allergies:
     resource: App\Controller\Api\Allergy\AllergyController

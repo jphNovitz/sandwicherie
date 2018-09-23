@@ -29,6 +29,14 @@ class CartRepository extends ServiceEntityRepository
             ;
 
     }
+
+    public function findOrdersByUser($username){
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.items', 'items')
+            ->addSelect('c, items')
+            ->getQuery()
+            ->getResult();
+    }
     /*
     public function findBySomething($value)
     {

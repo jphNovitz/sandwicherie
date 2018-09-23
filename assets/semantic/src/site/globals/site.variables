@@ -1,6 +1,8 @@
 /*******************************
      User Global Variables
 *******************************/
+@pageBackground    : rgba(212, 212, 213, .3);
+@fontSize          : 16px;
 @headerFont        : 'Cuprum', sans-serif;
 @importGoogleFonts : true;
 @googleFontName    : 'Cuprum';

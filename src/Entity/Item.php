@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\ORM\Mapping as ORM;
 use mageekguy\atoum\asserters\boolean;
@@ -43,15 +44,16 @@ class Item
 
     /**
      * @var Product
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product")
      *
      */
     private $product;
 
     /**
-     * @var array
+     * @var ArrayCollection
      *
-     * @ORM\Column(type="array", length=100, nullable=true)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
+     * @ORM\JoinTable(name="item_vegetables")
      */
     private $vegetables;
 
@@ -65,7 +67,9 @@ class Item
 
     public function __construct()
     {
+        $this->halal=true;
         $this->qty=1;
+        $this->vegetables = new ArrayCollection();
     }
 
     /**
@@ -87,7 +91,7 @@ class Item
     /**
      * @return Product
      */
-    public function getProduct(): Product
+    public function getProduct(): ?Product
     {
         return $this->product;
     }
@@ -151,7 +155,7 @@ class Item
     /**
      * @return string
      */
-    public function getBread(): string
+    public function getBread(): ?string
     {
         return $this->bread;
     }
@@ -165,12 +169,15 @@ class Item
     }
 
     /**
-     * @return array
+     * @return ArrayCollection
      */
-    public function getVegetables(): ?array
+    public function getVegetables(): ?Collection
     {
         return $this->vegetables;
     }
+
+
+
 
     /**
      * @param mixed $vegetable
@@ -185,9 +192,9 @@ class Item
      */
     public function removeVegetable($vegetable)
     {
-        if (false !== $key = array_search($vegetable, $this->vegetables, true)) {
-            array_splice($this->vegetables, $key, 1);
-        }
+        $this->vegetables->removeElement($vegetable);
+        // uncomment if you want to update other side
+        //$vegetable->setItem(null);
     }
 
 

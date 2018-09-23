@@ -36,18 +36,6 @@ class Ingredient
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=15, nullable=true)
-     */
-    private $code;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=15, nullable=true)
-     */
-    private $ref;
-
-    /**
-     * @var string
      *
      * @ORM\Column(type="string", length=120, nullable=true)
      */
@@ -306,38 +294,6 @@ class Ingredient
     public function setVegetable(bool $vegetable): void
     {
         $this->vegetable = $vegetable;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    /**
-     * @param string $code
-     */
-    public function setCode(string $code): void
-    {
-        $this->code = $code;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRef(): ?string
-    {
-        return $this->ref;
-    }
-
-    /**
-     * @param string $ref
-     */
-    public function setRef(string $ref): void
-    {
-        $this->ref = $ref;
     }
 
 

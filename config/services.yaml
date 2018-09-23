@@ -9,6 +9,7 @@ parameters:
     adm_provider: Admin/Provider/
     adm_ingredient: Admin/Ingredient/
     adm_input: Admin/Input/
+    adm_user: Admin/User/
     email_from: info@laclementine.be
 
 services:

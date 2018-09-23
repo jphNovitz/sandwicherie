@@ -6,8 +6,11 @@
             </div>
             <div class="right floated column" >
                 <div class="middle aligned content" >
-                    <sui-button basic color="black" icon="bars" @click.native="click"  style="cursor: pointer"/>
 
+
+                       <!--<sui-button basic color="black" icon="bars" @click.native="showMenu"  style="display: block ; cursor: pointer"/>-->
+                    <a href="#" @click="showMenu" class="ui basic button" style="    padding: 20rem;
+    display: contents;"> <i class="bars icon"></i> </a>
                 </div>
             </div>
         </div>
@@ -40,8 +43,12 @@ export default {
     computed: {
     },
     methods: {
-        click: function () {
-            this.on = !this.on
+        showMenu: function (event) {
+            if (event) event.preventDefault()
+            {
+                this.on = !this.on
+            }
+
         }
     }
 }

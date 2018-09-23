@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Query as Query;
 
 class ProductRepository extends ServiceEntityRepository
 {
@@ -58,5 +59,26 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('user', $id)
             ->getQuery()
             ->getArrayResult();
+    }
+
+    public function findDiscoveryList($id){
+        $query =  $this->createQueryBuilder('p')
+            ->leftJoin('p.images', 'images')
+            ->leftJoin('p.interestedBy', 'interest')
+            ->addSelect('partial p.{id,slug}, images, partial interest.{id}')
+            ->andWhere('interest.id = :user')
+            ->setParameter('user', $id)
+            ->getQuery()
+            ->setHint(Query::HINT_FORCE_PARTIAL_LOAD, 1);
+
+        return $query->getArrayResult();
+    }
+
+    public function findVegetables(){
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.vegetables', 'vegetables')
+            ->addSelect('vegetables')
+            ->getQuery()
+            ;
     }
 }

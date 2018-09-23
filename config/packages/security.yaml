@@ -14,6 +14,9 @@ security:
                     admin:
                         password: $2y$12$NmJuFEP1fV.wKOTboVsvqufPRO5eD6Gxg2.qN8h55na.FiUyAoNFy
                         roles: 'ROLE_ADMIN'
+                    zeAdmin:
+                        password: $2y$12$NmJuFEP1fV.wKOTboVsvqufPRO5eD6Gxg2.qN8h55na.FiUyAoNFy
+                        roles: 'ROLE_ADMIN'
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

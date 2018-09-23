@@ -23,11 +23,22 @@ export default {
                 return like.id === this.userID
             }).length
         },
+        discovery: function () {
+            return this.product.interested_by.filter(interest => {
+                return interest.id === this.userID
+            }).length
+        },
         likeAction: function () {
             this.$http.patch(/*this.base_api+*/'/api/s/products/'+this.product.slug+'/like')
                 .then((response) => {
                 //let obj = this.group.filter(p=> p.slug === this.product.slug)
                 this.$store.dispatch('call_products')
+            })
+        },
+        discoverAction: function () {
+            this.$http.patch(/*this.base_api+*/'/api/s/products/'+this.product.slug+'/discovery')
+                .then((response) => {
+                    this.$store.dispatch('call_products')
             })
         }
     }
