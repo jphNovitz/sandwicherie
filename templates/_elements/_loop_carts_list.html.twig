@@ -1,7 +1,7 @@
 {# receive a list and display each element #}
 <div class="ui relaxed divided list">
     {% for object in objects|slice(0, max) %}
-        <div class="item">
+        <div class="item ">
             <a href="{{ path(object|entity~'_show', {'id': object.id}) }}">
                 <li>{{ object.client }} ({{ object.created|date('d/m') }})
                     {{ object.done ? '<span class="ui green horizontal label">Classé</span>' : '<span class="ui red horizontal label">En cours</span>' }}  </li>

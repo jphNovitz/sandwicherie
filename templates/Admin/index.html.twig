@@ -1,184 +1,170 @@
+{#---------------------------------#}
+{# Admin Home Page                 #}
+{# Part of laclementine project    #}
+{# Novitz Jean-Philippe            #}
+{# novitz@gmail.com                #}
+{# 2018                            #}
+{#---------------------------------#}
 {% extends '_bases/_admin_base.html.twig' %}
 
-{%  block body %}
+{% block body %}
 
     {% include '_elements/_flash_messages.html.twig' %}
     <h1>Admininistration</h1>
-<div class="ui stackable grid">
-    <div class="stackable four wide column">
-        <div class="ui red card">
-            <div class="content">
-                <i class="circular right floated shopping cart icon"></i>
-                <div class="header">
-                   Commandes
+    <div class="ui stackable grid">
+        <div class="stackable four wide column">
+            <!---------------------->
+            <!-- orders/carts list ->
+            <!---------------------->
+            <div class="ui red card">
+                <div class="content">
+                    <i class="circular right floated shopping cart icon"></i>
+                    <div class="header">
+                        Commandes
+                    </div>
+                    <div class="description">
+                        {% include '_elements/_loop_carts_list.html.twig' with {
+                            'objects': carts, 'max': 25} %}
+                    </div>
+                    <a class="ui fluid blue button"
+                       style="margin-top: 1rem;"
+                       href="{{ path('carts_list') }}">
+                       Liste
+                    </a>
                 </div>
-                <div class="description">
-                    {% include '_elements/_loop_carts_list.html.twig' with {
-                        'objects': carts, 'max': 25} %}
-                </div>
-                <a href="{{path('carts_list') }}">
-                    <div class="ui fluid blue button" style="margin-top: 1rem;">Liste</div>
-                </a>
             </div>
+        </div>
+
+
+        <div class="four wide column">
+            <!---------------------->
+            <!-- products  list    ->
+            <!---------------------->
+            <div class="ui green card">
+                <div class="content">
+                    <i class="circular right floated utensils icon"></i>
+                    <div class="header">
+                        Produits
+                    </div>
+                    <div class="description">
+                        {% include '_elements/_loop_entity_list.html.twig' with {
+                            'objects': products, 'max': 20} %}
+                    </div>
+                    <a class="ui fluid blue button"
+                       style="margin-top: 1rem;"
+                       href="{{ path('products_list') }}">
+                            Liste
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="four wide column">
+            <!---------------------->
+            <!-- ingredients list  ->
+            <!---------------------->
+            <div class="ui green card">
+                <div class="content">
+                    <i class="circular right floated utensil spoon icon"></i>
+                    <div class="header">
+                        Ingrédients
+                    </div>
+                    <div class="description">
+                        {% include '_elements/_loop_entity_list.html.twig' with {
+                            'objects': ingredients, 'max': 20} %}
+                    </div>
+                    <a href="{{ path('ingredients_list') }}"
+                       class="ui fluid blue button"
+                       style="margin-top: 1rem;">
+                        Liste
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="four wide column">
+            <!---------------------->
+            <!-- categories list   ->
+            <!---------------------->
+            <div class="ui green card">
+                <div class="content">
+                    <i class="circular right floated tags icon"></i>
+                    <div class="header">
+                        Categories
+                    </div>
+                    <div class="description">
+                        {% include '_elements/_loop_entity_list.html.twig' with {
+                            'objects': categories, 'max': 5} %}
+                    </div>
+                        <a href="{{ path('categories_list') }}"
+                           class="ui fluid blue button"
+                           style="margin-top: 1rem;" >
+                            Liste
+                        </a>
+                </div>
+            </div>
+            <!----------------------->
+            <!-- product types list ->
+            <!----------------------->
+            <div class="ui green card">
+                <div class="content">
+                    <i class="circular right floated tags icon"></i>
+                    <div class="header">
+                        Types de produits
+                    </div>
+                    <div class="description">
+                        {% include '_elements/_loop_entity_list.html.twig' with {
+                            'objects': types, 'max': 5} %}
+                    </div>
+                        <a href="{{ path('types_list') }}"
+                           class="ui fluid blue button"
+                           style="margin-top: 1rem;">
+                            Liste
+                        </a>
+                </div>
+            </div>
+
+            <!---------------------->
+            <!-- allergies  list   ->
+            <!---------------------->
+            <div class="ui green card">
+                <div class="content">
+                    <i class="circular right floated user md icon"></i>
+                    <div class="header">
+                        Allergies
+                    </div>
+                    <div class="description">
+                        {% include '_elements/_loop_entity_list.html.twig' with {
+                            'objects': allergies, 'max': 5} %}
+                    </div>
+                        <a href="{{ path('allergies_list') }}"
+                           class="ui fluid blue button"
+                           style="margin-top: 1rem;">
+                            Liste
+                        </a>
+                </div>
+            </div>
+            <!---------------------->
+            <!-- providers  list   ->
+            <!---------------------->
+            <div class="ui green card">
+                <div class="content">
+                    <i class="circular right floated truck icon"></i>
+                    <div class="header">
+                        Fournisseurs
+                    </div>
+                    <div class="description">
+                        {% include '_elements/_loop_entity_list.html.twig' with {
+                            'objects': providers, 'max': 5} %}
+                    </div>
+                        <a href="{{ path('providers_list') }}"
+                           class="ui fluid blue button"
+                           style="margin-top: 1rem;">
+                            Liste
+                        </a>
+                </div>
+            </div>
+
         </div>
     </div>
-
-
-    <div class="four wide column">
-        <div class="ui green card">
-            <div class="content">
-                <i class="circular right floated utensils icon"></i>
-                <div class="header">
-                    Produits
-                </div>
-                <div class="description">
-                    {% include '_elements/_loop_entity_list.html.twig' with {
-                        'objects': products, 'max': 20} %}
-                </div>
-                <div class="ui fluid blue button" style="margin-top: 1rem;">
-                    <a href="{{ path('products_list') }}" >
-                        Liste
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="four wide column">
-        <div class="ui green card">
-            <div class="content">
-                <i class="circular right floated utensil spoon icon"></i>
-                <div class="header">
-                   Ingrédients
-                </div>
-                <div class="description">
-                    {% include '_elements/_loop_entity_list.html.twig' with {
-                        'objects': ingredients, 'max': 20} %}
-                </div><div class="ui fluid blue button" style="margin-top: 1rem;">
-                    <a href="{{ path('ingredients_list') }}" >
-                        Liste
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="four wide column">
-        <div class="ui green card">
-            <div class="content">
-                <i class="circular right floated tags icon"></i>
-                <div class="header">
-                    Categories
-                </div>
-                <div class="description">
-                    {% include '_elements/_loop_entity_list.html.twig' with {
-                        'objects': categories, 'max': 5} %}
-                </div><div class="ui fluid blue button" style="margin-top: 1rem;">
-                    <a href="{{ path('categories_list') }}" >
-                        Liste
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="ui green card">
-            <div class="content">
-                <i class="circular right floated tags icon"></i>
-                <div class="header">
-                    Types de produits
-                </div>
-                <div class="description">
-                    {% include '_elements/_loop_entity_list.html.twig' with {
-                        'objects': types, 'max': 5} %}
-                </div><div class="ui fluid blue button" style="margin-top: 1rem;">
-                    <a href="{{ path('types_list') }}" >
-                        Liste
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="ui green card">
-            <div class="content">
-                <i class="circular right floated user md icon"></i>
-                <div class="header">
-                    Allergies
-                </div>
-                <div class="description">
-                    {% include '_elements/_loop_entity_list.html.twig' with {
-                        'objects': allergies, 'max': 5} %}
-                </div><div class="ui fluid blue button" style="margin-top: 1rem;">
-                    <a href="{{ path('allergies_list') }}" >
-                        Liste
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="ui green card">
-            <div class="content">
-                <i class="circular right floated truck icon"></i>
-                <div class="header">
-                    Fournisseurs
-                </div>
-                <div class="description">
-                    {% include '_elements/_loop_entity_list.html.twig' with {
-                        'objects': providers, 'max': 5} %}
-                </div>
-                <div class="ui fluid blue button" style="margin-top: 1rem;">
-                    <a href="{{ path('providers_list') }}" >
-                        Liste
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-    {#<div class="ui three stackable cards">#}
-    {#<div class="card">#}
-        {#<h2 class="ui header">#}
-            {#<i class="puzzle piece icon"></i>#}
-            {#<div class="content">#}
-                {#<a href="{{ path('ingredients_list') }}">#}
-                {#Ingrédients#}
-                {#</a>#}
-            {#</div>#}
-        {#</h2>#}
-
-        {#{% include '_elements/_loop_entity_list.html.twig' with {'objects': ingredients} %}#}
-    {#</div>#}
-    {#<div class="card">#}
-        {#<a href="{{ path('categories_list') }}">#}
-            {#<i class="material-icons">local_offer</i>#}
-            {#<span class="link-name">Categorie</span>#}
-        {#</a>#}
-        {#{%  include '_elements/_loop_entity_list.html.twig' with {'objects': categories} %}#}
-    {#</div>#}
-    {#<div class="card">#}
-        {#<a href="{{ path('products_list') }}">#}
-            {#<i class="material-icons">restaurant</i>#}
-            {#<span class="link-name">Products</span>#}
-        {#</a>#}
-        {#{% include '_elements/_loop_entity_list.html.twig' with {'objects': products} %}#}
-    {#</div>#}
-    {#<div class="card">#}
-        {#<a href="{{ path('types_list') }}">#}
-            {#<i class="material-icons">event_note</i>#}
-            {#<span class="link-name">Types</span>#}
-        {#</a>#}
-        {#{% include '_elements/_loop_entity_list.html.twig' with {'objects': types} %}#}
-    {#</div>#}
-    {#<div class="card">#}
-        {#<a href="{{ path('providers_list') }}">#}
-            {#<i class="material-icons">store_mall_directory</i>#}
-            {#<span class="link-name">Fournisseurs</span>#}
-        {#</a>#}
-        {#{% include '_elements/_loop_entity_list.html.twig' with {'objects': providers} %}#}
-    {#</div>#}
-    {#<div class="card">#}
-        {#<a href="{{ path('allergies_list') }}">#}
-            {#<i class="material-icons">assignment_late</i>#}
-            {#<span class="link-name">Allergies</span>#}
-        {#</a>#}
-        {#{%  include '_elements/_loop_entity_list.html.twig' with {'objects': allergies} %}#}
-    {#</div>#}
-    {#<div>#}
 {% endblock %}

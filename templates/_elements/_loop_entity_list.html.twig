@@ -1,5 +1,14 @@
+{#-----------------------------------------#}
+{# Loop entity loop                        #}
 {# receive a list and display each element #}
+{# Part of laclementine project            #}
+{# Novitz Jean-Philippe                    #}
+{# novitz@gmail.com                        #}
+{# 2018                                    #}
+{#-----------------------------------------#}
+
 <div class="ui relaxed divided list">
+
     {% for object in objects|slice(0, max) %}
         <div class="item">
             <a href="{{ path(object|entity~'_show', {'slug': object.slug}) }}"><li>{{ object.name }}</li></a>

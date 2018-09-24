@@ -1,4 +1,18 @@
 <?php
+/**
+ * Admin Controller Page
+ *
+ * get all the importants entities and give them to the twig template
+ *
+ * @category   CategoryName
+ * @package     App\Controller\Admin
+ * @author     Novitz Jean-Philippe <novitz@gmail.com>
+ * @copyright  2018
+ * @license    Opensource
+ * @version    CVS: $Id:$
+ * @link       http://pear.php.net/package/PackageName
+ * @see        http://www.laclementine.be
+ */
 
 namespace App\Controller\Admin;
 use App\Entity\Ingredient;
@@ -11,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class AdminController
  * @package App\Controller\Admin
- *  @Route("/admin/")
+ * @Route("/admin/")
  */
 class AdminController extends Controller {
     /**
@@ -24,7 +38,7 @@ class AdminController extends Controller {
         $allergies = $loader->LoadAll('App:Allergy');
         $products = $loader->LoadAll('App:Product');
         $types = $loader->LoadAll('App:Type');
-        $providers = $loader->LoadAll('App:Product');
+        $providers = $loader->LoadAll('App:Provider');
         $users = $loader->LoadAll('App:User');
         $carts = $loader->LoadAll('App:Cart');
 
