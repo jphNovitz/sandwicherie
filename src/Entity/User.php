@@ -82,7 +82,7 @@ class User implements UserInterface, EquatableInterface
     private $phone;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="simple_array")
      */
     private $roles ;
 //    /**
