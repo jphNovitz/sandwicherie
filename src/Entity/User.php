@@ -85,11 +85,6 @@ class User implements UserInterface, EquatableInterface
      * @ORM\Column(type="array")
      */
     private $roles ;
-//    /**
-//     * @var array
-//     * @ORM\Column(type="json")
-//     */
-//    private $roles;
 
     /**
      * @var  int $tries
