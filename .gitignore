@@ -1,9 +1,3 @@
-
-
-
-
-
-
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
@@ -15,3 +9,8 @@
 /node_modules/
 /public/build/
 ###< symfony/webpack-encore-pack ###
+
+###> lexik/jwt-authentication-bundle ###
+/%CONFIG_DIR%/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+/public/images/

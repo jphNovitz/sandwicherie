@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Form\ImagesProviderType;
 
 class ProviderType extends AbstractType
 {
@@ -29,7 +30,7 @@ class ProviderType extends AbstractType
                         ->orderBy('c.zip', 'ASC');
                 }
             ])
-           ->add('image', ImagesProviderType::class)
+           ->add('imageFile', ImagesProviderType::class)
         ;
     }
 

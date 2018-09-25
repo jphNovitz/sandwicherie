@@ -67,7 +67,7 @@ class Provider
 
 
     /**
-     * @Vich\UploadableField(mapping="provider8", fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="provider", fileNameProperty="imageName")
      *
      * @var File
      */

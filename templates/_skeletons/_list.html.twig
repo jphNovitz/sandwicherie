@@ -1,11 +1,22 @@
+{#####################################################}
+{## @page template/_skeletons/_list.html.twig       ##}
+{## - receive a list as an array                    ##}
+{## - display all elements in a list                ##}
+{## abstract -> can receive any object with         ##}
+{##             slug and name properties            ##}
+{## this list has to be extended                    ##}
+{## part of laclementine project                    ##}
+{## @author Novitz Jean-Philippe <novitz@gmail.com> ##}
+{## 2018                                            ##}
+{#####################################################}
+
 {% extends '_bases/_admin_base.html.twig' %}
 
 {% block body %}
     {% include '_elements/_flash_messages.html.twig' %}
-    <h1> {% block title %}skeleton list {% endblock %} </h1>
-
-    <div class="row">
-        <div class="ui middle aligned divided fluid big list">
+        <h1> {% block title %}skeleton list {% endblock %} </h1>
+        <div class="row">
+            <div class="ui middle aligned divided fluid big list">
             {% for object in list %}
                 <div class="item" >
                     <div class="middle aligned right floated">
@@ -35,8 +46,10 @@
             {% endfor %}
 
         </div>
-    </div>
-
-    {% include '_elements/_action_floating_menu.html.twig' %}
-
+        </div>
 {% endblock %}
+    {% block right_column %}
+        {% include '_elements/_action_floating_menu/_action_floating_menu.html.twig' %}
+    {% endblock %}
+
+

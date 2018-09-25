@@ -1,0 +1,78 @@
+{#####################################################}
+{## @page template/_action_floating_menu.html.twig  ##}
+{## Display the Action Floating menu for a list     ##}
+{##   shows a basic add action button               ##}
+{##   and a block to add new button                 ##}
+{##   this list has to be extended                  ##}
+{## part of laclementine project                    ##}
+{## @author Novitz Jean-Philippe <novitz@gmail.com> ##}
+{## 2018                                            ##}
+{#####################################################}
+
+<div class="action" id="action">
+    <div :class="menuActive">
+        {% block new_buttons %}
+            {#EXAMPLE USAGE#}
+            {#<a href="{{ path(entity ~ '_list', {'slug' : object.slug}) }}"#}
+            {#class="ui blue circular icon button" title="Liste">#}
+            {#<i class="list icon"></i>#}
+            {#</a>#}
+        {% endblock %}
+        {% block base_button %}
+            {# if error try replace add by create #}
+            <a href="{{ path(entity ~ '_add') }}"
+               class="ui blue circular icon button black" title="Ajouter">
+                <i class="write icon"></i>
+            </a>
+        {% endblock %}
+    </div>
+    <button id="menu" class="ui brown circular icon button" @click="showMenu" title="Menu"><i
+                class="plus icon"></i></button>
+
+</div>
+{% block javascripts %}
+    <script>
+        (function () {
+            /*********************/
+            /** floating button **/
+            /*********************/
+
+            Vue.config.delimiters = ['${', '}'];
+            const action = new Vue({
+                el: '#action',
+                data() {
+                    return {
+                        menuActive: 'notVisible',
+                        detailed: []
+                    }
+                },
+                methods: {
+                    showMenu: function () {
+                        if (this.menuActive === 'notVisible') {
+                            this.menuActive = 'visible'
+                        } else {
+                            this.menuActive = 'notVisible'
+                        }
+                    },
+                    toggleDetail: function (id) {
+                        let i = this.detailed.indexOf(id);
+                        if (i > 0) {
+                            this.detailed.splice(i, 1)
+                        } else {
+                            this.detailed.push(id);
+                        }
+                        console.log(this.detailed)
+                    },
+                    detailClass: function (id) {
+                        if (this.detailed.indexOf(id) > -1) {
+                            return 'down';
+                        } else {
+                            return 'right';
+                        }
+                    }
+                }
+            })
+        })()
+    </script>
+
+{% endblock %}

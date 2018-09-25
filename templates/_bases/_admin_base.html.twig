@@ -19,7 +19,7 @@
 <body>
 <div class="ui grid" id="app">
     {% block toolbar %}
-        <div class="ui top fixed  fluid menu">
+        <div class="ui top fixed  fluid menu" >
             <a class="orange item" id="button">
                 <i class="centered bars white large icon"></i>
             </a>
@@ -32,70 +32,64 @@
             </a>
         </div>
     {% endblock %}
+    <div class="ui huge vertical menu"
+         id="lateral-menu"
+         style="z-index: 200"
+         :class="[show ? 'showit' : 'hide' ]">
 
-        <div class="ui huge vertical menu"
-             id="lateral-menu"
-             style="z-index: 200"
-             :class="[show ? 'showit' : 'hide' ]">
-
-            <a href="{{ path('admin_default') }}" class="item" >
-                Accueil
-            </a>
-            <a class="item">
-                Utilisateurs
-                {#<div class="ui teal left pointing label">1</div>#}
-            </a>
-            <a href="{{ path('products_list') }}" class="item">
-                Produits
-                {#<div class="ui label">51</div>#}
-            </a>
-            <a href="{{ path('types_list') }}" class="item">
-                Types de produits
-            </a>
-            <a href="{{ path('ingredients_list') }}" class="item">
-                Ingrédients
-            </a>
-            <a href="{{ path('categories_list') }}" class="item">
-                Categories d'Ingrédients
-            </a>
-            <a href="{{ path('allergies_list') }}" class="item">
-                Allergies
-            </a>
-            <a class="item">
-                Configuration du site
-            </a>
-            <div class="item">
-                <div class="ui transparent icon input">
-                    <input type="text" placeholder="Search mail...">
-                    <i class="search icon"></i>
-                </div>
+        <a href="{{ path('admin_default') }}" class="item" >
+            Accueil
+        </a>
+        <a class="item">
+            Utilisateurs
+            {#<div class="ui teal left pointing label">1</div>#}
+        </a>
+        <a href="{{ path('products_list') }}" class="item">
+            Produits
+            {#<div class="ui label">51</div>#}
+        </a>
+        <a href="{{ path('types_list') }}" class="item">
+            Types de produits
+        </a>
+        <a href="{{ path('ingredients_list') }}" class="item">
+            Ingrédients
+        </a>
+        <a href="{{ path('categories_list') }}" class="item">
+            Categories d'Ingrédients
+        </a>
+        <a href="{{ path('allergies_list') }}" class="item">
+            Allergies
+        </a>
+        <a class="item">
+            Configuration du site
+        </a>
+        <div class="item">
+            <div class="ui transparent icon input">
+                <input type="text" placeholder="Search mail...">
+                <i class="search icon"></i>
             </div>
         </div>
-        {#<div class="left aligned item">#}
-            {#<div class="header">Aliments</div>#}
-            {#<div class="menu">#}
-                {#<a class="huge item" href="{{ path('products_list') }}"> Produits </a>#}
-                {#<a class="item" href="{{ path('types_list') }}"> Types de produits</a>#}
-                {#<a class="item" href="{{ path('ingredients_list') }}"> Ingredients </a>#}
-                {#<a class="item" href="{{ path('categories_list') }}"> Catégories d'ingrédient </a>#}
-            {#</div>#}
-            {#<div class="header">Configuration</div>#}
-            {#<div class="menu">#}
-                {#<a class="huge item" href="{{ path('configuration') }}"> Géneral </a>#}
-                {#<a class="item" href="{{ path('services_list') }}"> Services</a>#}
-            {#</div>#}
-        {#</div>#}
     </div>
-    <div class="ui fourteen wide column container" style="margin-top: 8rem">
+    {#</div>#}
+
+    <div class="one wide column" style="margin-top: 8rem">
+        {% block left_column %}
+            {# nothing just in case and balance between left and right#}
+        {% endblock %}
+    </div>
+    <div class="thirteen wide column"   style="margin-top: 8rem">
         {% block body %}{% endblock %}
     </div>
 </div>
-     <script src="{{ asset('build/js/app.js') }}"> </script>
+    <div class="two wide column" style="margin-top: 8rem">
+        {% block right_column %}
+            {# action button fits just good here #}
+        {% endblock %}
+    </div>
 
-         {% block javascripts %}{% endblock %}
 
-    {#<script src="{{ asset('build/js/vue.js') }}"></script>#}
-
+<script src="{{ asset('build/js/app.js') }}"> </script>
+{% block javascripts %}{% endblock %}
 
 </body>
 </html>
