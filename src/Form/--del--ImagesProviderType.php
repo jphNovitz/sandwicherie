@@ -12,7 +12,7 @@ class ImagesProviderType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('imageFile', VichImageType::class, [])
+        $builder->add('imageFile', VichImageType::class, ["label"=> "Photo"])
         ;
     }
 

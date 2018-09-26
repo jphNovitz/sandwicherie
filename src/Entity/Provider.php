@@ -3,10 +3,14 @@
 namespace App\Entity;
 
 use App\Form\InputType;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -38,6 +42,21 @@ class Provider
     private $slug;
 
     /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var datetime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=120, nullable=true)
@@ -64,27 +83,27 @@ class Provider
      */
     private $city;
 
-
-
-    /**
-     * @Vich\UploadableField(mapping="provider", fileNameProperty="imageName")
-     *
-     * @var File
-     */
-    private $imageFile;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @var string
-     */
-    private $imageName;
-
     /**
      * @var ArrayCollection $input
      * @ORM\OneToMany(targetEntity="App\Entity\Input", mappedBy="provider")
      */
     private $inputs;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="image_provider", fileNameProperty="image")
+     *
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $image;
+
 
     /**
      * Provider constructor.
@@ -93,7 +112,6 @@ class Provider
     public function __construct()
     {
         $this->input = new ArrayCollection();
-       // $this->images = new ArrayCollection();
     }
 
     /**
@@ -192,7 +210,6 @@ class Provider
         $this->email = $email;
     }
 
-
     /**
      * @return mixed
      */
@@ -210,42 +227,22 @@ class Provider
     }
 
     /**
-     * @return string
+     * @return ArrayCollection
      */
-    public function getImageName(): ?string
+    public function getInputs(): ArrayCollection
     {
-        return $this->imageName;
+        return $this->inputs;
     }
 
     /**
-     * @param string $imageName
+     * @param ArrayCollection $inputs
      */
-    public function setImageName(string $imageName): void
+    public function setInputs(ArrayCollection $inputs): void
     {
-        $this->imageName = $imageName;
+        $this->inputs = $inputs;
     }
 
-    /**
-     * @return File
-     */
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
 
-    /**
-     * @param File $imageFile
-     */
-    public function setImageFile(?File $image = null): void
-    {
-        $this->imageFile = $image;
-
-        if (null !== $image) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-    }
 
     /**
      * @return Input
@@ -273,10 +270,92 @@ class Provider
         $input->setProvider(null);
     }
 
+    /**
+     * @return DateTime
+     */
+    public function getCreated(): DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param DateTime $created
+     */
+    public function setCreated(DateTime $created): void
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getUpdated(): DateTime
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param DateTime $updated
+     */
+    public function setUpdated(DateTime $updated): void
+    {
+        $this->updated = $updated;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param mixed $imageFile
+     */
+    public function setImageFile($imageFile): void
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
+
+
 
     public function __toString()
     {
         return $this->name;
     }
 
+//    /**
+//     * @Assert\Callback
+//     */
+//    public function validate(ExecutionContextInterface $context)
+//    {
+//        if (! in_array($this->imageFile->getMimeType(), array(
+//            'image/jpeg',
+//            'image/gif',
+//            'image/png'
+//        ))) {
+//            $context
+//                ->buildViolation('Wrong file type (jpg,gif,png)')
+//                ->atPath('fileName')
+//                ->addViolation()
+//            ;
+//        }
+//    }
 }

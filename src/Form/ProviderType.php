@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Form\ImagesProviderType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProviderType extends AbstractType
 {
@@ -30,7 +31,7 @@ class ProviderType extends AbstractType
                         ->orderBy('c.zip', 'ASC');
                 }
             ])
-           ->add('imageFile', ImagesProviderType::class)
+            ->add('imageFile',VichImageType::class)
         ;
     }
 

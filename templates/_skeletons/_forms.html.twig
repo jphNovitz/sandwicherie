@@ -1,3 +1,11 @@
+{###############################################################}
+{## @page template/_skeleton/forms.html.twig                  ##}
+{##                                                           ##}
+{## part of laclementine project                              ##}
+{## @author Novitz Jean-Philippe <novitz@gmail.com>           ##}
+{## 2018                                                      ##}
+{###############################################################}
+
 {%  extends '_bases/_admin_base.html.twig' %}
 
 {% block body %}
@@ -29,4 +37,7 @@
     {{ form_end(form) }}
 
 
+{% endblock %}
+{% block right_column %}
+    {% include '_elements/_action_floating_menu/_form_action_floating_menu.html.twig' %}
 {% endblock %}

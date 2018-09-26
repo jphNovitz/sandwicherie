@@ -1,46 +1,54 @@
+{###############################################################}
+{## @page template/Admin/Provier/form/provider-add.html.twig  ##}
+{##                                                           ##}
+{## child of _skeleton/forms.html.twig                        ##}
+{##                                                           ##}
+{## part of laclementine project                              ##}
+{## @author Novitz Jean-Philippe <novitz@gmail.com>           ##}
+{## 2018                                                      ##}
+{###############################################################}
 {% extends '_skeletons/_forms.html.twig' %}
+
+{% set entity = 'providers' %}
 
 {% block title %}Ajout d'un fournisseur{% endblock %}
     {% block form_details %}
-
-        <div class="form-row">
-            <label for="form_name" class="custom">Nom</label>
-            {{ form_widget(form.name, {"attr": {"class": "custom"}}) }}
-
+        <div class="field">
+            <label for="form_name">Nom</label>
+            {{ form_widget(form.name, {"attr": {"placeholder": "nom"}}) }}
+            {% if form.name.vars.errors|length %}
+                <div class="form-errors">
+                    {{ form_errors(form.name, {"attr": {"class": "form-error"}}) }}
+                </div>
+            {% endif %}
         </div>
-        {% if form.name.vars.errors|length %}
-        <div class="form-errors">
-            {{ form_errors(form.name, {"attr": {"class": "form-error"}}) }}
+        <div class="three fields">
+            <div class="field">
+                <label for="form_streetName">Rue</label>
+                {{ form_widget(form.streetName, {"attr": {"placeholder": "rue"}}) }}
+            </div>
+            <div class="field">
+                <label for="form_streetNr">N°</label>
+                {{ form_widget(form.streetNr, {"attr": {"placeholder": "n°","maxlength":"3"}}) }}
+            </div>
+            <div class="field">
+                {{ form_errors(form.city) }}
+                <label for="form_city">Localité</label>
+                {{ form_widget(form.city,
+                    {"attr": {"class": "dropdown"}}) }}
+            </div>
         </div>
-        {% endif %}
-        <div class="form-row">
-            <label for="form_streetName" class="custom">Rue</label>
-            {{ form_widget(form.streetName, {"attr": {"class": "custom"}}) }}
+        <div class="two fields">
+            <div class="field">
+                <label for="form_Email">Email</label>
+                {{ form_widget(form.email, {"attr": {"placeholder": "email"}}) }}
+            </div>
 
+            {#<div class="field">#}
+                {#<label for="form_imageFile">Logo</label>#}
+                {#{{ form_widget(form.imageFile) }}#}
+            {#</div>#}
         </div>
-
-        <div class="form-row">
-            <label for="form_streetNr" class="custom">No</label>
-            {{ form_widget(form.streetNr, {"attr": {"class": "custom"}}) }}
-
-        </div>
-        <div class="form-row">
-            <label for="form_streetEmail" class="custom">Email</label>
-            {{ form_widget(form.email, {"attr": {"class": "custom"}}) }}
-        </div>
-        <div class="form-row">
-        {{ form_errors(form.city) }}
-        <label for="form_city">Localité</label>
-        {{ form_widget(form.city,
-            {"attr": {"class": "dropdown"}}) }}
-        </div>
-
-        <div class="form-row">
-            <label for="form_imageFile">image</label>
-            {{ form_widget(form.imageFile,
-                {"attr": {"class": ""},
-                    "label": "Click me" }) }}
-        </div>
-
-
-    {% endblock %}
+{% endblock %}
+{% block right_column %}
+{% endblock %}

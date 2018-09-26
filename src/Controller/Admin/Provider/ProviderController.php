@@ -57,9 +57,12 @@ class ProviderController extends Controller
     public function add(Request $request)
     {
         $provider = new Provider();
+
         $form = $this->createForm(ProviderType::class, $provider);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()):
+//            dump($form->getData()); die();
             if ($this->customPersister->insert($provider)){
                 $this->addFlash("success", "Le fournisseur a été ajouté.");
                 return $this->redirectToRoute('providers_add');
@@ -100,6 +103,7 @@ class ProviderController extends Controller
         $form = $this->createForm(ProviderType::class, $provider);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()):
+
             if ($this->customPersister->update($provider)){
                 $this->addFlash("success", "Le fournisseur a été modifié.");
                 return $this->redirectToRoute('providers_update', ['slug'=>$provider->getSlug()]);
