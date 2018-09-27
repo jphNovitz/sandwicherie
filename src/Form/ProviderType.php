@@ -24,6 +24,7 @@ class ProviderType extends AbstractType
             ->add('streetName',TextType::class)
             ->add('streetNr',TextType::class)
             ->add('email',EmailType::class)
+            ->add('phone', TextType::class)
             ->add('city', EntityType::class,[
                 'class'=> City::class,
                 'query_builder' => function (CityRepository $r) {

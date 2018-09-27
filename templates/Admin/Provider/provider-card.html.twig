@@ -1,16 +1,23 @@
 {% extends '_skeletons/_card.html.twig' %}
 {% set object = provider %}
+{% set entity = 'providers' %}
 {% block object_image  %}
     {% if object.image is not empty %}
         {% block card_image %}
-            <img src="{{ asset('images/providers/'~object.image.imageName) }}" />
+            <img src="{{ asset('images/providers/'~object.image) }}" />
         {% endblock %}
     {% endif %}
 {% endblock %}
 
 
 {% block card_rest %}
-    <p>{{ object.email }}
-    <br /> {{ object.streetname }} {{ object.streetnr }}
+    <p><em>Téléphone: </em>
+        {% if object.phone is not empty %}
+            {{ object.phone }}
+        {% else %}
+            Non communiqué
+        {% endif %}
+    <br /><em>Email: </em>{{ object.email }}
+    <br /><em>Adresse: </em> {{ object.streetname }} {{ object.streetnr }}
 </p>
 {% endblock %}

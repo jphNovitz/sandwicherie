@@ -32,17 +32,17 @@
                 </div>
 
             </h1>
-            <div class="ui  horizontal  aligned list ">
-                {% block header_buttons %}
+            {#<div class="ui  horizontal  aligned list ">#}
+                {#{% block header_buttons %}#}
 
-                <div class="item"><a href="{{ path(object|entity ~ '_update', {'slug' : object.slug}) }}"
-                                     class="ui  basic secondary circular button" style="min-width: 7rem"> modifier</a>
-                </div>
-                <div class="item"><a href="{{ path(object|entity ~ '_delete', {'slug' : object.slug}) }}"
-                                     class="ui  basic secondary circular button" style="min-width: 7rem"> supprimer</a>
-                </div>
-                {% endblock %}
-            </div>
+                {#<div class="item"><a href="{{ path(object|entity ~ '_update', {'slug' : object.slug}) }}"#}
+                                     {#class="ui  basic secondary circular button" style="min-width: 7rem"> modifier</a>#}
+                {#</div>#}
+                {#<div class="item"><a href="{{ path(object|entity ~ '_delete', {'slug' : object.slug}) }}"#}
+                                     {#class="ui  basic secondary circular button" style="min-width: 7rem"> supprimer</a>#}
+                {#</div>#}
+                {#{% endblock %}#}
+            {#</div>#}
         </div>
         <div class="sixteen wide column ui centered grid">
             {% block object_image %}
@@ -78,4 +78,7 @@
         </div>
     </div>
 
+{% endblock %}
+{% block right_column %}
+    {% include '_elements/_action_floating_menu/_card_action_floating_menu.html.twig' %}
 {% endblock %}

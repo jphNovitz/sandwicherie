@@ -1,0 +1,22 @@
+{#####################################################}
+{## @page template/_form_action_floating_menu.html.twig  ##}
+{## Display the Action Floating menu for a list     ##}
+{##   shows a basic add action button               ##}
+{##   and a block to add new button                 ##}
+{##   this list has to be extended                  ##}
+{## part of laclementine project                    ##}
+{## @author Novitz Jean-Philippe <novitz@gmail.com> ##}
+{## 2018                                            ##}
+{#####################################################}
+{% extends '_elements/_action_floating_menu/_action_floating_menu.html.twig' %}
+
+        {% block new_buttons %}
+                <a href="{{ path(entity ~ '_delete', {'slug' : object.slug}) }}"
+                   class="ui negative circular icon button" title="delete">
+                        <i class="trash icon"></i>
+                </a>
+            {#<a href="{{ path(entity ~ '_list', {'slug' : object.slug}) }}"#}
+            {#class="ui blue circular icon button" title="Liste">#}
+            {#<i class="list icon"></i>#}
+            {#</a>#}
+        {% endblock %}

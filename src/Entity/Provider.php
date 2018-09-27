@@ -78,9 +78,23 @@ class Provider
     private $email;
 
     /**
+     * @var  string
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\City")
+     * @ORM\Column(type="string", length=15, nullable=true)
+     * @Assert\Length(
+     *      min = 9,
+     *      max = 15,
+     *      minMessage = "Au moins {{ limit }} chiffres",
+     *      maxMessage = "Tu as plus de  {{ limit }} chiffres"
+     * )
      */
+    private $phone;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\City")
+     *
+     */
+
     private $city;
 
     /**
@@ -209,6 +223,24 @@ class Provider
     {
         $this->email = $email;
     }
+
+    /**
+     * @return string
+     */
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone(string $phone): void
+    {
+        $this->phone = $phone;
+    }
+
+
 
     /**
      * @return mixed

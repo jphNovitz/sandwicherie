@@ -44,11 +44,17 @@
                 {{ form_widget(form.email, {"attr": {"placeholder": "email"}}) }}
             </div>
 
-            {#<div class="field">#}
-                {#<label for="form_imageFile">Logo</label>#}
-                {#{{ form_widget(form.imageFile) }}#}
-            {#</div>#}
+            <div class="field">
+                <label for="form_Phone">Telephone</label>
+                {{ form_widget(form.phone, {"attr": {"placeholder": "telephone"}}) }}
+            </div>
         </div>
-{% endblock %}
+        <div class="four fields">
+            <div class="field">
+                <label for="form_imageFile">Logo</label>
+                {{ form_widget(form.imageFile) }}
+            </div>
+        </div>
+    {% endblock %}
 {% block right_column %}
 {% endblock %}
