@@ -1,9 +1,11 @@
 {% extends '_skeletons/_forms.html.twig' %}
 
+{% set entity = 'categories' %}
 {% block title %}Ajout d'une catégorie d'ingredient{% endblock %}
     {% block form_details %}
 <div class="ui stackable grid">
-    <div class="eight wide column">
+    <div class="three wide column"></div>
+    <div class="ten wide column">
         <div class="field">
             <label for="form_name" >Nom</label>
             {{ form_widget(form.name) }}
@@ -22,6 +24,16 @@
                 {{ form_errors(form.comment) }}
             </div>
         {% endif %}
+        <p style="margin-top: 1rem">
+            <button class="ui orange positive circular button" type="submit" ><i class="ui check icon"></i> Envoi</button>
+            {% block other_buttons %} {% endblock %}
+        </p>
+
     </div>
+    <div class="three wide column"></div>
 </div>
     {% endblock %}
+{% block submit %}
+{% endblock %}
+{% block right_column %}
+{% endblock %}

@@ -28,11 +28,12 @@
     {% endblock %}
 
 
-
+    {% block submit %}
         <p style="margin-top: 1rem">
             <button class="ui orange positive circular button" type="submit" ><i class="ui check icon"></i> Envoi</button>
             {% block other_buttons %} {% endblock %}
         </p>
+    {% endblock %}
 
     {{ form_end(form) }}
 
