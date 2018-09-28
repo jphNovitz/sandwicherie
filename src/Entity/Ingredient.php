@@ -76,8 +76,8 @@ class Ingredient
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Images_Ingredient", mappedBy="ingredient", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Images_Ingredient", mappedBy="ingredient", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     private $images;
 
@@ -294,7 +294,7 @@ class Ingredient
     public function removeImage($image)
     {
         $this->images->removeElement($image);
-        $image->setIngredient(null);
+        $image->removeIngredient($this);
     }
 
     /**

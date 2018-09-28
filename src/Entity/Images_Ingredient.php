@@ -103,7 +103,7 @@ class Images_Ingredient
     /**
      * @param string $imageName
      */
-    public function setImageName(string $imageName): void
+    public function setImageName($imageName): void
     {
         $this->imageName = $imageName;
     }
