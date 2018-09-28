@@ -17,11 +17,11 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-<div class="ui grid" id="app">
+<div class="ui grid">
     {% block toolbar %}
-        <div class="ui top fixed  fluid menu" >
-            <a class="orange item" id="button">
-                <i class="centered bars white large icon"></i>
+        <div class="ui top fixed  fluid menu">
+            <a class="orange item"  >
+                <i class="centered bars white large icon" id="general-button"></i>
             </a>
             <div class="ui huge orange header item">
                 La Clémentine
@@ -52,11 +52,11 @@
 
         <a class="item">
             Utilisateurs
-            {#<div class="ui teal left pointing label">1</div>#}
+            <div class="ui teal left pointing label">1</div>
         </a>
         <a href="{{ path('products_list') }}" class="item">
             Produits
-            {#<div class="ui label">51</div>#}
+            <div class="ui label">51</div>
         </a>
         <a href="{{ path('types_list') }}" class="item">
             Types de produits
