@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\Images_IngredientRepository")
  * @Vich\Uploadable
  */
-class Image
+class Images_Ingredient
 {
     /**
      * @ORM\Id
@@ -31,9 +31,17 @@ class Image
     private $product;
 
     /**
+     * @Assert\Image()
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ingredient", inversedBy="images")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $ingredient;
+
+    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="product", fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="ingredient", fileNameProperty="imageName")
      *
      * @var File
      */
@@ -99,7 +107,14 @@ class Image
     {
         $this->imageName = $imageName;
     }
-
+    /**
+     * @param mixed $images_ingredient
+     */
+    public function removeImagesingredient($images_ingredient)
+    {
+        $this->images_ingredient->removeElement($images_ingredient);
+        $images_ingredient->setImage(null);
+    }
 
     /**
      * @param mixed $product
@@ -117,8 +132,21 @@ class Image
         return $this->product;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIngredient()
+    {
+        return $this->ingredient;
+    }
 
-
+    /**
+     * @param mixed $ingredient
+     */
+    public function setIngredient($ingredient): void
+    {
+        $this->ingredient = $ingredient;
+    }
 
 
 

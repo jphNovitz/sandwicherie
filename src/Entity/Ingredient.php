@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -35,6 +36,22 @@ class Ingredient
     private $slug;
 
     /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var datetime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=120, nullable=true)
@@ -59,7 +76,7 @@ class Ingredient
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Images_Ingredient", mappedBy="ingredient", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $images;
@@ -143,6 +160,40 @@ class Ingredient
     {
         $this->slug = $slug;
     }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreated(): DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param DateTime $created
+     */
+    public function setCreated(DateTime $created): void
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getUpdated(): DateTime
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param DateTime $updated
+     */
+    public function setUpdated(DateTime $updated): void
+    {
+        $this->updated = $updated;
+    }
+
+
 
     /**
      * @return string
@@ -234,8 +285,7 @@ class Ingredient
     public function addImage($image)
     {
         $this->images->add($image);
-        // uncomment if you want to update other side
-        //$image->setIngredient($this);
+        $image->setIngredient($this);
     }
 
     /**
@@ -244,8 +294,7 @@ class Ingredient
     public function removeImage($image)
     {
         $this->images->removeElement($image);
-        // uncomment if you want to update other side
-        //$image->setIngredient(null);
+        $image->setIngredient(null);
     }
 
     /**

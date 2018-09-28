@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Image;
+use App\Entity\Images_Ingredient;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +24,7 @@ class ImagesIngredientType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-           'data_class' => Image::class,
+           'data_class' => Images_Ingredient::class,
         ]);
     }
 }

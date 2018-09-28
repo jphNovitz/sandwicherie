@@ -1,5 +1,8 @@
 {% embed '_skeletons/_card.html.twig' %}
+
+    {% set entity = 'ingredients' %}
     {% set object = ingredient %}
+
     {% block sub_header %}
         {% if object.description is defined %}
             {% if object.description is not empty %}
@@ -9,8 +12,7 @@
             {% endif %}
         {% endif %}
     {% endblock %}
-    {% block header_image %} {% endblock %}
-    {% block object_image %}  {% endblock %}
+
 
     {% block infos %}
         <br /> Pain: {{ object.bread ? '<i class="ui green horizontal label"> oui</i>' : '<i class="ui red horizontal label"> non </i>' }}
