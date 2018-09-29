@@ -12,6 +12,7 @@
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
             crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+    <script src="{{ asset('build/js/sui.js') }}"></script>
     <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
     <link href="{{ asset('build/css/back.css') }}" rel="stylesheet">
     {% block stylesheets %}{% endblock %}
@@ -36,7 +37,6 @@
          id="lateral-menu"
          style="z-index: 200"
          :class="[show ? 'showit' : 'hide' ]">
-
         <a href="{{ path('admin_default') }}" class="item" >
             Accueil
         </a>
@@ -49,22 +49,23 @@
              <a href="{{ path('categories_list') }}" class="item">
                  &nbsp;&nbsp; Categories d'ingrédients
             </a>
+            <a href="{{ path('allergies_list') }}" class="item">
+                &nbsp;&nbsp; Allergies
+            </a>
+
+        <a href="{{ path('products_list') }}" class="item">
+            Produits
+            {#<div class="ui label">51</div>#}
+        </a>
+        <a href="{{ path('types_list') }}" class="item">
+            &nbsp;&nbsp; Types de produits
+        </a>
 
         <a class="item">
             Utilisateurs
             <div class="ui teal left pointing label">1</div>
         </a>
-        <a href="{{ path('products_list') }}" class="item">
-            Produits
-            <div class="ui label">51</div>
-        </a>
-        <a href="{{ path('types_list') }}" class="item">
-            Types de produits
-        </a>
 
-        <a href="{{ path('allergies_list') }}" class="item">
-            Allergies
-        </a>
         <a class="item">
             Configuration du site
         </a>
@@ -95,6 +96,7 @@
 
 <script src="{{ asset('build/js/app.js') }}"> </script>
 {% block javascripts %}{% endblock %}
+{% block sui_js %}{% endblock %}
 
 </body>
 </html>
