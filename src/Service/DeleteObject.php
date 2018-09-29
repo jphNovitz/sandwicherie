@@ -23,6 +23,9 @@ class DeleteObject{
     public function delete($obj){
         $claspath = explode('\\',get_class($obj));
         $class = strtolower($claspath[2]);
+        if (substr($class, -1)=='y'){
+            $class = str_replace('y', 'ie', $class);
+        }
         if ($this->customPersister->delete($obj)) {
             if ($class != 'usertemp') {
                 $this->session->getFlashBag()->add('success', 'element supprimé');
