@@ -11,6 +11,7 @@
 {% extends '_elements/_action_floating_menu/_action_floating_menu.html.twig' %}
 
         {% block new_buttons %}
+            {%  if (entity is defined)  and (form.vars.data.slug is not null) %}
                 <a href="{{ path(entity ~ '_delete', {'slug' : form.vars.data.slug}) }}"
                    class="ui negative circular icon button" title="delete">
                         <i class="trash icon"></i>
@@ -19,6 +20,12 @@
                    class="ui blue circular icon button" title="detail">
                         <i class="eye icon"></i>
                 </a>
+            {% endif %}
+            <a href="{{ path(entity ~ '_list') }}"
+               class="ui blue circular icon button" title="detail">
+                <i class="list icon"></i>
+            </a>
+
             {#<a href="{{ path(entity ~ '_list', {'slug' : object.slug}) }}"#}
             {#class="ui blue circular icon button" title="Liste">#}
             {#<i class="list icon"></i>#}
