@@ -4,6 +4,17 @@
 {% block other_buttons %}
     {% set entity = "allergies" %}
     {% set slug = form.vars.value.slug %}
+{% endblock %}
 
-    {% include '_elements/_other_buttons.html.twig' %}
+
+{% block right_column %}
+    {% include '_elements/_action_floating_menu/_form_action_floating_menu.html.twig' %}
+{% endblock %}
+
+{% block sui_js %}
+    <script>
+        $('.ui.dropdown')
+            .dropdown()
+        ;
+    </script>
 {% endblock %}

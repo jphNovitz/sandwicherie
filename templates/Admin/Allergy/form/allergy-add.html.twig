@@ -1,47 +1,58 @@
 {% extends '_skeletons/_forms.html.twig' %}
 
+{% set entity = "allergies" %}
+
 {% block title %}Ajout d'une allergie{% endblock %}
     {% block form_details %}
-        <div class="ui stackable grid">
-            <div class="eight wide column">
-                <div class="field">
-                    <label for="form_name">Nom</label>
-                    {{ form_widget(form.name) }}
+                <div class="two fields">
+                    <div class="field">
+                        <label for="form_name">Nom</label>
+                        {{ form_widget(form.name) }}
+                        {% if form.name.vars.errors|length %}
+                            <div class="ui pointing red basic label">
+                               {{ form_errors(form.name) }}
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="field">
-                    {% if form.name.vars.errors|length %}
-                        <div class="ui pointing red basic label">
-                            {{ form_errors(form.name, {"attr": {"class": "form-error"}}) }}
-                        </div>
-                    {% endif %}
-                </div>
-
         <div class="field">
             <label for="form_description" >Description</label>
             {{ form_widget(form.description) }}
         </div>
-            </div>
-        <div class="eight wide column">
+
+        <div class="two fields">
             <div class="field">
-                {{ form_errors(form.categories) }}
-                <label for="form_categories">categories</label>
-                {{ form_widget(form.categories,
-                    {"attr": {"class": "dropdown"}}) }}
+                <label for="form_name">Categories</label>
+                {{ form_widget(form.categories, {"attr": {"class": "ui fluid dropdown"}}) }}
             </div>
-        <div class="field">
-            <label for="form_ingredients">ingredients</label>
-            {{ form_widget(form.ingredients, {"attr": {
-                "class": "dropdown"
-            }}) }}
+            <div class="field">
+                <label for="form_ingredients">ingredients</label>
+                {{ form_widget(form.ingredients, {
+                    "attr": {"class": "ui fluid dropdown"}})
+                }}
+            </div>
+            </div>
+            <div class="six fields">
+                <div class="field">
+                <label for="form_imageFile">Logo</label>
+                {{ form_widget(form.imageFile,
+                    {"attr": {"class": ""}}) }}
+            </div>
+                <div class="field">
+                    <button style="margin-top: 2rem" class="ui positive circular button" type="submit">Ajouter</button>
+                </div>
+            </div>
         </div>
-        <div class="field">
-            <label for="form_imageFile">Logo</label>
-            {{ form_widget(form.imageFile,
-                {"attr": {"class": ""}}) }}
-        </div>
-    </div>
-
-
-
 
     {% endblock %}
+{% block submit %} {% endblock %}
+{% block right_column %}
+{% endblock %}
+{%  block sui_js %}
+<script>
+    $('.ui.dropdown')
+        .dropdown()
+    ;
+</script>
+{% endblock %}
+

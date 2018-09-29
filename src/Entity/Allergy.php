@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -44,6 +45,25 @@ class Allergy
      * @ORM\Column(length=80, unique=true)
      */
     private $slug;
+
+
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var datetime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+
+
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -135,9 +155,43 @@ class Allergy
     }
 
     /**
+     * @return DateTime
+     */
+    public function getCreated(): DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param DateTime $created
+     */
+    public function setCreated(DateTime $created): void
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getUpdated(): DateTime
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param DateTime $updated
+     */
+    public function setUpdated(DateTime $updated): void
+    {
+        $this->updated = $updated;
+    }
+
+
+
+    /**
      * @return File
      */
-    public function getImageFile(): ?File
+    public function getImageFile()
     {
         return $this->imageFile;
     }
@@ -148,6 +202,9 @@ class Allergy
     public function setImageFile(File $imageFile): void
     {
         $this->imageFile = $imageFile;
+        if ($imageFile) {
+            $this->updated = new \DateTime('now');
+        }
     }
 
     /**
@@ -161,7 +218,7 @@ class Allergy
     /**
      * @param string $imageName
      */
-    public function setImageName(string $imageName): void
+    public function setImageName($imageName): void
     {
         $this->imageName = $imageName;
     }

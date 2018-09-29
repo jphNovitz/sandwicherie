@@ -1,31 +1,39 @@
 {% extends '_skeletons/_card.html.twig' %}
 {% set object = allergy %}
-{% if allergy.imageName is not empty %}
-    {% block card_image %}
-        {{ asset('images/allergies/'~allergy.imageName) }}
-    {% endblock %}
-{% endif %}
+{% set entity = "allergies" %}
+{% block object_image %} {% endblock %}
 {% block card_properties_rest %}
 {% endblock %}
-{%  block card_rest %}
+{% block card_rest %}
     {% if allergy.ingredients is not empty %}
         <p>Cette allergie est provoquée par les ingrédients suivants:</p>
-        <ul>
+        <div class="ui list horizontal">
             {% for ingredient in allergy.ingredients %}
-                <li><a href="{{ path('ingredients_show', {'slug': ingredient.slug}) }}">
-                        {{ ingredient.name }}
-                    </a></li>
+                <div class="item">
+                    <a class="ui tag label"
+                       href="{{ path('ingredients_show', {
+                           'slug': ingredient.slug
+                       }) }}">
+                        <strong> {{ ingredient.name }} </strong>
+                    </a></div>
             {% endfor %}
-        </ul>
+        </div>
     {% endif %}
+
+
     {% if allergy.categories is not empty %}
         <p>Cette allergie est provoquée par les ingrédients suivants:</p>
-        <ul>
+        <div class="ui list horizontal">
             {% for category in allergy.categories %}
-                <li><a href="{{ path('categories_show', {'slug': category.slug}) }}">
+                <div class="item">
+                    <a class="ui tag label"
+                       href="{{ path('categories_show', {
+                           'slug': category.slug}
+                       ) }}">
                         {{ category.name }}
-                    </a></li>
+                    </a>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
     {% endif %}
 {% endblock %}
