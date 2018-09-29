@@ -1,111 +1,105 @@
 {% extends '_skeletons/_forms.html.twig' %}
-
+{% set entity = "products" %}
 {% block title %}Ajout d'un produit{% endblock %}
 
     {% block form_details %}
-        <div class="ui stackable grid">
-        <div class="eight wide column">
+    <div class="field">
+        <div class="two fields">
             <div class="field">
-                <label for="form_name" class="custom">Nom</label>
-                {{ form_widget(form.name, {"attr": {"class": "custom"}}) }}
+                <label for="form_name" >Nom</label>
+                {{ form_widget(form.name) }}
                 {% if form.name.vars.errors|length %}
                     <div class="ui pointing red basic label">
                         {{ form_errors(form.name) }}
                     </div>
                 {% endif %}
-
             </div>
             <div class="field">
-                <label for="form_description">Description</label>
-                {{ form_widget(form.description) }}
-                {% if form.description.vars.errors|length %}
-                    <div class="ui pointing red basic label">
-                        {{ form_errors(form.description) }}
+                <div class="three fields">
+                    <div class="field">
+                        <label for="form_price">Prix</label>
+                        {{ form_widget(form.price, {attr: {"size":2}}) }}
+                        {% if form.price.vars.errors|length %}
+                        <div class="ui pointing red basic label">
+                            {{ form_errors(form.price) }}
+                        </div>
+                        {% endif %}
                     </div>
-                {% endif %}
-
-            </div>
-            <div class="fields">
-                <div class="field">
-                    <label for="form_price">Prix</label>
-                    {{ form_widget(form.price, {attr: {"size":2}}) }}
-                </div>
-                {% if form.price.vars.errors|length %}
-                    <div class="ui pointing red basic label">
-                        {{ form_errors(form.price) }}
+                    <div class="field">
+                        <label for="form_types">Types</label>
+                        {{ form_widget(form.types, {'attr': {'class': 'ui fluid dropdown'}}) }}
+                        {% if form.types.vars.errors|length %}
+                            <div class="ui pointing red basic label">
+                                {{ form_errors(form.types, {"attr": {"class": "form-error"}}) }}
+                            </div>
+                        {% endif %}
                     </div>
-                {% endif %}
-                <div class="field">
-                    <label for="form_isActive">Actif</label>
-                    {{ form_widget(form.isActive) }}
-                </div>
-                <div class="field">
-                    <label for="form_featured">A la une</label>
-                    {{ form_widget(form.featured) }}
+                    <div class="field">
+                        <div class="two fields">
+                            <div class="field">
+                            <label for="form_isActive">Actif</label>
+                            {{ form_widget(form.isActive) }}
+                            </div>
+                            <div class="field">
+                                <label for="form_featured">A la une</label>
+                                {{ form_widget(form.featured) }}
+                            </div>
+                         </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="eight wide column">
-            <div class="field">
-                <label for="form_types">Types</label>
-                {{ form_widget(form.types) }}
+    </div>
+    <div class="field">
+        <label for="form_description">Description</label>
+        {{ form_widget(form.description) }}
+        {% if form.description.vars.errors|length %}
+            <div class="ui pointing red basic label">
+                {{ form_errors(form.description) }}
             </div>
-            {% if form.types.vars.errors|length %}
+        {% endif %}
+    </div>
+    <div class="field">
+         <div class="four fields">
+             <div class="field">
+                 <label for="form_ingredients">Ingredients</label>
+                  {{ form_widget(form.ingredients, {'attr': {'class': 'ui fluid dropdown'}}) }}
+                  {% if form.vegetables.vars.errors|length %}
+                    <div class="ui pointing red basic label">
+                        {{ form_errors(form.vegetables) }}
+                    </div>
+                  {% endif %}
+             </div>
+             <div class="field">
+                 <label for="form_vegetables">Crudités disponibles</label>
+                 {{ form_widget(form.vegetables, {'attr': {'class': 'ui fluid dropdown'}}) }}
+                 {% if form.vegetables.vars.errors|length %}
+                    <div class="ui pointing red basic label">
+                        {{ form_errors(form.vegetables) }}
+                    </div>
+                 {% endif %}
+            </div>
+            <div class="field">
+                <label for="form_breads">Pains disponibles</label>
+                {{ form_widget(form.breads, {'attr': {'class': 'ui fluid dropdown'}}) }}
+            {% if form.breads.vars.errors|length %}
                 <div class="ui pointing red basic label">
-                    {{ form_errors(form.types, {"attr": {"class": "form-error"}}) }}
+                    {{ form_errors(form.breads) }}
                 </div>
             {% endif %}
         </div>
-        <div class="sixteen wide column">
-            <div class="ui stackable four column grid">
-                <div class="row">
-                    <div class="column">
-                        <div class="field">
-                            <label for="form_ingredients">Ingredients</label>
-                            {{ form_widget(form.ingredients) }}
-                        </div>
-                        {% if form.vegetables.vars.errors|length %}
-                            <div class="ui pointing red basic label">
-                                {{ form_errors(form.vegetables) }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="column">
-                        <div class="field">
-                            <label for="form_vegetables">Crudités disponibles</label>
-                            {{ form_widget(form.vegetables) }}
-                        </div>
-                        {% if form.vegetables.vars.errors|length %}
-                            <div class="ui pointing red basic label">
-                                {{ form_errors(form.vegetables) }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="column">
-                        <div class="field">
-                            <label for="form_breads">Pains disponibles</label>
-                            {{ form_widget(form.breads) }}
-                        </div>
-                        {% if form.breads.vars.errors|length %}
-                            <div class="ui pointing red basic label">
-                                {{ form_errors(form.breads) }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="column">
-                        <div class="field">
-                            <label for="form_breads">Sauces disponibles</label>
-                            {{ form_widget(form.sauces) }}
-                        </div>
-                        {% if form.sauces.vars.errors|length %}
-                            <div class="ui pointing red basic label">
-                                {{ form_errors(form.sauces) }}
-                            </div>
-                        {% endif %}
-                    </div>
+        <div class="field">
+            <label for="form_breads">Sauces disponibles</label>
+            {{ form_widget(form.sauces, {'attr': {'class': 'ui fluid dropdown'}}) }}
+            {% if form.sauces.vars.errors|length %}
+                <div class="ui pointing red basic label">
+                    {{ form_errors(form.sauces) }}
+                </div>
+            {% endif %}
+         </div>
                 </div>
             </div>
-        </div>
+
         <div class="sixteen wide column">
             <div class="ui cards">
                 {% for image in form.images %}
@@ -116,16 +110,19 @@
                     </div>
                 {% endfor %}
             </div>
+
             <ul class="vich-image" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
+            Images
             </ul>
         </div>
-        </div>{#
-        <div class="form-row">
-            {% for image in form.images %}
-                {{ form_row(image.imageFile) }}
-            {% endfor %}
-        </div>
-        <ul class="vich-image" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
-        </ul>#}
         {% include '_elements/_upload_collection.html.twig' %}
     {% endblock %}
+{% block right_column %}
+{% endblock %}
+{% block sui_js %}
+    <script>
+        $('.ui.dropdown')
+            .dropdown()
+        ;
+    </script>
+{% endblock %}

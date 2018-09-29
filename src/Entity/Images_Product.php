@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,11 +7,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\Images_productRepository")
  * @Vich\Uploadable
  */
-class Image
+class Images_Product
 {
     /**
      * @ORM\Id
@@ -21,12 +20,11 @@ class Image
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @Assert\Image()
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="images")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $product;
 
@@ -46,11 +44,10 @@ class Image
      */
     private $imageName;
 
-
     public function __construct()
     {
-
     }
+
     /**
      * @return mixed
      */
@@ -59,13 +56,20 @@ class Image
         return $this->id;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
 
     /**
-     * @param mixed $id
+     * @param mixed $product
      */
-    public function setId($id): void
+    public function setProduct($product): void
     {
-        $this->id = $id;
+        $this->product = $product;
     }
 
     /**
@@ -82,6 +86,9 @@ class Image
     public function setImageFile(File $imageFile): void
     {
         $this->imageFile = $imageFile;
+        if ($imageFile) {
+            $this->updated = new \DateTime();
+        }
     }
 
     /**
@@ -95,31 +102,9 @@ class Image
     /**
      * @param string $imageName
      */
-    public function setImageName(string $imageName): void
+    public function setImageName($imageName): void
     {
         $this->imageName = $imageName;
     }
-
-
-    /**
-     * @param mixed $product
-     */
-    public function setProduct($product): void
-    {
-        $this->product = $product;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-
-
-
-
 
 }

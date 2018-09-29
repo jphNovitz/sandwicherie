@@ -2,15 +2,15 @@
 
 namespace App\Repository;
 
-use App\Entity\Image;
+use App\Entity\Imagesproduct;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class ImageRepository extends ServiceEntityRepository
+class Images_productRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Image::class);
+        parent::__construct($registry, Imagesproduct::class);
     }
 
     /*

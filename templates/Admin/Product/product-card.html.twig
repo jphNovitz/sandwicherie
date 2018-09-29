@@ -1,6 +1,7 @@
 {% extends '_skeletons/_card.html.twig' %}
 
 {% set object = product %}
+{% set entity = 'products' %}
 {% block header_buttons %}
     <div class="item"><a href="http://laclementine.be/#/menu/{{ object.slug }} " class="ui blue circular button"
                          style="min-width: 7rem"> Voir</a></div>
@@ -12,13 +13,12 @@
     {% endblock %}
     {% block card_rest %}
         {% if (object.ingredients is not empty) %}
-
             <h3>Ingrédients:</h3>
             <div class="ui bulleted animated list">
                 {% for ingredient in object.ingredients %}
                     <div class="item">
                         <a href="{{ path('ingredients_show', {'slug': ingredient.slug}) }}">
-                            {{ ingredient.name }}
+                            <span class="ui tag blue label ">  {{ ingredient.name }} </span>
                         </a>
                     </div>
                 {% endfor %}
@@ -29,7 +29,7 @@
                     {% for bread in object.breads %}
                         <div class="item">
                             <a href="{{ path('ingredients_show', {'slug': bread.slug}) }}">
-                                {{ bread.name }}
+                                <span class="ui tag teal label "> {{ bread.name }} </span>
                             </a>
                         </div>
                     {% endfor %}
@@ -41,7 +41,7 @@
                     {% for vegetable in object.vegetables %}
                         <div class="item">
                             <a href="{{ path('ingredients_show', {'slug': vegetable.slug}) }}">
-                                {{ vegetable.name }}
+                                <span class="ui tag olive label ">  {{ vegetable.name }} </span>
                             </a>
                         </div>
                     {% endfor %}

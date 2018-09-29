@@ -7,6 +7,7 @@ use App\Form\ProductType;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
 use App\Service\DeleteObject;
+use Doctrine\DBAL\Types\DateTimeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

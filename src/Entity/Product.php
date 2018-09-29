@@ -1,14 +1,11 @@
 <?php
-
 namespace App\Entity;
-
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
@@ -20,7 +17,6 @@ class Product
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @var datetime $created
      *
@@ -28,7 +24,6 @@ class Product
      * @ORM\Column(type="datetime")
      */
     private $created;
-
     /**
      * @var datetime $updated
      *
@@ -36,14 +31,12 @@ class Product
      * @ORM\Column(type="datetime")
      */
     private $updated;
-
-   /**
-    * @var String
-    * @ORM\Column(name="name", type="string", length=80, nullable=false)
-    * @Assert\NotBlank(message="N'oubliez pas le nom !")
-    */
-   private $name;
-
+    /**
+     * @var String
+     * @ORM\Column(name="name", type="string", length=80, nullable=false)
+     * @Assert\NotBlank(message="N'oubliez pas le nom !")
+     */
+    private $name;
     /**
      * @var string
      *
@@ -51,82 +44,71 @@ class Product
      * @ORM\Column(name="slug", type="string", length=90, unique=true)
      */
     private $slug;
-
-
     /**
-    * @var string
-    * @ORM\Column(name="description", type="string", length=255, nullable=true)
-    *
-    */
-   private $description;
-
-   /**
-    * @var float
-    * @ORM\Column(name="price", type="float", length=3)
-    * @Assert\NotBlank(message="Le produit est gratuit ?")
-    * @Assert\Type(type="float", message="Le prix est un nombre")
-    */
-   private $price;
-
-   /**
-    * @var boolean
-    * @ORM\Column(name="isactive", type="boolean", length=1, nullable=true)
-    */
-   private $isActive;
-
-   /**
-    * @var boolean
-    * @ORM\Column(name="featured", type="boolean", length=1, nullable=true)
-    */
-   private $featured;
-
-   /**
-    * @var ArrayCollection
-    * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
-    * @ORM\JoinColumn(nullable=true)
-    * @ORM\JoinTable(name="product_ingredients")
-    *
-    */
-   private $ingredients;
-
-   /**
-    * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
-    * @ORM\JoinColumn(nullable=true)
-    * @ORM\JoinTable(name="product_vegetables")
-    *
-    */
-   private $vegetables;
-
-   /**
-    * @var ArrayCollection
-    * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
-    * @ORM\JoinColumn(nullable=true)
-    * @ORM\JoinTable(name="product_breads")
-    */
-   private $breads;
-
-   /**
-    * @var ArrayCollection
-    * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
-    * @ORM\JoinColumn(nullable=true)
-    * @ORM\JoinTable(name="product_sauces")
-    */
-   private $sauces;
-
-   /**
-    * @var ArrayCollection
-    * @ORM\ManyToMany(targetEntity="App\Entity\Type")
-    * @ORM\JoinColumn(nullable=true)
-    * @ORM\JoinTable(name="product_types")
-    * }})
-    */
-   private $types;
-
+     * @var string
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     *
+     */
+    private $description;
+    /**
+     * @var float
+     * @ORM\Column(name="price", type="float", length=3)
+     * @Assert\NotBlank(message="Le produit est gratuit ?")
+     * @Assert\Type(type="float", message="Le prix est un nombre")
+     */
+    private $price;
+    /**
+     * @var boolean
+     * @ORM\Column(name="isactive", type="boolean", length=1, nullable=true)
+     */
+    private $isActive;
+    /**
+     * @var boolean
+     * @ORM\Column(name="featured", type="boolean", length=1, nullable=true)
+     */
+    private $featured;
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinTable(name="product_ingredients")
+     *
+     */
+    private $ingredients;
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinTable(name="product_vegetables")
+     *
+     */
+    private $vegetables;
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinTable(name="product_breads")
+     */
+    private $breads;
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinTable(name="product_sauces")
+     */
+    private $sauces;
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\Type")
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinTable(name="product_types")
+     * }})
+     */
+    private $types;
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="product", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Images_Product", mappedBy="product", cascade={"persist", "remove"},  orphanRemoval=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     private $images;
 
@@ -136,32 +118,28 @@ class Product
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="likes")
      */
     private $likedBy;
-
     /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="discoveries")
      */
     private $interestedBy;
-
     /**
      * Product constructor.
      */
-
-   public function __construct()
-   {
-       $this->ingredients = new ArrayCollection();
-       $this->vegetables = new ArrayCollection();
-       $this->breads = new ArrayCollection();
-       $this->sauces = new ArrayCollection();
-       $this->types = new ArrayCollection();
-       $this->images = new ArrayCollection();
-       $this->isActive = true;
-       $this->featured = false;
-       $this->likedBy = new ArrayCollection();
-       $this->interestedBy = new ArrayCollection();
-   }
-
+    public function __construct()
+    {
+        $this->ingredients = new ArrayCollection();
+        $this->vegetables = new ArrayCollection();
+        $this->breads = new ArrayCollection();
+        $this->sauces = new ArrayCollection();
+        $this->types = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->isActive = true;
+        $this->featured = false;
+        $this->likedBy = new ArrayCollection();
+        $this->interestedBy = new ArrayCollection();
+    }
     /**
      * @return mixed
      */
@@ -169,7 +147,6 @@ class Product
     {
         return $this->id;
     }
-
     /**
      * @param mixed $id
      */
@@ -177,7 +154,6 @@ class Product
     {
         $this->id = $id;
     }
-
     /**
      * @return datetime
      */
@@ -185,9 +161,6 @@ class Product
     {
         return $this->created;
     }
-
-
-
     /**
      * @param datetime $created
      */
@@ -195,7 +168,6 @@ class Product
     {
         $this->created = $created;
     }
-
     /**
      * @return datetime
      */
@@ -203,7 +175,6 @@ class Product
     {
         return $this->updated;
     }
-
     /**
      * @param datetime $updated
      */
@@ -211,9 +182,6 @@ class Product
     {
         $this->updated = $updated;
     }
-
-
-
     /**
      * @return String
      */
@@ -221,7 +189,6 @@ class Product
     {
         return $this->name;
     }
-
     /**
      * @param String $name
      */
@@ -229,7 +196,6 @@ class Product
     {
         $this->name = $name;
     }
-
     /**
      * @return string
      */
@@ -237,7 +203,6 @@ class Product
     {
         return $this->slug;
     }
-
     /**
      * @param string $slug
      */
@@ -245,7 +210,6 @@ class Product
     {
         $this->slug = $slug;
     }
-
     /**
      * @return string
      */
@@ -253,7 +217,6 @@ class Product
     {
         return $this->description;
     }
-
     /**
      * @param string $description
      */
@@ -261,7 +224,6 @@ class Product
     {
         $this->description = $description;
     }
-
     /**
      * @return float
      */
@@ -269,7 +231,6 @@ class Product
     {
         return $this->price;
     }
-
     /**
      * @param float $price
      */
@@ -277,7 +238,6 @@ class Product
     {
         $this->price = $price;
     }
-
     /**
      * @return bool
      */
@@ -285,7 +245,6 @@ class Product
     {
         return $this->isActive;
     }
-
     /**
      * @param bool $isActive
      */
@@ -293,7 +252,6 @@ class Product
     {
         $this->isActive = $isActive;
     }
-
     /**
      * @return bool
      */
@@ -301,7 +259,6 @@ class Product
     {
         return $this->featured;
     }
-
     /**
      * @param bool $featured
      */
@@ -309,7 +266,6 @@ class Product
     {
         $this->featured = $featured;
     }
-
     /**
      * @return Collection
      */
@@ -317,7 +273,6 @@ class Product
     {
         return $this->ingredients;
     }
-
     /**
      * @param mixed $ingredient
      */
@@ -327,7 +282,6 @@ class Product
         // uncomment if you want to update other side
         //$ingredient->setProduct($this);
     }
-
     /**
      * @param mixed $ingredient
      */
@@ -337,7 +291,6 @@ class Product
         // uncomment if you want to update other side
         //$ingredient->setProduct(null);
     }
-
     /**
      * @return Collection
      */
@@ -345,7 +298,6 @@ class Product
     {
         return $this->vegetables;
     }
-
     /**
      * @param mixed $vegetable
      */
@@ -355,7 +307,6 @@ class Product
         // uncomment if you want to update other side
         //$vegetable->setProduct($this);
     }
-
     /**
      * @param mixed $vegetable
      */
@@ -365,7 +316,6 @@ class Product
         // uncomment if you want to update other side
         //$vegetable->setProduct(null);
     }
-
     /**
      * @return Collection
      */
@@ -373,7 +323,6 @@ class Product
     {
         return $this->breads;
     }
-
     /**
      * @param mixed $bread
      */
@@ -383,7 +332,6 @@ class Product
         // uncomment if you want to update other side
         //$bread->setProduct($this);
     }
-
     /**
      * @param mixed $bread
      */
@@ -393,7 +341,6 @@ class Product
         // uncomment if you want to update other side
         //$bread->setProduct(null);
     }
-
     /**
      * @return Collection
      */
@@ -401,7 +348,6 @@ class Product
     {
         return $this->sauces;
     }
-
     /**
      * @param mixed $sauce
      */
@@ -411,7 +357,6 @@ class Product
         // uncomment if you want to update other side
         //$sauce->setProduct($this);
     }
-
     /**
      * @param mixed $sauce
      */
@@ -421,7 +366,6 @@ class Product
         // uncomment if you want to update other side
         //$sauce->setProduct(null);
     }
-
     /**
      * @return Collection
      */
@@ -429,7 +373,6 @@ class Product
     {
         return $this->types;
     }
-
     /**
      * @param mixed $type
      */
@@ -439,7 +382,6 @@ class Product
         // uncomment if you want to update other side
         //$type->setProduct($this);
     }
-
     /**
      * @param mixed $type
      */
@@ -451,7 +393,7 @@ class Product
     }
 
     /**
-     * @return Collection
+     * @return ArrayCollection
      */
     public function getImages(): ?Collection
     {
@@ -459,10 +401,19 @@ class Product
     }
 
     /**
+     * @param ArrayCollection $images
+     */
+    public function setImages(ArrayCollection $images): void
+    {
+        $this->images = $images;
+    }
+
+    /**
      * @param mixed $image
      */
     public function addImage($image)
     {
+
         $this->images->add($image);
         $image->setProduct($this);
     }
@@ -473,9 +424,9 @@ class Product
     public function removeImage($image)
     {
         $this->images->removeElement($image);
-        // uncomment if you want to update other side
-        //$image->setProduct(null);
+        $image->setProduct(null);
     }
+
 
     /**
      * @return ArrayCollection
@@ -484,7 +435,6 @@ class Product
     {
         return $this->likedBy;
     }
-
     /**
      * @param mixed $likedBy
      */
@@ -493,7 +443,6 @@ class Product
         $this->likedBy->add($likedBy);
         $likedBy->addLike($this);
     }
-
     /**
      * @param mixed $likedBy
      */
@@ -502,7 +451,6 @@ class Product
         $this->likedBy->removeElement($likedBy);
         $likedBy->removeLike($this);
     }
-
     /**
      * @return ArrayCollection
      */
@@ -510,7 +458,6 @@ class Product
     {
         return $this->interestedBy;
     }
-
     /**
      * @param mixed $interestedBy
      */
@@ -520,7 +467,6 @@ class Product
         // uncomment if you want to update other side
         //$interestedBy->setProduct($this);
     }
-
     /**
      * @param mixed $interestedBy
      */
@@ -530,11 +476,9 @@ class Product
         // uncomment if you want to update other side
         //$interestedBy->setProduct(null);
     }
-
-
     public function __toString()
     {
-       return $this->name;
+        return $this->name;
     }
 
 }
