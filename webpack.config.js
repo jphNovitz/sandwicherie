@@ -20,6 +20,7 @@ Encore
      .addStyleEntry('css/front', './assets/scss/front.scss')
      .addStyleEntry('css/back', './assets/scss/back.scss')
      .addStyleEntry('css/security', './assets/scss/security.scss')
+     .addEntry('js/sui', './assets/semantic/dist/semantic.js')
      .addEntry('js/vue', './assets/js/vue.js')
      .addEntry('js/app', './assets/js/app.js')
      .addEntry('main', './assets/vue/main.js')

@@ -11,6 +11,7 @@ parameters:
     adm_input: Admin/Input/
     adm_user: Admin/User/
     email_from: info@laclementine.be
+    site_url: http://www.laclementine.be
 
 services:
     # default configuration for services in *this* file

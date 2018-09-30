@@ -48,7 +48,7 @@
             {% block object_image %}
                 {% if (object.images is defined) and (object.images is not null) %}
                     {% for image in object.images %}
-                        <div class="four wide column">
+                        <div class="three wide column">
                             <img src="{{ asset('images/'~object|entity~'/'~image.imageName) }}" class="ui fluid rounded image">
                         </div>
                     {% endfor %}

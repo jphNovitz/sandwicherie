@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Email La Clementine{% endblock %}</title>
+    <title>{% block header_title %}Email La Clementine{% endblock %}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
@@ -13,13 +13,13 @@
     <div class="ui sixteen column wide grid>">
         <div class="centered row">
             <div class="two column wide centered column">
-                <h2 class="ui icon header">
+                <div class="ui icon header">
                     <img src="{{ asset('images/logo_clementine_02.png') }}" />
                     <div class="content">
                         La CLémentine
                         <div class="sub header">Sandwicherie artisanale</div>
                     </div>
-                </h2>
+                </div>
             </div>
         </div>
         <div class="row">

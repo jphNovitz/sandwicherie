@@ -127,7 +127,7 @@ class UserController extends Controller
                     $this->addFlash('success', 'L\'utilisateur n\'a pas pu être désactivé');
                 endif;
 
-                return $this->redirectToRoute('users_show', ['username'=>$user->getUsername()]);
+                return $this->redirectToRoute('users_list');
             }
             if ($form->get('non')->isClicked())
                 return $this->redirectToRoute('users_list');
@@ -165,7 +165,7 @@ class UserController extends Controller
                     $this->addFlash('success', 'L\'utilisateur n\'a pas pu être réactivé');
                 endif;
 
-                return $this->redirectToRoute('users_show', ['username'=>$user->getUsername()]);
+                return $this->redirectToRoute('users_list');
             }
             if ($form->get('non')->isClicked())
                 return $this->redirectToRoute('users_list');

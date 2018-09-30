@@ -1,32 +1,53 @@
-{% extends '_bases/_admin_base.html.twig' %}
+{% extends '_skeletons/_list.html.twig' %}
 
-{% block body %}
-    <h1>Liste des Utilisateurs</h1>
+{% set entity = "users" %}
 
-    <div class="row">
-        <div class="ui middle aligned divided fluid big list">
-            {% for user in users %}
-                <div class="item" >
-                    <div class="middle aligned right floated">
-                        <a href="{{ path('users_show', {'username': user.username}) }}"
-                           class="ui blue circular tiny icon button">
-                            <i class=" middle aligned zoom icon"></i>
-                        </a>
-                        {#<a href="{{ path('users_delete', {'username' : user.username}) }}" class="ui red circular tiny icon button">#}
-                            {#<i class="delete icon"></i>#}
-                        {#</a>#}
-                    </div>
-                    <div class="middle aligned content" style="line-height: 2rem">
-                        <a href="{{ path('users_show', {'username' : user.username}) }}">
-                            {{ user.username }}
-                        </a> [{{ user.firstName }} {{ user.lastName }}]
-                        <div class="content">
-                            {{ user.street }} {{ user.streetNr }} - {{ user.city }}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+{% block title %}Liste des utilisateurs {% endblock %}
 
-        </div>
-    </div>
+{% block list %}
+    {% for object in users %}
+     <div class="item" >
+         <div class="middle aligned right floated">
+             {% block show %}
+                 <a href="{{ path(entity ~ '_show', {'username' : object.username}) }}" class="ui blue circular tiny icon button">
+                     <i class="zoom icon"></i>
+                 </a>
+             {% endblock %}
+             {% block update %}
+                 {% if object.isActive is defined %}
+                     {% if  object.isActive == true  %}
+                         <a href="{{ path(entity ~ '_desactive', {'username' : object.username}) }}"
+                            class="ui red circular tiny icon button">
+                                 <i class="user times icon"></i>
+                         </a>
+                     {% else %}
+                         <a href="{{ path(entity ~ '_reactive', {'username' : object.username}) }}"
+                            class="ui teal circular tiny icon button">
+                                 <i class="user icon"></i>
+                         </a>
+                     {% endif %}
+                 {% endif %}
+             {% endblock %}
+             {% block delete %}
+                 <a href="{{ path(entity ~ '_delete', {'username' : object.username}) }}" class="ui red circular tiny icon button">
+                     <i class="delete icon"></i>
+                 </a>
+             {% endblock %}
+         </div>
+         {#<img class="ui avatar image" src="/images/~{{ object.images[0].imageName }}">#}
+         <div class="middle aligned content stackable ui grid" style="line-height: 2rem">
+             {% block element_title %}
+             <div class="eight wide column content">
+                 <a href="{{ path(entity ~ '_show', {'username' : object.username}) }}">{{object.username}}</a> [{{ object.firstName }} {{ object.lastName }}]
+             </div>
+             <div class="eight wide column content">
+                 <a href="mailto:{{object.email}}"> {{ object.email }} </a>  -  <a href="tel:{{object.phone}}"> {{ object.phone }} </a>
+             </div>
+             {% endblock %}
+         </div>
+     </div>
+ {% endfor %}
 {% endblock %}
+
+
+{% block right_column %} {% endblock %}

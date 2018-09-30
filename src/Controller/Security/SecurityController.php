@@ -57,7 +57,7 @@ class SecurityController extends Controller {
                     'Security/emails/register-confirmation.html.twig',
                     $userTemp->getUniqId());
 
-                return $this->redirectToRoute('admin_default');
+                return $this->redirectToRoute('register');
             } else {
                 $this->addFlash('error', 'Il y a eu problème avec votre inscription');
                 return $this->render('Security/register.html.twig');
@@ -78,8 +78,8 @@ class SecurityController extends Controller {
                                  DeleteObject $deleter)
     {
         if (!$user) {
-            $this->addFlash("error", "utilisateur inconnu");
-            return $this->redirectToRoute('register');
+         //   $this->addFlash("error", "utilisateur inconnu");
+            return $this->redirectToRoute('default');
         }
         $test = new User();
         $form = $this->createForm(UserType::class, $test);

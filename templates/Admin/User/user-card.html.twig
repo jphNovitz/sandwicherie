@@ -54,7 +54,9 @@
             <div class="nine wide column left aligned">
                 {% block card_rest %}
                     <div class="ui list items_parent">
-                        {% for order in orders %}
+                        {% if orders|length > 0 %}
+                        {% if orders|length > 0 %}
+                            {% for order in orders %}
                             <div class="item ui sixteen wide column stackable grid" id="id{{ order.id }}"
                                  data-done="{{ order.done }}">
                                 <div class="ui seven wide column">
@@ -119,6 +121,9 @@
                                 </div>
                             </div>
                         {% endfor %}
+                        {% else %}
+                            <em>Ce Client n'a commandé aucun sandwiche</em>
+                        {% endif %}
                     </div>
                     {% if user.likes|length > 0 %}
                         <div>
@@ -132,34 +137,33 @@
                 {% endblock %}
             </div>
         </div>
-        <div class="one wide column center aligned">
-            <div class="action" id="action">
-                <div :class="menuActive">
-                    <a href="{{ path('users_list') }}"
-                       class="ui blue circular icon button" title="Liste">
-                        <i class="list icon"></i>
-                    </a>
-                    {% if user.isActive %}
-                        <a href="{{ path('users_desactive', {'username': user.username}) }}"
-                           class="ui  circular icon button" title="Désactiver"><i class="user times icon"></i></a>
-                    {% else %}
-                        <a href="{{ path('users_reactive', {'username': user.username}) }}"
-                           class="ui  circular icon button" title="Activer"><i class="user icon"></i></a>
-                    {% endif %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('users_delete', {'username': user.username}) }}"
-                           class="ui negative circular icon button" title="Supprimer">
-                            <i class="trash icon"></i>
-                        </a>
-                    {% endif %}
-                </div>
-                <button id="menu" class="ui orange circular icon button" @click="showMenu" title="Menu"><i
-                            class="plus icon"></i></button>
-
-            </div>
-        </div>
     </div>
+{% endblock %}
+{% block right_column %}
+    <div class="action" id="action">
+        <div :class="menuActive">
+            <a href="{{ path('users_list') }}"
+               class="ui blue circular icon button" title="Liste">
+                <i class="list icon"></i>
+            </a>
+            {% if user.isActive %}
+                <a href="{{ path('users_desactive', {'username': user.username}) }}"
+                   class="ui  circular icon button" title="Désactiver"><i class="user times icon"></i></a>
+            {% else %}
+                <a href="{{ path('users_reactive', {'username': user.username}) }}"
+                   class="ui  circular icon button" title="Activer"><i class="user icon"></i></a>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('users_delete', {'username': user.username}) }}"
+                   class="ui negative circular icon button" title="Supprimer">
+                    <i class="trash icon"></i>
+                </a>
+            {% endif %}
+        </div>
+        <button id="menu" class="ui orange circular icon button" @click="showMenu" title="Menu"><i
+                    class="plus icon"></i></button>
 
+    </div>
 {% endblock %}
 {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
