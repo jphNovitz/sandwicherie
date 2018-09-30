@@ -5,7 +5,7 @@
 {% block title %}Ajout d'un ingrédient{% endblock %}
     {% block form_details %}
         <div class="field">
-            <label for="form_name" >Nom</label>
+            <label for="form_name">Nom</label>
             {{ form_widget(form.name) }}
         </div>
         {% if form.name.vars.errors|length %}
@@ -18,18 +18,18 @@
             {{ form_widget(form.comment) }}
         </div>
 
-            <div class="field">
-                <label for="form_categories">categories</label>
-                {{ form_widget(form.categories, {"attr": {
-                    "class": "dropdown"
-                }}) }}
-            </div>
-            <div class="field">
-                <label for="form_components">composants</label>
-                {{ form_widget(form.components, {"attr": {
-                    "class": "dropdown"
-                }}) }}
-            </div>
+        <div class="field">
+            <label for="form_categories">categories</label>
+            {{ form_widget(form.categories, {"attr": {
+                "class": "ui fluid dropdown"
+            }}) }}
+        </div>
+        <div class="field">
+            <label for="form_components">composants</label>
+            {{ form_widget(form.components, {"attr": {
+                "class": "ui fluid dropdown"
+            }}) }}
+        </div>
         <div class="three fields">
             <div class="field">
                 <label for="form_components">Pain</label>
@@ -39,93 +39,96 @@
                 <label for="form_components">Sauce</label>
                 {{ form_widget(form.sauce) }}
             </div>
-        <div class="field">
-            <label for="form_components">Crudité</label>
-            {{ form_widget(form.vegetable) }}
-        </div>
+            <div class="field">
+                <label for="form_components">Crudité</label>
+                {{ form_widget(form.vegetable) }}
+            </div>
         </div>
 
-        {#<div class="form-row">#}
-                {#{% for image in form.images %}#}
-                    {#{{ form_row(image.imageFile) }}#}
-                {#{% endfor %}#}
-        {#</div>#}
-<div id="images-list-items"
+
+        <div id="images-list-items"
              class="vich-image ui grid"
              data-prototype="{{ form_widget(form.images.vars.prototype)|e }}">
-    <div class="sixteen wide column">
-            <button
-                v-if="index < 0"
-                    @click.prevent="plus"
-                class="ui circular icon positive mini button">
-                <i class="ui plus icon"> </i>
-            </button>
-    </div>
+            <div class="sixteen wide column">
+                <button
+                        v-if="index < 0"
+                        @click.prevent="plus"
+                        class="ui circular icon positive mini button">
+                    <i class="ui plus icon"> </i>
+                </button>
+            </div>
 
             <div v-for="(line, key) in lines" class="four wide column">
                 <span v-html="line"></span>
-               <button @click.prevent="plus" v-if="key === index" class="ui circular icon positive mini button">
+                <button @click.prevent="plus" v-if="key === index" class="ui circular icon positive mini button">
                     <i class="ui plus icon"> </i>
                 </button>
                 <button @click.prevent="minus(key)" class="ui circular icon negative mini button">
                     <i class="ui minus icon"> </i>
                 </button>
-                </div>
-                {% for image in form.images %}
-                    <div id="element{{ loop.index0 }}">
-                        {{ form_errors(image) }}
-                        {{ form_widget(image) }}
+            </div>
+            {% for image in form.images %}
+                <div id="element{{ loop.index0 }}">
+                    {{ form_errors(image) }}
+                    {{ form_widget(image) }}
 
-                        <button @click.prevent="plus" class="ui circular icon positive mini button" >
-                            <i class="ui plus icon"> </i>
-                        </button>
-                        <button @click.prevent="updateMinus({{ loop.index0 }})" class="ui circular icon negative mini button">
-                            <i class="ui minus icon"> </i>
-                        </button>
-                    </div>
-                {% endfor %}
-    </div>
+                    <button @click.prevent="plus" class="ui circular icon positive mini button">
+                        <i class="ui plus icon"> </i>
+                    </button>
+                    <button @click.prevent="updateMinus({{ loop.index0 }})"
+                            class="ui circular icon negative mini button">
+                        <i class="ui minus icon"> </i>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
 
     {% endblock %}
 
-{% block right_column %}
-{% endblock %}
 {% block javascripts %}
-<script>
-(function (){
-   const im = new Vue({
-        el: '#images-list-items',
-        delimiters: ['${', '}'],
-        data: function () {
-            return {
-            proto: '',
-            line: '',
-            lines: [],
-            index: -1
-            }
-        },
-        mounted() {
-            this.proto = this.$el.dataset.prototype
-            let model = document.getElementById('images-list-items')
-            let node = model.getElementsByTagName('div')
-        },
-        methods: {
-            plus: function () {
-                this.index++
-                this.line = this.proto.replace(/__name__/g, this.index)
-                this.lines.push(this.line)
-            },
-            minus: function(k){
-                this.lines.splice(k,1)
-                this.index--
-            },
-            updateMinus: function (k) {
-                let element = document.getElementById('element'+k)
-                let model = document.getElementById('items-fields-list')
-                model.removeChild(element)
-            }
-        }
-    })
-    })()
+    <script>
+        (function () {
+            const im = new Vue({
+                el: '#images-list-items',
+                delimiters: ['${', '}'],
+                data: function () {
+                    return {
+                        proto: '',
+                        line: '',
+                        lines: [],
+                        index: -1
+                    }
+                },
+                mounted() {
+                    this.proto = this.$el.dataset.prototype
+                    let model = document.getElementById('images-list-items')
+                    let node = model.getElementsByTagName('div')
+                },
+                methods: {
+                    plus: function () {
+                        this.index++
+                        this.line = this.proto.replace(/__name__/g, this.index)
+                        this.lines.push(this.line)
+                    },
+                    minus: function (k) {
+                        this.lines.splice(k, 1)
+                        this.index--
+                    },
+                    updateMinus: function (k) {
+                        let element = document.getElementById('element' + k)
+                        let model = document.getElementById('items-fields-list')
+                        model.removeChild(element)
+                    }
+                }
+            })
+        })()
     </script>
+{% endblock %}
+
+{%  block sui_js %}
+<script>
+    $('.ui.dropdown')
+        .dropdown()
+    ;
+</script>
 {% endblock %}

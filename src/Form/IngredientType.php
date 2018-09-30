@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Image;
+use App\Entity\Imagesproduct;
 use App\Entity\Ingredient;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -41,11 +41,9 @@ class IngredientType extends AbstractType
                 'allow_add'  => true,
                 'allow_delete'  => true,
                 'by_reference' => false,
-                'label' => 'Fichier(s) :',
+                'label' => ' ',
                 'prototype' => true
             ])
-            ->add('code', TextType::class)
-            ->add('ref', TextType::class)
         ;
     }
 

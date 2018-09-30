@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Image;
+use App\Entity\Imagesproduct;
 use App\Entity\Images_Ingredient;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
