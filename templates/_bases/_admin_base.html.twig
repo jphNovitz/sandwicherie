@@ -58,22 +58,20 @@
             {#<div class="ui label">51</div>#}
         </a>
         <a href="{{ path('types_list') }}" class="item">
-            &nbsp;&nbsp; Types de produits
+            &nbsp;&nbsp;  Types de produits
         </a>
-
-        <a class="item">
-            Utilisateurs
-            <div class="ui teal left pointing label">1</div>
-        </a>
-
-        <a class="item">
+        <a href="{{ path('configuration') }}" class="item">
             Configuration du site
         </a>
+        <a href="{{ path('services_list') }}" class="item">
+            &nbsp;&nbsp;  Services
+        </a>
+        <a href="{{ path('configuration') }}" class="item">
+                &nbsp;&nbsp;Utilisateurs
+            {#<div class="ui teal left pointing label">1</div>#}
+        </a>
         <div class="item">
-            <div class="ui transparent icon input">
-                <input type="text" placeholder="Search mail...">
-                <i class="search icon"></i>
-            </div>
+
         </div>
     </div>
     {#</div>#}
