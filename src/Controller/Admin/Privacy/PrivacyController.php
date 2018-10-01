@@ -43,18 +43,16 @@ class PrivacyController extends Controller
     public function index(Request $request)
     {
         $list =  $this->loader->LoadAll('App:Privacy');
+
+        if(!$list) {
+            $this->addFlash('info', 'aucun élément trouvé.');
+            return $this->redirectToRoute('privacies_add');
+        }
         return $this->render('Admin/Privacy/privacies-list.html.twig', ['list'=>$list]);
     }
 
     /**
-     * @Route("{slug}", name="privacies_show")
-     */
-    public function show(Privacy $privacy){
-        return $this->render('Admin/Privacy/privacy-card.html.twig', ['privacy'=>$privacy]);
-    }
-
-    /**
-     * @Route("create", name="privacies_creation")
+     * @Route("create", name="privacies_add")
      * @Method({"GET", "POST"})
      */
     public function create(Request $request){
@@ -72,6 +70,13 @@ class PrivacyController extends Controller
     }
 
     /**
+     * @Route("{slug}", name="privacies_show")
+     */
+    public function show(Privacy $privacy){
+        return $this->render('Admin/Privacy/privacy-card.html.twig', ['privacy'=>$privacy]);
+    }
+
+    /**
      * @Route("{slug}/update", name="privacies_update")
      * @Method({"GET", "POST"})
      */
@@ -81,7 +86,7 @@ class PrivacyController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()):
             if ($this->persister->update($privacy)){
-                $this->addFlash('succes', '<i class="ui check icon "></i>Privacy Modifié ');
+                $this->addFlash('succes', 'Privacy Modifié ');
                 return $this->redirectToRoute('privacies_list');
         } else {
                 $this->addFlash('error', 'Privacy NON Modifié ');

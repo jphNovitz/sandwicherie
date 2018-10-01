@@ -1,6 +1,8 @@
 {% extends '_skeletons/_card.html.twig' %}
 
 {% set object = privacy %}
+{% set entity = 'privacies' %}
+
 {%  block element_name %} {# this time it's title #}
     {{ object.title }}
 {% endblock %}

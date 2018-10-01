@@ -1,10 +1,13 @@
 {% extends '_skeletons/_forms.html.twig' %}
 
+{% set entity = 'privacies' %}
+
 {% block title %}Ajout d'un information sur la confidentialité {% endblock %}
 
     {% block form_details %}
         <div class="ui stackable grid">
-        <div class="eight wide column">
+            <div class="two wide column"></div>
+        <div class="twelve wide column">
             <div class="field">
                 {{ form_label(form.title) }}
                 {{ form_widget(form.title) }}
@@ -41,11 +44,11 @@
                     </div>
                 {% endif %}
 
-            </div>
-            {#{% block submit %}#}
-                {#<button class="ui circular positive button">Ajouter</button>#}
-            {#{% endblock %}#}
-        </div>
-        </div>
+            </div><button class="ui circular positive button">Envoi </button>
 
+        </div>
+        </div>
+        {% block submit %}
+
+        {% endblock %}
     {% endblock %}

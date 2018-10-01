@@ -4,7 +4,35 @@
 {% block title %}
     Liste des informations sur l'utilisation des données
 {% endblock %}
+{% block list %}
+{% for object in list %}
+            <div class="item">
+                <div class="middle aligned right floated">
+                    {% block show %}
+                        <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}"
+                           class="ui blue circular tiny icon button">
+                            <i class="zoom icon"></i>
+                        </a>
+                    {% endblock %}
+                    {% block update %}
+                        <a href="{{ path(entity ~ '_update', {'slug' : object.slug}) }}"
+                           class="ui olive circular tiny icon button">
+                            <i class="edit icon"></i>
+                        </a>
+                    {% endblock %}
+                    {% block delete %}
+                        <a href="{{ path(entity ~ '_delete', {'slug' : object.slug}) }}"
+                           class="ui red circular tiny icon button">
+                            <i class="delete icon"></i>
+                        </a>
+                    {% endblock %}
+                </div>
+                <div class="middle aligned content" style="line-height: 2rem">
+                    {% block element_title %}  {# this ime it's title #}
+                        <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}">{{ object.title }}</a>
+                    {% endblock %}
+                </div>
+            </div>
+        {% endfor %}
 
-{% block element_title %}
-    <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}">{{ object.title }}</a>
 {% endblock %}
