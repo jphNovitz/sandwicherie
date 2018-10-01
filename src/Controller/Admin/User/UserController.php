@@ -50,7 +50,7 @@ class UserController extends Controller
             $this->addFlash("notice", "Aucun utilisateur ");
             return $this->redirectToRoute('admin_default');
         }
-        return $this->render($this->getParameter('adm_user') . 'users-list.html.twig', ['users' => $users]);
+        return $this->render($this->getParameter('adm_user') . 'users-list.html.twig', ['list' => $users]);
     }
 
     /**

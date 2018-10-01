@@ -49,12 +49,16 @@
                     {% endblock %}
                     </p>
                 </div>
-                {{ render(controller('App\\Controller\\Admin\\User\\UserController::roleUser', {'username': user.username})) }}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div>
+                        {{ render(controller('App\\Controller\\Admin\\User\\UserController::roleUser', {'username': user.username})) }}
+                    </div>
+                {% endif %}
             </div>
             <div class="nine wide column left aligned">
                 {% block card_rest %}
                     <div class="ui list items_parent">
-                        {% if orders|length > 0 %}
+
                         {% if orders|length > 0 %}
                             {% for order in orders %}
                             <div class="item ui sixteen wide column stackable grid" id="id{{ order.id }}"

@@ -115,7 +115,10 @@
         },
         methods: {
             path: function (key,  action) {
-                let slug = this.base_object[key].slug
+                let slug =  this.base_object[key].slug
+                if (!slug){
+                    slug =  this.base_object[key].username
+                }
                 let path = slug+'/'+action
                 return (path)
             }
