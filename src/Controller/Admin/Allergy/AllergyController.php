@@ -45,6 +45,7 @@ class AllergyController extends Controller
             $this->addFlash("notice", "Aucun allergie trouvé, ajoutez-en un ");
             return $this->redirectToRoute('allergies_add');
         }
+
         return $this->render( $this->getParameter('adm_allergy').'allergies-list.html.twig',
             ['list'=>$list]);
     }

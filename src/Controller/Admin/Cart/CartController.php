@@ -44,7 +44,7 @@ class CartController extends Controller{
     }
 
     /**
-     * @Route("new", name="carts_create")
+     * @Route("new", name="carts_add")
      * @Method({"GET","POST"})
      */
     public function new(Request $request){
@@ -131,7 +131,7 @@ class CartController extends Controller{
 
             if ($this->persister->insert($cart)){
                 $this->addFlash('success', 'Commande ajoutée ');
-                return $this->redirectToRoute('carts_create');
+                return $this->redirectToRoute('carts_add');
             }
             $this->addFlash('error', 'Problème avec la commande ');
             return $this->redirectToRoute('carts_list');

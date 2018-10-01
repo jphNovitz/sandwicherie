@@ -117,22 +117,6 @@ class Images_Ingredient
     }
 
     /**
-     * @param mixed $product
-     */
-    public function setProduct($product): void
-    {
-        $this->product = $product;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
      * @return mixed
      */
     public function getIngredient()
@@ -147,7 +131,6 @@ class Images_Ingredient
     {
         $this->ingredient = $ingredient;
     }
-
 
 
 }

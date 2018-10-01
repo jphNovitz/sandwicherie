@@ -1,9 +1,11 @@
 {% extends '_skeletons/_card.html.twig' %}
 {% set object = allergy %}
 {% set entity = "allergies" %}
+
 {% block object_image %} {% endblock %}
 {% block card_properties_rest %}
 {% endblock %}
+
 {% block card_rest %}
     {% if allergy.ingredients is not empty %}
         <p>Cette allergie est provoquée par les ingrédients suivants:</p>

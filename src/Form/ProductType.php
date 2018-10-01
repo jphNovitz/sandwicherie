@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 
@@ -66,11 +68,12 @@ class ProductType extends AbstractType
                 'allow_add'  => true,
                 'allow_delete'  => true,
                 'by_reference' => false,
-                'label' => 'Fichier(s) :',
+                'label' => ' ',
                 'prototype' => true
             ])
 
         ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

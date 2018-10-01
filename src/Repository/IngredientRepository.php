@@ -13,6 +13,16 @@ class IngredientRepository extends ServiceEntityRepository
         parent::__construct($registry, Ingredient::class);
     }
 
+    public function findAll()
+    {
+        return $this->createQueryBuilder('i')
+            ->leftJoin('i.categories', 'categories')
+            ->leftJoin('i.components', 'components')
+            ->leftJoin('i.images', 'images')
+            ->addSelect('i, categories, components, images')
+            ->getQuery()->getResult();
+    }
+
     // this function is used in the productType form
     public function findGeneralIngredients()
     {

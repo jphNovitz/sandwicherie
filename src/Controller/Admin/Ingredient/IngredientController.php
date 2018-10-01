@@ -40,19 +40,6 @@ class IngredientController extends Controller
     }
 
     /**
-     * @Route("", name="ingredients_list")
-     */
-    public function index()
-    {
-        $list = $this->customLoader->LoadAll('App:Ingredient');
-        if (!$list) {
-            $this->addFlash("notice", "Il n'y a aucun ingrédient, ajoutez-en un");
-            return $this->redirectToRoute("ingredients_add");
-        }
-        return $this->render($this->getParameter('adm_ingredient').'ingredients-list.html.twig', ['list'=>$list]);
-    }
-
-    /**
      * @Route("new", name="ingredients_add")
      * @Method({"GET", "POST"})
      */
@@ -74,6 +61,21 @@ class IngredientController extends Controller
         return $this->render($this->getParameter('adm_ingredient').'form/ingredient-add.html.twig', [
             'form'=>$form->createView()
         ]);
+    }
+
+
+    /**
+     * @Route("", name="ingredients_list")
+     */
+    public function list()
+    {
+        $list = $this->customLoader->LoadAll('App:Ingredient');
+
+        if (!$list) {
+            $this->addFlash("notice", "Il n'y a aucun ingrédient, ajoutez-en un");
+            return $this->redirectToRoute("ingredients_add");
+        }
+        return $this->render($this->getParameter('adm_ingredient').'ingredients-list.html.twig', ['list'=>$list]);
     }
 
     /**
@@ -119,7 +121,7 @@ class IngredientController extends Controller
 
     /**
      * @Route("{slug}/delete", name="ingredients_delete")
-     * @Method({"GET", "POST"})
+     * @Method({"GET", "DELETE"})
      */
     public function delete(Request $request, Ingredient $ingredient= NULL )
     {
@@ -127,17 +129,14 @@ class IngredientController extends Controller
             $this->addFlash("error", "ingrédient inconnu");
             return $this->redirectToRoute('ingredients_list');
         }
-        $form = $this->createForm(DeleteType::class,null);
-        /*
-        $form = $this->createFormBuilder()
-            ->add('oui', SubmitType::class, ['label'=>'oui'])
-            ->add('non', SubmitType::class, ['label'=>'non'])
-            ->getForm();
-            */
+        $form = $this->createForm(DeleteType::class,null, [
+            'method'=>'DELETE'
+        ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()):
             if ($form->get('oui')->isClicked()) {
-                return $this->deleter->delete($ingredient);}
+                    return $this->deleter->delete($ingredient);
+                }
             if ($form->get('non')->isClicked())
                 return $this->redirectToRoute('ingredients_list');
         endif;
