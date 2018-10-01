@@ -13,44 +13,118 @@
 {% extends '_bases/_admin_base.html.twig' %}
 
 {% block body %}
+
     {% include '_elements/_flash_messages.html.twig' %}
     <h1> {% block title %}skeleton list {% endblock %} </h1>
     <div class="row">
-        <div class="ui middle aligned divided fluid big list">
+        <div class="ui middle aligned divided fluid big list"
+             id="object-list"   data-list="{{ list|serialize }}"   >
             {% block list %}
-                {% for object in list %}
-                    <div class="item">
+                <div class="ui input focus sixteen wide field">
+                    <input type="text"
+                           placeholder="recherche rapide"
+                           v-model="typing"
+                    style="width: 100%"/>
+                </div>
+                {#{% for object in list %}#}
+                    {#<div class="item">#}
+                        {#<div class="middle aligned right floated">#}
+                            {#{% block show %}#}
+                                {#<a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}"#}
+                                   {#class="ui blue circular tiny icon button">#}
+                                    {#<i class="zoom icon"></i>#}
+                                {#</a>#}
+                            {#{% endblock %}#}
+                            {#{% block update %}#}
+                                {#<a href="{{ path(entity ~ '_update', {'slug' : object.slug}) }}"#}
+                                   {#class="ui olive circular tiny icon button">#}
+                                    {#<i class="edit icon"></i>#}
+                                {#</a>#}
+                            {#{% endblock %}#}
+                            {#{% block delete %}#}
+                                {#<a href="{{ path(entity ~ '_delete', {'slug' : object.slug}) }}"#}
+                                   {#class="ui red circular tiny icon button">#}
+                                    {#<i class="delete icon"></i>#}
+                                {#</a>#}
+                            {#{% endblock %}#}
+                        {#</div>#}
+                        {#<img class="ui avatar image" src="/images/~{{ object.images[0].imageName }}">#}
+                        {#<div class="middle aligned content" style="line-height: 2rem">#}
+                            {#{% block element_title %} #}{# sometime it's title #}
+                                {#<a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}">{{ object.name }}</a>#}
+                            {#{% endblock %}#}
+                        {#</div>#}
+                    {#</div>#}
+                {#{% endfor %} #}
+
+                    <div class="item" v-for="(object, key) in filtered">
                         <div class="middle aligned right floated">
                             {% block show %}
-                                <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}"
+                                <a :href="path(key, '')"
                                    class="ui blue circular tiny icon button">
                                     <i class="zoom icon"></i>
                                 </a>
                             {% endblock %}
                             {% block update %}
-                                <a href="{{ path(entity ~ '_update', {'slug' : object.slug}) }}"
+                                <a :href="path(key, 'update')"
                                    class="ui olive circular tiny icon button">
                                     <i class="edit icon"></i>
                                 </a>
                             {% endblock %}
                             {% block delete %}
-                                <a href="{{ path(entity ~ '_delete', {'slug' : object.slug}) }}"
+                                <a :href="path(key, 'delete')"
                                    class="ui red circular tiny icon button">
                                     <i class="delete icon"></i>
                                 </a>
                             {% endblock %}
                         </div>
-                        {#<img class="ui avatar image" src="/images/~{{ object.images[0].imageName }}">#}
+                        {#<img class="ui avatar image" src="/images/"~${object.images[0].imageName}~">#}
                         <div class="middle aligned content" style="line-height: 2rem">
-                            {% block element_title %} {# sometime it's title #}
-                                <a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}">{{ object.name }}</a>
+                            {% block element_title %}  {#sometime it's title#}
+                                <a :href="path(key, '')">${ object.name }</a>
                             {% endblock %}
                         </div>
                     </div>
-                {% endfor %}
             {% endblock %}
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+    {{ parent() }}
+
+    (function(){
+    const vmlist = new Vue({
+        el: '#object-list',
+        delimiters : ['${', '}'],
+        data: {
+            typing: '',
+            base_object: []
+        },
+        computed: {
+            filtered() {
+                let query = this.typing.replace(/\s/g,'').toLowerCase()
+                return this.base_object.filter(o=>{
+                    return (o.name.replace(/\s/g,'').toLowerCase().indexOf(query) > -1)
+                })
+            }
+        },
+        mounted() {
+            let raw = this.$el.attributes['data-list'].value;
+            this.base_object = JSON.parse(raw);
+        },
+        methods: {
+            path: function (key,  action) {
+                let slug = this.base_object[key].slug
+                let path = slug+'/'+action
+                return (path)
+            }
+        }
+
+    })
+
+    })()
+    </script>
 {% endblock %}
     {% block right_column %}
         {% include '_elements/_action_floating_menu/_action_floating_menu.html.twig' %}
