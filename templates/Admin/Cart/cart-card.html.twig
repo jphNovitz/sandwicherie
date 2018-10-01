@@ -1,27 +1,14 @@
 {% extends '_skeletons/_card.html.twig' %}
 
 {% set object = cart %}
+{% set entity = 'carts' %}
 {% block header_image %} {% endblock %}
 {% block element_name %} Commande {{ object.id }} ({{ object.client }}) {% endblock %}
-{% block header_buttons %}
 
-    <div class="item">
-        <a href="{{ path(object|entity ~ '_update', {'id' : object.id}) }}" class="ui  basic secondary circular button"
-           style="min-width: 7rem">
-            modifier
-        </a>
-    </div>
-    <div class="item">
-        <a href="{{ path(object|entity ~ '_delete', {'id' : object.id}) }}" class="ui  basic secondary circular button"
-           style="min-width: 7rem">
-            supprimer
-        </a>
-    </div>
-{% endblock %}
     {% block card_infos %}
         <p><a href="{{ path('users_show', {'username': object.client}) }}">Client: {{ object.client }}</a>
             <br/>Commande n°: <em>{{ object.id }}</em> ({{ object.created|date('d/m/Y')}})
-            <br/>Status: {{ object.done ? '<i class="ui green horizontal label"> Classé</i>' : '<i class="ui red horizontal label"> En cours </i>' }}
+            <br /><button data-status="{{ object.done|serialize}}" class="ui toggle button" id="status">Voted</button>
         </p>
     {% endblock %}
     {% block infos %}
@@ -45,3 +32,117 @@
  {% endfor %}
     {% endblock %}
 
+{% block right_column %}
+    <div class="action" id="action">
+        <div :class="menuActive">
+            {% block new_buttons %}
+                <a href="{{ path(entity ~ '_delete', {'id' : object.id}) }}"
+                   class="ui negative circular icon button" title="delete">
+                    <i class="trash icon"></i>
+                </a>
+                <a href="{{ path(entity ~ '_update', {'id' : object.id}) }}"
+                   class="ui blue circular icon button" title="update">
+                    <i class="sync alternate icon"></i>
+                </a>
+                <a href="{{ path(entity ~ '_list') }}"
+                   class="ui blue circular icon button" title="list">
+                    <i class="list icon"></i>
+                </a>
+            {% endblock %}
+            {% block base_button %}
+                {# if error try replace add by create #}
+                <a href="{{ path(entity ~ '_add') }}"
+                   class="ui blue circular icon button black" title="Ajouter">
+                    <i class="write icon"></i>
+                </a>
+            {% endblock %}
+        </div>
+        <button id="menu" class="ui brown circular icon button" @click="showMenu" title="Menu"><i
+                    class="plus icon"></i></button>
+
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script>
+        (function () {
+            /*********************/
+            /** floating button **/
+            /*********************/
+
+            Vue.config.delimiters = ['${', '}'];
+            const action = new Vue({
+                el: '#action',
+                data() {
+                    return {
+                        menuActive: 'notVisible',
+                        detailed: [],
+                        status: {
+                            status: false,
+                            message: '',
+                            class: ''
+                        },
+                    }
+                },
+                mounted() {
+                  const toggle = document.getElementById('status');
+                    if (toggle.dataset.status === "true"){
+                        this.status.status = true
+                        this.status.message = 'Classé'
+                        this.status.class = 'active'
+                    } else {this.status.status = true
+                        this.status.message = 'Classé'
+                        this.status.class = 'active'
+                    }
+                  toggle.innerHTML = this.status.message
+                    toggle.classList.add(this.status.class)
+
+                  toggle.addEventListener('click', function () {
+                      let url = '{{ path("cart_done", {"id": 'cart_id' }) }}'
+                      url = url.replace("cart_id", {{ object.id }})
+                      const that = this
+                      axios.patch(url)
+                          .then(function (response) {
+                              let flag = response.data
+                              if (flag){
+                                  that.innerHTML = "Classé"
+                                  that.classList.add('active')
+                              } else {
+                                  that.innerHTML = "En cours"
+                                  that.classList.remove('active')
+                              }
+                          })
+                  })
+
+                },
+                methods: {
+                    showMenu: function () {
+                        if (this.menuActive === 'notVisible') {
+                            this.menuActive = 'visible'
+                        } else {
+                            this.menuActive = 'notVisible'
+                        }
+                    },
+                    toggleDetail: function (id) {
+                        let i = this.detailed.indexOf(id);
+                        if (i > 0) {
+                            this.detailed.splice(i, 1)
+                        } else {
+                            this.detailed.push(id);
+                        }
+                        console.log(this.detailed)
+                    },
+                    detailClass: function (id) {
+                        if (this.detailed.indexOf(id) > -1) {
+                            return 'down';
+                        } else {
+                            return 'right';
+                        }
+                    }
+                }
+            })
+        })()
+    </script>
+
+{% endblock %}

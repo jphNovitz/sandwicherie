@@ -1,4 +1,5 @@
 {% extends '_skeletons/_forms.html.twig' %}
+{% set entity = "carts" %}
 
 {% block title %}Nouvelle Commande{% endblock %}
 
@@ -17,93 +18,77 @@
             </div>
             <div class="eight wide column">
                 <div id="items-fields-list"
-                    data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
+                     data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
                     <button v-if="index < 0"
                             @click.prevent="plus"
                             class="ui circular icon positive mini button">
-                            <i class="ui plus icon"> </i>
+                        <i class="ui plus icon"> </i>
                     </button>
                     <div v-for="(line, key) in lines">
-                    <span v-html="line"></span>
-                    <button @click.prevent="plus" class="ui circular icon positive mini button">
-                    <i class="ui plus icon"> </i>
-                    </button>
-                    <button @click.prevent="minus(key)" class="ui circular icon negative mini button">
-                    <i class="ui minus icon"> </i>
-                    </button>
+                        <span v-html="line"></span>
+                        <button @click.prevent="plus" class="ui circular icon positive mini button">
+                            <i class="ui plus icon"> </i>
+                        </button>
+                        <button @click.prevent="minus(key)" class="ui circular icon negative mini button">
+                            <i class="ui minus icon"> </i>
+                        </button>
                     </div>
                     {% for itemField in form.items %}
                         <div id="element{{ loop.index0 }}">
                             {{ form_errors(itemField) }}
                             {{ form_widget(itemField) }}
 
-                            <button @click.prevent="plus" class="ui circular icon positive mini button" >
+                            <button @click.prevent="plus" class="ui circular icon positive mini button">
                                 <i class="ui plus icon"> </i>
                             </button>
-                            <button @click.prevent="updateMinus({{ loop.index0 }})" class="ui circular icon negative mini button">
+                            <button @click.prevent="updateMinus({{ loop.index0 }})"
+                                    class="ui circular icon negative mini button">
                                 <i class="ui minus icon"> </i>
                             </button>
                         </div>
                     {% endfor %}
                 </div>
-                {#<div  id="items-list"  data-prototype="{{ form_widget(form.items.vars.prototype)|e('html_attr') }}">#}
-
-                    {#<button v-if="index < 0" @click.prevent="plus" class="ui circular icon positive mini button">#}
-                        {#<i class="ui plus icon"> </i>#}
-                    {#</button>#}
-                    {#<div v-for="(line, key) in lines">#}
-                        {#<span v-html="line"></span>#}
-                        {#<button @click.prevent="plus" class="ui circular icon positive mini button">#}
-                            {#<i class="ui plus icon"> </i>#}
-                        {#</button>#}
-                        {#<button @click.prevent="minus(key)" class="ui circular icon negative mini button">#}
-                            {#<i class="ui minus icon"> </i>#}
-                        {#</button>#}
-                    {#</div>#}
-                {#</div>#}
-            </div>
-                {#{% for field in form.items %}#}
-                    {#{{ form_widget(field) }}#}
-                {#{% endfor %}#}
-            </div>
-            <div class="sixteen wide column">
             </div>
         </div>
+        <div class="sixteen wide column">
+
+        </div>
+
 
     {% endblock %}
 {% block javascripts %}
-<script>
-    const item = new Vue({
-        el: '#items-fields-list',
-        delimiters: ['${', '}'],
-        data:  {
-            proto: '',
-            line: '',
-            lines: [],
-            index: -1
-        },
-        mounted(){
-            this.proto = this.$el.dataset.prototype
-            let model = document.getElementById('items-fields-list')
-            let node = model.getElementsByTagName('div')
-        },
-        methods: {
-            plus: function () {
-                this.index++
-                this.line = this.proto.replace(/__name__/g, this.index)
-                this.lines.push(this.line)
+    <script>
+        const item = new Vue({
+            el: '#items-fields-list',
+            delimiters: ['${', '}'],
+            data: {
+                proto: '',
+                line: '',
+                lines: [],
+                index: -1
             },
-            minus: function(k){
-                this.lines.splice(k,1)
-                this.index--
-            },
-            updateMinus: function (k) {
-                let element = document.getElementById('element'+k)
+            mounted() {
+                this.proto = this.$el.dataset.prototype
                 let model = document.getElementById('items-fields-list')
-                model.removeChild(element)
+                let node = model.getElementsByTagName('div')
+            },
+            methods: {
+                plus: function () {
+                    this.index++
+                    this.line = this.proto.replace(/__name__/g, this.index)
+                    this.lines.push(this.line)
+                },
+                minus: function (k) {
+                    this.lines.splice(k, 1)
+                    this.index--
+                },
+                updateMinus: function (k) {
+                    let element = document.getElementById('element' + k)
+                    let model = document.getElementById('items-fields-list')
+                    model.removeChild(element)
+                }
             }
-        }
 
-    })
-</script>
+        })
+    </script>
 {% endblock %}
