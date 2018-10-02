@@ -8,8 +8,8 @@ twig:
         adm_ingredient: '%adm_ingredient%'
         adm_input: '%adm_input%'
         adm_allergy: Admin/Allergy/
-        domain: http://localhost:8000
-        #domain: http://v2.jphnovitz.be
+        #domain: http://localhost:8000
+        domain: http://v2.jphnovitz.be
         products: "@app.products"
         site: "@app.site"
 
