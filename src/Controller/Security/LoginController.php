@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController  extends Controller{
 
     /**
-     * @Route("/admin/login", name="login")
+     * @Route("/clem_admin/login", name="login")
      */
     public function login(Request $request, AuthenticationUtils $authUtils)
     {
@@ -34,7 +34,7 @@ class LoginController  extends Controller{
     }
 
     /**
-     * @Route("/admin/logout", name="logout")
+     * @Route("/clem_admin/logout", name="logout")
      */
     public function logout(Request $request)
     {
