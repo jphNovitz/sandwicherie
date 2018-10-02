@@ -6,6 +6,9 @@ acme_privacy:
     controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
     defaults:
         template: static/privacy.html.twig
+logout:
+    path:   /logout
+
 dashboard:
     path:         /admin/dashboard
     controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction

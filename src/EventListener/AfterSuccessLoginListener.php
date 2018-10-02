@@ -45,16 +45,19 @@ class AfterSuccessLoginListener implements AuthenticationSuccessHandlerInterface
                 if ($user->getIsActive()) :
                     $user->setTries(0);
                     $this->persister->insert($user);
-                    $this->session->getFlashBag()->add("info", "bonjour " . $username);
+
                 endif;
             }
         $roles = $user->getRoles();
 
+
         if (in_array('ROLE_ADMIN', $roles)) :
+            $this->session->getFlashBag()->add("info", "bonjour " . $username);
             return new RedirectResponse($this->router->generate('admin_default'));
-        elseif (in_array('ROLE_MEMBER', $user->getRoles())) :
+        elseif (in_array('ROLE_MEMBER', $roles)) :
+            $this->session->getFlashBag()->add("info", "bonjour " . $username);
             return new RedirectResponse($this->router->generate('admin_default'));
-        elseif (in_array('ROLE_USER', $user->getRoles())) :
+        elseif (in_array('ROLE_USER', $roles)) :
             return new RedirectResponse($this->router->generate('default'));
         endif;
     }

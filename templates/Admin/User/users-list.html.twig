@@ -6,7 +6,7 @@
 
 {% block list %}
     {% for object in list %}
-     <div class="item" >
+     <div class="item">
          <div class="middle aligned right floated">
              {% block show %}
                  <a href="{{ path(entity ~ '_show', {'username' : object.username}) }}" class="ui blue circular tiny icon button">
@@ -14,7 +14,8 @@
                  </a>
              {% endblock %}
              {% block update %}
-                 {% if object.isActive is defined %}
+                 {% if is_granted('ROLE_ADMIN') %}
+                    {% if object.isActive is defined %}
                      {% if  object.isActive == true  %}
                          <a href="{{ path(entity ~ '_desactive', {'username' : object.username}) }}"
                             class="ui red circular tiny icon button">
@@ -26,6 +27,7 @@
                                  <i class="user icon"></i>
                          </a>
                      {% endif %}
+                 {% endif %}
                  {% endif %}
              {% endblock %}
              {% block delete %}

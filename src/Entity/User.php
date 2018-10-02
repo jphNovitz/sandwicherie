@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface, EquatableInterface
+class User implements UserInterface,  \Serializable
 {
     /**
      * @ORM\Id
@@ -276,31 +276,7 @@ class User implements UserInterface, EquatableInterface
         $this->city = $city;
     }
 
-    /**
-     * @return mixed
-     */
-//    public function getRoles()
-//    {
-//        return $this->roles;
-//    }
-//
-//    /**
-//     * @param mixed $roles
-//     */
-//    public function setRoles($roles): void
-//    {
-//        $this->roles = $roles;
-//    }
-//
-//    /**
-//     * @param mixed $role
-//     */
-//    public function removeRole($role)
-//    {
-//        $this->roles->removeElement($role);
-//        // uncomment if you want to update other side
-//        //$role->setUser(null);
-//    }
+
     public function getRoles(): array
 
     {
@@ -309,8 +285,8 @@ class User implements UserInterface, EquatableInterface
         $roles[] = 'ROLE_USER';
         return array_unique($roles);
     }
-    public function setRoles(array $roles): self
 
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
         return $this;
@@ -483,5 +459,38 @@ class User implements UserInterface, EquatableInterface
     public function __toString()
     {
         return $this->getUsername();
+    }
+
+    /**
+     * String representation of object
+     * @link http://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+        ));
+    }
+
+    /**
+     * Constructs the object
+     * @link http://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password
+            ) = unserialize($serialized, array('allowed_classes' => false));
     }
 }
