@@ -35,31 +35,6 @@ class ProductController extends FOSRestController{
     }
 
 
-
-    /**
-     * @Patch("s/products/{slug}/like", name="like_product")
-     */
-    public function likeProduct(Product $product)
-    {
-        $user = $this->getUser();
-        if (!$user) return;
-
-        if ($product->getLikedBy()->contains($user)){
-            $product->removeLikedBy($user);
-        } else {
-            $product->addLikedBy($user);
-        }
-
-        $this->customPersister->update($product);
-        $response = new Response('ok', 200, array('application/json'));
-        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
-        $response->headers->set('Access-Control-Allow-Origin', '*');
-        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
-        return $response;
-    }
-
-
-
     /**
      * @Get("s/profile/favorites", name="get_favorites")
      */
@@ -78,6 +53,35 @@ class ProductController extends FOSRestController{
 
 
     }
+
+    /**
+     * @Patch("s/products/{slug}/like")
+     */
+    public function likeProduct(Product $product)
+    {
+        $user = $this->getUser();
+        if (!$user) return;
+
+        if ($product->getLikedBy()->contains($user)){
+            $product->removeLikedBy($user);
+        } else {
+            $product->addLikedBy($user);
+        }
+
+        $this->customPersister->update($product);
+
+//        $em = $this->get('doctrine.orm.default_entity_manager')->getRepository('App:Product');
+//        $test=$em->findOneBy(['slug'=>$product->getSlug()]);
+//        if ($test->getLikedBy()->contains($user)){
+//            dump($product->getLikedBy()->contains($user));die();
+//        }
+        $response = new Response('ok', 200, array('application/json'));
+        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, PATCH, OPTIONS');
+        return $response;
+    }
+
 
     /**
      * @Patch("s/products/{slug}/discovery", name="like_product")

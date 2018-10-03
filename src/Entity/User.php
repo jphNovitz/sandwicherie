@@ -403,7 +403,7 @@ class User implements UserInterface,  \Serializable
     /**
      * @return ArrayCollection
      */
-    public function getLikes(): Collection
+    public function getLikes(): ?Collection
     {
         return $this->likes;
     }
@@ -414,7 +414,7 @@ class User implements UserInterface,  \Serializable
     public function addLike($like)
     {
         $this->likes->add($like);
-        $like->setUser($this);
+//        $like-> addLikedBy($this);
     }
 
     /**
@@ -423,7 +423,7 @@ class User implements UserInterface,  \Serializable
     public function removeLike($like)
     {
         $this->likes->removeElement($like);
-        $like->setUser(null);
+//        $like-> removeLikedBy(null);
     }
 
     /**

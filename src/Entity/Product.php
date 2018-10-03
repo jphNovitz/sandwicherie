@@ -118,6 +118,7 @@ class Product
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="likes")
      */
     private $likedBy;
+
     /**
      * @var ArrayCollection
      *
@@ -441,7 +442,7 @@ class Product
     public function addLikedBy($likedBy)
     {
         $this->likedBy->add($likedBy);
-        $likedBy->addLike($this);
+       $likedBy->addLike($this);
     }
     /**
      * @param mixed $likedBy

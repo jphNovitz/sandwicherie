@@ -57,14 +57,14 @@ class Privacy
     /**
      * @var string $intro
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $intro;
 
     /**
      * @var string $outro
      *
-     * @ORM\Column(type="string", length=80)
+     * @ORM\Column(type="string", length=80, nullable=true)
      */
     private $outro;
 
