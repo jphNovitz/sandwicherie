@@ -5,17 +5,22 @@
     <meta name=viewport content="width=device-width, initial-scale=1">
 
     {% block stylesheets %}
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+              integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+              crossorigin=""/>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Cuprum|Roboto" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
         <link href="{{ asset('build/css/front.css') }}" rel="stylesheet">
-        <link href="{{ asset('build/css/main.css') }}" rel="stylesheet">
-
+        <link href="{{ asset('build/main.css') }}" rel="stylesheet">
+        <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+                integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+                crossorigin=""></script>
     {% endblock %}
 
 </head>
 <body >
-<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyD8VwmSjvYXfjvMFZ9lH2-6vlGI_0-gjS0'></script>
+{#<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyD8VwmSjvYXfjvMFZ9lH2-6vlGI_0-gjS0'></script>#}
 <div id="products" data-vars="{{ products|json_encode()|e('html_attr') }}"></div>
 <div id="site" data-vars="{{ site|json_encode()|e('html_attr') }}"></div>
 
