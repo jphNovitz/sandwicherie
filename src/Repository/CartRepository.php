@@ -17,7 +17,7 @@ class CartRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->addSelect('partial c.{id}')
              ->leftJoin('c.items', 'items')
-             ->addSelect('partial items.{id, halal, bread, vegetables}')
+             ->addSelect('items')
              ->leftJoin('items.product', 'prod')
              ->addSelect('partial prod.{id, slug, name, price}')
              ->leftJoin('c.client', 'client')
