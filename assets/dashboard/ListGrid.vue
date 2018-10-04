@@ -1,11 +1,18 @@
 <template>
     <div>
         <sui-card-group>
-            <sui-card :items-per-row="3" v-for="order in orders" :key="order.id" :class="{ active: isActive(order.id) }">
+            <a class="orange card"
+                :items-per-row="4"
+                v-for="order in orders"
+                :key="order.id"
+                :class="{ active: isActive(order.id), disabled: isActive(order.id)}"
+                @click="setActive(order.id)"    >
                 <sui-card-content>
                     <sui-card-header>{{order.client.firstName}} {{order.client.lastName}} </sui-card-header>
-                    <sui-card-meta>{{order.id}}</sui-card-meta>
-                    <sui-card-meta>{{order.created|dateReadable}}</sui-card-meta>
+                    <sui-card-meta>Commande N°: {{order.id}}
+                                    <br /> ({{order.created|dateReadable}})
+                    </sui-card-meta>
+                    <sui-card-meta></sui-card-meta>
                     <sui-card-description>
                         <sui-list>
                             <sui-list-item v-for="item in order.items" :key="item.id">
@@ -24,16 +31,12 @@
                         </sui-list>
                     </sui-card-description>
                 </sui-card-content>
-                <sui-button attached="bottom" @click="setActive(order.id)" :class="{ disabled: isActive(order.id)}">
-                    <sui-icon name="hand paper" /> Je prends
-                </sui-button>
-                <sui-button attached="bottom" positive @click="setDone(order.id)" :class="{ disabled: isActive(order.id)}">
-                    <sui-icon name="shopping basket" /> Prêt
-                </sui-button>
-                <sui-button attached="bottom" negative @click="deleteItem(order.id)" :class="{ disabled: isActive(order.id)}">
-                    <sui-icon name="trash" /> Annuler
-                </sui-button>
-            </sui-card>
+                <sui-card-content extra class="center aligned">
+                <sui-button circular size="big" icon="shopping basket" positive @click="setDone(order.id)" :class="{ disabled: isActive(order.id)}" />
+                <sui-button circular size="big" icon="hand paper" @click="setActive(order.id)" :class="{ disabled: isActive(order.id)}" />
+                <sui-button circular size="big" icon="trash"  negative @click="deleteItem(order.id)" :class="{ disabled: isActive(order.id)}" />
+                </sui-card-content>
+            </a>
         </sui-card-group>
     </div>
 </template>
@@ -42,6 +45,7 @@
     import moment from 'moment'
     export default {
         name: 'ListGrid',
+        components: {},
         props: ['orders', 'current'],
         mounted() {},
         methods: {

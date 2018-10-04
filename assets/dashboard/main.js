@@ -9,7 +9,7 @@ import Dashboard from './Dashboard';
 import VueResource from 'vue-resource';
 
 Vue.prototype.$http = VueResource;
-Vue.use(VueSocketio, 'http://localhost:5000');
+Vue.use(VueSocketio, 'https://d28339bd.ngrok.io');
 
 //Vue.use(Vuex)
 Vue.use(SuiVue)

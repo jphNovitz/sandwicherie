@@ -1,24 +1,36 @@
 <template>
     <div>
-        {{order}}
-        <h2 is="sui-header" class="centered">
+        <h2 is="sui-header" class="centered" size="massive">
             commande {{order.id}} pour {{order.client.firstName}} {{order.client.lastName}}
             <sui-header-subheader>
                 Date de commande: {{order.created|dateReadable}}
             </sui-header-subheader>
         </h2>
 
-        <sui-card-group>
-            <sui-card v-for="item in order.items" class="centered" :key="item.id">
-                <p>
-                    {{item.product.name}} ({{item.product.price}}) <br />
-                    pain: {{item.bread}} <br />
-                    <sui-list horizontal v-if="item.vegetable">
-                                <sui-list-item v-for="vegetable in item.vegetables" :key="vegetable.id"></sui-list-item>
-                              </sui-list>
-
-                     <span v-else> <em>Pas de crudités</em></span>
-                </p>
+        <sui-card-group >
+            <sui-card :items-per-row="4"
+                      v-for="item in order.items"
+                      class="centered"
+                      :key="item.id">
+                <sui-card-content>
+                    <sui-card-header>
+                        {{item.product.name}} ({{item.product.price}})
+                    </sui-card-header>
+                    <sui-card-description>
+                        <p>pain: {{item.bread}} <br />
+                         <span v-if="item.vegetale">
+                           Crudités:  <sui-list horizontal v-if="item.vegetable">
+                                            <sui-list-item
+                                                    v-for="vegetable in item.vegetables"
+                                                    :key="vegetable.id">
+                                                {{vegetable}},
+                                            </sui-list-item>
+                                      </sui-list>
+                        </span>
+                        <span v-else> <em>Pas de crudités</em></span>
+                        </p>
+                    </sui-card-description>
+                </sui-card-content>
             </sui-card>
         </sui-card-group>
         <p>
