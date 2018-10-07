@@ -19,13 +19,15 @@
 
             <sui-grid-column >
                 <h2>Suivez La Clémentine sur Facebook et Instagram</h2>
-                <instagram-footer :count="5" :cols="5"/>
+                <p><instagram-footer :count="5" :cols="5"/>
                 <sui-list horizontal>
                     <sui-list-item> </sui-list-item>
                     <sui-list-item><a :href="site.SocialInstagram"> <sui-button circular social="instagram" icon="instagram" /></a> </sui-list-item>
                     <sui-list-item><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Flaclementine.be&width=178&layout=button_count&action=like&size=large&show_faces=false&share=true&height=46&appId=1146945778741142" width="178" height="65" style="border:none;overflow:hidden ; padding-top: 2.3rem;" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" ></iframe> </sui-list-item>
-                </sui-list>
-                <router-link :to="{name: 'privacy'}">Information concernant les données</router-link>
+                </sui-list></p>
+                <p>
+                    <router-link :to="{name: 'privacy'}">Information concernant les données</router-link>
+                </p>
             </sui-grid-column>
 
             <sui-grid-column >

@@ -8,7 +8,7 @@ Vue.prototype.$http = axios
 //const baseURl = "http://localhost:8000"
 const url_allergies = "/api/allergies"
 const url_categories =  "/api/categories"
-const url_products =  "http://v2.jphnovitz.be/api/products"
+const url_products =  "/api/products"
 const url_types =  "/api/types"
 const url_privacy =  "/api/privacy"
 
@@ -17,7 +17,7 @@ export const store = new Vuex.Store({
         logged: false,
         auth: {},
         user: {},
-        post_cart: '/api/cart',
+        post_cart: '/api/s/cart',
         site: {},
         allergies: [],
         categories: [],
@@ -71,7 +71,11 @@ export const store = new Vuex.Store({
                     Object.assign(state.cart.items[found], datasObj)
                 }
 
+        },
+        RESET_CART(state) {
+            state.cart.items = []
         }
+
     },
     getters: {
         is_logged: state => state.logged,
@@ -88,11 +92,6 @@ export const store = new Vuex.Store({
         allergies : state => state.allergies,
         categories : state => state.categories,
         products : state => state.products,
-        /*product: (state) => (slug) => {
-            return state.products.find(product => {
-                return product.slug === slug
-            })
-        },*/
         privacy: state => state.privacy,
         types : state => state.types,
         suggestions : state => state.suggestions,
@@ -139,6 +138,9 @@ export const store = new Vuex.Store({
         update_cart (context, payload){
 
             this.commit('UPDATE_PRODUCT_CART', {'item': payload.item, 'qty': payload.qty})
+        },
+        reset_cart (context){
+            this.commit('RESET_CART')
         }
 
     }

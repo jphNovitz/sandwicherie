@@ -62,9 +62,11 @@
 
 <script>
       import Map from '../components/Map/Map'
+      import userCheck from  '../mixins/userCheck'
 
     export default {
         name: 'contact',
+        mixins: [userCheck],
         components: {
             Map
         },

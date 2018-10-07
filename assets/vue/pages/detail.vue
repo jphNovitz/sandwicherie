@@ -69,32 +69,6 @@
                  </div>
             </sui-grid-column>
             <sui-grid-column :width="10" class="ui clearing left floated">
-                <!--<div style="margin-top: 2em" v-if="product.breads.length > 0">-->
-                    <!--Pains disponibles-->
-                    <!--<sui-segment class="ui orange rounded">-->
-                        <!--<sui-list horizontal :divided="true">-->
-                            <!--<sui-list-item-->
-                                    <!--v-for="bread in product.breads"-->
-                                    <!--:key="bread.id">-->
-                                <!--{{bread.name}}-->
-                            <!--</sui-list-item>-->
-                        <!--</sui-list>-->
-                    <!--</sui-segment>-->
-                <!--</div>-->
-                <!---->
-                <!---->
-                <!--<div style="margin-top: 2em" v-if="product.vegetables.length > 0" >-->
-                    <!--Les crudités proposées :-->
-                    <!--<sui-segment class="ui green rounded">-->
-                        <!--<sui-list horizontal>-->
-                            <!--<sui-list-item-->
-                                    <!--v-for="vegetable in product.vegetables"-->
-                                    <!--:key="vegetable.id">-->
-                                <!--{{vegetable.name}}-->
-                            <!--</sui-list-item>-->
-                        <!--</sui-list>-->
-                    <!--</sui-segment>-->
-                <!--</div>-->
                 <sui-list left floated>
                     <sui-list-item v-if="product.breads.length > 0">
                         Pains disponibles

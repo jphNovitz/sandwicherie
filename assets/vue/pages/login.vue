@@ -15,7 +15,6 @@
                             <sui-input type="password" placeholder="choisissez bien votre mot de passe" v-model="input._password" />
                         </sui-form-field>
                             <sui-button type="submit"> Se connecter </sui-button>
-
                     </sui-form>
                 </sui-grid-column>
             </sui-grid-row>
@@ -34,7 +33,7 @@
    export default {
         name: 'login',
        components: {},
-       //   mixins: [securityCheck],
+       // mixins: [securityCheck],
         data() {
             return {
                 input: {
@@ -42,12 +41,15 @@
                     _password: ''
                 },
                 error: false,
-                destination: '',
+               destination: '',
                 user: {}
             }
         },
         mounted() {},
         created() {
+            if (this.$store.getters.is_logged){
+                this.$router.push({ name: 'profile'})
+            }
                 if (this.$route.params.destination !== undefined) {
                     this.destination = this.$route.params.destination;
                 } else {

@@ -9,23 +9,28 @@
                     <sui-card-content  v-bind:class="{ contentActive: isActive(key) }">
                             <sui-icon size="large"
                                       color="orange"
-                                      name="hand point up outline"
+                                      name="hand point up"
                                       style="cursor: pointer"
                                       class="pointer-on"
                                       @click="setActive(key)"
                             />
-                        <span class="centered pointer-off" style="position: absolute ; top: 75%;">
+                        <span class="centered pointer-off"
+                              style="
+                                position: absolute;
+                                bottom: 15%;
+                                left: 0%;
+                                width: 13rem;">
                           <a :href="image.original" target="_blank"
                              class="white">
                               <sui-icon name="instagram"
                                         size="large"
-                                        color="white"/>
+                                        color="grey"/>
                           </a>
                          <a @click="setActive(key)"
                             class="white">
                                  <sui-icon size="large"
-                                           color="white"
-                                           name="hand point down outline"
+                                           color="grey"
+                                           name="hand point down "
                                            class="pointer-off"/>
                          </a>
                         </span>
@@ -76,15 +81,12 @@ import axios from 'axios'
         computed: {
         },
         created() {
-
             axios.get(this.base_url+'users/self/media/recent',
                 {params:  {
                         access_token: this.access_token,
                         count: this.count}
                 } )
                 .then(response => {
-                    //this.images =  response.body
-                    console.log(response)
                     let raw = response.data.data
                     raw.map(object=>{
                         let image ={}
@@ -97,7 +99,6 @@ import axios from 'axios'
 
                     })
 
-                    console.log(response.data.data)
                 }, response => {
                     console.log(response)
                 });
@@ -112,6 +113,7 @@ import axios from 'axios'
     }
     .pointer-off{
         visibility: hidden;
+
     }
 
     .ui.five.cards>.card{
@@ -136,7 +138,8 @@ import axios from 'axios'
     }
 
     .contentActive {
-        background-color: rgba(0,197,82, .75 ) !important;
+        background-color: rgba(255,255,255, .9 ) !important;
+        color: #000;
         top: 0% !important;
         height: 110% !important;
     }
@@ -177,7 +180,7 @@ import axios from 'axios'
     }
     .elipsis {
         font-size: 1rem;
-        height: 80%;
+        height: 60%;
     }
 }
 </style>

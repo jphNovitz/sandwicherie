@@ -22,9 +22,11 @@
     import SearchProduct from '../components/SearchProduct/SearchProduct'
     import Introduction from '../components/Introduction/Introduction'
     import FlashMessage from '../components/Messages/flashMessage'
+    import userCheck from "../mixins/userCheck";
 
     export default {
         name: 'home',
+        mixins: [userCheck],
         components: {
             FlashMessage,
             CallToAction,

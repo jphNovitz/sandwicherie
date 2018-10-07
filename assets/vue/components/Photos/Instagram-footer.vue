@@ -32,8 +32,6 @@ import axios from 'axios'
                         access_token: this.access_token,
                         count: this.count}} )
                 .then(response => {
-                    //this.images =  response.body
-                    console.log('-++-++-++-'+response.data.data)
                     let raw = response.data.data
                     raw.map(object=>{
                         let image ={}
@@ -43,12 +41,9 @@ import axios from 'axios'
                         }
                         image.original = object.link ;
                         this.images.push(image)
-
                     })
-
-                    console.log(response.body.data)
                 }, response => {
-                    console.log(response)
+                    console.log('API Instagram indisponible')
                 });
         }
     }
@@ -57,7 +52,6 @@ import axios from 'axios'
 <style>
     .elipsis{
         margin: auto;
-        /* white-space: nowrap; */
         overflow: hidden;
         text-overflow: ellipsis;
         width: 95%;

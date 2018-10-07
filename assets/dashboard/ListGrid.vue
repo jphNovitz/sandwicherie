@@ -1,12 +1,11 @@
 <template>
     <div>
         <sui-card-group>
-            <a class="orange card"
+            <sui-card orange
                 :items-per-row="4"
-                v-for="order in orders"
-                :key="order.id"
-                :class="{ active: isActive(order.id), disabled: isActive(order.id)}"
-                @click="setActive(order.id)"    >
+                v-for="(order, index) in orders"
+                :key="order.id">
+                <!--:class="{ active: actives[order.id], disabled: isActive(order.id)}" >-->
                 <sui-card-content>
                     <sui-card-header>{{order.client.firstName}} {{order.client.lastName}} </sui-card-header>
                     <sui-card-meta>Commande N°: {{order.id}}
@@ -36,24 +35,54 @@
                 <sui-button circular size="big" icon="hand paper" @click="setActive(order.id)" :class="{ disabled: isActive(order.id)}" />
                 <sui-button circular size="big" icon="trash"  negative @click="deleteItem(order.id)" :class="{ disabled: isActive(order.id)}" />
                 </sui-card-content>
-            </a>
+            </sui-card>
         </sui-card-group>
     </div>
 </template>
 
 <script>
+    import { EventBus } from './EventBus.js';
     import moment from 'moment'
     export default {
         name: 'ListGrid',
         components: {},
-        props: ['orders', 'current'],
-        mounted() {},
+        props: ['orders'],
+        watch: {
+            orders: function(newVal, oldVal) {
+                this.ordersList = newVal
+            }
+        },
+        data() {return {
+            ordersList: [],
+            actives: []
+        }},
+        created() {
+            this.$socket.emit('get_orders') ;
+            EventBus.$on('activeItems', list=>{
+                    this.actives = []
+                    list.forEach(el=>{
+                    this.actives.push(el)
+                })
+            }
+            )
+            EventBus.$on('remove', id=>{
+                  this.removeTemplateITem(id)
+            }
+            )
+        },
+        mounted(){},
         methods: {
+            refresh: function(){
+                this.orders = []
+                this.$socket.emit('refresh') ;
+            },
             setDone: function (id) {
                 Vue.http.patch('/api/order/'+id+'/done');
+                this.refresh
             },
             deleteItem: function (id) {
-                Vue.http.delete('/api/order/'+id);
+                Vue.http.delete('/api/order/'+id+'/delete');
+                this.refresh
             },
             removeTemplateITem:function (id) {
                 let pos = -1 ;
@@ -69,16 +98,13 @@
                 let order = this.orders.filter(o => {
                     return o.id === id ;
                 })
-                this.$emit('active', order) ;
+                EventBus.$emit('current', order[0]);
                 this.$socket.emit('activate_order', id) ;
             },
             isActive: function(id){
-                if (id === this.current){
-                    return true ;
-                } else {
-                    return false ;
-                }
-            }
+                if (this.actives.length > 0){
+                    return (this.actives.indexOf(id) > -1) ;
+                } else { return false ; }            }
         },
         filters: {
             dateReadable: function (val) {
@@ -87,6 +113,7 @@
                 }
             }
         }
+
     }
 
 </script>

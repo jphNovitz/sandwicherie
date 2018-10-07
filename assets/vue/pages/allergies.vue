@@ -46,10 +46,11 @@
 
 <script>
     import list_allergies from '../Classes/Allergies_list'
-
+    import userCheck from '../mixins/userCheck'
     export default {
         name: 'allergies',
         components: {},
+        mixins: [userCheck],
         data(){
             return {}
         },
@@ -59,7 +60,10 @@
             },
             list: function () {
                 return list_allergies(this.allergies)
-            }
+            },
+        },
+        mounted(){
+
         }
     }
 

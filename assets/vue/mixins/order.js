@@ -19,8 +19,8 @@ export default {
             this.$store.dispatch('update_cart', {'item': product, 'qty': this.in_cart});
         },
         likes: function () {
-            return this.product.liked_by.filter(like => {
-                return like.id === this.userID
+           return this.product.liked_by.filter(like => {
+                return  like.id === this.userID
             }).length
         },
         discovery: function () {
@@ -29,14 +29,15 @@ export default {
             }).length
         },
         likeAction: function () {
-            this.$http.patch(/*this.base_api+*/'/api/s/products/'+this.product.slug+'/like')
+            this.$http.patch('/api/s/products/'+this.product.slug+'/like')
                 .then((response) => {
                 //let obj = this.group.filter(p=> p.slug === this.product.slug)
+                    console.log(response)
                 this.$store.dispatch('call_products')
             })
         },
         discoverAction: function () {
-            this.$http.patch(/*this.base_api+*/'/api/s/products/'+this.product.slug+'/discovery')
+            this.$http.patch('/api/s/products/'+this.product.slug+'/discovery')
                 .then((response) => {
                     this.$store.dispatch('call_products')
             })

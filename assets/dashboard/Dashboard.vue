@@ -1,6 +1,12 @@
 <template>
     <div>
-        <component  v-on:active="changeActive" :is="dashComponent" :orders="orders"  :current="active" class="sixteen wide column"></component>
+        <component
+                :is="dashComponent"
+                :orders="orders"
+                :current="current"
+                class="sixteen wide column">
+
+        </component>
     </div>
 </template>
 
@@ -9,6 +15,7 @@
     import moment from 'moment' ;
     import ListGrid from './ListGrid' ;
     import OrderDetail from './OrderDetail' ;
+    import { EventBus } from './EventBus.js';
 
     export default {
         name: 'Dashboard',
@@ -20,8 +27,14 @@
             },
             order: function(val){
                 console.log('!! Stock de commandes +1 !!') ;
-                let order = JSON.parse(val) ;
-                console.log(order)
+                console.log(typeof(val))
+                var order = []
+                if (typeof  val === 'string') {
+                    order = JSON.parse(val) ;
+                } else {
+                    order = val
+                }
+                // let order = JSON.parse(val) ;
                 this.orders.push(order) ;
             },
             remove_order: function (id) {
@@ -35,23 +48,22 @@
                 this.orders.splice(pos, 1);
             },
             update_order: function (id) {
+                EventBus.$emit('remove', id);
                 this.removeTemplateITem(id);
-            },
-            active_order: function (id) {
-                console.log(id);
-                this.active = id ;
             }
          },
         data () {
             return {
                 orders: [],
                 active: '',
+                current: '',
                 dashComponent: 'ListGrid',
             }
         },
         methods: {
-            changeActive: function(val){
-                this.orders =  val ;
+            addActive: function(val){
+                // this.$store.dispatch('add_item', val.id)
+                this.current =  val ;
                 this.dashComponent = "OrderDetail" ;
             },
             setDone: function (id) {
@@ -68,11 +80,18 @@
                         break ;
                     }
                 }
+                console.log(pos)
                 this.orders.splice(pos, 1);
             }
         },
         mounted() {
             this.active = '' ;
+            EventBus.$on('current', order=> {
+                this.addActive(order)
+            })
+            EventBus.$on('component', component=> {
+                this.dashComponent = component
+            })
         },
         filters: {
             dateReadable: function (val) {

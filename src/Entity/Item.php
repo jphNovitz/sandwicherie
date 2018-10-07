@@ -54,6 +54,7 @@ class Item
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
      * @ORM\JoinTable(name="item_vegetables")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $vegetables;
 

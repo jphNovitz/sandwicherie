@@ -7,9 +7,10 @@
 
 <script>
     import Instagram from '../components/Photos/Instagram'
-
+    import userCheck from '../mixins/userCheck';
     export default {
         name: 'photos',
+        mixins: [userCheck],
         components: {Instagram},
         data() {
             return{

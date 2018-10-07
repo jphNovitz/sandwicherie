@@ -1,16 +1,14 @@
 <template>
-    <div class="ui row" id="introduction-wrapper">
-        <div class="ui sixteen wide column">
-            {{text}}
+        <div class="ui centered fourteen wide column">
+            <sui-segment raised class="intro" >
+                {{text}}
+            </sui-segment>
         </div>
-    </div>
-
 </template>
 
 <script>
-
     export default {
-        name: 'introuction',
+        name: 'introdction',
         components: {},
         data (){
             return { }
@@ -25,20 +23,10 @@
 </script>
 
 <style scoped>
-    #introduction-wrapper{
-        margin: 5rem 0 ;
-        border-radius: 20px ;
-        padding-bottom: 28rem;
-        background-image: url("./500_carly-jayne-464057-unsplash.png");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position-y: bottom;
+    .intro{
+        padding: 3rem;
+        margin: 2rem auto !important;
+        font-size: large;
     }
-    @media (min-width: 800px) {
-        #introduction-wrapper{
-        background-image: url("./1200_carly-jayne-464057-unsplash.png");
-        background-position: bottom center;
-    }
-}
 
 </style>

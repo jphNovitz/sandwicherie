@@ -16,7 +16,7 @@
                       </i>
                   </a>
                     {{privacy.title}}
-                    <div :class="{ onClass: isActive(privacy.id) }" class="offClass">
+                    <div :class="{ onClass: isActive(privacy.id) }" class="offClass" style="text-align: left">
                         <p>
                             {{privacy.intro}}
                         </p>
@@ -36,8 +36,12 @@
 </template>
 
 <script>
+
+    import userCheck from '../mixins/userCheck'
+
     export default {
         name: 'privacy',
+        mixins: [userCheck],
         components: {},
         data(){
             return {

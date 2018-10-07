@@ -77,17 +77,19 @@ export default {
         },
         methods:{
             validate: function () {
+                let that=this
                 const box = {
                     user: this.user.username,
                     items: this.definitive_cart
                 };
-                console.log(JSON.stringify(box)) ;
-                    this.$http.post(this.url, JSON.stringify(box)).then(response => {
-                        console.log('order persisted ok');
-                        console.log(response);
-                        this.$router.push({ name: 'home'})
-                    }, response => {
-                        console.log(response.data);
+                // console.log(JSON.stringify(box))
+
+                    this.$http.post(this.url, JSON.stringify(box))
+                        .then(response => {
+                        that.$store.dispatch('reset_cart', {'items': []})
+                        that.$router.push({ name: 'home'})
+                        }, error => {
+                        console.log(error.data);
                     });
             }
         },
@@ -95,8 +97,7 @@ export default {
         let  definitive = [] ;
         let index = 0 ;
             this.cart.items.map(it =>{
-                this.total = it.item.price;
-//        this.cart.items.forEach(it =>{
+                this.total += it.item.price*it.qty;
             it.item.breads.forEach(bread =>{
                 this.breads[it.item.slug] =[]
                 this.breads[it.item.slug].push(bread.name)

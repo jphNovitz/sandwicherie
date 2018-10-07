@@ -8,7 +8,7 @@
     {% block card_infos %}
         <p><a href="{{ path('users_show', {'username': object.client}) }}">Client: {{ object.client }}</a>
             <br/>Commande n°: <em>{{ object.id }}</em> ({{ object.created|date('d/m/Y')}})
-            <br /><button data-status="{{ object.done|serialize}}" class="ui toggle button" id="status">Voted</button>
+            <br /><button data-status="{{ object.done|serialize}}" class="ui toggle button" id="status"></button>
         </p>
     {% endblock %}
     {% block infos %}
@@ -87,16 +87,18 @@
                 },
                 mounted() {
                   const toggle = document.getElementById('status');
-                    if (toggle.dataset.status === "true"){
+
+                  if (toggle.dataset.status === true){
                         this.status.status = true
                         this.status.message = 'Classé'
                         this.status.class = 'active'
-                    } else {this.status.status = true
-                        this.status.message = 'Classé'
-                        this.status.class = 'active'
+                    } else {
+                        this.status.status = false
+                        this.status.message = 'En cours'
+                        this.status.class = 'inactive'
                     }
                   toggle.innerHTML = this.status.message
-                    toggle.classList.add(this.status.class)
+                  toggle.classList.add(this.status.class)
 
                   toggle.addEventListener('click', function () {
                       let url = '{{ path("cart_done", {"id": 'cart_id' }) }}'
@@ -105,6 +107,7 @@
                       axios.patch(url)
                           .then(function (response) {
                               let flag = response.data
+                              console.log(response.data)
                               if (flag){
                                   that.innerHTML = "Classé"
                                   that.classList.add('active')

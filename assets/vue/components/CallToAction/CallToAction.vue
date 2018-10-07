@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="show">
         <!-- card with call to action -->
         <div class="ui stackable  grid" id="cta-wrapper" :style="cta_background">
             <div class="ui row bg ">
@@ -33,14 +33,17 @@
                cta_background: {
                     transition: 'all ease .9s' ,
                 },
-                name :  ''
+                name :  '',
+                show: false
             }
         },
         mounted: function () {
-            this.set_featured(1)
-            this.cta_background.backgroundImage = 'url(../images/products/' + this.name + ')'
-            const that = this
-            let i = 0
+            if (this.parsed.length > 0){
+                this.show = true ;
+                this.set_featured(1)
+                this.cta_background.backgroundImage = 'url(../images/products/' + this.name + ')'
+                const that = this
+                let i = 0
                 setInterval(function () {
                     if (i > that.parsed.length-1) i=0
                     that.change = true
@@ -51,18 +54,21 @@
                     }, 11000)
                     i++
                 }, 12000)
+
+            }
         },
         computed: {
            parsed: function() {
-                let raw =  document.getElementById('products').dataset.vars
-                return JSON.parse(raw).featured
+               let raw =  document.getElementById('products').dataset.vars
+               return JSON.parse(raw).featured
             }
         },
         methods: {
           set_featured: function (count=0) {
-              this.featured_product = this.parsed[count]
-              console.log(this.parsed[count])
-              this.name = this.parsed[count].images[0].imageName;
+              this.featured_product = this.parsed[count];
+              if (this.parsed[count]!== undefined) {
+                  this.name = this.parsed[count].images[0].imageName;
+              }
           }
         }
     }

@@ -25,7 +25,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter;
 /**
  * Class CartController
  * @package App\Controller\Admin\Cart
- * @Route("/admin/cart/")
+ * @Route("admin/cart/")
  * @Method({"GET"})
  */
 class CartController extends Controller{
@@ -186,15 +186,13 @@ class CartController extends Controller{
              $em = $this->get('doctrine.orm.default_entity_manager');
              if ($cart->isDone()){
                  $cart->setDone(false);
-                 $flag = false ;
              } else {
                  $cart->setDone(true);
-                 $flag = true ;
              }
-             $em->persist($cart);
+             $em->merge($cart);
              $em->flush();
              $response->setStatusCode(200);
-             $response->setData($flag);
+             $response->setData($cart->isDone());
              return  $response;
          } catch (\Exception $e){
              $response->setStatusCode(500);

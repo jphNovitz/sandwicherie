@@ -2,10 +2,10 @@
 <div>
     <sui-grid container>
         <sui-grid-row class="stackable">
-            <sui-grid-column :width="2">
+            <sui-grid-column :width="3">
                 <h3>Allergies</h3>
-                <sui-list>
-                    <sui-list-item horizontal
+                <sui-list >
+                    <sui-list-item
                             v-for="allergy in allergies"
                             :key="allergy.id"
                             @click="changeAllergies(allergy.id, allergy.slug)">
@@ -14,7 +14,7 @@
                     </sui-list-item>
                 </sui-list>
             </sui-grid-column>
-            <sui-grid-column :width="14">
+            <sui-grid-column :width="13">
                 <sui-menu secondary>
                     <sui-menu-item  link
                                     @click="selected=null"
@@ -63,7 +63,7 @@
                 allergiesList: []
             }
         },
-        created() { console.log(Object.keys(this.user).length)},
+        created() {},
         computed: {
             user_cred: function(){
                 if(Object.keys(this.user).length > 0){
@@ -72,14 +72,7 @@
                     return false ;
                 }
             },
-            // user: function (){
-            //     console.log(this.$store.getters.get_user)
-            //     if (Object.keys(this.$store.getters.get_user).length > 0) {
-            //         return this.$store.getters.get_user ;
-            //     } else {
-            //         return {}
-            //     }
-            // },
+
             all_products: function () {
                 return this.$store.getters.products
             },
@@ -117,52 +110,6 @@
                         return product
                     }
                 })
-
-                // let base = this.all_products.filter(ap=>{
-                //     let list = []
-                //     ap.ingredients.map(ing=>{
-                //         if (this.blacklist.indexOf(ing.slug) > -1){
-                //             list.push(ing.slug)
-                //         }
-                //         for (var i in ing) {
-                //             for (var cat in i.categories) {
-                //                 if (this.blacklist.indexOf(cat.slug) > -1) {
-                //                     list.push(cat.slug)
-                //                 }
-                //             }
-                //         }
-                //     })
-                //     return list.length  === 0
-                // })
-                // var stack = [];
-                // if (this.selected === null) {
-                //     return base /*this.all_products.filter(ap=>{
-                //         let list = []
-                //         ap.ingredients.map(ing=>{
-                //             if (this.blacklist.indexOf(ing.slug) > -1){
-                //                 list.push(ing.slug)
-                //             }
-                //             for (var i in ing) {
-                //                 for (var cat in i.categories) {
-                //                     if (this.blacklist.indexOf(cat.slug) > -1) {
-                //                         list.push(cat.slug)
-                //                     }
-                //                 }
-                //             }
-                //         })
-                //         return list.length  === 0
-                //     })*/
-                //     //return this.all_products;
-                // } else {
-                //      base.map(item=>{
-                //         item.types.map(type=>{
-                //             if (type.id  === this.selected) {
-                //                 stack.push(item);
-                //             }
-                //         })
-                //     })
-                // }
-                // return stack ;
             },
             types: function() {
                 return this.$store.getters.types ;
@@ -180,14 +127,6 @@
 
                 })
                 return list;
-                // let list = [] ;
-                // this.allergies.map(allergy=>{
-                //     list.push(allergy.slug) ;
-                //     allergy.ingredients.map(ingr=>{
-                //         list.push(ingr.slug)
-                //     })
-                // })
-                // return list;
             }
 
         },

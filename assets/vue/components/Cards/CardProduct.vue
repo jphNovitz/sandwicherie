@@ -13,13 +13,12 @@
             </sui-card-description>
         </sui-card-content>
          <sui-card-content extra v-if="userID">
-             <input v-model.number="in_cart" type="number" @click="add_cart(product)"  style="width: 4rem" v-if="in_cart"/>
+             <input v-model.number="in_cart" type="number" @click="add_cart(product)"  style="width: 2.8rem" v-if="in_cart"/>
            <sui-button  icon="cart plus" circular @click="in_cart++ ; add_cart(product)" v-if="!in_cart" />
-
-           <sui-button  circular  icon="heart outline"  v-if="!likes()" @click="likeAction()" />
+           <sui-button  circular  icon="heart"  v-if="!likes()" @click="likeAction()" />
            <sui-button circular color="pink" icon="heart" v-if="likes()" @click="likeAction()" />
-           <sui-button circular icon="eye"  v-if="discovery()" @click="discoverAction()" />
-           <sui-button circular icon="eye slash" v-if="!discovery()"   @click="discoverAction()" />
+           <sui-button circular color="teal" icon="eye"  v-if="discovery()" @click="discoverAction()" />
+           <sui-button circular  icon="eye slash" v-if="!discovery()"   @click="discoverAction()" />
          </sui-card-content >
    </sui-card>
 </template>
@@ -31,11 +30,7 @@
         mixins: [order],
         props: ['product', 'group', 'user'],
         data() {
-            return {
-               // base_api: 'http://localhost:8000/api/',
-               // only for dev remove if data exist on server
-               //  in_cart: 0
-            }
+            return {            }
         },
         computed: {
             imageName: function (){
@@ -67,21 +62,7 @@
                 let imageName = elm.images[0].image_name;
                 return  'images/products/' + imageName;
 
-            },
-            // add_cart: function () {
-            //     this.$store.dispatch('update_cart', {'item': this.product, 'qty': this.in_cart});
-            // },
-            // likes: function () {
-            //     return this.product.liked_by.filter(like => {
-            //         return like.id === this.userID
-            //     }).length
-            // },
-            // likeAction: function () {
-            //     axios.patch(/*this.base_api+*/'/api/products/'+this.product.slug+'/like/'+this.username).then((response) => {
-            //         //let obj = this.group.filter(p=> p.slug === this.product.slug)
-            //         this.$store.dispatch('call_products')
-            //     })
-            // }
+            }
         }
     }
 </script>

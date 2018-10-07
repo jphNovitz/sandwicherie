@@ -1,130 +1,85 @@
 <template>
-        <div class="google-map" id="map"> </div>
+        <div id="mapid"></div>
 </template>
 
 <script>
     export default {
         name: "Map",
-        //props: ['markerCoordinates'],
         data (){
             return {
-                key: 'AIzaSyD8VwmSjvYXfjvMFZ9lH2-6vlGI_0-gjS0',
-             /*   markerCoordinates: [{
-                    latitude: 50.645437,
-                    longitude: 5.523483
-                },
-                    {latitude: 50.639436,
-                        longitude: 5.531717
-                    }
-                ],*/
-               markerCoordinates: [],
-                bounds: null,
-                markers: [],
-                map: null
-
+                visitorLAT: 50.645437,
+                visitorLONG: 5.523483,
+                // icon: L.icon({
+                //     iconUrl: 'logo_clem.png',
+                //     shadowUrl: 'leaf-shadow.png',
+                //
+                //     iconSize:     [38, 95], // size of the icon
+                //     shadowSize:   [50, 64], // size of the shadow
+                //     iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+                //     shadowAnchor: [4, 62],  // the same for the shadow
+                //     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                // })
             }
         },
-        computed: {
-          /*  markerCoordinates: function () {
-                let coordsList= [{
-                    latitude: 50.645437,
-                    longitude: 5.523483
-                }]
-               // let position = this.getPosition()
-                coordsList.push(this.getPosition())
-                return coordsList
-            } */
-        },
-        created (){
-                let coordsList= [{
-                    latitude: 50.645437,
-                    longitude: 5.523483
-                }]
-                coordsList.push(this.getPosition())
-                this.markerCoordinates = coordsList
-        },
-        mounted () {
-
-            this.bounds = new google.maps.LatLngBounds();
-            const element = document.getElementById('map')
-            const options = {
-                zoom: 12,
-                center: new google.maps.LatLng(50.64, 5.52)
-
-            }
-            this.map = new google.maps.Map(element, options);
-            let that = this
-                setTimeout(function () {
-                    that.setMarkers()
-                }, 300)
-            /*this.markerCoordinates.forEach((coord, count) => {
-                let icon = null
-                if (count === 0 )
-                {
-                    icon = require('./logo_clem.png')
-                }
-
-                const position = new google.maps.LatLng(coord.latitude, coord.longitude);
-
-                const marker = new google.maps.Marker({
-                    position,
-                    map: this.map,
-                    icon: icon
-                })
-                this.markers.push(marker)
-                this.map.fitBounds(this.bounds.extend(position))
-
-            })*/
-
-
-        },
-        methods: {
-            getPosition: function () {
-                var marker = {};
-                if (navigator.geolocation) {
-                    let that=this
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        marker.latitude = position.coords.latitude
-                        marker.longitude = position.coords.longitude
-
-                    });
-                    return marker
-                }
-            },
-            setMarkers: function () {
-                this.markerCoordinates.forEach((coord, count) => {
-                    let icon = null
-                    if (count === 0 )
-                    {
-                        icon = require('./logo_clem.png')
-                    }
-
-                    const position = new google.maps.LatLng(coord.latitude, coord.longitude);
-
-                    const marker = new google.maps.Marker({
-                        position,
-                        map: this.map,
-                        icon: icon
-                    })
-                    this.markers.push(marker)
-                    this.map.fitBounds(this.bounds.extend(position))
-
+        computed: {},
+        created(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(position => {
+                    this.visitorLAT =  position.coords.latitude;
+                    this.visitorLONG =  position.coords.longitude;
                 })
             }
-        }
+        },
+        mounted (){
+            const  mymap = L.map('mapid').setView([50.645437, 5.523483], 13);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1IjoiamlwaGkiLCJhIjoiY2ptdGpsaDBwMWFzZTNxbDhudmRhN3pkcCJ9.pG2JbFxQ4Vtwt4dOxvgGoA'
+            }).addTo(mymap);
+
+
+            const clem = L.circle([50.645437, 5.523483], {
+                // icon: this.icon,
+                color: 'orangered',
+                fillColor: '#ff7f0d',
+                fillOpacity: 0.5,
+                radius: 100
+            }).addTo(mymap);
+            clem.bindPopup("<b>La clémentine </b><br>Une petite faim ?!");
+
+            const lidl = L.marker([50.646033, 5.525093], {
+                color: 'blue',
+                fillColor: '#fcff9d'
+            }).addTo(mymap);
+            lidl.bindPopup("Lidl").openPopup();
+
+            const athenee = L.marker([50.643842, 5.520184], {
+                color: 'blue',
+                fillColor: '#fcff9d'
+            }).addTo(mymap);
+            athenee.bindPopup("Athenée");
+
+            const visitor = L.marker([this.visitorLAT, this.visitorLONG] , {
+                color: 'red'
+            }).addTo(mymap);
+            visitor.bindPopup("Vous êtes ici").openPopup();
+
+         },
+        methods: { }
     }
 
 </script>
 
 <style scoped>
-
-    .google-map {
+        #mapid {
         width: 100vw;
         height: 100vh ;
-        /*margin: 3rem auto;*/
+
     }
     @media (min-width: 502px) {
-            .google-map {
+            #mapid {
                 width: 100%;
                 height: calc(60vw/1.5) ;
                 margin: 3rem auto;

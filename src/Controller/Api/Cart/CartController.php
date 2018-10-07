@@ -5,6 +5,7 @@ namespace App\Controller\Api\Cart;
 
 use App\Entity\Cart;
 use App\Entity\Item;
+use App\Entity\Product;
 use App\Model\CustomPersisterInterface;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
@@ -17,13 +18,16 @@ use FOS\RestBundle\Controller\Annotations\Patch;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\FOSRestController;
 use Hateoas\HateoasBuilder;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use ZMQ;
-use ZMQContext;
 
 
+/**
+ * Class CartController
+ * @package App\Controller\Api\Cart
+ */
 class CartController extends FOSRestController
 {
     protected $serializer;
@@ -31,6 +35,7 @@ class CartController extends FOSRestController
     protected $customLoader;
     protected $em;
     protected $notifier;
+    protected $logger;
     public function __construct(CustomObjectLoader $customObjectLoader,
                                 CustomPersisterInterface $customPersister,
                                 ContainerInterface $container,
@@ -44,32 +49,50 @@ class CartController extends FOSRestController
     }
 
     /**
-     * @Get("orders", name="orders_list")
+     * @Get("s/orders", name="orders_list")
      */
     public function list(Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_MEMBER');
         $result =  $this->get('doctrine.orm.default_entity_manager')
                 ->getRepository('App:Cart')
                 ->findAllOrders();
-        $status = 200;
-        $hateoas = HateoasBuilder::create()->build();
-        $json = $hateoas->serialize($result, 'json');
-        $response = new Response($json, $status, array('application/json'));
-        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
-        $response->headers->set('Access-Control-Allow-Origin', '*');
-        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET');
+        if (!$result) {
+            $status = 500;
+            $result = ['message'=>'inconnu'];
+        } else{
+            $status = 200;
+        }
+        $response = $this->prepare($result, $status);
+        return ($response);
+    }
+
+
+    /**
+     * @Get("s/pending")
+     */
+    public function pending(Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_MEMBER');
+        $result =  $this->get('doctrine.orm.default_entity_manager')
+                ->getRepository('App:Cart')
+                ->findAllPending();
+
+        if (!$result) {
+            $status = 500;
+            $result = ['message'=>'inconnu'];
+        } else{
+            $status = 200;
+        }
+        $response = $this->prepare($result, $status);
         return ($response);
     }
 
     /**
-     * @Post("cart", name="cart_new")
+     * @Post("s/cart", name="cart_new")
      */
-    public function post(Request $request)
+    public function post(Request $request, LoggerInterface $logger)
     {
-
         $cart = new Cart();
-    //  $box = json_decode($request->request->get('cart'));
-//       dump($request->request);die();
-       $box = json_decode($request->getContent(), true);
+        $box = json_decode($request->getContent(), true);
         $username = $box['user'];
 
         $user = $this->em = $this->get('doctrine.orm.entity_manager')
@@ -79,7 +102,7 @@ class CartController extends FOSRestController
             foreach ($box['items']  as $item)
             {
                 $line = new Item();
-                $product=$this->customLoader->LoadOne('App:Product', $item['slug']);
+                $product = $this->customLoader->LoadOne('App:Product', $item['slug']);
                 $line->setProduct($product);
                 $line->setPrice($item['price']);
                 $line->setBread($item['bread']);
@@ -91,90 +114,94 @@ class CartController extends FOSRestController
                         $line->addVegetable($vege);
                         }
                  }
-
                 $cart->addItem($line);
-
             }
-        $cart->setClient($user);
 
+        $hateoas = HateoasBuilder::create()->build();
         if ($this->customPersister->insert($cart)){
-            $result=$cart;
-            $status = 200;
-           // $this->notifier->notify('new_order', ['commande'=>$cart]);
+            $result =  $hateoas->serialize($cart, 'json');
+            $status = 200;;
         } else {
             $result = ['message'=>'erreur serveur'];
             $status = 500;
         }
 
-        $hateoas = HateoasBuilder::create()->build();
-        $json = $hateoas->serialize($result, 'json');
+        try {
+            $this->notifier->notify('new_order', ['order'=>$result]);
+        } catch (\Exception $e){
+            $logger->warning('connection impossible',['meesage'=>$e]);
+        }
 
-//        $context = new ZMQContext();
-//        try {
-//            $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
-//            $socket->connect("tcp://localhost:5555");
-//            $socket->send(json_encode($json));
-//        } catch (\ZMQSocketException $e) {
-//        }
-
-
-        $this->notifier->notify('new_order', ['order'=>$json]);
-        $response = new Response($json, $status, array('application/json'));
-        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
-        $response->headers->set('Access-Control-Allow-Origin', '*');
-        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET');
+        $response = $this->prepare($result, $status);
         return ($response);
     }
 
     /**
-     * @Delete("order/{id}", name="orders_delete")
+     * @Delete("s/order/{id}", name="orders_delete")
      */
-    public function delete(Cart $order, Request $request) {
+    public function delete(Cart $order, Request $request, LoggerInterface $logger) {
+        if ($order && $this->isGranted('ROLE_MEMBER')) {
 
-        $removed = $order->getId();
-        try {
-            $this->em->remove($order);
-            $this->em->flush();
-            $status = 200;
-            $result = $removed ;
-        } catch (\Doctrine\DBAL\DBALException $e) {
+            $removed = $order->getId();
+            try {
+                $this->em->remove($order);
+                $this->em->flush();
+                $status = 200;
+                $result = ['message' => 'commande ' . $removed . ' supprimee'];
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                $status = 500;
+                $result = ['message' => 'erreur de suppression'];
+            }
+            try {
+                $this->notifier->notify('remove_order', ['id' => $removed]);
+            } catch (\Exception $e) {
+                $logger->warning('connection impossible', ['meesage' => $e]);
+            }
+        }else {
             $status = 500;
-            $result = ['message' => 'erreur de suppression'];
+            $result = ['error' => 'erreur de suppression'];
         }
-
-        $hateoas = HateoasBuilder::create()->build();
-        $json = $hateoas->serialize($result, 'json');
-
-        $this->notifier->notify('remove_order', ['id'=>$removed]);
-        $response = new Response($json, $status, array('application/json'));
-        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
-        $response->headers->set('Access-Control-Allow-Origin', '*');
-        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET');
+        $response = $this->prepare($result, $status);
         return ($response);
     }
+
     /**
      * @Patch("order/{id}/done", name="orders_done")
      */
-    public function done(Cart $order, Request $request) {
-        try {
-            $order->setDone(true);
-            $this->customPersister->update($order);
-            $status = 200;
-            $result = ['done' => $order->getId()] ;
-            $this->notifier->notify('update_order', $result);
-        } catch (\Doctrine\DBAL\DBALException $e) {
+    public function done(Cart $order, Request $request, LoggerInterface $logger) {
+
+        if ($order && $this->isGranted('ROLE_MEMBER')) {
+            try {
+                $order->setDone(true);
+                $this->customPersister->update($order);
+                $status = 200;
+                $result = ['message' => 'commande '.$order->getId().' mise a jours'];
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                $status = 500;
+                $result = ['error' => 'erreur de suppression'];
+            }
+
+            try {
+                $this->notifier->notify('update_order', $result);
+            } catch (\Exception $e) {
+                $logger->warning('connection impossible', ['meesage' => $e]);
+            }
+        } else {
             $status = 500;
-            $result = ['message' => 'erreur de suppression'];
+            $result = ['error' => 'erreur de mise a jour'];
         }
 
+        $response = $this->prepare($result, $status);
+        return ($response);
+    }
+
+    protected function prepare($result, $status){
         $hateoas = HateoasBuilder::create()->build();
         $json = $hateoas->serialize($result, 'json');
-
-
         $response = new Response($json, $status, array('application/json'));
         $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
         $response->headers->set('Access-Control-Allow-Origin', '*');
         $response->headers->set('Access-Control-Allow-Methods', 'POST, GET');
-        return ($response);
+        return $response;
     }
 }

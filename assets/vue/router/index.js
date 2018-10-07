@@ -10,12 +10,15 @@ import login from '../pages/login'
 import logout from '../pages/logout'
 import profile from '../pages/profile'
 import photos from '../pages/photos'
+import oups from '../pages/404'
+import play from '../pages/play'
 import privacy from '../pages/privacy'
 
 Vue.use(Router)
 
 
-export default new Router({
+const router = new Router({
+    // mode: 'history',
     routes: [
         {
             name: 'home',
@@ -40,7 +43,20 @@ export default new Router({
         {
             name: 'contact',
             path: '/contact',
-            component: contact
+            component: contact,
+            meta: {
+                title: 'La clémentine - contact',
+                metaTags: [
+                    {
+                        name: 'contact',
+                        content: 'contactez la clémentine'
+                    },
+                    {
+                        property: 'og:description',
+                        content: 'La Clémentine sandwicherie'
+                    }
+                ]
+            }
         },
         {
             name: 'cart',
@@ -71,6 +87,26 @@ export default new Router({
             name: 'privacy',
             path: '/apropos/donnees',
             component: privacy
+        },
+        {
+            name: '404',
+            path: '/oups',
+            component: oups
+        },
+        {
+            name: 'play',
+            path: '/play',
+            component: play
         }
     ]
 })
+
+export default router
+
+router.beforeEach((to, from, next) => {
+    if (!to.matched.length) {
+        next('/oups');
+    } else {
+        next();
+    }
+});
