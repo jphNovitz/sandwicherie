@@ -20,6 +20,9 @@ use Doctrine\ORM\Mapping\Annotation;
 use ElephantIO\Client;
 use ElephantIO\Engine\SocketIO\Version2X;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter;
+use App\Service\SocketNotifier;
+use Hateoas\HateoasBuilder;
+
 
 
 /**
@@ -33,14 +36,17 @@ class CartController extends Controller{
     protected $loader ;
     protected $persister;
     protected $deleter;
+    protected $notifier;
 
     public function __construct(CustomObjectLoaderInterface $loader,
                                 CustomPersisterInterface $persister,
-                                DeleteObject $deleter)
+                                DeleteObject $deleter,
+				SocketNotifier $notifier)
     {
         $this->loader = $loader;
         $this->persister = $persister;
         $this->deleter = $deleter;
+	$this->notifier = $notifier;
     }
 
     /**
@@ -60,8 +66,16 @@ class CartController extends Controller{
             }
 
             if ($this->persister->insert($cart)){
+		 try {
+			$hateoas = HateoasBuilder::create()->build();
+			$result =  $hateoas->serialize($cart, 'json');
+
+	            	$this->notifier->notify('new_order', ['order'=>$result]);
+        	} catch (\Exception $e){
+	            	$logger->warning('connection impossible',['meesage'=>$e]);
+       		 }			
                 $this->addFlash('success', 'Commande ajoutée ');
-                return $this->redirectToRoute('carts_create');
+                return $this->redirectToRoute('carts_add');
             }
             $this->addFlash('error', 'Problème avec la commande ');
             return $this->redirectToRoute('carts_list');

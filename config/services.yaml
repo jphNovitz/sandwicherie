@@ -12,7 +12,7 @@ parameters:
     adm_user: Admin/User/
     email_from: info@laclementine.be
     site_url: http://www.laclementine.be
-    ngrok: http://7b4e4fe1.ngrok.io
+    ngrok: http://db0e5817.ngrok.io
 
 services:
     # default configuration for services in *this* file

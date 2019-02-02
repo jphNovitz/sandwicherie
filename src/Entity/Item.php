@@ -65,6 +65,13 @@ class Item
      */
     private $bread;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $sauce;
+
 
     public function __construct()
     {
@@ -156,6 +163,23 @@ class Item
     /**
      * @return string
      */
+    public function getSauce(): ?string
+    {
+        return $this->sauce;
+    }
+
+    /**
+     * @param string $sauce
+     */
+    public function setSauce(string $sauce): void
+    {
+        $this->sauce = $sauce;
+    }
+
+
+    /**
+     * @return string
+     */
     public function getBread(): ?string
     {
         return $this->bread;
@@ -168,6 +192,7 @@ class Item
     {
         $this->bread = $bread;
     }
+
 
     /**
      * @return ArrayCollection

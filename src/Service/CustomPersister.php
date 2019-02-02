@@ -24,7 +24,7 @@ class CustomPersister implements CustomPersisterInterface
             $this->entityManager->flush();
             return true;
         } catch (\Exception $e) {
-
+die($e);
             return false;
         }
     }

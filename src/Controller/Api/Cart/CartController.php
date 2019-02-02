@@ -68,20 +68,18 @@ class CartController extends FOSRestController
 
 
     /**
-     * @Get("s/pending")
+     * @Get("pending")
      */
     public function pending(Request $request) {
-        $this->denyAccessUnlessGranted('ROLE_MEMBER');
+       
         $result =  $this->get('doctrine.orm.default_entity_manager')
                 ->getRepository('App:Cart')
                 ->findAllPending();
 
         if (!$result) {
-            $status = 500;
-            $result = ['message'=>'inconnu'];
-        } else{
-            $status = 200;
-        }
+            $result = ['message'=>'empty'];
+        } 
+         $status = 200;
         $response = $this->prepare($result, $status);
         return ($response);
     }
@@ -94,28 +92,30 @@ class CartController extends FOSRestController
         $cart = new Cart();
         $box = json_decode($request->getContent(), true);
         $username = $box['user'];
-
         $user = $this->em = $this->get('doctrine.orm.entity_manager')
             ->getRepository('App:User')->findOneBy(['username'=>$username]);
 
-        $cart->setClient($user);
-            foreach ($box['items']  as $item)
+        $cart->setClient($user); 
+        foreach ($box['items']  as $item)
             {
+		
                 $line = new Item();
                 $product = $this->customLoader->LoadOne('App:Product', $item['slug']);
                 $line->setProduct($product);
                 $line->setPrice($item['price']);
                 $line->setBread($item['bread']);
-                property_exists('item', 'halal') ? $line->setHalal($item->halal) : $line->setHalal(false) ;
+		$line->setSauce($item['sauce']);
+		$line->setHalal($item['halal']);
+		foreach ($item['vegetables'] as $vege){
+			$newVege = $this->em = $this->get('doctrine.orm.entity_manager')
+		            ->getRepository('App:Ingredient')->findOneBy(['name'=>$vege]);
 
-                if (property_exists('item', 'vegetables') && is_array($item->vegetables))
-                {
-                    foreach ($item->vegetables as $vege) {
-                        $line->addVegetable($vege);
-                        }
-                 }
-                $cart->addItem($line);
+			$line->addVegetable($newVege);
+		}
+            
+               $cart->addItem($line);
             }
+
 
         $hateoas = HateoasBuilder::create()->build();
         if ($this->customPersister->insert($cart)){
@@ -128,16 +128,16 @@ class CartController extends FOSRestController
 
         try {
             $this->notifier->notify('new_order', ['order'=>$result]);
+		
         } catch (\Exception $e){
             $logger->warning('connection impossible',['meesage'=>$e]);
         }
-
         $response = $this->prepare($result, $status);
         return ($response);
     }
 
     /**
-     * @Delete("s/order/{id}", name="orders_delete")
+     * @Delete("order/{id}", name="orders_delete")
      */
     public function delete(Cart $order, Request $request, LoggerInterface $logger) {
         if ($order && $this->isGranted('ROLE_MEMBER')) {
@@ -157,10 +157,10 @@ class CartController extends FOSRestController
             } catch (\Exception $e) {
                 $logger->warning('connection impossible', ['meesage' => $e]);
             }
-        }else {
+  /**/      }else {
             $status = 500;
             $result = ['error' => 'erreur de suppression'];
-        }
+        }/**/
         $response = $this->prepare($result, $status);
         return ($response);
     }
@@ -175,7 +175,7 @@ class CartController extends FOSRestController
                 $order->setDone(true);
                 $this->customPersister->update($order);
                 $status = 200;
-                $result = ['message' => 'commande '.$order->getId().' mise a jours'];
+                $result = ['message' => $order->getId()];
             } catch (\Doctrine\DBAL\DBALException $e) {
                 $status = 500;
                 $result = ['error' => 'erreur de suppression'];
