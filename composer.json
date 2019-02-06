@@ -37,7 +37,8 @@
     "require-dev": {
         "atoum/atoum": "^3.2",
         "symfony/dotenv": "^4.0",
-        "symfony/profiler-pack": "^1.0"
+        "symfony/profiler-pack": "^1.0",
+        "symfony/web-server-bundle": "^4.0"
     },
     "config": {
         "preferred-install": {

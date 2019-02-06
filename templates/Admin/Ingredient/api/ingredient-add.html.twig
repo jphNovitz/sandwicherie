@@ -1,0 +1,36 @@
+{% extends '_bases/_admin_base.html.twig' %}
+
+{#{% set entity = 'ingredients' %}#}
+{% block title %}Ajout d'un ingrédient{% endblock %}
+{% block body %}
+    <p>Ajout d'un ingredient</p>
+
+        <div class="ui grid">
+            <div class="ten wide column">
+                <div class="ui card fluid">
+                    <div class="content">
+                        <div class="header">
+                            header
+                        </div>
+                        <div class="ui input">
+                            <input type="text" placeholder="Search...">
+                        </div>
+                        <div class="description">
+                            <p>
+                                Marque: <br />
+                                Nom: <br />
+                                Nom générique:
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="six wide column">
+                <div class="ui card">
+                    right
+                </div>
+            </div>
+
+        </div>
+{% endblock %}

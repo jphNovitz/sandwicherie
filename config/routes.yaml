@@ -9,6 +9,12 @@ acme_privacy:
 logout:
     path:   /logout
 
+add_ingredient_from_api:
+    path:         /admin/ingredients/new/api
+    controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    defaults:
+        template: Admin/Ingredient/api/ingredient-add.html.twig
+
 dashboard:
     path:         /admin/dashboard
     controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
