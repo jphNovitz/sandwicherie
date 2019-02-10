@@ -38,6 +38,7 @@
         "socket.io-client": "^2.1.1",
         "transform-runtime": "^0.0.0",
         "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
+        "vue-axios": "^2.1.4",
         "vue-resource": "^1.5.1",
         "vue-router": "^3.0.1",
         "vue-session": "^1.0.0",

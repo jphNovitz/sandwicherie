@@ -3,34 +3,153 @@
 {#{% set entity = 'ingredients' %}#}
 {% block title %}Ajout d'un ingrédient{% endblock %}
 {% block body %}
-    <p>Ajout d'un ingredient</p>
 
-        <div class="ui grid">
-            <div class="ten wide column">
-                <div class="ui card fluid">
-                    <div class="content">
-                        <div class="header">
-                            header
+
+    <div class="ui grid" id="ingredients-api">
+        <div class="eight wide column">
+            <div class="ui card fluid">
+                <div class="content">
+                    <div class="header">
+                        Ajout d'un ingredient
+                    </div>
+                    <div class="ui form">
+                    <div class="ui input sixteen wide field">
+                        <input type="text" placeholder="Entrez un code bar"  v-model="code"  />
+                    </div>
+                    </div>
+                    <div class="description">
+                        <div class="ui form">
+                            {#<div class="inline fields">#}
+                                <div class="sixteen wide field inline fields">
+                                    <div class="five wide field">
+                                        <label>Marque</label>
+                                    </div>
+                                    <div class="eleven wide field right aligned">
+                                        <input type="text"
+                                               placeholder="Marque"
+                                               v-model="product.brands">
+                                    </div>
+                                </div>
+                                <div class="sixteen wide field inline fields">
+                                    <div class="five wide field">
+                                        <label>Nom</label>
+                                    </div>
+                                    <div class="eleven wide field">
+                                        <input type="text"
+                                               placeholder="Nom"
+                                               v-model="product.name">
+                                    </div>
+                                </div>
+                                <div class="sixteen wide field inline fields">
+                                    <div class="five wide field">
+                                        <label>Nom Générique</label>
+                                    </div>
+                                    <div class="eleven wide field">
+                                        <input type="text"
+                                               placeholder="Nom Générique"
+                                               v-model="product.generic_name_fr">
+                                    </div>
+                                </div>
+                                {#<div class="sixteen wide field inline fields">#}
+                                    {#<div class="six wide field">#}
+                                        {#<label>Nom</label>#}
+                                    {#</div>#}
+                                    {#<div class="ten wide field">#}
+                                        {#<input type="text" placeholder="First Name">#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#</div>#}
                         </div>
-                        <div class="ui input">
-                            <input type="text" placeholder="Search...">
-                        </div>
-                        <div class="description">
-                            <p>
-                                Marque: <br />
-                                Nom: <br />
-                                Nom générique:
-                            </p>
-                        </div>
+
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="six wide column">
-                <div class="ui card">
-                    right
+
+        <div class="two wide centered column">
+            <button class="fluid ui huge blue button"
+                    @click="getInfos()" >
+                CODE
+            </button>
+            <button class="fluid ui huge green button">
+                <i class="plus icon"></i>
+            </button>
+            <button class="fluid ui huge red button"
+                    @click="resetInfos()" >
+                <i class="sync alternate icon"></i>
+            </button>
+        </div>
+
+
+        <div class="six wide column">
+            <div class="ui card centered">
+                <div class="ui medium image ">
+                    <img :src="product.image_url" class="ui mini image">
                 </div>
             </div>
-
+            <div class="ui card centered">
+                <div class="ui medium image ">
+                    <img :src="product.image_ingredients_url" class="ui mini image">
+                </div>
+            </div>
+            <div class="ui card centered">
+                <div class="ui medium image ">
+                    <img :src="product.image_nutrition_url" class="ui mini image">
+                </div>
+            </div>
         </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/js/ingredient-add.js') }}">
+        // new Vue({
+        // el: '#ing',
+        // template: '#my-template'
+        // })
+    </script>
+    {#<script>#}
+        {#const ing = new Vue({#}
+            {#el: '#ingredients-api',#}
+            {#delimiters: ['${', '}'],#}
+            {#data: function () {#}
+                {#return {#}
+                    {#code: '',#}
+                    {#productInfos: {}#}
+                {#}#}
+            {#},#}
+            {#watch: {#}
+                {#code: function (val) {#}
+                    {#// this.productInfos = {}#}
+                    {#this.$http.get('https://fr.openfoodfacts.org/api/v0/produit/' + val + '.json').then((response) => {#}
+                        {#if (response.data.status_verbose === "product found") {#}
+                            {#console.log(response.data)#}
+                            {#this.productInfos.brands = response.data.product.brands#}
+                            {#this.productInfos.generic_name_fr = response.data.product.genericNameFr#}
+                            {#this.productInfos.name = response.data.product.product_name#}
+                            {#this.productInfos.image_ingredients_url = response.data.product.image_ingredients_url#}
+                            {#this.productInfos.image_nutrition_url = response.data.product.image_nutrition_url#}
+                            {#this.productInfos.image_url = response.data.product.image_url#}
+                            {#this.productInfos.ingredients_text_fr = response.data.product.ingredients_text_fr#}
+                            {#var element = document.getElementById('ingredient_code');#}
+                            {#element.value = 'toto'#}
+                            {#console.log(element.value)#}
+                        {#}#}
+
+                    {#})#}
+                {#}#}
+            {#},#}
+            {#mounted() {#}
+                {#this.$http.get('https://fr.openfoodfacts.org/api/v0/produit/27065655.json').then((response) => {#}
+                    {#// console.log(response.data)#}
+                {#})#}
+
+            {#},#}
+            {#methods: {}#}
+        {#})#}
+    {#</script>#}
 {% endblock %}
