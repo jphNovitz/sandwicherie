@@ -1,58 +1,28 @@
+/**
+ * ingredient add via api management
+ * author: Novitz Jean-Philippe <novitz@gmail.com>
+ * date: february 2019
+ */
+
 import vue from 'vue';
 import VueResource from 'vue-resource'
-// import regeneratorRuntime from "regenerator-runtime"
-// import AsyncComputed from 'vue-async-computed'
-
-// Vue.use(VueResource);
 
 new Vue({
     el: '#ingredients-api',
     delimiters: ['${', '}'],
     data: function () {
         return {
-            code: '01',
-            product: {}
+            code: '',
+            product: {},
+            message: {}
         }
     },
-    // asynComputed: {
-    //     async productInfos() {
-    //         var product={}
-    //         // this.$http.get('https://fr.openfoodfacts.org/api/v0/produit/' + this.code + '.json').then(response => {
-    //         //     if (response.data.status === 1) {
-    //         //         let raw = response.data.product
-    //         //         product.brands = raw.brands
-    //                 // console.log(response.data.product.brands)
-    //                 // product.generic_name_fr = response.data.product.genericNameFr
-    //                 // product.name = raw.product_name
-    //                 // console.log(product)
-    //                 // product.image_ingredients_url = raw.image_ingredients_url
-    //             //     productInfos.image_nutrition_url = response.data.product.image_nutrition_url
-    //             //     productInfos.image_url = response.data.product.image_url
-    //             //     productInfos.ingredients_text_fr = response.data.product.ingredients_text_fr
-    //             //
-    //             //     // this.$refs.brands = this.productInfos.brands
-    //             //     // var element = document.getElementById('ingredient_code');
-    //             //     // element.value = 'toto'
-    //             //     // console.log(element.value)
-    //             //     console.log(productInfos)
-    //             //     }
-    //             // })
-    //         // console.log(product)
-    //         // console.log(productInfos)
-    //         return 'product'
-    //     }
-    //
-    //     },
-    mounted() {
-        // this.$http.get('https://fr.openfoodfacts.org/api/v0/produit/27065655.json').then((response) => {
-        //     // console.log(response.data)
-        //         })
-
-        },
+    mounted() {},
     methods: {
         resetInfos: function () {
             this.code = ''
             this.product = {}
+            this.message = {}
         },
         getInfos: function () {
                 var product={}
@@ -65,21 +35,30 @@ new Vue({
                         product.image_ingredients_url = raw.image_ingredients_url
                         product.image_nutrition_url = raw.image_nutrition_url
                         product.image_url = raw.image_url
-                        //     productInfos.ingredients_text_fr = response.data.product.ingredients_text_fr
-                        //
-                        //     // this.$refs.brands = this.productInfos.brands
-                        //     // var element = document.getElementById('ingredient_code');
-                        //     // element.value = 'toto'
-                        //     // console.log(element.value)
-                        //     console.log(productInfos)
+                        product.ingredients_text_fr = raw.ingredients_text_fr
                     }
                 })
-                // console.log(product)
-                // console.log(productInfos)
                 setTimeout( ()=> {
                     this.product = product
                 }, 100)
-            }
+            },
+        sendInfos: function () {
+                let packed = JSON.stringify(this.product)
+                console.log(JSON.stringify(this.product))
+                this.$http.post('/api/ingredient/new', packed).then(response => {
+                console.log(response.data)
+                this.resetInfos()
+                if(response.status === 200) {
+                    this.message.color = "green"
+                    this.message.text =  "L'ingrédient a été ajouté."
+                    this.message.active = 1
+                } else {
+                    this.message.color = "red"
+                    this.message.text =  "Erreur"
+                    this.message.active = 1
+                }
+         })
         }
+    }
 
 })

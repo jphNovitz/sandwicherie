@@ -63,7 +63,6 @@ class IngredientController extends Controller
         ]);
     }
 
-
     /**
      * @Route("", name="ingredients_list")
      */
