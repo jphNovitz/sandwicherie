@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}PDF - La clementine.be{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+    <script src="{{ asset('build/js/sui.js') }}"></script>
+    {#<script src="{{ asset('build/js/ingredient-add.js') }}"></script>#}
+    <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
+    <link href="{{ asset('build/css/back.css') }}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<div class="ui grid">
+        {% include '_elements/_flash_messages.html.twig' %}
+        {% block body %}
+
+        {% endblock %}
+</div>
+
+<script src="{{ asset('build/js/app.js') }}"> </script>
+{% block javascripts %}{% endblock %}
+{% block sui_js %}{% endblock %}
+
+</body>
+</html>

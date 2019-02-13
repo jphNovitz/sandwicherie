@@ -76,24 +76,38 @@
 
         <div class="two wide centered column">
             <button class="fluid ui huge blue button"
-                    style="min-height: 19vh"
+                    style="min-height: 12vh"
                     @click="getInfos()">
                 CODE
             </button>
             <button class="fluid ui huge green button"
-                    style="min-height: 19vh"
+                    style="min-height: 12vh"
                     @click="sendInfos()">
                 <i class="plus icon"></i>
             </button>
             <button class="fluid ui huge red button"
                     @click="resetInfos()"
-                    style="min-height: 19vh" >
+                    style="min-height: 12vh" >
                 <i class="sync alternate icon"></i>
             </button>
             <button class="fluid ui huge  button"
-                    style="min-height: 19vh" >
+                    :class="{disabled : !pdf.isActive }"
+                    style="min-height: 12vh" >
+                <i class="file pdf icon"></i>
+            </button>
+            <button class="fluid ui huge  button"
+                    style="min-height: 12vh" >
                 <i class=""></i>
             </button>
+            <button class="fluid ui huge  button"
+                    style="min-height: 12vh" >
+                <i class=""></i>
+            </button>
+            <a class="fluid ui huge  button"
+                    style="min-height: 6vh"
+                    href="{{ path('ingredients_add') }}">
+                Classic
+            </a>
         </div>
 
         <div class="six wide column">

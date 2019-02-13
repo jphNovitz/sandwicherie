@@ -14,7 +14,11 @@ new Vue({
         return {
             code: '',
             product: {},
-            message: {}
+            message: {},
+            pdf: {
+                lastID: -1,
+                isActive: false
+            },
         }
     },
     mounted() {},
@@ -44,15 +48,21 @@ new Vue({
             },
         sendInfos: function () {
                 let packed = JSON.stringify(this.product)
-                console.log(JSON.stringify(this.product))
+                //console.log(JSON.stringify(this.product))
                 this.$http.post('/api/ingredient/new', packed).then(response => {
                 console.log(response.data)
                 this.resetInfos()
                 if(response.status === 200) {
+                    /* manage message*/
                     this.message.color = "green"
                     this.message.text =  "L'ingrédient a été ajouté."
                     this.message.active = 1
+                    /* manage last product id & pdf action */
+                    this.pdf.lastID = JSON.parse(response.data)
+                    this.pdf.isActive = true
+
                 } else {
+                    /* manage message*/
                     this.message.color = "red"
                     this.message.text =  "Erreur"
                     this.message.active = 1
