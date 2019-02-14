@@ -23,17 +23,19 @@ class IngredientController extends FOSRestController
      */
     public function add(CustomPersister $persister, Request $request)
     {
+//        $this->get('knp_snappy.pdf')->generateFromHtml(
+//            $this->renderView(
+//                'test.html.twig',
+//                array(
+//                    'some'  => null
+//                )
+//            ),
+//            'tatayoyo.pdf'
+//        );
+        
         $ingredient = new Ingredient();
         $received = json_decode($request->getContent(), true);
 
-//     var_dump($received['name']);die();
-//        $ingredient->setName($received['name']) ;
-//        $ingredient->setBrands($received['brands']) ;
-//        $ingredient->setGenericNameFr($received['generic_name_fr']) ;
-//        $ingredient->setImageIngredientsUrl($received['image_ingredients_url']) ;
-//        $ingredient->setImageNutritionUrl($received['image_nutrition_url']) ;
-//        $ingredient->setImageUrl($received['image_url']) ;
-//        $ingredient->setIngredientsTextFr($received['ingredients_text_fr']) ;
         if (isset($received['name'])) {
             $ingredient->setName($received['name']) ;
         } ;
@@ -58,7 +60,7 @@ class IngredientController extends FOSRestController
 
         $hateoas = HateoasBuilder::create()->build();
         if ($persister->insert($ingredient)){
-            $result =  $hateoas->serialize($ingredient, 'json');
+            $result =  $hateoas->serialize($ingredient->getId(), 'json');
             $status = 200;;
         } else {
             $result = ['message'=>'erreur serveur'];

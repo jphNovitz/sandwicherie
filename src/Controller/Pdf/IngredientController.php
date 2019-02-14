@@ -22,18 +22,22 @@ class IngredientController extends Controller
      */
     public function index(Ingredient $ingredient)
     {
-//        var_dump($ingredient->getSlug());
-//die('ok');
         $this->get('knp_snappy.pdf')->setTimeout('1000');
-        $this->get('knp_snappy.pdf')->generateFromHtml(
-            $this->renderView(
-                'Pdf/ingredient-pdf.html.twig',
-                array(
-                    'ingredient' => $ingredient
-                )
-            ),
-            'pdf/documents/ingredients/'.$ingredient->getSlug().'pdf'
-        );
-        die('ok');
+        try {
+            $this->get('knp_snappy.pdf')->generateFromHtml(
+                $this->renderView(
+                    'Pdf/ingredient-pdf.html.twig',
+                    array(
+                        'ingredient' => $ingredient
+                    )
+                ),
+                'pdf/documents/ingredients/' . $ingredient->getSlug() . 'pdf'
+            );
+            return $this->render('Pdf/pdf-confirmation.html.twig', [
+                "file" => 'pdf/documents/ingredients/' . $ingredient->getSlug() . 'pdf'
+            ]);
+        } catch (\Exception $e){
+            echo 'erreur: '.$e->getMessage();
+        }
     }
 }

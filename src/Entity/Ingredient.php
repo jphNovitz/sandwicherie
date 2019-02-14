@@ -29,6 +29,58 @@ class Ingredient
      */
     private $name;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=15, nullable=true)
+     */
+    private $code;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=80, nullable=true)
+     */
+    private $brands;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $generic_name_fr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image_ingredients_url;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image_nutrition_url;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image_url;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ingredients_text_fr;
+
     /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=80, unique=true)
@@ -343,6 +395,118 @@ class Ingredient
     public function setVegetable(bool $vegetable): void
     {
         $this->vegetable = $vegetable;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode(string $code): void
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrands(): ?string
+    {
+        return $this->brands;
+    }
+
+    /**
+     * @param string $brands
+     */
+    public function setBrands(string $brands): void
+    {
+        $this->brands = $brands;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGenericNameFr(): ?string
+    {
+        return $this->generic_name_fr;
+    }
+
+    /**
+     * @param string $generic_name_fr
+     */
+    public function setGenericNameFr(string $generic_name_fr): void
+    {
+        $this->generic_name_fr = $generic_name_fr;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageIngredientsUrl(): ?string
+    {
+        return $this->image_ingredients_url;
+    }
+
+    /**
+     * @param string $image_ingredients_url
+     */
+    public function setImageIngredientsUrl(string $image_ingredients_url): void
+    {
+        $this->image_ingredients_url = $image_ingredients_url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageNutritionUrl(): ?string
+    {
+        return $this->image_nutrition_url;
+    }
+
+    /**
+     * @param string $image_nutrition_url
+     */
+    public function setImageNutritionUrl(string $image_nutrition_url): void
+    {
+        $this->image_nutrition_url = $image_nutrition_url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageUrl(): ?string
+    {
+        return $this->image_url;
+    }
+
+    /**
+     * @param string $image_url
+     */
+    public function setImageUrl(string $image_url): void
+    {
+        $this->image_url = $image_url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIngredientsTextFr(): ?string
+    {
+        return $this->ingredients_text_fr;
+    }
+
+    /**
+     * @param string $ingredients_text_fr
+     */
+    public function setIngredientsTextFr(string $ingredients_text_fr): void
+    {
+        $this->ingredients_text_fr = $ingredients_text_fr;
     }
 
 
