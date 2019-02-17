@@ -3,9 +3,13 @@
 Namespace App\Controller\Pdf;
 
 use App\Entity\Ingredient;
+use App\Service\CustomObjectLoader;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Snappy\Pdf;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Twig\Environment;
 
 
 /**
@@ -17,27 +21,41 @@ use Symfony\Component\Routing\Annotation\Route;
 class IngredientController extends Controller
 {
 
-    /**
-     * @Route("{id}", name="ingredient_pdf")
-     */
-    public function index(Ingredient $ingredient)
+    protected $generator ;
+    protected $twig ;
+    protected $loader ;
+
+    public function __construct(Pdf $generator, Environment $twig, CustomObjectLoader $loader)
     {
-        $this->get('knp_snappy.pdf')->setTimeout('1000');
+        $this->generator = $generator;
+        $this->twig = $twig;
+        $this->loader = $loader;
+    }
+
+    /**
+     * @Route("{slug}", name="ingredient_pdf")
+     */
+    public function index(String $slug)
+    {
+        $ingredient = $this->loader->LoadOne('App:Ingredient', $slug);
+        $this->generator->setTimeout('1000');
         try {
-            $this->get('knp_snappy.pdf')->generateFromHtml(
-                $this->renderView(
+            $this->generator->generateFromHtml(
+                $this->twig->render(
                     'Pdf/ingredient-pdf.html.twig',
                     array(
                         'ingredient' => $ingredient
                     )
                 ),
-                'pdf/documents/ingredients/' . $ingredient->getSlug() . 'pdf'
+                'pdf/documents/ingredients/' . $ingredient->getSlug() . '.pdf'
             );
-            return $this->render('Pdf/pdf-confirmation.html.twig', [
-                "file" => 'pdf/documents/ingredients/' . $ingredient->getSlug() . 'pdf'
-            ]);
+            return true;
+//            return $this->render('Pdf/pdf-confirmation.html.twig', [
+//                "file" => 'pdf/documents/ingredients/' . $ingredient->getSlug() . '.pdf'
+//            ]);
         } catch (\Exception $e){
-            echo 'erreur: '.$e->getMessage();
+            return false;
+//            return 'erreur: '.$e->getMessage();
         }
     }
 }
