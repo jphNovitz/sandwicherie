@@ -49,7 +49,7 @@ class IngredientController extends Controller
                 ),
                 'pdf/documents/ingredients/' . $ingredient->getSlug() . '.pdf'
             );
-            return true;
+            return $ingredient->getSlug();
 //            return $this->render('Pdf/pdf-confirmation.html.twig', [
 //                "file" => 'pdf/documents/ingredients/' . $ingredient->getSlug() . '.pdf'
 //            ]);

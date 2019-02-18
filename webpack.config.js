@@ -23,6 +23,7 @@ Encore
      .addEntry('js/sui', './assets/semantic/dist/semantic.js')
      .addEntry('js/vue', './assets/js/vue.js')
      .addEntry('js/app', './assets/js/app.js')
+     .addEntry('js/ingredient-add', './assets/js/ingredient-add.js')
      .addEntry('main', './assets/vue/main.js')
      .addEntry('dashboard', './assets/dashboard/main.js')
     //.enableVueLoader()

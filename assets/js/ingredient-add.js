@@ -6,22 +6,115 @@
 
 import vue from 'vue';
 import VueResource from 'vue-resource'
+import vuePdf from 'vue-pdf'
+
+
+
+
+const images = Vue.component('images', {
+
+    delimiters: ['${', '}'],
+    template: `
+    <div>                
+    <div class="ui card fluid centered">
+                    <div class="content">
+                        <div class="header">
+                            Produit
+                        </div>
+                        <div class="ui medium centered image ">
+                            <template v-if="product.image_url">
+                                <img :src="product.image_url" class="ui centered image">
+                            </template>
+                            <template v-else>
+                            <img src="../../../images/no-photo.png" class="ui  image">
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui card fluid centered">
+                    <div class="content">
+                        <div class="header">
+                            Ingredients
+                        </div>
+                        <div class="ui medium centered image">
+                            <template v-if="product.image_ingredients_url">
+                                <img :src="product.image_ingredients_url" class="ui image">
+                            </template>
+                            <template v-else>
+                                <img src="../../../images/no-photo.png" class="ui  image">
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui card fluid centered">
+                <div class="content">
+                    <div class="header">
+                        Nutrition
+                    </div>
+                    <div class="ui medium image ">
+                        <template v-if="product.image_nutrition_url">
+                            <img :src="product.image_nutrition_url" class="ui image">
+                        </template>
+                        <template v-else>
+                            <img src="../../../images/no-photo.png" class="ui  image">
+                        </template>
+                    </div>
+                </div>
+            </div>
+            </div>
+`,
+    props: ['product'],
+    data: function (){
+       return {
+       }
+    },
+    mounted(){}
+});
+
+const pdf = Vue.component('pdf', {
+    components: {
+        'vue-pdf': vuePdf
+    },
+    template: `
+        <div> 
+            <vue-pdf :src="'../../../pdf/documents/ingredients/' + slug + '.pdf'"> </vue-pdf>
+        </div>`,
+    props: ['slug'],
+    data: function (){
+       return {}
+    },
+    mounted(){}
+});
 
 new Vue({
     el: '#ingredients-api',
     delimiters: ['${', '}'],
+    components: {
+        'pdf': pdf,
+        'images': images
+    },
     data: function () {
         return {
             code: '',
             product: {},
             message: {},
             pdf: {
-                lastID: -1,
+                lastSLUG: -1,
                 isActive: false
             },
+            righte: 'images'
         }
     },
     mounted() {},
+    computed: {
+      pdfIcon: function () {
+          if (this.righte === 'pdf'){
+              return 'images'
+          } else {
+              return 'pdf'
+          }
+      }
+    },
     methods: {
         resetInfos: function () {
             this.code = ''
@@ -48,7 +141,6 @@ new Vue({
             },
         sendInfos: function () {
                 let packed = JSON.stringify(this.product)
-                //console.log(JSON.stringify(this.product))
                 this.$http.post('/api/ingredient/new', packed).then(response => {
                 console.log(response.data)
                 this.resetInfos()
@@ -58,7 +150,7 @@ new Vue({
                     this.message.text =  "L'ingrédient a été ajouté."
                     this.message.active = 1
                     /* manage last product id & pdf action */
-                    this.pdf.lastID = JSON.parse(response.data)
+                    this.pdf.lastSLUG = JSON.parse(response.data).slice(1, -1)
                     this.pdf.isActive = true
 
                 } else {
@@ -68,6 +160,14 @@ new Vue({
                     this.message.active = 1
                 }
          })
+        },
+        switchPdf: function () {
+            if (this.righte === 'pdf'){
+                this.righte = 'images'
+            } else if (this.righte === 'images') {
+                this.righte = 'pdf'
+            }
+
         }
     }
 

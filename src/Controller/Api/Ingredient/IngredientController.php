@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api\Ingredient;
 
+use App\Controller\Pdf\IngredientController as pdf;
 use App\Entity\Ingredient;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
@@ -21,18 +22,8 @@ class IngredientController extends FOSRestController
      * @Route("ingredient/new", name="ingredients_api_add")
      * @Method({"POST"})
      */
-    public function add(CustomPersister $persister, Request $request)
+    public function add(CustomPersister $persister, Request $request, pdf $pdf)
     {
-//        $this->get('knp_snappy.pdf')->generateFromHtml(
-//            $this->renderView(
-//                'test.html.twig',
-//                array(
-//                    'some'  => null
-//                )
-//            ),
-//            'tatayoyo.pdf'
-//        );
-        
         $ingredient = new Ingredient();
         $received = json_decode($request->getContent(), true);
 
@@ -58,15 +49,17 @@ class IngredientController extends FOSRestController
             $ingredient->setGenericNameFr($received['ingredients_text_fr']);
         } ;
 
+
         $hateoas = HateoasBuilder::create()->build();
         if ($persister->insert($ingredient)){
-            $result =  $hateoas->serialize($ingredient->getId(), 'json');
+            $make = $pdf->index($ingredient->getSlug());
+            $result =  $hateoas->serialize($make, 'json');
             $status = 200;;
         } else {
             $result = ['message'=>'erreur serveur'];
             $status = 500;
         }
-//        var_dump($result);die();
+
         $response = $this->prepare($result, $status);
         return ($response);
     }

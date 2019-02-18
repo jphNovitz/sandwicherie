@@ -92,8 +92,9 @@
             </button>
             <button class="fluid ui huge  button"
                     :class="{disabled : !pdf.isActive }"
-                    style="min-height: 12vh" >
-                <i class="file pdf icon"></i>
+                    style="min-height: 12vh"
+                    @click="switchPdf()">
+                <i class="file  icon" :class="pdfIcon"></i>
             </button>
             <button class="fluid ui huge  button"
                     style="min-height: 12vh" >
@@ -112,51 +113,52 @@
 
         <div class="six wide column">
             <div style="max-height: 77vh ; overflow-y: scroll" >
-                <div class="ui card fluid centered">
-                    <div class="content">
-                        <div class="header">
-                            Produit
-                        </div>
-                        <div class="ui medium centered image ">
-                            <template v-if="product.image_url">
-                                <img :src="product.image_url" class="ui centered image">
-                            </template>
-                            <template v-else>
-                                <img src="{{ asset('images/no-photo.png') }}" class="ui  image">
-                            </template>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui card fluid centered">
-                    <div class="content">
-                        <div class="header">
-                            Ingredients
-                        </div>
-                        <div class="ui medium centered image">
-                            <template v-if="product.image_ingredients_url">
-                                <img :src="product.image_ingredients_url" class="ui image">
-                            </template>
-                            <template v-else>
-                                <img src="{{ asset('images/no-photo.png') }}" class="ui  image">
-                            </template>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui card fluid centered">
-                <div class="content">
-                    <div class="header">
-                        Nutrition
-                    </div>
-                    <div class="ui medium image ">
-                        <template v-if="product.image_nutrition_url">
-                            <img :src="product.image_nutrition_url" class="ui image">
-                        </template>
-                        <template v-else>
-                            <img src="{{ asset('images/no-photo.png') }}" class="ui  image">
-                        </template>
-                    </div>
-                </div>
-            </div>
+                <span :is="righte" :product="product" :slug="pdf.lastSLUG"></span>
+                {#<div class="ui card fluid centered">#}
+                    {#<div class="content">#}
+                        {#<div class="header">#}
+                            {#Produit#}
+                        {#</div>#}
+                        {#<div class="ui medium centered image ">#}
+                            {#<template v-if="product.image_url">#}
+                                {#<img :src="product.image_url" class="ui centered image">#}
+                            {#</template>#}
+                            {#<template v-else>#}
+                                {#<img src="{{ asset('images/no-photo.png') }}" class="ui  image">#}
+                            {#</template>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+                {#<div class="ui card fluid centered">#}
+                    {#<div class="content">#}
+                        {#<div class="header">#}
+                            {#Ingredients#}
+                        {#</div>#}
+                        {#<div class="ui medium centered image">#}
+                            {#<template v-if="product.image_ingredients_url">#}
+                                {#<img :src="product.image_ingredients_url" class="ui image">#}
+                            {#</template>#}
+                            {#<template v-else>#}
+                                {#<img src="{{ asset('images/no-photo.png') }}" class="ui  image">#}
+                            {#</template>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+                {#<div class="ui card fluid centered">#}
+                {#<div class="content">#}
+                    {#<div class="header">#}
+                        {#Nutrition#}
+                    {#</div>#}
+                    {#<div class="ui medium image ">#}
+                        {#<template v-if="product.image_nutrition_url">#}
+                            {#<img :src="product.image_nutrition_url" class="ui image">#}
+                        {#</template>#}
+                        {#<template v-else>#}
+                            {#<img src="{{ asset('images/no-photo.png') }}" class="ui  image">#}
+                        {#</template>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
             </div>
         </div>
     </div>
