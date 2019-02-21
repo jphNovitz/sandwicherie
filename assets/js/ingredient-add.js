@@ -76,7 +76,11 @@ const pdf = Vue.component('pdf', {
         'vue-pdf': vuePdf
     },
     template: `
-        <div> 
+        <div>
+        <a class="fluid ui bg-info button"
+            :href="'/admin/pdf/ingredient/view/' + slug"
+            target="_blank">ouvrir dans une nouvelle fenêtre
+        </a>
             <vue-pdf :src="'../../../pdf/documents/ingredients/' + slug + '.pdf'"> </vue-pdf>
         </div>`,
     props: ['slug'],

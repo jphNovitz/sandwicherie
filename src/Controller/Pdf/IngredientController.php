@@ -58,4 +58,15 @@ class IngredientController extends Controller
 //            return 'erreur: '.$e->getMessage();
         }
     }
+
+
+    /**
+     * @Route("view/{slug}", name="ingredient_view_pdf")
+     */
+    public function view(String $slug)
+    {
+        return $this->render('Pdf/pdf-confirmation.html.twig', [
+                "file" => 'pdf/documents/ingredients/' . $slug . '.pdf'
+            ]);
+    }
 }
