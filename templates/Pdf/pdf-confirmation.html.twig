@@ -1,6 +1,9 @@
+{% set entity = 'ingredients' %}
+
 {% extends '_bases/_admin_base.html.twig' %}
+
 {% block body %}
-    <div class="ui grid" style="min-height: 100%" >
+    <div class="ui grid container" style="min-height: 100vh" >
        <div class="sixteen wide column">
             <object type="application/pdf" width="100%" height="100%" >
                 <param name="src" value="{{ asset(file) }}"  />
@@ -13,4 +16,8 @@
        </div>
     </div>
 
+{% endblock %}
+
+{% block right_column %}
+    {% include '_elements/_action_floating_menu/_form_action_floating_menu.html.twig' %}
 {% endblock %}
