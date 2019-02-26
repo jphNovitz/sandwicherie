@@ -130,6 +130,9 @@ new Vue({
                 this.$http.get('https://fr.openfoodfacts.org/api/v0/produit/' + this.code + '.json').then(response => {
                     if (response.data.status === 1) {
                         let raw = response.data.product
+                        product.code = raw.code
+                        console.log(raw)
+                        // console.log(raw.code)
                         product.brands = raw.brands
                         product.generic_name_fr = response.data.product.genericNameFr
                         product.name = raw.product_name
@@ -140,6 +143,7 @@ new Vue({
                     }
                 })
                 setTimeout( ()=> {
+                    console.log(product)
                     this.product = product
                 }, 100)
             },

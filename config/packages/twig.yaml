@@ -12,4 +12,7 @@ twig:
         domain: http://v2.jphnovitz.be
         products: "@app.products"
         site: "@app.site"
+        pdf_base: '%router.request_context.host%'
+        pathToWeb: "%kernel.root_dir%/../public"
+        pathToTemplate: "%kernel.root_dir%/../templates"
 

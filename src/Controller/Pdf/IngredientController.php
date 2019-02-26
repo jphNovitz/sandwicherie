@@ -54,8 +54,8 @@ class IngredientController extends Controller
 //                "file" => 'pdf/documents/ingredients/' . $ingredient->getSlug() . '.pdf'
 //            ]);
         } catch (\Exception $e){
-            return false;
-//            return 'erreur: '.$e->getMessage();
+//            return false;
+            return 'erreur: '.$e->getMessage();
         }
     }
 

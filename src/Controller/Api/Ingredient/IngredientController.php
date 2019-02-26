@@ -27,28 +27,31 @@ class IngredientController extends FOSRestController
         $ingredient = new Ingredient();
         $received = json_decode($request->getContent(), true);
 
+
+        if (isset($received['code'])) {
+            $ingredient->setCode($received['code']) ;
+        } ;
         if (isset($received['name'])) {
             $ingredient->setName($received['name']) ;
         } ;
         if (isset($received['brands'])) {
-            $ingredient->setName($received['brands']) ;
+            $ingredient->setBrands($received['brands']) ;
         } ;
         if (isset($received['generic_name_fr'])) {
             $ingredient->setGenericNameFr($received['generic_name_fr']);
         } ;
         if (isset($received['image_ingredients_url'])) {
-            $ingredient->setGenericNameFr($received['image_ingredients_url']);
+            $ingredient->setImageIngredientsUrl($received['image_ingredients_url']);
         } ;
         if (isset($received['image_nutrition_url'])) {
-            $ingredient->setGenericNameFr($received['image_nutrition_url']);
+            $ingredient->setImageNutritionUrl($received['image_nutrition_url']);
         } ;
         if (isset($received['image_url'])) {
-            $ingredient->setGenericNameFr($received['image_url']);
+            $ingredient->setImageUrl($received['image_url']);
         } ;
         if (isset($received['ingredients_text_fr'])) {
-            $ingredient->setGenericNameFr($received['ingredients_text_fr']);
+            $ingredient->setIngredientsTextFr($received['ingredients_text_fr']);
         } ;
-
 
         $hateoas = HateoasBuilder::create()->build();
         if ($persister->insert($ingredient)){
