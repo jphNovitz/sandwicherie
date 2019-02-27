@@ -19,6 +19,7 @@ Encore
      //.addStyleEntry('css/sui', './node_modules/semantic-ui-css/semantic.css')
      .addStyleEntry('css/front', './assets/scss/front.scss')
      .addStyleEntry('css/back', './assets/scss/back.scss')
+     .addStyleEntry('css/pdf', './assets/scss/pdf.scss')
      .addStyleEntry('css/security', './assets/scss/security.scss')
      .addEntry('js/sui', './assets/semantic/dist/semantic.js')
      .addEntry('js/vue', './assets/js/vue.js')

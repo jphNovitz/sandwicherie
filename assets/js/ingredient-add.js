@@ -8,9 +8,6 @@ import vue from 'vue';
 import VueResource from 'vue-resource'
 import vuePdf from 'vue-pdf'
 
-
-
-
 const images = Vue.component('images', {
 
     delimiters: ['${', '}'],
@@ -130,27 +127,25 @@ new Vue({
                 this.$http.get('https://fr.openfoodfacts.org/api/v0/produit/' + this.code + '.json').then(response => {
                     if (response.data.status === 1) {
                         let raw = response.data.product
+                        console.log(response.data.product)
                         product.code = raw.code
-                        console.log(raw)
-                        // console.log(raw.code)
                         product.brands = raw.brands
-                        product.generic_name_fr = response.data.product.genericNameFr
+                        product.generic_name_fr = raw.generic_name_fr
                         product.name = raw.product_name
                         product.image_ingredients_url = raw.image_ingredients_url
                         product.image_nutrition_url = raw.image_nutrition_url
                         product.image_url = raw.image_url
                         product.ingredients_text_fr = raw.ingredients_text_fr
+                        product.allergens_tags = raw.allergens_tags
                     }
                 })
                 setTimeout( ()=> {
-                    console.log(product)
                     this.product = product
                 }, 100)
             },
         sendInfos: function () {
                 let packed = JSON.stringify(this.product)
                 this.$http.post('/api/ingredient/new', packed).then(response => {
-                console.log(response.data)
                 this.resetInfos()
                 if(response.status === 200) {
                     /* manage message*/

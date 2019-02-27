@@ -1,71 +1,103 @@
-{#{% extends {{ pathToTemmplate }}::'_bases/_pdf_base.html.twig' %}#}
-{#{% set toto = {{ pathToTemplate ~ '/_bases/_pdf_base.html.twig' }} %}#}
-{#{% extends pathToTemplate ~ '_bases/_pdf_base.html.twig' %}#}
-{#{% extends '_bases/_pdf_base.html.twig' %}#}
-{#{{ pathToTemplate ~ '/_bases/_pdf_base.html.twig' }}#}
-{#{% block title %}fiche produit : {{ ingredient.name }} - La clementine.be{% endblock %}#}
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}PDF - La clementine.be{% endblock %}</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {#<link rel="stylesheet" href="//cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css">#}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
-    {#<script src="https://code.jquery.com/jquery-2.2.4.min.js"#}
-            {#integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="#}
-            {#crossorigin="anonymous"></script>#}
-    {#<script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>#}
-    {#<script src="{{ asset('build/js/sui.js') }}"></script>#}
-    {#<script src="{{ asset('build/js/ingredient-add.js') }}"></script>#}
     <link href="{{ pathToWeb }}/build/css/sui.css" rel="stylesheet">
-    {#<link href="{{ asset('build/css/back.css') }}" rel="stylesheet">#}
+    <link href="{{ pathToWeb }}/build/css/pdf.css" rel="stylesheet">
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-<div class="ui grid">
-    {% include '_elements/_flash_messages.html.twig' %}
-{% block body %}
-    <div class="row">
-        <div class="two wide column">
-            <div class="ui fluid image">
-                {#{{ absolute_url(asset('images/no-photo.png'))}}#}
-                    {#<img src="{{ pdf_base ~ '/images/no-photo.png' }}"  alt="clem"/>#}
-                    <img src="{{ pathToWeb }}/images/logo_clementine_02.png"  alt="clem"/>
+<div class="ui padded grid">
+    {% block body %}
+        <div class="row">
+            <div class="two wide column">
+                <div class="ui fluid image">
+                    <img src="{{ pathToWeb }}/images/logo_clementine_02.png" alt="clem"/>
+                </div>
+            </div>
+            <div class="fourteen wide column">
+                <h1>Fiche produit : {{ ingredient.name }} ({{ ingredient.code }})</h1>
             </div>
         </div>
-        <div class="fourteen wide column">
-            <h1>Fiche produit : {{ ingredient.name }} </h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="eight wide column">
-            <div class="ui card fluid centered">
-                <div class="content">
-                    <div class="header text-center">
-                        {{ ingredient.name }}
+        <div class="row">
+            <div class="fourteen wide centered column">
+                <div class="ui two cards">
+                    <div class="red card">
+                        <div class="content">
+                            <div class="header text-center">
+                                {{ ingredient.name }}
+                            </div>
+                            <ul>
+                                <li>Code: {{ ingredient.code }}</li>
+                                <li>Nom: {{ ingredient.name }}</li>
+                                <li>Marque: {{ ingredient.brands }}</li>
+                                <li>Nom générique: {{ ingredient.genericNameFr }} </li>
+                                <li>Ingredients (texte): {{ ingredient.ingredientsTextFr }}</li>
+                            </ul>
+                        </div>
                     </div>
-                    <ul>
-                        <li>Code: {{ ingredient.code }}</li>
-                        <li>Nom: {{ ingredient.name }}</li>
-                        <li>Marque: {{ ingredient.brands }}</li>
-                        {#<li>Nom générique: {{ ingredient.generic_name_fr }}</li>#}
-                        {#<li>Ingredients (texte): {{ ingredient.ingredients_text_fr }}</li>#}
-                    </ul>
+                    <div class="red card">
+                        <div class="content">
+                            <div class="header text-center">
+                                Allergies
+                            </div>
+                            <ul>
+                                <li> **</li>
+                                <li> **</li>
+                                <li> **</li>
+                                <li> **</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="fourteen wide centered column">
+                <div class="ui three cards">
+                    {% if ingredient.imageUrl is not null %}
+                        <div class="red card">
+                            <div class="image">
+                                <img src="{{ ingredient.imageUrl }}" alt="{{ ingredient.brands }} image">
+                            </div>
+                        <div class="content">
+                            {{ ingredient.name }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if ingredient.imageIngredientsUrl is not null %}
+                        <div class="red card">
+                            <div class="image">
+                                <img src="{{ ingredient.imageIngredientsUrl }}" alt="{{ ingredient.brands }} image ingredients">
+                            </div>
+                        <div class="content">
+                            {{ ingredient.name }} composition
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if ingredient.imageNutritionUrl is not null %}
+                        <div class="red card">
+                            <div class="image">
+                                <img src="{{ ingredient.imageNutritionUrl }}" alt="{{ ingredient.brands }} image nutrition">
+                            </div>
+                        <div class="content">
+                            {{ ingredient.name }} infos nutrition
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
 
-{% endblock %}
+        </div>
+
+    {% endblock %}
 
 </div>
-
-{#<script src="{{ asset('build/js/app.js') }}"> </script>#}
-{#{% block javascripts %}{% endblock %}#}
-{#{% block sui_js %}{% endblock %}#}
 
 </body>
 </html>

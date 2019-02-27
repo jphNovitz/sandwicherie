@@ -65,7 +65,7 @@
                             <div class="sixteen wide field">
                             <label>Ingredients</label>
                             <textarea rows="2"
-                                      v-model="product.generic_name_fr">
+                                      v-model="product.ingredients_text_fr">
                                 </textarea>
                         </div>
                          </div>
@@ -75,90 +75,47 @@
         </div>
 
         <div class="two wide centered column">
-            <button class="fluid ui huge blue button"
-                    style="min-height: 12vh"
-                    @click="getInfos()">
-                CODE
-            </button>
-            <button class="fluid ui huge green button"
-                    style="min-height: 12vh"
-                    @click="sendInfos()">
-                <i class="plus icon"></i>
-            </button>
-            <button class="fluid ui huge red button"
-                    @click="resetInfos()"
-                    style="min-height: 12vh" >
-                <i class="sync alternate icon"></i>
-            </button>
-            <button class="fluid ui huge  button"
-                    :class="{disabled : !pdf.isActive }"
-                    style="min-height: 12vh"
-                    @click="switchPdf()">
-                <i class="file large  icon" :class="pdfIcon"></i>
-            </button>
-            <button class="fluid ui huge  button"
-                    style="min-height: 12vh" >
-                <i class=""></i>
-            </button>
-            <button class="fluid ui huge  button"
-                    style="min-height: 12vh" >
-                <i class=""></i>
-            </button>
-            <a class="fluid ui huge  button"
-                    style="min-height: 6vh"
-                    href="{{ path('ingredients_add') }}">
-                Classic
-            </a>
+            <div class="ui vertical buttons" style="margin-left: -10px">
+                <button class="ui blue button"
+                        style="min-height: 12vh"
+                        @click="getInfos()">
+                    CODE
+                </button>
+                <button class="ui green button"
+                        style="min-height: 12vh"
+                        @click="sendInfos()">
+                    <i class="plus icon"></i>
+                </button>
+                <button class="ui red button"
+                        @click="resetInfos()"
+                        style="min-height: 12vh" >
+                    <i class="sync alternate icon"></i>
+                </button>
+                <button class="ui button"
+                        :class="{disabled : !pdf.isActive }"
+                        style="min-height: 12vh"
+                        @click="switchPdf()">
+                    <i class="file large  icon" :class="pdfIcon"></i>
+                </button>
+                <button class="ui button"
+                        style="min-height: 12vh" >
+                    <i class=""></i>
+                </button>
+                <button class="ui  button"
+                        style="min-height: 12vh" >
+                    <i class=""></i>
+                </button>
+                <a class="ui button"
+                        style="min-height: 6vh"
+                        href="{{ path('ingredients_add') }}">
+                    Classic
+                </a>
+            </div>
         </div>
 
         <div class="six wide column">
             <div style="max-height: 77vh ; overflow-y: scroll" >
                 <span :is="righte" :product="product" :slug="pdf.lastSLUG"></span>
-                {#<div class="ui card fluid centered">#}
-                    {#<div class="content">#}
-                        {#<div class="header">#}
-                            {#Produit#}
-                        {#</div>#}
-                        {#<div class="ui medium centered image ">#}
-                            {#<template v-if="product.image_url">#}
-                                {#<img :src="product.image_url" class="ui centered image">#}
-                            {#</template>#}
-                            {#<template v-else>#}
-                                {#<img src="{{ asset('images/no-photo.png') }}" class="ui  image">#}
-                            {#</template>#}
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
-                {#<div class="ui card fluid centered">#}
-                    {#<div class="content">#}
-                        {#<div class="header">#}
-                            {#Ingredients#}
-                        {#</div>#}
-                        {#<div class="ui medium centered image">#}
-                            {#<template v-if="product.image_ingredients_url">#}
-                                {#<img :src="product.image_ingredients_url" class="ui image">#}
-                            {#</template>#}
-                            {#<template v-else>#}
-                                {#<img src="{{ asset('images/no-photo.png') }}" class="ui  image">#}
-                            {#</template>#}
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
-                {#<div class="ui card fluid centered">#}
-                {#<div class="content">#}
-                    {#<div class="header">#}
-                        {#Nutrition#}
-                    {#</div>#}
-                    {#<div class="ui medium image ">#}
-                        {#<template v-if="product.image_nutrition_url">#}
-                            {#<img :src="product.image_nutrition_url" class="ui image">#}
-                        {#</template>#}
-                        {#<template v-else>#}
-                            {#<img src="{{ asset('images/no-photo.png') }}" class="ui  image">#}
-                        {#</template>#}
-                    {#</div>#}
-                {#</div>#}
-            {#</div>#}
             </div>
         </div>
     </div>
@@ -168,49 +125,7 @@
 
 {% block javascripts %}
     <script src="{{ asset('build/js/ingredient-add.js') }}">
-        // new Vue({
-        // el: '#ing',
-        // template: '#my-template'
-        // })
+
     </script>
-    {#<script>#}
-    {#const ing = new Vue({#}
-    {#el: '#ingredients-api',#}
-    {#delimiters: ['${', '}'],#}
-    {#data: function () {#}
-    {#return {#}
-    {#code: '',#}
-    {#productInfos: {}#}
-    {#}#}
-    {#},#}
-    {#watch: {#}
-    {#code: function (val) {#}
-    {#// this.productInfos = {}#}
-    {#this.$http.get('https://fr.openfoodfacts.org/api/v0/produit/' + val + '.json').then((response) => {#}
-    {#if (response.data.status_verbose === "product found") {#}
-    {#console.log(response.data)#}
-    {#this.productInfos.brands = response.data.product.brands#}
-    {#this.productInfos.generic_name_fr = response.data.product.genericNameFr#}
-    {#this.productInfos.name = response.data.product.product_name#}
-    {#this.productInfos.image_ingredients_url = response.data.product.image_ingredients_url#}
-    {#this.productInfos.image_nutrition_url = response.data.product.image_nutrition_url#}
-    {#this.productInfos.image_url = response.data.product.image_url#}
-    {#this.productInfos.ingredients_text_fr = response.data.product.ingredients_text_fr#}
-    {#var element = document.getElementById('ingredient_code');#}
-    {#element.value = 'toto'#}
-    {#console.log(element.value)#}
-    {#}#}
 
-    {#})#}
-    {#}#}
-    {#},#}
-    {#mounted() {#}
-    {#this.$http.get('https://fr.openfoodfacts.org/api/v0/produit/27065655.json').then((response) => {#}
-    {#// console.log(response.data)#}
-    {#})#}
-
-    {#},#}
-    {#methods: {}#}
-    {#})#}
-    {#</script>#}
 {% endblock %}
