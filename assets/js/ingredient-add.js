@@ -137,11 +137,45 @@ new Vue({
                         product.image_url = raw.image_url
                         product.ingredients_text_fr = raw.ingredients_text_fr
                         product.allergens_tags = raw.allergens_tags
+                        product.nutrition_grade_fr = raw.nutrition_grade_fr
+                    // allergens_from_ingredients is a string
+                    // i need to split to an array
+                        if (raw.allergens_from_ingredients !== "") {
+                            product.allergens_from_ingredients = raw.allergens_from_ingredients.split(', ')
+                        } else {
+                            product.allergens_from_ingredients = []
+                        }
+                        if (raw.categories !== "") {
+                            product.categories = raw.categories.split(', ')
+                        } else {
+                            product.categories = []
+                        }
+                        product.cities_tags = raw.cities_tags
+                        product.additives_tags = raw.additives_tags
+                    // nutrient needs to be translated
+                        let levels = raw.nutrient_levels
+                        let temp = {}
+                        temp.sucre = levels.sugars
+                        temp.graisse = levels.fat
+                        temp.sel = levels.salt
+                        temp['graisse-saturee'] = levels['saturated-fat']
+                        let trans = {
+                            'low' : 'bas',
+                            'moderate' : 'moyen',
+                            'high': 'haut'
+                        }
+
+                        Object.keys(temp).map(level=>{
+                            temp[level] = trans[temp[level]]
+                        })
+                        product.nutrient_levels = temp
+
+                        product.nutrition_grade_fr = raw.nutrition_grade_fr
                     }
                 })
                 setTimeout( ()=> {
                     this.product = product
-                }, 100)
+                }, 200)
             },
         sendInfos: function () {
                 let packed = JSON.stringify(this.product)
