@@ -5,39 +5,11 @@
 {% block title %}Ajout d'un ingrédient{% endblock %}
 
     {% block form_details %}
-        <div id="ingredients-api">
-            <input type="text" v-model="code"/>
-            <div class="three fields">
-                <div class="field">
-                    Marque: ${ productInfos.brands }
-                </div>
-                <div class="field">
-                    Nom: ${ productInfos.name }
-                </div>
-                <div class="field">
-                    Nom Générique: ${ productInfos.generic_name_fr }
-                </div>
-            </div>
-            <div class="field">
-                <p>Ingredients (text): <br /> ${ productInfos.ingredients_text_fr } </p>
-            </div>
-        <div class="fields">
-        <div class="field">
-            <img :src="productInfos.image_url"/>
-        </div>
-        <div class="field">
-            <img :src="productInfos.image_ingredients_url"/>
-        </div>
-        <div class="field">
-            <img :src="productInfos.image_nutrition_url"/>
-        </div>
-        </div>
-        </div>
 
         <div class="two fields">
             <div class="field">
                 <label for="form_name">Code</label>
-                {{ form_widget(form.code, {'attr': {'ref': 'toto'}}) }}
+                {{ form_widget(form.code, {'attr': {}}) }}
             </div>
             {% if form.code.vars.errors|length %}
                 <div class="field">
@@ -54,59 +26,7 @@
                 </div>
             {% endif %}
         </div>
-        <div class="two fields">
-            <div class="field">
-                <label for="form_name">Marque</label>
-                {{ form_widget(form.brands) }}
-            </div>
-            {% if form.brands.vars.errors|length %}
-                <div class="field">
-                    {{ form_errors(form.brands) }}
-                </div>
-            {% endif %}
-            <div class="field">
-                <label for="form_name">Nom Générique</label>
-                {{ form_widget(form.genericNameFr) }}
-            </div>
-            {% if form.genericNameFr.vars.errors|length %}
-                <div class="field">
-                    {{ form_errors(form.genericNameFr) }}
-                </div>
-            {% endif %}
-        </div>
-        <div class="three fields">
-            <div class="field">
-                <label for="form_name">Image Ingredients</label>
-                {{ form_widget(form.imageIngredientsUrl) }}
-            </div>
-            {% if form.imageIngredientsUrl.vars.errors|length %}
-                <div class="field">
-                    {{ form_errors(form.imageIngredientsUrl) }}
-                </div>
-            {% endif %}
-            <div class="field">
-                <label for="form_name">Image Nutrition</label>
-                {{ form_widget(form.imageNutritionUrl) }}
-            </div>
-            {% if form.imageNutritionUrl.vars.errors|length %}
-                <div class="field">
-                    {{ form_errors(form.imageNutritionUrl) }}
-                </div>
-            {% endif %}
-            <div class="field">
-                <label for="form_name">Image (url)</label>
-                {{ form_widget(form.imageUrl) }}
-            </div>
-            {% if form.imageUrl.vars.errors|length %}
-                <div class="field">
-                    {{ form_errors(form.imageUrl) }}
-                </div>
-            {% endif %}
-        </div>
-        <div class="field">
-            <label for="form_comment">Ingrédient (texte)</label>
-            {{ form_widget(form.ingredientsTextFr) }}
-        </div>
+
         <div class="field">
             <label for="form_comment">Commentaire</label>
             {{ form_widget(form.comment) }}
@@ -218,44 +138,6 @@
                 }
             })
 
-            // const ing = new Vue({
-            //     el: '#ingredients-api',
-            //     delimiters: ['${', '}'],
-            //     data: function () {
-            //         return {
-            //             code: '',
-            //             productInfos: {}
-            //         }
-            //     },
-            //     watch: {
-            //         code: function (val) {
-            //             // this.productInfos = {}
-            //             this.$http.get('https://fr.openfoodfacts.org/api/v0/produit/' + val + '.json').then((response) => {
-            //                 if (response.data.status_verbose === "product found") {
-            //                     console.log(response.data)
-            //                     this.productInfos.brands = response.data.product.brands
-            //                     this.productInfos.generic_name_fr = response.data.product.genericNameFr
-            //                     this.productInfos.name = response.data.product.product_name
-            //                     this.productInfos.image_ingredients_url = response.data.product.image_ingredients_url
-            //                     this.productInfos.image_nutrition_url = response.data.product.image_nutrition_url
-            //                     this.productInfos.image_url = response.data.product.image_url
-            //                     this.productInfos.ingredients_text_fr = response.data.product.ingredients_text_fr
-            //                     var element=document.getElementById('ingredient_code');
-            //                     element.value = 'toto'
-            //                     console.log(element.value)
-            //                 }
-            //
-            //             })
-            //         }
-            //     },
-            //     mounted() {
-            //         this.$http.get('https://fr.openfoodfacts.org/api/v0/produit/27065655.json').then((response) => {
-            //             // console.log(response.data)
-            //         })
-            //
-            //     },
-            //     methods: {}
-            // })
         })()
 
 

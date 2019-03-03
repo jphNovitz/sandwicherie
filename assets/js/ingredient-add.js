@@ -103,7 +103,8 @@ new Vue({
                 lastSLUG: -1,
                 isActive: false
             },
-            righte: 'images'
+            righte: 'images',
+            leftPanel: 'general'
         }
     },
     mounted() {},
@@ -114,7 +115,12 @@ new Vue({
           } else {
               return 'pdf'
           }
-      }
+      },
+       objectDisabled: function () {
+           if (Object.keys(this.product).length === 0){
+               return 'disabled'
+           }
+       }
     },
     methods: {
         resetInfos: function () {
@@ -136,7 +142,10 @@ new Vue({
                         product.image_nutrition_url = raw.image_nutrition_url
                         product.image_url = raw.image_url
                         product.ingredients_text_fr = raw.ingredients_text_fr
-                        product.allergens_tags = raw.allergens_tags
+                        if (raw.allergens_from_user !== undefined) {
+                            let allergens = raw.allergens_from_user.replace('(fr)', '')
+                            product.allergens_tags = allergens.split(', ')
+                        }
                         product.nutrition_grade_fr = raw.nutrition_grade_fr
                     // allergens_from_ingredients is a string
                     // i need to split to an array
@@ -145,24 +154,27 @@ new Vue({
                         } else {
                             product.allergens_from_ingredients = []
                         }
-                        if (raw.categories !== "") {
+                        if (raw.categories !== "" && raw.categories !== undefined) {
                             product.categories = raw.categories.split(', ')
                         } else {
                             product.categories = []
                         }
-                        product.cities_tags = raw.cities_tags
-                        product.additives_tags = raw.additives_tags
+                        product.countries = raw.countries
+                        product.additives_tags = []
+                        raw.additives_tags.map(tag=>{
+                            product.additives_tags.push(tag.replace('en:',''))
+                        })
                     // nutrient needs to be translated
                         let levels = raw.nutrient_levels
                         let temp = {}
                         temp.sucre = levels.sugars
                         temp.graisse = levels.fat
                         temp.sel = levels.salt
-                        temp['graisse-saturee'] = levels['saturated-fat']
+                        temp.graisseSaturee = levels['saturated-fat']
                         let trans = {
-                            'low' : 'bas',
+                            'low' : 'faible',
                             'moderate' : 'moyen',
-                            'high': 'haut'
+                            'high': 'élevé'
                         }
 
                         Object.keys(temp).map(level=>{
@@ -205,6 +217,17 @@ new Vue({
                 this.righte = 'pdf'
             }
 
+        },
+        nutritionActive: function (letter) {
+            if (this.product.nutrition_grade_fr !== letter) {
+                return 'basic'
+            }
+        },
+        setNutriGrade: function (letter) {
+            this.product.nutrition_grade_fr = letter
+        },
+        setLeftPanel: function (panel) {
+            this.leftPanel = panel
         }
     }
 

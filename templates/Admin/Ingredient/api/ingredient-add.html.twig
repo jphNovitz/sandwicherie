@@ -27,7 +27,8 @@
                 <div class="ui small message" :class="message.color">${message.text}</div>
             </template>
 
-            <div class="ui card fluid">
+            <template v-if="leftPanel === 'general'">
+                <div class="ui card fluid">
                 <div class="content">
                     <div class="description">
                         <div class="ui form">
@@ -63,15 +64,221 @@
                                 </div>
                             </div>
                             <div class="sixteen wide field">
-                            <label>Ingredients</label>
-                            <textarea rows="2"
-                                      v-model="product.ingredients_text_fr">
+                                <label>Ingredients</label>
+                                <textarea rows="2"
+                                          v-model="product.ingredients_text_fr">
                                 </textarea>
+                            </div>
                         </div>
-                         </div>
-                     </div>
+                    </div>
+                </div>
+            </div >
+            </template>
+            <template v-if="leftPanel === 'nutrition'">
+                <div class="ui card fluid">
+                <div class="content">
+                    <div class="description">
+                        <div class="ui form">
+                            <div class="sixteen wide field inline fields">
+                                <label>Score Nutrition</label>
+                                <div class="ui buttons">
+                                    <button class="ui green  button"
+                                            :class="nutritionActive('a')"
+                                            @click="setNutriGrade('a')">A
+                                    </button>
+                                    <button class="ui olive  button"
+                                            :class="nutritionActive('b')"
+                                            @click="setNutriGrade('b')">B
+                                    </button>
+                                    <button class="ui orange button"
+                                            :class="nutritionActive('c')"
+                                            @click="setNutriGrade('c')">C
+                                    </button>
+                                    <button class="ui yellow button"
+                                            :class="nutritionActive('d')"
+                                            @click="setNutriGrade('d')">D
+                                    </button>
+                                    <button class="ui red button"
+                                            :class="nutritionActive('e')"
+                                            @click="setNutriGrade('e')">E
+                                    </button>
+                                </div>
+                            </div>
+                            <template v-if="product.nutrient_levels !== undefined">
+                                <div class="sixteen wide field inline fields grid">
+                                    <div class="six wide field">
+                                        <label>Graisses</label>
+                                    </div>
+                                    <div class="ten wide field right aligned">
+                                        <div class="field">
+                                            <div class="inline fields">
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="graisse" value="faible"
+                                                               v-model="product.nutrient_levels.graisse">
+                                                        <label>faible </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="graisse" value="moyen"
+                                                               v-model="product.nutrient_levels.graisse">
+                                                        <label>moyen </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="graisse" value="élevé"
+                                                               v-model="product.nutrient_levels.graisse">
+                                                        <label>haut </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sixteen wide field inline fields grid">
+                                    <div class="six wide field">
+                                        <label>Graisses saturées</label>
+                                    </div>
+                                    <div class="ten wide field right aligned">
+                                        <div class="field">
+                                            <div class="inline fields">
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="graisseSaturee" value="faible"
+                                                               v-model="product.nutrient_levels.graisseSaturee">
+                                                        <label>faible </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="graisseSaturee" value="moyen"
+                                                               v-model="product.nutrient_levels.graisseSaturee">
+                                                        <label>moyen </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="graisseSaturee" value="élevé"
+                                                               v-model="product.nutrient_levels.graisseSaturee">
+                                                        <label>haut </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sixteen wide field inline fields grid">
+                                    <div class="six wide field">
+                                        <label>Sel</label>
+                                    </div>
+                                    <div class="ten wide field right aligned">
+                                        <div class="field">
+                                            <div class="inline fields">
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="sel" value="faible"
+                                                               v-model="product.nutrient_levels.sel">
+                                                        <label>faible </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="sel" value="moyen"
+                                                               v-model="product.nutrient_levels.sel">
+                                                        <label>moyen </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="sel" value="élevé"
+                                                               v-model="product.nutrient_levels.sel">
+                                                        <label>haut </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sixteen wide field inline fields grid">
+                                    <div class="six wide field">
+                                        <label>Sucre</label>
+                                    </div>
+                                    <div class="ten wide field right aligned">
+                                        <div class="field">
+                                            <div class="inline fields">
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="sugar" value="faible"
+                                                               v-model="product.nutrient_levels.sucre">
+                                                        <label>faible </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="sugar" value="moyen"
+                                                               v-model="product.nutrient_levels.sucre">
+                                                        <label>moyen </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <div class="ui radio checkbox">
+                                                        <input type="radio" name="sugar" value="élevé"
+                                                               v-model="product.nutrient_levels.sucre">
+                                                        <label>élevé</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <div class="sixteen wide field inline fields">
+                                <div class="five wide field">
+                                    <label>Origines</label>
+                                </div>
+                                <div class="eleven wide field">
+                                    <input type="text" v-model="product.countries" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </template>
+            <template v-if="leftPanel === 'allergens'">
+                <div class="ui card fluid">
+                <div class="content">
+                    <div class="description">
+                        <div class="ui form">
+                            <div class="sixteen wide field">
+                                    <label>Allergènes</label>
+                                <div class="ui large horizontal divided list">
+                                    <div class="item" v-for="allergen in product.allergens_tags">${allergen}</div>
+                                </div>
+
+                            </div>
+                            <div class="sixteen wide field">
+                                <label>Ingrédients Allergènes</label>
+                                <div class="ui large horizontal divided list">
+                                    <div class="item" v-for="ingredient in product.allergens_from_ingredients">${ingredient}</div>
+
+                                </div>
+                            </div>
+                            <div class="sixteen wide field">
+                                <label>Additifs</label>
+                                <div class="ui large horizontal divided list">
+                                    <div class="item" v-for="additive in product.additives_tags">${additive}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
              </div>
+            </template>
         </div>
 
         <div class="two wide centered column">
@@ -88,7 +295,7 @@
                 </button>
                 <button class="ui red button"
                         @click="resetInfos()"
-                        style="min-height: 12vh" >
+                        style="min-height: 12vh">
                     <i class="sync alternate icon"></i>
                 </button>
                 <button class="ui button"
@@ -97,24 +304,51 @@
                         @click="switchPdf()">
                     <i class="file large  icon" :class="pdfIcon"></i>
                 </button>
-                <button class="ui button"
-                        style="min-height: 12vh" >
-                    <i class=""></i>
-                </button>
+
+                <template v-if="leftPanel === 'general'">
+                    <button class="ui button"
+                            style="min-height: 12vh"
+                            :class="objectDisabled"
+                            @click="setLeftPanel('nutrition')">
+                        <i class="">Nutrition</i>
+                    </button>
+                </template>
+                <template v-else>
+                    <button class="ui button"
+                            style="min-height: 12vh"
+                            :class="objectDisabled"
+                            @click="setLeftPanel('general')">
+                        <i class="">General</i>
+                    </button>
+                </template>
+                <template v-if="leftPanel === 'allergens'">
+                    <button class="ui button"
+                            style="min-height: 12vh" @click="setLeftPanel('nutrition')">
+                        <i class="">Nutrition</i>
+                    </button>
+                </template>
+                <template v-else>
+                    <button class="ui button"
+                            style="min-height: 12vh"
+                            :class="objectDisabled"
+                            @click="setLeftPanel('allergens')">
+                        <i class="">Allergies</i>
+                    </button>
+                </template>
                 <button class="ui  button"
-                        style="min-height: 12vh" >
+                        style="min-height: 12vh">
                     <i class=""></i>
                 </button>
                 <a class="ui button"
-                        style="min-height: 6vh"
-                        href="{{ path('ingredients_add') }}">
+                   style="min-height: 6vh"
+                   href="{{ path('ingredients_add') }}">
                     Classic
                 </a>
             </div>
         </div>
 
         <div class="six wide column">
-            <div style="max-height: 77vh ; overflow-y: scroll" >
+            <div style="max-height: 77vh ; overflow-y: scroll">
                 <span :is="righte" :product="product" :slug="pdf.lastSLUG"></span>
             </div>
         </div>
