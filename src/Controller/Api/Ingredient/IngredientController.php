@@ -3,9 +3,14 @@
 namespace App\Controller\Api\Ingredient;
 
 use App\Controller\Pdf\IngredientController as pdf;
+use App\Entity\AllergenCloud;
+use App\Entity\Allergy;
+use App\Entity\Category;
 use App\Entity\Ingredient;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
+use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Persisters\PersisterException;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\FOSRestController;
 use Hateoas\HateoasBuilder;
@@ -52,12 +57,67 @@ class IngredientController extends FOSRestController
         if (isset($received['ingredients_text_fr'])) {
             $ingredient->setIngredientsTextFr($received['ingredients_text_fr']);
         } ;
+        if (isset($received['allergens_tags'])) {
+            foreach ($received['allergens_tags'] as $tag) {
+                $repo = $this->get('doctrine.orm.default_entity_manager')->getRepository('App:Allergy');
+                $allergy = $repo->findOneBy(['name' => $tag]);
+                if (!$allergy){
+                    $allergy = new Allergy();
+                    $allergy->setName($tag);
+                }
+                $ingredient->addAllergy($allergy);
+            }
+        } ;
+        if (isset($received['allergens_from_ingredients'])) {
+            foreach ($received['allergens_from_ingredients'] as $t) {
+                $repo = $this->get('doctrine.orm.default_entity_manager')->getRepository('App:AllergenCloud');
+                $tag = $repo->findOneBy(["allergenTag" =>$t]);
+
+                if (!$tag){
+                    $tag = new AllergenCloud();
+                    $tag->setAllergenTag($t);
+                    try {
+                        $this->get('doctrine.orm.default_entity_manager')->persist($tag);
+                    } catch (ORMException $e){
+                        die($e);
+                    }
+                }
+                $ingredient->addAllergenTag($tag);
+            }
+        }
+
+        if (isset($received['nutrition_grade_fr'])){
+            $ingredient->setNutritionGradeFr($received['nutrition_grade_fr']);
+        }
+        if (isset($received['categories'])){
+            foreach ($received['categories'] as $name){
+                $repo = $this->get('doctrine.orm.default_entity_manager')
+                    ->getRepository('App:Category');
+                $category = $repo->findOneBy(['name' => $name]);
+
+                if (!$category){
+                    $category = new Category();
+                    $category->setName($name);
+                    try {
+                        $this->get('doctrine.orm.default_entity_manager')
+                            ->persist($category);
+                    } catch (ORMException $e){
+                        die($e);
+                    }
+                }
+                $ingredient->addCategory($category);
+            }
+        }
+
+        if (isset($received['nutrient_levels'])){
+            $ingredient->setNutrientLevels(implode(",",$received['nutrient_levels']));
+        }
 
         $hateoas = HateoasBuilder::create()->build();
         if ($persister->insert($ingredient)){
             $make = $pdf->index($ingredient->getSlug());
             $result =  $hateoas->serialize($make, 'json');
-            $status = 200;;
+            $status = 200;
         } else {
             $result = ['message'=>'erreur serveur'];
             $status = 500;

@@ -182,7 +182,7 @@ new Vue({
                         })
                         product.nutrient_levels = temp
 
-                        product.nutrition_grade_fr = raw.nutrition_grade_fr
+                        // product.nutrition_grade_fr = raw.nutrition_grade_fr
                     }
                 })
                 setTimeout( ()=> {
@@ -190,6 +190,7 @@ new Vue({
                 }, 200)
             },
         sendInfos: function () {
+                console.log(JSON.stringify(this.product))
                 let packed = JSON.stringify(this.product)
                 this.$http.post('/api/ingredient/new', packed).then(response => {
                 this.resetInfos()
@@ -199,6 +200,7 @@ new Vue({
                     this.message.text =  "L'ingrédient a été ajouté."
                     this.message.active = 1
                     /* manage last product id & pdf action */
+                    console.log(response.data)
                     this.pdf.lastSLUG = JSON.parse(response.data).slice(1, -1)
                     this.pdf.isActive = true
 

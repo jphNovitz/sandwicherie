@@ -77,9 +77,23 @@ class Ingredient
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", length=10000, nullable=true)
      */
     private $ingredients_text_fr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=1, nullable=true)
+     */
+    private $nutrition_grade_fr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="json_array", nullable=true)
+     */
+    private $nutrient_levels;
 
     /**
      * @Gedmo\Slug(fields={"name"})
@@ -120,6 +134,14 @@ class Ingredient
     private $categories;
 
     /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\Allergy", mappedBy="ingredients")
+     * @ORM\JoinColumn(nullable=true)
+     *
+     */
+    private $allergies;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
      * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
@@ -152,12 +174,20 @@ class Ingredient
     private $vegetable;
 
     /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\AllergenCloud", inversedBy="ingredients")
+     */
+    private $allergenTags;
+
+    /**
      * Ingredient constructor.
      */
 
     public function __construct()
     {
+        $this->allergenTags = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->allergies = new ArrayCollection();
         $this->components = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->bread = false;
@@ -196,6 +226,24 @@ class Ingredient
     {
         $this->name = $name;
     }
+
+    /**
+     * @return string
+     */
+    public function getNutritionGradeFr(): string
+    {
+        return $this->nutrition_grade_fr;
+    }
+
+    /**
+     * @param string $nutrition_grade_fr
+     */
+    public function setNutritionGradeFr(string $nutrition_grade_fr): void
+    {
+        $this->nutrition_grade_fr = $nutrition_grade_fr;
+    }
+
+
 
     /**
      * @return mixed
@@ -292,6 +340,36 @@ class Ingredient
     {
         return $this->categories;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAllergies(): ?Collection
+    {
+        return $this->allergies;
+    }
+
+    /**
+     * @param mixed $allergy
+     */
+    public function addAllergy($allergy)
+    {
+        if ($this->allergies->contains($allergy)) {
+            return;
+        }
+        $this->allergies->add($allergy);
+        $allergy->addIngredient($this);
+    }
+
+    /**
+     * @param mixed $allergy
+     */
+    public function removeAllergy($allergy)
+    {
+        $this->allergies->removeElement($allergy);
+//        $allergy->setIngredient(null);
+    }
+
 
     /**
      * @return mixed
@@ -508,6 +586,53 @@ class Ingredient
     {
         $this->ingredients_text_fr = $ingredients_text_fr;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAllergenTags(): ?Collection
+    {
+        return $this->allergenTags;
+    }
+
+    /**
+     * @param mixed $allergenTag
+     */
+    public function addAllergenTag($allergenTag)
+    {
+        if ($this->allergenTags->contains($allergenTag)) {
+            return;
+        }
+        $this->allergenTags->add($allergenTag);
+        $allergenTag->addIngredient($this);
+    }
+
+
+    /**
+     * @param mixed $allergenTag
+     */
+    public function removeAllergenTag($allergenTag)
+    {
+        $this->allergenTags->removeElement($allergenTag);
+//        $allergenTag->removeIngredient($this);
+    }
+
+    /**
+     * @return string
+     */
+    public function getNutrientLevels(): string
+    {
+        return $this->nutrient_levels;
+    }
+
+    /**
+     * @param string $nutrient_levels
+     */
+    public function setNutrientLevels(string $nutrient_levels): void
+    {
+        $this->nutrient_levels = $nutrient_levels;
+    }
+
 
 
 

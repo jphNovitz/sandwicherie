@@ -89,7 +89,7 @@ class Allergy
     private $categories;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient", cascade={"persist"}, inversedBy="allergies")
      * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
      */
     private $ingredients;
@@ -231,8 +231,7 @@ class Allergy
     public function addIngredient($ingredient)
     {
         $this->ingredients->add($ingredient);
-        // uncomment if you want to update other side
-        //$ingredient->setAllergy($this);
+//        $ingredient->setAllergy($this);
     }
 
     /**
@@ -299,6 +298,9 @@ class Allergy
         $this->description = $description;
     }
 
-
+public function __toString()
+{
+    return $this->name;
+}
 
 }
