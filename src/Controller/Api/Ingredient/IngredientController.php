@@ -110,7 +110,14 @@ class IngredientController extends FOSRestController
         }
 
         if (isset($received['nutrient_levels'])){
-            $ingredient->setNutrientLevels(implode(",",$received['nutrient_levels']));
+            $ingredient->setNutrientLevels($received['nutrient_levels']);
+        }
+
+        if (isset($received['additives_tags'])){
+            $ingredient->setAdditives($received['additives_tags']);
+        }
+        if (isset($received['countries'])){
+            $ingredient->setCountries($received['countries']);
         }
 
         $hateoas = HateoasBuilder::create()->build();

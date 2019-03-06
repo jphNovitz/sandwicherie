@@ -13,7 +13,8 @@ class AppExtension extends AbstractExtension
     public function getFilters()
     {
         return array(
-            new TwigFilter('entity', array($this, 'entityFilter')),
+            new TwigFilter('entity', [$this, 'entityFilter']),
+            new TwigFilter('json_decode', [$this, 'jsonDecode']),
         );
     }
 
@@ -27,4 +28,10 @@ class AppExtension extends AbstractExtension
          endif;
          return strtolower($word.'s')   ;
     }
+
+    public function jsonDecode($encoded)
+    {
+        return  json_decode($encoded,true );
+    }
+
 }

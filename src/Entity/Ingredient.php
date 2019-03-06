@@ -89,11 +89,27 @@ class Ingredient
     private $nutrition_grade_fr;
 
     /**
-     * @var string
+     * @var String
      *
-     * @ORM\Column(type="json_array", nullable=true)
+     * @ORM\Column(type="array", nullable=true)
      */
     private $nutrient_levels;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $additives;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $countries;
+
+
 
     /**
      * @Gedmo\Slug(fields={"name"})
@@ -620,19 +636,50 @@ class Ingredient
     /**
      * @return string
      */
-    public function getNutrientLevels(): string
+    public function getNutrientLevels(): ?string
     {
-        return $this->nutrient_levels;
+        return  $this->nutrient_levels;
     }
 
     /**
      * @param string $nutrient_levels
      */
-    public function setNutrientLevels(string $nutrient_levels): void
+    public function setNutrientLevels( $nutrient_levels): void
     {
-        $this->nutrient_levels = $nutrient_levels;
+        $this->nutrient_levels = json_encode($nutrient_levels);
     }
 
+    /**
+     * @return string
+     */
+    public function getAdditives(): string
+    {
+        return $this->additives;
+    }
+
+    /**
+     * @param string $additives
+     */
+    public function setAdditives($additives): void
+    {
+        $this->additives = json_encode($additives);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountries(): string
+    {
+        return $this->countries;
+    }
+
+    /**
+     * @param string $countries
+     */
+    public function setCountries(String $countries): void
+    {
+        $this->countries = $countries ;
+    }
 
 
 

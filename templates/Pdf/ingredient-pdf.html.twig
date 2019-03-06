@@ -32,17 +32,25 @@
                             <span class="header red text"> Allergies </span>
                             <div class="ui bulleted list">
                                 {% for allergy in ingredient.allergies %}
-                                    <div class="item">{{ allergy }}</div>
+                                    <div class="item">
+                                        <span class="ui tag label red">
+                                            {{ allergy }}
+                                        </span>
+                                    </div>
                                 {% endfor %}
                             </div>
                         </div>
                     </div>
                     <div class="blue card">
                         <div class="content">
-                            <span class="header">  Allergènes </span>
+                            <span class="header">Ingrédients Allergènes </span>
                             <div class="ui bulleted list">
                                 {% for tag in ingredient.allergenTags %}
-                                    <div class="item">{{ tag }}</div>
+                                    <div class="item">
+                                        <span class="ui red tag label">
+                                        {{ tag }}
+                                        </span>
+                                    </div>
                                 {% endfor %}
                             </div>
                         </div>
@@ -65,22 +73,28 @@
                     <div class="content">
                         <div class="header"> Repères Nutritionnels</div>
                     </div>
-                    {%  set levels = ingredient.nutrientLevels|split(',')  %}
                     <div class="ui list">
-                        <div class="ui item">
-                            Sucre: {{ levels[0] }}
-                        </div>
-                        <div class="ui item">
-                            Graisse: {{ levels[1] }}
-                        </div>
-                        <div class="ui item">
-                            Sel: {{ levels[2] }}
-                        </div>
-                        <div class="ui item">
-                            Graisses Saturées {{ levels[3] }}
-                        </div>
+                        {% for nutrient, level in ingredient.nutrientLevels|json_decode %}
+                            <div class="ui item">
+                                {{ nutrient }} : {{ level }}
+                            </div>
+                        {% endfor %}
                     </div>
 
+                </div>
+                <div class="ui fluid red card">
+                    <div class="content">
+                        <div class="header text-center">
+                            Additifs
+                        </div>
+                        <div class="ui horizontal list">
+                            {% for additive in ingredient.additives|json_decode %}
+                                <div class="item">
+                                    <span class="ui tag label"> {{ additive}} </span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="eight wide centered column">
@@ -94,7 +108,8 @@
                                 <li>Nom: {{ ingredient.name }}</li>
                                 <li>Marque: {{ ingredient.brands }}</li>
                                 <li>Nom générique: {{ ingredient.genericNameFr }} </li>
-                                {#<li>Origine: {{ ingredient.countries }}</li>#}
+                                <li>Origine: {{ ingredient.countries }}
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -112,20 +127,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui fluid red card">
-                    <div class="content">
-                        <div class="header text-center">
-                           Additifs
-                        </div>
-                        <div class="ui horizontal divided list">
-                            {% for additive in ingredient.additives %}
-                                <div class="item">
-                                    {{ additive.name }}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
         <div class="row">
