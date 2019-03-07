@@ -25,39 +25,32 @@
             </div>
         </div>
         <div class="row ">
-            <div class="sixteen wide centered column">
-                <div class="ui two cards">
-                    <div class="ui card ">
-                        <div class="red content">
-                            <span class="header red text"> Allergies </span>
-                            <div class="ui bulleted list">
-                                {% for allergy in ingredient.allergies %}
-                                    <div class="item">
-                                        <span class="ui tag label red">
-                                            {{ allergy }}
-                                        </span>
-                                    </div>
-                                {% endfor %}
-                            </div>
+            {% if ( ingredient.allergies|length > 0) or (ingredient.allergenTags |length > 0) %}
+                <div class="sixteen wide column">
+                    <div class="ui red message">
+                        <div class="header red text"> Allergies</div>
+                        <div class="ui big horizontal divided list">
+                            {% for allergy in ingredient.allergies %}
+                                <div class="item">
+                                    {{ allergy }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="header">Ingrédients Allergènes</div>
+                        <div class="ui big horizontal divided list">
+                            {% for tag in ingredient.allergenTags %}
+                                <div class="item">
+                                    {{ tag }}
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
-                    <div class="blue card">
-                        <div class="content">
-                            <span class="header">Ingrédients Allergènes </span>
-                            <div class="ui bulleted list">
-                                {% for tag in ingredient.allergenTags %}
-                                    <div class="item">
-                                        <span class="ui red tag label">
-                                        {{ tag }}
-                                        </span>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
+            {% else %}
+                <div class="ui green message text-center">Aucune allergie alimentaire n'a été signalée pour cet
+                    ingrédient
+                </div>
+            {% endif %}
         </div>
         <div class="row">
             <div class="eight wide centered column">
@@ -66,7 +59,8 @@
                         <div class="header"> Nutriscore</div>
                     </div>
                     <div class="ui medium centered image">
-                        <img src="{{ pathToWeb }}/images/nutriscore/nutriscore-{{ ingredient.nutritionGradeFr }}.png" alt="clem"/>
+                        <img src="{{ pathToWeb }}/images/nutriscore/nutriscore-{{ ingredient.nutritionGradeFr }}.png"
+                             alt="clem"/>
                     </div>
                 </div>
                 <div class="ui fluid red centered card">
@@ -90,7 +84,7 @@
                         <div class="ui horizontal list">
                             {% for additive in ingredient.additives|json_decode %}
                                 <div class="item">
-                                    <span class="ui tag label"> {{ additive}} </span>
+                                    <span class="ui tag label"> {{ additive }} </span>
                                 </div>
                             {% endfor %}
                         </div>
@@ -99,24 +93,24 @@
             </div>
             <div class="eight wide centered column">
                 <div class="ui fluid red card">
-                        <div class="content">
-                            <div class="header text-center">
-                                {{ ingredient.name }}
-                            </div>
-                            <ul>
-                                <li>Code: {{ ingredient.code }}</li>
-                                <li>Nom: {{ ingredient.name }}</li>
-                                <li>Marque: {{ ingredient.brands }}</li>
-                                <li>Nom générique: {{ ingredient.genericNameFr }} </li>
-                                <li>Origine: {{ ingredient.countries }}
-                                </li>
-                            </ul>
+                    <div class="content">
+                        <div class="header text-center">
+                            {{ ingredient.name }}
                         </div>
+                        <ul>
+                            <li>Code: {{ ingredient.code }}</li>
+                            <li>Nom: {{ ingredient.name }}</li>
+                            <li>Marque: {{ ingredient.brands }}</li>
+                            <li>Nom générique: {{ ingredient.genericNameFr }} </li>
+                            <li>Origine: {{ ingredient.countries }}
+                            </li>
+                        </ul>
                     </div>
+                </div>
                 <div class="ui fluid red card">
                     <div class="content">
                         <div class="header text-center">
-                           Catégories
+                            Catégories
                         </div>
                         <div class="ui horizontal divided list">
                             {% for category in ingredient.categories %}
@@ -137,39 +131,41 @@
             </div>
         </div>
         <div class="row">
-            <div class="fourteen wide centered column">
-                <div class="ui three cards">
-                    {% if ingredient.imageUrl is not null %}
-                        <div class="red card">
-                            <div class="image">
-                                <img src="{{ ingredient.imageUrl }}" alt="{{ ingredient.brands }} image">
-                            </div>
+            <div class="six wide centered column">
+                {% if ingredient.imageUrl is not null %}
+                    <div class="ui flui card">
+                        <div class="ui rounded fluid image">
+                            <img src="{{ ingredient.imageUrl }}" alt="{{ ingredient.brands }} image">
+                        </div>
                         <div class="content">
                             {{ ingredient.name }}
                         </div>
                     </div>
-                    {% endif %}
-                    {% if ingredient.imageIngredientsUrl is not null %}
-                        <div class="red card">
-                            <div class="image">
-                                <img src="{{ ingredient.imageIngredientsUrl }}" alt="{{ ingredient.brands }} image ingredients">
-                            </div>
+                {% endif %}
+                {% if ingredient.imageIngredientsUrl is not null %}
+                    <div class="ui fluid card">
+                        <div class="ui rouned fluid image">
+                            <img src="{{ ingredient.imageIngredientsUrl }}"
+                                 alt="{{ ingredient.brands }} image ingredients">
+                        </div>
                         <div class="content">
                             {{ ingredient.name }} composition
                         </div>
                     </div>
-                    {% endif %}
-                    {% if ingredient.imageNutritionUrl is not null %}
-                        <div class="red card">
-                            <div class="image">
-                                <img src="{{ ingredient.imageNutritionUrl }}" alt="{{ ingredient.brands }} image nutrition">
-                            </div>
+                {% endif %}
+            </div>
+
+            <div class="ten wide centered column">
+                {% if ingredient.imageNutritionUrl is not null %}
+                    <div class="ui fluid card">
+                        <div class="ui fluid image">
+                            <img src="{{ ingredient.imageNutritionUrl }}" alt="{{ ingredient.brands }} image nutrition">
+                        </div>
                         <div class="content">
                             {{ ingredient.name }} infos nutrition
                         </div>
                     </div>
-                    {% endif %}
-                </div>
+                {% endif %}
             </div>
 
         </div>
