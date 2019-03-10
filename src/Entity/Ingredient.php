@@ -328,6 +328,15 @@ class Ingredient
     }
 
     /**
+     * @param $categories
+     */
+    public function setCategories($categories){
+        foreach ($categories as $category){
+            $this->addCategory($category);
+        }
+    }
+
+    /**
      * @param mixed $category
      */
     public function addCategory($category)
@@ -363,6 +372,15 @@ class Ingredient
     public function getAllergies(): ?Collection
     {
         return $this->allergies;
+    }
+
+    /**
+     * @param $allergies
+     */
+    public function setAllergies($allergies){
+        foreach ($allergies as $allergy){
+            $this->addAllergy($allergy);
+        }
     }
 
     /**
@@ -601,6 +619,16 @@ class Ingredient
     public function setIngredientsTextFr(string $ingredients_text_fr): void
     {
         $this->ingredients_text_fr = $ingredients_text_fr;
+    }
+
+
+    /**
+     * @param $allergenTags
+     */
+    public function setAllergenTags($tags){
+        foreach ($tags as $tag){
+            $this->addAllergenTag($tag);
+        }
     }
 
     /**

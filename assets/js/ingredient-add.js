@@ -143,19 +143,24 @@ new Vue({
                         product.image_url = raw.image_url
                         product.ingredients_text_fr = raw.ingredients_text_fr
                         if (raw.allergens_tags.length > 0) {
+                            let en_allergens = ['crustaceans', 'eggs', 'fish', 'peanuts',
+                                'soybeans', 'milk', 'nuts', 'celery', 'mustard', 'sesame seeds', 'sulphites', 'lupin', 'molluscs']
+                            let fr_allergens = ['crustacés', 'oeufs', 'poisson', 'cacahuètes', 'soja', 'lait', 'noix', 'celeri',
+                                'moutarde', 'graines de césame', 'sulphites', 'lupin', 'mollusques']
                             let allergens = []
                             raw.allergens_tags.forEach(tag=>{
                                 tag = tag.replace('en:', '')
                                 tag = tag.replace('fr:', '')
+                                let pos = en_allergens.indexOf(tag)
+                                if (pos > -1){
+                                    tag = fr_allergens[pos]
+                                }
                                     allergens.push(tag)
                             })
 
                             product.allergens_tags = allergens
                         }
-                        // if (raw.allergens_from_user !== "" && raw.allergens_from_user !== undefined) {
-                        //     let allergens = raw.allergens_from_user.replace('(fr)', '')
-                        //     product.allergens_tags = allergens.split(',')
-                        // }
+
                         product.nutrition_grade_fr = raw.nutrition_grade_fr
                     // allergens_from_ingredients is a string
                     // i need to split to an array

@@ -9,6 +9,7 @@
 
 namespace App\Service;
 
+use App\Entity\AllergenCloud;
 use App\Entity\Allergy;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Category;
@@ -73,6 +74,34 @@ class IngredientPusher{
                 array_push($new, $allergy);
 
             }
+            return $new;
+        }
+        return null;
+    }
+
+    public function addAllergenTags($tags = null){
+        $new = [];
+        if ($tags){
+            foreach ($tags as $tag){
+                $repo = $this->entityManager
+                    ->getRepository('App:AllergenCloud');
+
+                $the_tag = $repo->findOneBy(['allergenTag' => $tag]);
+
+                if (!$the_tag){
+                    $the_tag = new AllergenCloud();
+                    $the_tag->setAllergenTag($tag);
+                    try {
+                        $this->entityManager
+                            ->persist($the_tag);
+                    } catch (ORMException $e){
+                        die($e);
+                    }
+                }
+                array_push($new, $the_tag);
+
+            }
+
             return $new;
         }
         return null;

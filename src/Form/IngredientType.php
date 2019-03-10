@@ -22,6 +22,13 @@ class IngredientType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('code', TextType::class)
+            ->add('brands', TextType::class)
+            ->add('genericNameFr', TextType::class)
+            ->add('imageIngredientsUrl', TextType::class)
+            ->add('imageNutritionUrl', TextType::class)
+            ->add('imageUrl', TextType::class)
+            ->add('ingredientsTextFr', TextType::class)
             ->add('comment', TextType::class)
             ->add('components', EntityType::class,[
                 'class'=>'App\Entity\Ingredient',
