@@ -142,23 +142,41 @@ new Vue({
                         product.image_nutrition_url = raw.image_nutrition_url
                         product.image_url = raw.image_url
                         product.ingredients_text_fr = raw.ingredients_text_fr
-                        if (raw.allergens_from_user !== undefined) {
-                            let allergens = raw.allergens_from_user.replace('(fr)', '')
-                            product.allergens_tags = allergens.split(', ')
+                        if (raw.allergens_tags.length > 0) {
+                            let allergens = []
+                            raw.allergens_tags.forEach(tag=>{
+                                tag = tag.replace('en:', '')
+                                tag = tag.replace('fr:', '')
+                                    allergens.push(tag)
+                            })
+
+                            product.allergens_tags = allergens
                         }
+                        // if (raw.allergens_from_user !== "" && raw.allergens_from_user !== undefined) {
+                        //     let allergens = raw.allergens_from_user.replace('(fr)', '')
+                        //     product.allergens_tags = allergens.split(',')
+                        // }
                         product.nutrition_grade_fr = raw.nutrition_grade_fr
                     // allergens_from_ingredients is a string
                     // i need to split to an array
                         if (raw.allergens_from_ingredients !== "") {
-                            product.allergens_from_ingredients = raw.allergens_from_ingredients.split(', ')
+                            let temp = raw.allergens_from_ingredients.split(',')
+                            let out = []
+                            temp.map(item=>{
+                                if (out.indexOf(item) === -1){
+                                    out.push(item)
+                                }
+                            })
+                            product.allergens_from_ingredients = out
                         } else {
                             product.allergens_from_ingredients = []
                         }
                         if (raw.categories !== "" && raw.categories !== undefined) {
-                            product.categories = raw.categories.split(', ')
+                            product.categories = raw.categories.split(',')
                         } else {
                             product.categories = []
                         }
+
                         product.countries = raw.countries
                         product.additives_tags = []
                         raw.additives_tags.map(tag=>{
