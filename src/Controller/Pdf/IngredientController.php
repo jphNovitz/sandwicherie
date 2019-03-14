@@ -35,7 +35,7 @@ class IngredientController extends Controller
     /**
      * @Route("{slug}", name="ingredient_pdf")
      */
-    public function index(String $slug)
+    public function create(String $slug)
     {
         $ingredient = $this->loader->LoadOne('App:Ingredient', $slug);
         $this->generator->setTimeout('1000');
@@ -50,12 +50,10 @@ class IngredientController extends Controller
                 'pdf/documents/ingredients/' . $ingredient->getSlug() . '.pdf'
             );
             return $ingredient->getSlug();
-//            return $this->render('Pdf/pdf-confirmation.html.twig', [
-//                "file" => 'pdf/documents/ingredients/' . $ingredient->getSlug() . '.pdf'
-//            ]);
+
         } catch (\Exception $e){
-//            return false;
-            return 'erreur: '.$e->getMessage();
+            return false;
+//            return 'erreur: '.$e->getMessage();
         }
     }
 
