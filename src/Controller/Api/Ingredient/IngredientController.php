@@ -112,7 +112,7 @@ class IngredientController extends FOSRestController
 
         $hateoas = HateoasBuilder::create()->build();
         if ($result = $persister->insert($ingredient)){
-            $result_persist = true;
+            $result_persist = 'success';
             $message_persist = 'Le produit a été enregistré';
             $persist = [
                 'persist' => [
@@ -123,20 +123,20 @@ class IngredientController extends FOSRestController
             // make receive a slug of false
             if($make = $pdf->create($ingredient->getSlug())){
                 $pdf = [
-                    'result' => true
+                    'result' => 'success'
                     ,
                     'message' => 'Un PDF a été créé'
                 ];
             } else {
                 $pdf = [
-                    'result' => false,
+                    'result' => 'error',
                     'message' => 'Le PDF n\'a pas pu être créé'
                 ];
             }
-            $result =  $hateoas->serialize([$persist, $pdf], 'json');
+            $result =  $hateoas->serialize(['persist' => $persist, 'pdf' => $pdf], 'json');
             $status = 200;
         } else {
-            $result_persist = false;
+            $result_persist = 'error' ;
             $message_persist = 'Le produit n\'a pas pu  être enregistré';
             $persist = ['persist' => [
                 'result' => $result_persist,
@@ -146,6 +146,9 @@ class IngredientController extends FOSRestController
             $status = 500;
         }
         $response = $builder->prepare($result, $status);
+//        echo '<pre>';
+//        dump($result); die();
+//        echo '</pre>';
         return ($response);
     }
 
