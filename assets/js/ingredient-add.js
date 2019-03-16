@@ -99,7 +99,7 @@ new Vue({
         return {
             code: '',
             product: {},
-            message: {},
+            messages: [],
             pdf: {
                 lastSLUG: -1,
                 isActive: false
@@ -222,26 +222,32 @@ new Vue({
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 }}).then(response => {
+                let data = JSON.parse(response.data)
+                let parsed = JSON.parse(data)
                 this.resetInfos()
                 if (response.status === 200) {
-                    let raw = JSON.parse(response.data).slice(1, -1)
-                    console.log(raw)
-                    let parsed = JSON.parse(raw)
-                    console.log(parsed)
                     /* manage message*/
-                    this.message.color = "green"
-                    this.message.text = "L'ingrédient a été ajouté."
-                    this.message.active = 1
-                    /* manage last product id & pdf action */
-                    console.log(response.data)
-                    this.pdf.lastSLUG = JSON.parse(response.data).slice(1, -1)
-                    this.pdf.isActive = true
+                    let persist_message = {}
+                    persist_message.text = parsed.persist.message
+                    persist_message.color = parsed.persist.result
+                    this.messages.push(persist_message)
 
+                    let pdf_message = {}
+                    pdf_message.text = parsed.pdf.message
+                    pdf_message.color = parsed.pdf.result
+                    this.messages.push(pdf_message)
+
+                    if (parsed.pdf.result === 'success') {
+                        alert()
+                        this.pdf.lastSLUG = parsed.persist.slug
+                        this.pdf.isActive = true
+                    }
                 } else {
                     /* manage message*/
-                    this.message.color = "red"
-                    this.message.text = "Erreur"
-                    this.message.active = 1
+                    let persist_message = {}
+                    persist_message.text = parsed.persist.message
+                    persist_message.color = parsed.persist.result
+                    this.message.push(persist_message)
                 }
             })
         },

@@ -115,11 +115,10 @@ class IngredientController extends FOSRestController
             $result_persist = 'success';
             $message_persist = 'Le produit a été enregistré';
             $persist = [
-                'persist' => [
-                    'result' => $result_persist
-//                    ,
-//                    'message' => $message_persist
-                ]];
+                    'result' => $result_persist,
+                    'message' => $message_persist,
+                    'slug' => $ingredient->getSlug()
+                ];
             // make receive a slug of false
             if($make = $pdf->create($ingredient->getSlug())){
                 $pdf = [

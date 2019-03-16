@@ -22,9 +22,13 @@
                     </div>
                 </div>
             </div >
-            <div style="height: 10vh">
-                <template v-if="message.active">
-                    <div class="ui small message" :class="message.color">${message.text}</div>
+            <div style="height: 10vh ; overflow-y: scroll">
+                <template v-if="messages.length > 0">
+                    <div v-for="message in messages">
+                        <div class="ui mini message" :class="message.color" >
+                            ${message.text}
+                        </div>
+                    </div>
                 </template>
                 <template v-else>
                     no message
