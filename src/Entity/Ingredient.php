@@ -91,21 +91,21 @@ class Ingredient
     /**
      * @var String
      *
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $nutrient_levels;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $additives;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $countries;
 
@@ -196,6 +196,12 @@ class Ingredient
     private $allergenTags;
 
     /**
+     * @var integer
+     * @ORM\Column(type="boolean", nullable=true);
+     */
+    protected $pdf;
+
+    /**
      * Ingredient constructor.
      */
 
@@ -209,6 +215,7 @@ class Ingredient
         $this->bread = false;
         $this->sauce = false;
         $this->vegetable = false;
+        $this->pdf = false ;
     }
 
     /**
@@ -708,6 +715,23 @@ class Ingredient
     {
         $this->countries = $countries ;
     }
+
+    /**
+     * @return int
+     */
+    public function getPdf(): ?int
+    {
+        return $this->pdf;
+    }
+
+    /**
+     * @param int $pdf
+     */
+    public function setPdf(int $pdf): void
+    {
+        $this->pdf = $pdf;
+    }
+
 
 
 

@@ -15,7 +15,7 @@ use Twig\Environment;
 /**
  * Class IngredientController
  * @package App\Controller\Pdf\Ingredient
- * @Route("/admin/pdf/ingredient/", methods={"GET","HEAD"})
+ * @Route("/admin/ingredients/pdf/", methods={"GET","HEAD"})
  */
 
 class IngredientController extends Controller
@@ -51,7 +51,7 @@ class IngredientController extends Controller
             );
             return $ingredient->getSlug();
 
-        } catch (\Exception $e){
+        } catch (\Exception $e){dump($e->getMessage()); die();
             return false;
 //            return 'erreur: '.$e->getMessage();
         }
@@ -59,7 +59,7 @@ class IngredientController extends Controller
 
 
     /**
-     * @Route("view/{slug}", name="ingredient_view_pdf")
+     * @Route("{slug}/view", name="ingredient_view_pdf")
      */
     public function view(String $slug)
     {

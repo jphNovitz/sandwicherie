@@ -121,9 +121,10 @@ class IngredientController extends FOSRestController
                 ];
             // make receive a slug of false
             if($make = $pdf->create($ingredient->getSlug())){
+                $ingredient->setPdf(true);
+                $persister->update($ingredient);
                 $pdf = [
-                    'result' => 'success'
-                    ,
+                    'result' => 'success',
                     'message' => 'Un PDF a été créé'
                 ];
             } else {

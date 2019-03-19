@@ -16,9 +16,10 @@
 
 
     <h1> {% block title %}skeleton list {% endblock %} </h1>
+
     <div class="row">
         <div class="ui middle aligned divided fluid big list"
-             id="object-list"   data-list="{{ list|serialize }}"   >
+             id="object-list" data-list="{{ list|serialize }}"     >
             {% block list %}
                 <div class="ui input focus sixteen wide field">
                     <input type="text"
@@ -26,36 +27,6 @@
                            v-model="typing"
                     style="width: 100%"/>
                 </div>
-                {#{% for object in list %}#}
-                    {#<div class="item">#}
-                        {#<div class="middle aligned right floated">#}
-                            {#{% block show %}#}
-                                {#<a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}"#}
-                                   {#class="ui blue circular tiny icon button">#}
-                                    {#<i class="zoom icon"></i>#}
-                                {#</a>#}
-                            {#{% endblock %}#}
-                            {#{% block update %}#}
-                                {#<a href="{{ path(entity ~ '_update', {'slug' : object.slug}) }}"#}
-                                   {#class="ui olive circular tiny icon button">#}
-                                    {#<i class="edit icon"></i>#}
-                                {#</a>#}
-                            {#{% endblock %}#}
-                            {#{% block delete %}#}
-                                {#<a href="{{ path(entity ~ '_delete', {'slug' : object.slug}) }}"#}
-                                   {#class="ui red circular tiny icon button">#}
-                                    {#<i class="delete icon"></i>#}
-                                {#</a>#}
-                            {#{% endblock %}#}
-                        {#</div>#}
-                        {#<img class="ui avatar image" src="/images/~{{ object.images[0].imageName }}">#}
-                        {#<div class="middle aligned content" style="line-height: 2rem">#}
-                            {#{% block element_title %} #}{# sometime it's title #}
-                                {#<a href="{{ path(entity ~ '_show', {'slug' : object.slug}) }}">{{ object.name }}</a>#}
-                            {#{% endblock %}#}
-                        {#</div>#}
-                    {#</div>#}
-                {#{% endfor %} #}
 
                     <div class="item" v-for="(object, key) in filtered">
                         <div class="middle aligned right floated">
@@ -64,6 +35,20 @@
                                    class="ui blue circular tiny icon button">
                                     <i class="zoom icon"></i>
                                 </a>
+                                <template v-if="object.pdf">
+                                    <a :href="path(key, 'pdf')"
+                                       class="ui blue circular tiny icon basic button"
+                                        title="pdf">
+                                        <i class="file pdf icon"></i>
+                                    </a>
+                                </template>
+                                <template v-else>
+                                    <a href="#"
+                                       class="ui blue circular tiny icon basic disabled button"
+                                        title="pdf">
+                                        <i class="file pdf icon"></i>
+                                    </a>
+                                </template>
                             {% endblock %}
                             {% block update %}
                                 <a :href="path(key, 'update')"
@@ -116,11 +101,16 @@
         },
         methods: {
             path: function (key,  action) {
+                let pre = ''
+                if (action === 'pdf'){
+                    action = 'view'
+                    pre = 'pdf'
+                }
                 let slug =  this.base_object[key].slug
                 if (!slug){
                     slug =  this.base_object[key].username
                 }
-                let path = slug+'/'+action
+                let path = pre+'/'+slug+'/'+action
                 return (path)
             }
         }

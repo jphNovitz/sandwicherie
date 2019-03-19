@@ -27,7 +27,6 @@ const images = Vue.component('images', {
                     </template>
                 </div>
                     <!--</div>-->
-                </div>
                 <div class="ui card fluid centered">
                     <div class="content">
                         <div class="header">
@@ -58,6 +57,8 @@ const images = Vue.component('images', {
                     </div>
                 </div>
             </div>
+    </div>
+        </div>
     </div>
 `,
     props: ['product'],
@@ -215,7 +216,8 @@ new Vue({
             }, 200)
         },
         sendInfos: function () {
-            console.log(JSON.stringify(this.product))
+            this.messages = []
+            // console.log(JSON.stringify(this.product))
             let packed = JSON.stringify(this.product)
             this.$http.post('/api/ingredient/new', packed, {
                 headers: {
@@ -238,7 +240,6 @@ new Vue({
                     this.messages.push(pdf_message)
 
                     if (parsed.pdf.result === 'success') {
-                        alert()
                         this.pdf.lastSLUG = parsed.persist.slug
                         this.pdf.isActive = true
                     }

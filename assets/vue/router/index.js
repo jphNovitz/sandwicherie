@@ -11,7 +11,7 @@ import logout from '../pages/logout'
 import profile from '../pages/profile'
 import photos from '../pages/photos'
 import oups from '../pages/404'
-import play from '../pages/play'
+// import play from '../pages/play'
 import privacy from '../pages/privacy'
 
 Vue.use(Router)
@@ -92,12 +92,13 @@ const router = new Router({
             name: '404',
             path: '/oups',
             component: oups
-        },
-        {
-            name: 'play',
-            path: '/play',
-            component: play
         }
+        // ,
+        // {
+        //     name: 'play',
+        //     path: '/play',
+        //     component: play
+        // }
     ]
 })
 
