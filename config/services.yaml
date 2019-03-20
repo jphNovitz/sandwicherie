@@ -13,7 +13,7 @@ parameters:
     email_from: info@laclementine.be
     site_url: http://www.laclementine.be
     ngrok: http://db0e5817.ngrok.io
-
+    router.request_context.host: 'http://localhost:8000/'
 services:
     # default configuration for services in *this* file
     _defaults:

@@ -47,7 +47,9 @@ class IngredientController extends Controller
                         'ingredient' => $ingredient
                     )
                 ),
-                'pdf/documents/ingredients/' . $ingredient->getSlug() . '.pdf'
+                'pdf/documents/ingredients/' . $ingredient->getSlug() . '.pdf',
+                [],
+                true
             );
             return $ingredient->getSlug();
 
