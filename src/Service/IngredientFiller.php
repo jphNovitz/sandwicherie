@@ -2,8 +2,9 @@
 namespace App\Service;
 
 use App\Entity\Ingredient;
+use App\Model\IngredientFillerInterface;
 
-class IngredientFiller{
+class IngredientFiller implements  IngredientFillerInterface {
 
     protected $pusher;
     /**
@@ -20,7 +21,7 @@ class IngredientFiller{
         $this->pusher = $pusher;
     }
 
-    public function fill(Ingredient $ingredient, $received){
+    public function fill(Ingredient $ingredient, Array $received){
 
         /**
          * this loop check and add simple properties
