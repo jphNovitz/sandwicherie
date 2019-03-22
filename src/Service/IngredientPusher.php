@@ -11,11 +11,12 @@ namespace App\Service;
 
 use App\Entity\AllergenCloud;
 use App\Entity\Allergy;
+use App\Model\IngredientPusherInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Category;
 use Doctrine\ORM\ORMException;
 
-class IngredientPusher{
+class IngredientPusher implements IngredientPusherInterface {
 
     private $entityManager;
 
@@ -25,7 +26,7 @@ class IngredientPusher{
 
     }
 
-    public function addCategories($categories = null){
+    public function addCategories(Array $categories = null){
         $new = [];
         if ($categories){
             foreach ($categories as $name){
@@ -52,7 +53,7 @@ class IngredientPusher{
         return null;
     }
 
-    public function addAllergies($allergen_tags = null){
+    public function addAllergies(Array $allergen_tags = null){
         $new = [];
         if ($allergen_tags){
             foreach ($allergen_tags as $tag){
@@ -79,7 +80,7 @@ class IngredientPusher{
         return null;
     }
 
-    public function addAllergenTags($tags = null){
+    public function addAllergenTags(Array $tags = null){
         $new = [];
         if ($tags){
             foreach ($tags as $tag){

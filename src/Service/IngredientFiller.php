@@ -3,6 +3,7 @@ namespace App\Service;
 
 use App\Entity\Ingredient;
 use App\Model\IngredientFillerInterface;
+use App\Model\IngredientPusherInterface;
 
 class IngredientFiller implements  IngredientFillerInterface {
 
@@ -16,7 +17,7 @@ class IngredientFiller implements  IngredientFillerInterface {
     'image_url', 'ingredients_text_fr', 'nutrition_grade_fr',  'nutrient_levels'
     ];
 
-    public function __construct(IngredientPusher $pusher)
+    public function __construct(IngredientPusherInterface $pusher)
     {
         $this->pusher = $pusher;
     }

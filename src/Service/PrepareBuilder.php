@@ -2,11 +2,12 @@
 
 namespace App\Service;
 
+use App\Model\PrepareBuilderInterface;
 use Hateoas\HateoasBuilder;
 use Symfony\Component\HttpFoundation\Response;
-class PrepareBuilder{
+class PrepareBuilder implements PrepareBuilderInterface {
 
-    public function prepare($result, $status){
+    public function prepare(String $result, Int $status){
         $hateoas = HateoasBuilder::create()->build();
         $json = $hateoas->serialize($result, 'json');
         $response = new Response($json, $status, array('application/json'));

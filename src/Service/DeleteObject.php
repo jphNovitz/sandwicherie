@@ -1,6 +1,7 @@
 <?php
 namespace App\Service;
 
+use App\Model\DeleteObjectInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -8,7 +9,7 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 
-class DeleteObject{
+class DeleteObject implements DeleteObjectInterface {
     protected  $router;
     protected  $session;
     protected  $customPersister;

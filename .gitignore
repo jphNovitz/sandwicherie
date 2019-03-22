@@ -1,3 +1,4 @@
+.idea/
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
@@ -14,3 +15,6 @@
 /%CONFIG_DIR%/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
 /public/images/
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
