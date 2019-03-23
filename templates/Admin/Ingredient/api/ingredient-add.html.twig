@@ -1,11 +1,11 @@
 {% extends '_bases/_admin_base.html.twig' %}
-
+{% set entity = 'ingredients' %}
 {#{% set entity = 'ingredients' %}#}
 {% block title %}Ajout d'un ingrédient{% endblock %}
 {% block body %}
 
 
-    <div class="ui grid" id="ingredients-api">
+    <div class="ui container grid stackable" id="ingredients-api">
 
         <div class="eight wide column">
             <div class="ui card fluid"  style="height: 17vh">
@@ -90,7 +90,7 @@
                                 <div class="sixteen wide field inline fields">
                                     <label>Score Nutrition</label>
                                     <div class="ui buttons">
-                                        <button class="ui green  button"
+                                        <button class="green ui button"
                                                 :class="nutritionActive('a')"
                                                 @click="setNutriGrade('a')">A
                                         </button>
@@ -290,70 +290,71 @@
             </div>
         </div>
 
-        <div class="two wide centered column">
-            <div class="ui vertical buttons" style="margin-left: -10px">
-                <button class="ui blue button"
+        <div class="two wide centered column grid">
+            {#<div class="ui vertical  buttons" style="margin-left: -10px">#}
+                <button class="ui blue fluid button"
                         style="min-height: 12vh"
                         @click="getInfos()">
-                    CODE
+                    <i class="info  icon"></i>
                 </button>
-                <button class="ui green button"
-                        style="min-height: 12vh"
+                <button class="green ui fluid button"
+                        :class="buttons.send"
+                        style="min-height: 10vh"
                         @click="sendInfos()">
                     <i class="plus icon"></i>
                 </button>
-                <button class="ui red button"
+                <button class="red ui fluid button"
                         @click="resetInfos()"
-                        style="min-height: 12vh">
+                        style="min-height: 10vh">
                     <i class="sync alternate icon"></i>
                 </button>
-                <button class="ui button"
+                <button class="ui  fluid button"
                         :class="{disabled : !pdf.isActive }"
-                        style="min-height: 12vh"
+                        style="min-height: 10vh"
                         @click="switchPdf()">
                     <i class="file large  icon" :class="pdfIcon"></i>
                 </button>
 
                 <template v-if="leftPanel === 'general'">
-                    <button class="ui button"
-                            style="min-height: 12vh"
+                    <button class="ui fluid button"
+                            style="min-height: 10vh"
                             :class="objectDisabled"
                             @click="setLeftPanel('nutrition')">
                         <i class="">Nutrition</i>
                     </button>
                 </template>
                 <template v-else>
-                    <button class="ui button"
-                            style="min-height: 12vh"
+                    <button class="ui fluid button"
+                            style="min-height: 10vh"
                             :class="objectDisabled"
                             @click="setLeftPanel('general')">
                         <i class="">General</i>
                     </button>
                 </template>
                 <template v-if="leftPanel === 'allergens'">
-                    <button class="ui button"
-                            style="min-height: 12vh" @click="setLeftPanel('nutrition')">
+                    <button class="ui fluid button"
+                            style="min-height: 10vh" @click="setLeftPanel('nutrition')">
                         <i class="">Nutrition</i>
                     </button>
                 </template>
                 <template v-else>
-                    <button class="ui button"
-                            style="min-height: 12vh"
+                    <button class="ui fluid button"
+                            style="min-height: 10vh"
                             :class="objectDisabled"
                             @click="setLeftPanel('allergens')">
                         <i class="">Allergies</i>
                     </button>
                 </template>
-                <button class="ui  button"
-                        style="min-height: 12vh">
+                <button class="ui fluid button"
+                        style="min-height: 10vh">
                     <i class=""></i>
                 </button>
                 <a class="ui button"
-                   style="min-height: 6vh"
+                   {#style="min-height: 6vh"#}
                    href="{{ path('ingredients_add') }}">
                     Classic
                 </a>
-            </div>
+            {#</div>#}
         </div>
 
         <div class="six wide column">
@@ -365,7 +366,9 @@
 
 
 {% endblock %}
-
+{% block right_column %}
+    {% include '_elements/_action_floating_menu/_form_action_floating_menu.html.twig' %}
+{% endblock %}
 {% block javascripts %}
     <script src="{{ asset('build/js/ingredient-add.js') }}">
 

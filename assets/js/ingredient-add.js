@@ -106,7 +106,10 @@ new Vue({
                 isActive: false
             },
             righte: 'images',
-            leftPanel: 'general'
+            leftPanel: 'general',
+            buttons: {
+                send : 'disabled'
+            }
         }
     },
     mounted() {
@@ -135,6 +138,7 @@ new Vue({
             var product = {}
             this.$http.get('https://fr.openfoodfacts.org/api/v0/produit/' + this.code + '.json').then(response => {
                 if (response.data.status === 1) {
+                    this.buttons.send = ''
                     let raw = response.data.product
                     console.log(response.data.product)
                     product.code = raw.code
@@ -216,6 +220,7 @@ new Vue({
             }, 200)
         },
         sendInfos: function () {
+            this.buttons.send = 'loading'
             this.messages = []
             // console.log(JSON.stringify(this.product))
             let packed = JSON.stringify(this.product)
@@ -224,6 +229,7 @@ new Vue({
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 }}).then(response => {
+                this.buttons.send = 'disabled'
                 let data = JSON.parse(response.data)
                 let parsed = JSON.parse(data)
                 this.resetInfos()
@@ -245,6 +251,7 @@ new Vue({
                     }
                 } else {
                     /* manage message*/
+                    console.log(response)
                     let persist_message = {}
                     persist_message.text = parsed.persist.message
                     persist_message.color = parsed.persist.result

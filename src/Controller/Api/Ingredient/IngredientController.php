@@ -16,8 +16,8 @@ namespace App\Controller\Api\Ingredient;
 use App\Controller\Pdf\IngredientController as pdf;
 use App\Entity\Ingredient;
 use App\Model\IngredientFillerInterface;
+use App\Model\PrepareBuilderInterface;
 use App\Service\CustomPersister;
-use App\Service\PrepareBuilder;
 use FOS\RestBundle\Controller\FOSRestController;
 use Hateoas\HateoasBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -40,7 +40,7 @@ class IngredientController extends FOSRestController
                         CustomPersister $persister,
                         Request $request,
                         pdf $pdf,
-                        PrepareBuilder $builder)
+                        PrepareBuilderInterface $builder)
     {
         $received = json_decode($request->getContent(), true);
         if (!$ingredient = $this->get('doctrine.orm.default_entity_manager')
