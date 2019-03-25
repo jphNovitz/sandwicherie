@@ -22,11 +22,6 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use Hateoas\HateoasBuilder;
 use FOS\RestBundle\Controller\Annotations\Get;
 
-
-
-
-
-
 class AllergyController extends FOSRestController
 {
     protected $serializer;
