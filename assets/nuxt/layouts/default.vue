@@ -1,7 +1,7 @@
 <template>
   <div>
     <sidebar
-      class="ui large sidebar vertical orange icon menu"
+      class="ui large sidebar vertical menu"
       :class="{ uncover: sidebarActive, visible: sidebarActive }"
     >
     </sidebar>
