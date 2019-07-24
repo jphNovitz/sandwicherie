@@ -1,0 +1,45 @@
+{% set infos = raw_infos|json_decode %}
+
+<div class="bg-footer">
+    <div class="row spaced-2-1">
+        <div class="sixteen wide column center aligned">
+            <img src="{{ asset('images/logo_white-400.png') }}" class="ui centered small image"/>
+        </div>
+    </div>
+    <div id="footer" class="ui container spaced-2-1">
+        <div class="ui stackable grid left aligned">
+            <div class="five wide column">
+                <h3 class="ui large header center aligned">{{ infos.title }}</h3>
+                <p class="ui medium header">{{ infos.subTitle }}</p>
+                <p><i class="map marker alternate icon"></i>{{ infos.adress }}
+                    <br/> &nbsp; &nbsp; {{ infos.city }}</p>
+                <p><i class="phone icon"></i><a href="tel:+32{{ infos.phone }}"> {{ infos.phone }} </a>
+                    <br/><i class="mail icon"></i><a href="mailto:'{{ infos.email }}'">{{ infos.email }}</a></p>
+
+            </div>
+            <div class="five wide column">
+                <h3 class="ui large header center aligned">Reseaux sociaux</h3>
+
+                <div class="ui horizontal list" >
+                    <span class="item">
+                        <a href="{{infos.SocialInstagram}}" class="ui instagram button">
+                             <i class="instagram icon"></i>  Instagram
+                        </a>
+                    </span>
+                    <span class="item">
+                        <br /><iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Flaclementine.be&width=178&layout=button_count&action=like&size=large&show_faces=false&share=true&height=46&appId=1146945778741142" width="178" height="65" style="border:none;overflow:hidden ; padding-top: 34px;" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" ></iframe>
+                    </span>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h3 class="ui large header center aligned">Informations</h3>
+                <div class="left aligned">
+                    <div class="ui list left aligned">
+                        <span class="list item">Information allergènes </span>
+                        <span class="list item">Vos données </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
