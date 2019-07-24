@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Cart;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\ORMException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class CartRepository extends ServiceEntityRepository
@@ -51,6 +52,47 @@ class CartRepository extends ServiceEntityRepository
             ->addSelect('c, items')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findOrderWithItems($id){
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.items', 'items')
+            ->addSelect('c, items')
+            ->andWhere('c.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()[0];
+    }
+    public function findOrderByUser($username){
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.items', 'items')
+            ->addSelect('c, items')
+            ->andWhere('c.status = :status')
+            ->setParameter('status', 'En cours')
+            ->addOrderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function countCartItemsByUser($username){
+
+       $query =  $this->createQueryBuilder('c')
+            ->leftJoin('c.items', 'items')
+            ->leftJoin('c.client', 'client')
+            ->andWhere('client.username = :username')
+            ->setParameter('username', $username)
+            ->andWhere('c.status = :status')
+            ->setParameter('status', 'En cours')
+            ->addselect('count(items.id)')
+            ->addGroupBy('c')
+            ->select('count(items)')
+            ->getQuery();
+       try {
+           return $query->getSingleScalarResult();
+       }catch (ORMException $e){
+           return 0;
+       }
+
     }
     /*
     public function findBySomething($value)
