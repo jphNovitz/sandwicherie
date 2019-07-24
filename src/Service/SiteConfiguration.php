@@ -31,4 +31,10 @@ class SiteConfiguration{
         //$serialized = $this->serializer->deserialize($content, site::class, 'json');
         return json_decode($content);
     }
+    public function getPitch(){
+
+        $content = json_decode(file_get_contents('../src/File/site.json'));
+
+        return $content->introduction;
+    }
 }
