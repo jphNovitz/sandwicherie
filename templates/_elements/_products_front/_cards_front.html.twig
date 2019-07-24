@@ -1,0 +1,26 @@
+{% block title %}
+    <h2 class="ui huge orange header">{{ title }}</h2>
+{% endblock %}
+<div class="ui three stackable cards">
+    {% for item in items %}
+        <div class="card">
+            <div class="image">
+                {%  if  item.images is not empty %}
+                    <img src="{{ asset('images/products/'~item.images[0].imageName) }}">
+                {% else %}
+                    <img src="{{ asset('images/logo_white-400.png') }}">
+                {% endif %}
+            </div>
+            <div class="content">
+                <a href="{{ path('product_card', {'slug': item.slug}) }}" class="header">{{ item.name }}</a>
+            </div>
+            <div class="extra content">
+                {% if item.halal %}
+                    <a>
+                        <img src="{{ asset('images/flags/halal-flag-50.png') }}">
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

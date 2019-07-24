@@ -1,0 +1,24 @@
+<div class="ui container modal test" id="modal">
+    <i class="close icon"></i>
+    <div class="ui padded grid">
+        <div class="row">
+            <div class="ten wide column">
+                <div class="ui huge orange header">
+                    Ajout au panier: {{ product.name }}
+                </div>
+            </div>
+            <div class="six wide column right aligned">
+                <div class="ui huge green header">
+                    ${sale_price} EUR
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen wide column">
+                {% include 'Front/Client/cart_form_add.html.twig' %}
+                {#{{ render(controller('App\\Controller\\Front\\Client\\cartController::addItemToCart')) }}#}
+            </div>
+        </div>
+    </div>
+    <span style="visibility: hidden" id="price" data-price="{{ product.price }}"></span>
+</div>
