@@ -1,0 +1,22 @@
+{% extends'_bases/_front_base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="sixteen wide column left aligned">
+            {% include '_elements/_products_front/_cards_front.html.twig' with {
+                'title' : 'Derniers ajouts',
+                'items' : last_products
+            } %}
+        </div>
+    </div>
+
+    <div class="row spaced-2-1">
+        <div class="sixteen wide column left aligned">
+            {% include '_elements/_products_front/_cards_front.html.twig' with {
+                'title' : 'Les propositions de Clémentine',
+                'items' : featured_products
+            } %}
+        </div>
+    </div>
+{% endblock %}

@@ -52,16 +52,15 @@ class Cart
     private $client;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", length=1, nullable=false)
+     * @var string
+     * @ORM\Column(name="status", length=20)
      */
-    private $done;
+    private $status;
 
     public function __construct()
     {
         $this->items = new ArrayCollection();
-        $this->done = false;
+        $this->status = 'En cours';
     }
 
     /**
@@ -137,7 +136,7 @@ class Cart
     public function removeItem($item)
     {
         $this->items->removeElement($item);
-        $item->setCart(null);
+//        $item->setCart(null);
     }
 
 
@@ -158,20 +157,22 @@ class Cart
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function isDone(): bool
+    public function getStatus(): string
     {
-        return $this->done;
+        return $this->status;
     }
 
     /**
-     * @param bool $done
+     * @param string $status
      */
-    public function setDone(bool $done): void
+    public function setStatus(string $status): void
     {
-        $this->done = $done;
+        $this->status = $status;
     }
+
+
 
 
 }

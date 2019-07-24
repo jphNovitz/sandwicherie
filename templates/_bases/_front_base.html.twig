@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Sandwicherie Saint-Nicolas - La clementine.be{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+    <script src="{{ asset('build/js/sui.js') }}"></script>
+    {#<script src="{{ asset('build/js/app-front.js') }}"></script>#}
+    <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
+    <link href="{{ asset('build/css/front.css') }}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+<div class="bg">
+    <header>
+        <div class="ui container">
+            {% block toolbar %}
+                <div id="toolbar" class="ui grid">
+                    <div class=" row">
+                        <div class="five wide column left aligned bottom aligned">
+                            <a href="tel:+320468538605">
+                                <i class="phone icon"></i>0468 53 86 05
+                            </a>
+                        </div>
+                        <div class="three wide column">
+                        </div>
+                        <div class="eight wide column right aligned ui grid">
+                            {% include '_elements/_header_front/_connect_status.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+        <nav class="ui container">
+            <div class="ui stackable grid">
+                <div class="four wide column left aligned">
+                    <a href="http://laclementine.be" class="item">
+                        <h1>La Clémentine</h1>
+                    </a>
+                </div>
+                <div class="twelve wide column right aligned">
+                    <div class="ui stackable mobile menu">
+                        <div class="item">
+                            <button class="ui primary basic button">menu</button>
+
+                            {#<i class="large bars icon"></i>#}
+                            {#</a>#}
+                        </div>
+                        <div class="link item">
+                            <a href="{{ path('home') }}"> Accueil </a>
+                        </div>
+                        <div class="link item">
+                            <a href="{{ path('front_products_list') }}"> La Carte </a>
+                        </div>
+                        <div class="link item">
+                            <a href="{{ path('front_cater') }}">Traiteur</a>
+                        </div>
+                        <div class="link item">
+                            <a href="{{ path('front_photos_instagram') }}"> Photos </a>
+                        </div>
+                        <div class="link item">
+                            <a href="{{ path('front_schedules_list') }}">Horaires </a>
+                        </div>
+                        <div class="link item">
+                            Contact
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if app.request.pathInfo == '/' %}
+                <div class="ui stackable grid">
+                    <div class="sixteen wide column center aligned cta ">
+                        <p class="cta-pitch">
+                            {{ render(controller('App\\Controller\\Front\\frontController::pitch')) }}
+                        </p>
+                        <a href="http://facebook.com/laclementine.be" class="ui primary basic huge button">
+                            <i class="facebook icon"></i>
+                            Facebook
+                        </a>
+                        <a href="http://facebook.com/laclementine.be" class="ui primary basic huge button">
+                            <i class="instagram icon"></i>
+                            Instagram
+                        </a>
+
+                    </div>
+                </div>
+            {% endif %}
+        </nav>
+    </header>
+</div>
+
+<div class="ui container">
+    <div class="ui grid"> <!-- flash message -->
+        <div class="row">
+            <div class="sixteen wide column">
+                {% include '_elements/_flash_messages.html.twig' %}
+            </div>
+        </div>
+        {% block body %}
+            content
+        {% endblock %}
+    </div>
+</div>
+
+
+{% block footer %}
+    {{ render(controller('App\\Controller\\Front\\frontController::infos')) }}
+{% endblock %}
+
+<script src="{{ asset('build/js/app.js') }}"></script>
+{% block javascripts %}
+
+{% endblock %}
+{% block sui_js %}{% endblock %}
+
+</body>
+</html>

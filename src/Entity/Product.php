@@ -5,6 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use PhpParser\Node\Expr\Cast\Bool_;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -62,11 +63,13 @@ class Product
      * @ORM\Column(name="isactive", type="boolean", length=1, nullable=true)
      */
     private $isActive;
+
     /**
      * @var boolean
      * @ORM\Column(name="featured", type="boolean", length=1, nullable=true)
      */
     private $featured;
+
     /**
      * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="App\Entity\Ingredient")
@@ -125,6 +128,13 @@ class Product
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="discoveries")
      */
     private $interestedBy;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="halal", type="boolean", length=1, nullable=true)
+     */
+    private $halal;
+
     /**
      * Product constructor.
      */
@@ -140,6 +150,7 @@ class Product
         $this->featured = false;
         $this->likedBy = new ArrayCollection();
         $this->interestedBy = new ArrayCollection();
+        $this->halal = false;
     }
     /**
      * @return mixed
@@ -477,6 +488,24 @@ class Product
         // uncomment if you want to update other side
         //$interestedBy->setProduct(null);
     }
+
+    /**
+     * @return bool
+     */
+    public function isHalal(): bool
+    {
+        return $this->halal;
+    }
+
+    /**
+     * @param bool $halal
+     */
+    public function setHalal(bool $halal): void
+    {
+        $this->halal = $halal;
+    }
+
+
     public function __toString()
     {
         return $this->name;

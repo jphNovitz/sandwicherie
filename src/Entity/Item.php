@@ -22,6 +22,21 @@ class Item
 
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $mode;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $comment;
+
+    /**
      * @var integer
      *
      * @ORM\Column(type="integer", length=2, nullable=false)
@@ -110,6 +125,40 @@ class Item
     public function setProduct(Product $product): void
     {
         $this->product = $product;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMode(): ?string
+    {
+        return $this->mode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     */
+    public function setComment(string $comment): void
+    {
+        $this->comment = $comment;
+    }
+
+
+
+    /**
+     * @param string $mode
+     */
+    public function setMode(string $mode): void
+    {
+        $this->mode = $mode;
     }
 
     /**
