@@ -31,7 +31,7 @@
                     <div class="item" v-for="(object, key) in filtered">
                         <div class="middle aligned right floated">
                             {% block show %}
-                                <a :href="path(key, '')"
+                                <a :href="'/'+path(key, '', '{{ entity }}')"
                                    class="ui blue circular tiny icon button">
                                     <i class="zoom icon"></i>
                                 </a>
@@ -51,13 +51,13 @@
                                 </template>
                             {% endblock %}
                             {% block update %}
-                                <a :href="path(key, 'update')"
+                                <a :href="'/'+path(key, 'update', '{{ entity }}')"
                                    class="ui olive circular tiny icon button">
                                     <i class="edit icon"></i>
                                 </a>
                             {% endblock %}
                             {% block delete %}
-                                <a :href="path(key, 'delete')"
+                                <a :href="'/'+path(key, 'delete', '{{ entity }}')"
                                    class="ui red circular tiny icon button">
                                     <i class="delete icon"></i>
                                 </a>
@@ -100,8 +100,11 @@
 
         },
         methods: {
-            path: function (key,  action) {
-                let pre = ''
+            path: function (key,  action, entity='') {
+                // if (entity!==''){
+                //     entity+='/'
+                // }
+                let pre = 'admin/' + entity
                 if (action === 'pdf'){
                     action = 'view'
                     pre = 'pdf'
@@ -111,6 +114,7 @@
                     slug =  this.base_object[key].username
                 }
                 let path = pre+'/'+slug+'/'+action
+                console.log(path)
                 return (path)
             }
         }
