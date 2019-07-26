@@ -1,0 +1,18 @@
+{% extends '_bases/_front_base.html.twig' %}
+
+{% block body %}
+    <div class="nine wide column">
+        <img src="{{ photo.standardResolution }}"
+            class="ui rounded large image  center aligned middle aligned" />
+    </div>
+    <div class="seven wide column center aligned middle aligned">
+        <p class="ui huge header">
+            {{ photo.caption }}
+        </p>
+
+        <a href="{{ path('front_photos_instagram') }}"
+            class="ui circular button">
+            <i class="left arrow icon"></i>
+        </a>
+    </div>
+{% endblock %}

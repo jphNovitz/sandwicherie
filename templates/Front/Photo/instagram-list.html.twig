@@ -1,0 +1,53 @@
+{% extends '_bases/_front_base.html.twig' %}
+
+{% block body %}
+    <div id="cards" class="stackable doubling four column row">
+        {% for col in photos|batch(5) %}
+            <div class="column">
+                {% for photo in col %}
+                    <div class="ui card card-zoom">
+                        <div class="image">
+                            <img src="{{ photo.lowResolution }}" class="ui fluid rounded image"/>
+                        </div>
+                        <div
+                                :class="{expanded : isExpanded({{ photo.id }})}"
+                                class="description instagram-description left aligned"
+                        >
+                            {{ photo.caption }}
+                        </div>
+                        <div class="extra content center aligned">
+                            <a href="{{ photo.link }}"
+                               class="ui rounded instagram icon basic button"
+                               title="Lien vers le post Instagram | La Clémentine .be">
+                                <i class="instagram icon"></i>
+                            </a>
+                            <a href="{{ path('front_photo_instagram', {'id': photo.id}) }}"
+                               class="ui rounded icon basic button"
+                               title="Voir dans une nouvelle fenêtre | La Clémentine .be">
+                                <i class="window restore outline icon"></i>
+                            </a>
+                            {#<a href="{{ path('front_photo_instagram', {'id': photo.id}) }}"#}
+                               {#class="ui rounded  icon basic button"#}
+                               {#title="Lien vers le post Instagram | La Clémentine .be">#}
+                                {#<i class="zoom icon"></i>#}
+                            {#</a>#}
+                            <button
+                               @click="doExpand({{ photo.id }})"
+                               class="ui rounded  icon basic button"
+                               title="Plus de description | La Clémentine .be">
+                                <i :class="{up : isExpanded({{ photo.id }}), down : !isExpanded({{ photo.id }}) }"
+                                   class="caret icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/js/instagram-list.js') }}"> </script>
+
+{% endblock %}
