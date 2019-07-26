@@ -34,6 +34,7 @@ class Allergy
      * @Assert\NotBlank(message="Vous avez oubliez de mettre un nom ")
      */
     private $name;
+
     /**
      * @var string
      * @ORM\Column(name="description", length=255, nullable=true)
