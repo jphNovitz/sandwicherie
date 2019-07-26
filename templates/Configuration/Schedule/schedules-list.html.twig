@@ -1,0 +1,59 @@
+{% extends '_bases/_admin_base.html.twig' %}
+{% set entity = 'schedules' %}
+{% block body %}
+    <h1> {% block title %}Jours d'ouverture {% endblock %} </h1>
+
+
+     <div class="row">
+        <div class="ui middle aligned divided fluid big list">
+            {% for row in list %}
+                <div class="ui item">
+                    <div class="middle aligned right floated">
+                        {% block switch %}
+                            <form style="display: inline" action="{{ path('schedules_switch', {'id': row.id}) }}">
+                                <button type="submit" class="ui blue circular tiny icon basic button">
+                                    {% if row.active %}
+                                        <i class="close icon"></i>
+                                    {% else %}
+                                        <i class="check icon"></i>
+                                    {% endif %}
+                                </button>
+                            </form>
+
+                        {% endblock %}
+                        {% block update %}
+                            <form style="display: inline" action="{{ path('schedules_update', {'id': row.id}) }}">
+                                <button type="submit" class="ui olive circular tiny icon button">
+                                    <i class="edit icon"></i>
+                                </button>
+                            </form>
+                        {% endblock %}
+                        {% block delete %}
+                            <form style="display: inline" action="{{ path('schedules_delete', {'id': row.id}) }}">
+                                <button type="submit" class="ui red circular tiny icon button">
+                                    <i class="trash icon"></i>
+                                </button>
+                            </form>
+                        {% endblock %}
+                    </div>
+                    <div class="middle aligned content" style="line-height: 2rem">
+                        {% block element_title %}
+                            {{ row.day }} - Ouvre {{ row.open|date("H:i") }} - Ferme {{ row.close|date("H:i")  }}
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        {{ parent() }}
+
+    </script>
+{% endblock %}
+    {% block right_column %}
+        {% include '_elements/_action_floating_menu/_action_floating_menu.html.twig' %}
+    {% endblock %}
+
+

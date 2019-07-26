@@ -1,0 +1,23 @@
+{% extends '_bases/_front_base.html.twig' %}
+
+{% block body %}
+ {%  for row, detail in schedule %}
+   <div class="row ">
+    <div class="eight wide  column ui">
+        <span class="ui medium green header">{{ row }} </span>
+    </div>
+    <div class="eight wide column left aligned">
+        <div class="ui segment">
+            <span class="ui medium header">
+                {% for day in detail %}
+                    <p>Ouvre: {{day.s_open|date("H:i") }} <br />
+                        Ferme: {{day.s_close|date("H:i") }} </p>
+                {% endfor %}
+            </span>
+        </div>
+    </div>
+   </div>
+
+
+ {% endfor %}
+{% endblock %}

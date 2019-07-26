@@ -1,0 +1,78 @@
+{% extends '_bases/_front_base.html.twig' %}
+{% block body %}
+
+    <div class="row">
+        <div class="ui sixteen wide column center aligned">
+            <h2 class="ui huge Header">
+                {{ site.title }} .::. Contactez-moi
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="ui sixteen wide column stackable grid">
+            <div class="row">
+                <div class="ui five wide column left aligned">
+                    <h3 class="ui large Header">
+                        Adresse
+                    </h3>
+                    <div class="ui list">
+                        <div class="item">
+                            {{ site.adress }}
+                        </div>
+                        <div class="item">
+                            {{ site.city }}
+                        </div>
+                        <div class="item">
+                            N° TVA: {{ site.tva }}
+                        </div>
+                    </div>
+                </div>
+                <div class="ui five wide column left aligned">
+                    <h3 class="ui large Header">
+                        Contact
+                    </h3>
+
+                    <div class="ui list">
+                        <div class="item">
+                            Téléphone: {{ site.phone }}
+                        </div>
+                        <div class="item">
+                            Email: {{ site.email }}
+                        </div>
+                    </div>
+                </div>
+                <div class="ui six wide column left aligned">
+                    <h3 class="ui large Header">
+                        Réseaux sociaux
+                    </h3>
+
+                    <div class="ui list">
+                        <div class="item">
+                            <a href="{{ site.socialFacebook }}">
+                                <i class="facebook icon" ></i>
+                                {{ site.socialFacebook }}
+                            </a>
+                        </div>
+                        <div class="item">
+
+
+                            <a href="{{ site.socialInstagram }}">
+                                <i class="instagram icon" ></i>
+                                {{ site.socialInstagram }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="ui sixteen wide column center aligned">
+
+            <h3 class="ui medium Header">
+                {{ site. introduction }}
+            </h3>
+        </div>
+    </div>
+{% endblock %}

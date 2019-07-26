@@ -1,0 +1,65 @@
+{% extends '_skeletons/_forms.html.twig' %}
+
+{% set entity = "schedules" %}
+
+{% block title %}Ajout d'une plage horaire{% endblock %}
+    {% block form_details %}
+        <div class="field">
+            <div class="field">
+                <label for="form_day">Jour</label>
+                {{ form_widget(form.day, {"attr": {"class": "ui dropdown"}}) }}
+                {% if form.day.vars.errors|length %}
+                    <div class="ui pointing red basic label">
+                        {{ form_errors(form.day) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="form_open">Ouvre à</label>
+                {{ form_widget(form.open) }}
+                {% if form.open.vars.errors|length %}
+                    <div class="ui pointing red basic label">
+                        {{ form_errors(form.open) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="field">
+                <label for="form_close">Ferme à</label>
+                {{ form_widget(form.close) }}
+                {% if form.close.vars.errors|length %}
+                    <div class="ui pointing red basic label">
+                        {{ form_errors(form.close) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="two fields">
+            <div class="field">
+                <label for="form_active">Actif</label>
+                {{ form_widget(form.active) }}
+            </div>
+            <div class="field">
+                <label for="form_comment">Commentaire</label>
+                {{ form_widget(form.comment, {"attr": {"class": "ui fluid dropdown"}}) }}
+            </div>
+
+        </div>
+        <div class="six fields">
+            <div class="field">
+                <button style="margin-top: 2rem" class="ui positive circular button" type="submit">Ajouter</button>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+    {% endblock %}
+{% block submit %} {% endblock %}
+{%  block sui_js %}
+    <script>
+        $('.ui.dropdown')
+            .dropdown()
+        ;
+    </script>
+{% endblock %}
+
