@@ -75,7 +75,9 @@
                 {% endif %}
             </div>
             <div class="spaced-1">
-                <a href="#" id ="test" class="circular ui icon green button">Ajouter au panier</a>
+                {% if ((app.user.username is not null) and (app.user.username != 'admin') ) %}
+                   <a href="#" id ="test" class="circular ui icon green button">Ajouter au panier</a>
+                {% endif %}
                 <a href="{{'https://www.facebook.com/sharer/sharer.php?u=' ~ url('product_card', {'slug': product.slug}) }}"
                    target="_blank" class="circular ui facebook button">
                     <i class="facebook icon"></i> Partager
