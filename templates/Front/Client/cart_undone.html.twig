@@ -1,0 +1,106 @@
+{% extends '_bases/_front_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="sixteen wide column left aligned">
+            <div class="ui huge orange header">
+                Mon panier d'achat
+            </div>
+        </div>
+    </div>
+    {% if cart is null %}
+        <div class="row" style="min-height: 60vh" >
+            <div class="eleven wide column ui grid middle aligned center aligned">
+                <p><i class="icon cart"></i> Votre panier est vide</p>
+            </div>
+        </div>
+    {% else %}
+    <div class="row" style="min-height: 60vh" >
+        <div class="eleven wide column ui grid">
+            {% for item in cart.items %}
+                <div class="row ui segment">
+                    <div class="two wide column middle aligned">
+                        {% if (item.product is not null) and (item.product.images[0] is defined ) %}
+                            <img src="{{ 'images/products/'~item.product.images[0].imageName }}"/>
+                        {% else %}
+                            <img src="{{ asset('images/logo_white-400.png') }}">
+                        {% endif %}
+                    </div>
+                    <div class="six wide column left aligned">
+                        {% if item.product is not null %}
+                            <h3 class="ui header">{{ item.product.name }}</h3>
+                        {% endif %}
+                        <div class="ui list">
+                            <div class="item">Pain: {{ item.bread }}</div>
+                            <div class="item">Sauce: {{ item.sauce }}</div>
+                            {% if item.vegetables is not null %}
+                                <div class="item">Crudités
+                                    <div class="ui list horizontal">
+                                        {% for vegetable in item.vegetables %}
+                                            <span class="item">vegetable.name</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="item">Halal: {% if item.halal %}<strong>oui</strong>{% else %}non{% endif %}
+                            </div>
+                            {% if item.comment is not null %}
+                                <div class="item">message: {{ item.comment }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="two wide column middle aligned">{{ item.qty }}</div>
+                    <div class="two wide column middle aligned">{{ item.price }}</div>
+                    <div class="two wide column middle aligned js-price" data-price="{{ item.qty * item.price }}">{{ item.qty * item.price }}</div>
+                    <div class="two wide column middle aligned left aligned">
+                        {#<a href="#"> <i class="trash red icon"></i> </a>#}
+                        {#{{ render(controller('App\\Controller\\Front\\Client\\cartController::deleteItem', {#}
+                        {#'cart': cart.id, 'item': item.id#}
+                        {#})) }}#}
+                        <form method="POST" action="{{ path('front_remove_cart_item') }}">
+                            <input type="hidden" name="cart" value="{{ cart.id }}"/>
+                            <input type="hidden" name="item" value="{{ item.id }}"/>
+                            <button type="submit" class="circular ui negative basic icon button">
+                                <i class="icon trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="basket" class="five wide column">
+            <div class="ui huge green header">
+                <p>Total Commande
+                    <br />${total} EUR</p>
+            </div>
+            <a href="{{ path('front_cart_validate', {'id' : cart.id }) }}" class="ui circular basic positive fluid button"> <i class="icon thumbs up"></i>Valider </a>
+            <a href="{{ path('front_products_list') }}" class="ui circular basic blue button"> <i class="icon cart plus"></i>Ajouter</a>
+            <a href="{{ path('front_cart_abandon', {'id' : cart.id }) }}" class="ui circular basic negative button"> <i class="icon cancel"></i>Abandonner </a>
+
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    <script>
+        const app = new Vue({
+            el: '#basket',
+            delimiters: ['${', '}'],
+            data: {},
+            mounted() {},
+            computed: {
+                total: function () {
+                    let elements = document.getElementsByClassName('js-price')
+                    let total = 0
+                    Array.from(elements).forEach(
+                        function(element, index, array) {
+                            total += Number(element.dataset.price)
+                        }
+                    )
+                    return total
+                }
+            }
+        })
+    </script>
+{% endblock %}

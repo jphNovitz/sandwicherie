@@ -1,0 +1,52 @@
+{{ form_start(form, {attr: { class: 'ui form', id: 'cart_form' }}) }}
+
+<div class="fields">
+    <div class="four wide field">
+        {{ form_label(form.mode) }}
+        {{ form_widget(form.mode, {
+                attr: { 'v-model': 'mode' }
+            }) }}
+    </div>
+    <div class="two wide field">
+        {{ form_label(form.qty) }}
+        {{ form_widget(form.qty, {
+            attr: { 'v-model': 'qty' }
+        }) }}
+    </div>
+    <div class="one wide field">
+        {{ form_label(form.halal) }}
+        {{ form_widget(form.halal) }}
+    </div>
+</div>
+
+<div class="spaced-2-1"></div>
+<p>Choisissez votre pain et vos crudités</p>
+
+<div class="three fields">
+    <div class="field">
+        {{ form_label(form.bread) }}
+        {{ form_widget(form.bread, {attr: { class: 'ui dropdown' }}) }}
+    </div>
+    <div class="field">
+        {{ form_label(form.sauce) }}
+        {{ form_widget(form.sauce, {attr: { class: 'ui dropdown' }}) }}
+    </div>
+    <div class="field">
+        {{ form_errors(form.vegetables) }}
+        {{ form_label(form.vegetables) }}
+        {{ form_widget(form.vegetables, {attr: { class: 'ui dropdown' }}) }}
+    </div>
+</div>
+<div class="field spaced-1">
+    {{ form_label(form.comment) }}
+    {{ form_widget(form.comment) }}
+</div>
+<div class="actions">
+    {{ form_widget(form.continue, {attr: { class: 'ui brown circular big button right floated' }}) }}
+    {{ form_widget(form.basket, {attr: { class: 'ui green circular big button right floated' }}) }}
+
+</div>
+
+{{ form_end(form) }}
+
+
