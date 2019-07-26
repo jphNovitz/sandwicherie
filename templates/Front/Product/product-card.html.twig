@@ -1,0 +1,158 @@
+{% extends '_bases/_front_base.html.twig' %}
+
+{% block body %}
+{% include '_elements/_products_front/_card_modal.html.twig' %}
+    <div class="row">
+        <div class="seven wide column left aligned">
+
+            <div id="images" data-images="{{ images }}" class="ui stackable grid">
+                <div class="row">
+                    <div class="ui sixteen wide column">
+                        <img :src="'/images/products/'+featured"
+                             class="ui fluid rounded image"/>
+                    </div>
+
+                </div>
+                <div v-for="(image, loop) in images" :key="loop" class="five wide column">
+                    <div class="ui image">
+                        <img :src="'/images/products/'+image.image_name"
+                             class="ui fluid rounded image" @click="change(loop)" style="cursor: pointer"/>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="nine wide column left aligned">
+            <h2 class="ui huge orange header">
+                {{ product.name }}
+                <div class="sub header ui green">{{ product.price }} eur (emporté)</div>
+            </h2>
+            <div class="ui segment">
+                <div class="ui bulleted list  horizontal">
+                    {% for type in product.types %}
+                        <div class="item"> {{ type }}</div>
+                    {% endfor %}
+
+                </div>
+
+                    <div class="spaced-1"><strong>Ingrédients:</strong></div>
+                    <div class="ui bulleted list  horizontal">
+                        {% for ingredient in product.ingredients %}
+                            <div class="item">
+                                {{ ingredient }}
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                <div class="spaced-1"><strong>Le '{{ product.name }}' s'accompagne généralement de </strong></div>
+                <div class="ui bulleted list  horizontal">
+                    {% for vegetable in product.vegetables %}
+                        <div class="item">
+                            {{ vegetable }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="spaced-1"><strong>Les pains proposés sont: </strong></div>
+                <div class="ui bulleted list  horizontal">
+                    {% for bread in product.breads %}
+                        <div class="item">
+                            {{ bread }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="spaced-1">
+                {% if product.halal %}
+                    <a>
+                        <img src="{{ asset('images/flags/halal-flag-50.png') }}"
+                             alt="produit Halal - La Clémentine"
+                             title="Produit Halal Friendly"
+                        />
+                    </a>
+                {% endif %}
+            </div>
+            <div class="spaced-1">
+                <a href="#" id ="test" class="circular ui icon green button">Ajouter au panier</a>
+                <a href="{{'https://www.facebook.com/sharer/sharer.php?u=' ~ url('product_card', {'slug': product.slug}) }}"
+                   target="_blank" class="circular ui facebook button">
+                    <i class="facebook icon"></i> Partager
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="row spaced-2-1">
+        <div class="sixteen wide column left aligned">
+            <p class="ui medium header">
+                {{ product.description }}
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(function(){
+            $("#test").click(function(){
+                $(".test").modal('show');
+            });
+            $(".test").modal({
+                closable: true
+            });
+            $('select.dropdown')
+                .dropdown()
+            ;
+        });
+    </script>
+    <script>
+        const app = new Vue({
+            el: '#images',
+            delimiters: ['${', '}'],
+            data: {
+                featured: ''
+            },
+            computed: {
+                images: function () {
+                    let collection = document.getElementById('images')
+                    return JSON.parse(collection.dataset.images)
+                },
+            },
+            mounted() {
+                if (this.images.length === 0) this.featured = '/images/logo_white-400.png'
+                else {
+                    this.featured = this.images[0].image_name
+                }
+            },
+            methods: {
+                change: function (loop) {
+                    this.featured = this.images[loop].image_name
+                }
+            }
+        })
+
+        const modal = new Vue ({
+            el: '#modal',
+            delimiters: ['${', '}'],
+            data: {
+                mode: 'emporte',
+                qty: 1
+                  },
+            computed: {
+                price: function () {
+                  let element = document.getElementById('price')
+                    return Number(element.dataset.price)
+                },
+                sale_price: function () {
+                    if (this.mode === 'sur place') return  (this.price+.5)*Number(this.qty)
+                        else  return this.price*Number(this.qty)
+                }
+            }
+        })
+
+    </script>
+{% endblock %}

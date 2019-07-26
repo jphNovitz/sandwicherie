@@ -1,0 +1,116 @@
+{% extends '_bases/_front_base.html.twig' %}
+
+{% block body %}
+    <span id="rawProducts" data-products="{{ list_products|json_encode }}"></span>
+    <span id="rawAllergies" data-allergies="{{ list_allergies|json_encode }}"></span>
+    <span id="toto" class="ui stackable row">
+        <div class="two wide column left aligned">
+            <h3>Allergies</h3>
+                <div class="ui celled list" :class="{horizontal: isHorizontal}">
+                  <div v-for="allergy in allergies" class="item">
+                    <div class="content">
+                      <div class="header" @click="pick(allergy.slug)">${allergy.name}</div>
+                    </div>
+                  </div>
+                </div>
+        </div>
+
+        <div class="fourteen wide column left aligned">
+            {% block product_title %}
+                <h2 class="ui huge orange header">Nos produits</h2>
+            {% endblock %}
+            <div class="ui three stackable cards">
+                <div v-for="product in filtered" class="card">
+                    <div class="image">
+                        <template v-if="product.images.length ">
+                            <img :src="'images/products/'+product.images[0].image_name">
+                        </template>
+                        <template v-else>
+                            <img src="{{ asset('images/logo_white-400.png') }}">
+                        </template>
+                    </div>
+                    <div class="content">
+                        <a :href="'detail-produit/' + product.slug " class="header">${ product.name }</a>
+                         <div class="description">
+                            ${product.description}
+                         </div>
+                    </div>
+                    <div class="extra content">
+                        <template v-if="product.halal ">
+                            <a>
+                                <img src="{{ asset('images/flags/halal-flag-50.png') }}">
+                            </a>
+                        </template>
+                    </div>
+                </div>
+        </div>
+        </div>
+        </div>
+</span>
+
+
+
+    <script>
+        const app = new Vue({
+            el: '#toto',
+            delimiters: ['${', '}'],
+            data: {
+                pickedAllergies: []
+            },
+            computed: {
+                products: function () {
+                    let collection = document.getElementById('rawProducts')
+                    let raw = JSON.parse(collection.dataset.products)
+                    return JSON.parse(raw)
+
+                },
+                allergies: function () {
+                    let collection = document.getElementById('rawAllergies')
+                    let raw = JSON.parse(collection.dataset.allergies)
+                    return JSON.parse(raw)
+
+                },
+                blackList: function () {
+                    var blackList = []
+                    this.allergies.map(al => {
+                        if (this.pickedAllergies.indexOf(al.slug) > -1)
+                            al.categories.map(ac => {
+                                blackList.push(ac.slug)
+                            })
+                    })
+                    return blackList;
+                },
+                filtered: function () {
+                    if (this.blackList.length) {
+                        return this.products.filter(p => {
+                            let flag = false;
+                            p.ingredients.map(ing => {
+                                ing.categories.map(category => {
+                                    if (this.blackList.indexOf(category.slug) > -1) {
+                                        flag = true;
+                                    }
+                                })
+                            })
+                            if (flag) return p
+                        })
+                    } else return this.products
+                },
+                isHorizontal: function () {
+                    if (window.innerWidth < 950) return true
+                        else return false
+                }
+            },
+            mounted() {
+            },
+            methods: {
+                pick: function (name) {
+                    let pos = this.pickedAllergies.indexOf(name)
+                    console.log(pos)
+                    if (pos > -1)
+                        this.pickedAllergies.splice(pos)
+                    else this.pickedAllergies.push(name)
+                }
+            }
+        });
+    </script>
+{% endblock %}
