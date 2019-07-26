@@ -1,0 +1,108 @@
+.bg {
+  background-image: url("../../images/vince-lee-mobile.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 3rem;
+}
+
+
+#toolbar {
+  font-size: 0.55rem;
+  border-bottom: solid 1px #cecece;
+}
+
+#toolbar .row{
+  padding-bottom: 0px;
+}
+#toolbar a{
+  background-color: inherit;
+  color: #ffffff;
+}
+
+nav,
+nav a{
+  margin-top: 1rem;
+  color: #ffffff;
+}
+
+//nav .ui.basic.primary.button,
+//nav .ui.basic.primary.buttons .button {
+//  color: #000000 !important;
+//  border-color: #000000;
+//  box-shadow: 0 0 0 1px #000000 inset!important;
+//}
+nav .ui.menu {
+  box-shadow: none;
+}
+nav .mobile.menu{
+  background: none;
+  border: none;
+
+}
+
+nav .mobile.menu .link.item{
+  box-shadow: none;
+  border: none;
+  display: none;
+}
+nav .mobile.menu:first-child{
+  display: block;
+}
+
+nav .link.item{
+  border: none !important;
+}
+nav .ui.basic.primary.button,
+nav .ui.basic.primary.buttons .button {
+  color: #ffffff !important;
+  border-color: #cecece;
+  box-shadow: 0 0 0 1px #cecece inset!important;
+}
+
+.cta-pitch {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.cta{
+  margin: 3rem auto;
+}
+@media only screen and (min-width: 768px) {
+  .bg {
+    background-image: url("../../images/vince-lee-desktop.png");
+  }
+
+  #toolbar {
+    font-size: 1rem;
+  }
+
+  header .ui.menu {
+    background: none;
+    color: #ffffff;
+  }
+  header .ui.menu a,
+  .ui.menu:not(.vertical) .item {
+    color: #ffffff;
+  }
+
+  nav .mobile.menu .link.item{
+    display: inline-block;
+  }
+
+  nav .mobile.menu .item:first-child{
+    display: none;
+  }
+
+  .cta-pitch {
+    font-size: 2rem;
+  }
+
+  .cta{
+    margin: 5rem auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .cta{
+    margin: 10rem auto;
+  }
+}

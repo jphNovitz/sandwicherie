@@ -1,0 +1,15 @@
+.instagram-description {
+  padding: .8rem;
+  white-space: nowrap;
+  max-height: 2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: all 1.1s ease-in-out ;
+}
+
+.instagram-description.expanded {
+  transition: all 2s ease-in-out ;
+  white-space: normal !important;
+  max-height: 20rem;
+  background-color: #cecece;
+}
