@@ -14,6 +14,8 @@ parameters:
     site_url: http://www.laclementine.be
     ngrok: http://db0e5817.ngrok.io
     router.request_context.host: 'http://localhost:8000/'
+    base_url: 'https://api.instagram.com/v1/'
+    access_token: '5919541710.5106335.21ac2fd8bfd644c2a0390d5a081ca6cb'
 services:
     # default configuration for services in *this* file
     _defaults:
