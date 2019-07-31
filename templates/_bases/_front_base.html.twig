@@ -23,27 +23,27 @@
     <header>
         <div class="ui container">
             {% block toolbar %}
-                <div id="toolbar" class="ui grid">
+                <div id="toolbar" class="ui stackable grid">
                     <div class=" row">
-                        <div class="five wide column left aligned bottom aligned">
+                        <div class="five wide column left aligned bottom aligned middle aligned phone-cell">
                             <a href="tel:+320468538605">
                                 <i class="phone icon"></i>0468 53 86 05
                             </a>
                         </div>
-                        <div class="three wide column">
-                        </div>
-                        <div class="eight wide column right aligned ui grid">
-                            {% include '_elements/_header_front/_connect_status.html.twig' %}
-                        </div>
+                        {#<div class="three wide column">#}
+                        {#</div>#}
+                        {#<div class="eight wide column right aligned ui grid">#}
+                            {#{% include '_elements/_header_front/_connect_status.html.twig' %}#}
+                        {#</div>#}
                     </div>
                 </div>
             {% endblock %}
         </div>
         <nav class="ui container">
-            <div class="ui stackable grid">
+            <div class="ui stackable  mobile reversed grid">
                 <div class="four wide column left aligned">
                     <a href="http://laclementine.be" class="item">
-                        <h1>La Clémentine</h1>
+                        <h1 class="">La Clémentine</h1>
                     </a>
                 </div>
                 <div class="twelve wide column right aligned">
@@ -83,11 +83,11 @@
                         </p>
                         <a href="http://facebook.com/laclementine.be" class="ui primary basic huge button">
                             <i class="facebook icon"></i>
-                            Facebook
+                            <span class="not-mobile"> Facebook </span>
                         </a>
                         <a href="http://facebook.com/laclementine.be" class="ui primary basic huge button">
                             <i class="instagram icon"></i>
-                            Instagram
+                            <span class="not-mobile"> Instagram </span>
                         </a>
 
                     </div>

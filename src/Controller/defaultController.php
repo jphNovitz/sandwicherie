@@ -17,13 +17,13 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class defaultController extends Controller {
 
 
-    /**
-     * @Route("/", name="default")
-     */
-    public function index(Request $request){
-       return $this->render('index.html.twig');
-
-    }
+//    /**
+//     * @Route("/", name="default")
+//     */
+//    public function index(Request $request){
+//       return $this->render('index.html.twig');
+//
+//    }
 
 
 }

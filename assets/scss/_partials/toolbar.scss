@@ -7,8 +7,12 @@
 
 
 #toolbar {
-  font-size: 0.55rem;
+  font-size: 1.55rem;
   border-bottom: solid 1px #cecece;
+}
+
+#toolbar .phone-cell {
+
 }
 
 #toolbar .row{
@@ -17,6 +21,8 @@
 #toolbar a{
   background-color: inherit;
   color: #ffffff;
+  line-height: 3.10rem;
+  //font-size: 1.5rem;
 }
 
 nav,
@@ -66,13 +72,22 @@ nav .ui.basic.primary.buttons .button {
 .cta{
   margin: 3rem auto;
 }
+
+.not-mobile{
+  display: none;
+}
 @media only screen and (min-width: 768px) {
   .bg {
     background-image: url("../../images/vince-lee-desktop.png");
   }
 
   #toolbar {
-    font-size: 1rem;
+    font-size: 1.2rem;
+  }
+
+
+  #toolbar a{
+    line-height: 2.4rem;
   }
 
   header .ui.menu {
@@ -99,7 +114,11 @@ nav .ui.basic.primary.buttons .button {
   .cta{
     margin: 5rem auto;
   }
+  .not-mobile{
+    display: inline;
+  }
 }
+
 
 @media only screen and (min-width: 1024px) {
   .cta{

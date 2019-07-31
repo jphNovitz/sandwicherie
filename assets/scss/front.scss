@@ -1,9 +1,15 @@
-body{
+@import "_partials/toolbar";
+@import "_partials/homepage.scss";
+@import "_partials/footer";
+@import "_partials/instagram";
+@import url('https://fonts.googleapis.com/css?family=Cuprum|Pacifico|Roboto&display=swap');
+
+body {
   width: 100%;
   height: 100%;
   margin: 0;
-  background-color:#F7F7F7;
-  color:#000;
+  background-color: #F7F7F7;
+  color: #000;
   font-size: 1.1rem;
   line-height: 1.5em;
   text-align: center;
@@ -15,43 +21,75 @@ body{
   box-sizing: border-box;
 }
 
-.text-center {
-  text-align: center;
-}
-.spaced{
-  padding: .8em;
+h1 {
+  font-family: 'Pacifico', cursive;
 }
 
-h1, h2, h3, h4, h5{
+h2, h3, h4, h5, h6, .ui.header {
   font-family: 'Cuprum', sans-serif !important;
 }
-h2 {
-  margin-top: 2rem !important;
-  border-bottom: solid 1px rgba(0, 128, 0, .1) !important;
-}
-.ui .header{
-  font-family: 'Cuprum', sans-serif;
-  color: green;
-  font-size: 1.8rem ;
-}
-.ui.card>.content, .ui.cards>.card>.content{
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 1.2rem !important;
+
+.spaced-1 {
+  margin-top: 1rem;
 }
 
-.wrapper {
-  margin: 0 auto;
-  display: flex;
-  max-width: 1170px;
-  justify-content: center;
-}
-p {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.4rem;
+.spaced-2-1 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
-.block-orange{
-  display: inline-block;
-  background-color: orangered;
-  color: white;
+.mobile-hidden {
+  display: none;
 }
+
+@media only screen and (min-width: 768px) {
+  .mobile-hidden {
+    display: flex;
+  }
+  .card-zoom:hover {
+    transform: scale(1.1);
+    z-index: 1000;
+  }
+}
+
+//
+//.text-center {
+//  text-align: center;
+//}
+//.spaced{
+//  padding: .8em;
+//}
+//
+//h1, h2, h3, h4, h5{
+//  font-family: 'Cuprum', sans-serif !important;
+//}
+//h2 {
+//  margin-top: 2rem !important;
+//  border-bottom: solid 1px rgba(0, 128, 0, .1) !important;
+//}
+//.ui .header{
+//  font-family: 'Cuprum', sans-serif;
+//  color: green;
+//  font-size: 1.8rem ;
+//}
+//.ui.card>.content, .ui.cards>.card>.content{
+//  font-family: 'Roboto', sans-serif !important;
+//  font-size: 1.2rem !important;
+//}
+//
+//.wrapper {
+//  margin: 0 auto;
+//  display: flex;
+//  max-width: 1170px;
+//  justify-content: center;
+//}
+//p {
+//  font-family: 'Roboto', sans-serif;
+//  font-size: 1.4rem;
+//}
+//
+//.block-orange{
+//  display: inline-block;
+//  background-color: orangered;
+//  color: white;
+//}
