@@ -1,33 +1,41 @@
 {% extends '_bases/_front_base.html.twig' %}
 
 {% block body %}
-{% include '_elements/_products_front/_card_modal.html.twig' %}
-    <div class="row">
-        <div class="seven wide column left aligned">
-
-            <div id="images" data-images="{{ images }}" class="ui stackable grid">
-                <div class="row">
-                    <div class="ui sixteen wide column">
-                        <img :src="'/images/products/'+featured"
-                             class="ui fluid rounded image"/>
-                    </div>
-
-                </div>
-                <div v-for="(image, loop) in images" :key="loop" class="five wide column">
-                    <div class="ui image">
-                        <img :src="'/images/products/'+image.image_name"
-                             class="ui fluid rounded image" @click="change(loop)" style="cursor: pointer"/>
-                    </div>
-                </div>
+    {% include '_elements/_products_front/_card_modal.html.twig' %}
+    <div id="images" data-images="{{ images }}" class="row ui stackable grid">
+        <div class="row">
+            <div class="nine wide column center aligned middle aligned">
+                <h2 class="ui huge orange header">
+                    {{ product.name }}
+                    <div class="sub header ui green">{{ product.price }} eur (emporté)</div>
+                </h2>
             </div>
-
-
+            <div class="seven wide column left aligned">
+                <img :src="'/images/products/'+featured"
+                     class="ui fluid rounded image"/>
+            </div>
         </div>
+        <div class="row">
+            <div class="seven wide column center aligned">
+                {#<div class="ui stackable grid">#}
+                    {#<div class="row">#}
+                    {#<div class="ui sixteen wide column">#}
+                    {#<img :src="'/images/products/'+featured"#}
+                    {#class="ui fluid rounded image"/>#}
+                    {#</div>#}
+
+                    {#</div>#}
+                    <div v-for="(image, loop) in images" :key="loop" class="ui horizontal list" >
+                        <div class="item ui image">
+                            <img :src="'/images/products/'+image.image_name"
+                                 class="ui rounded padded image" @click="change(loop)" :class="{tiny: isHorizontal, small: !isHorizontal}" style="cursor: pointer; padding: 5px"/>
+                        </div>
+                    </div>
+                {#</div>#}
+
+
+            </div>
         <div class="nine wide column left aligned">
-            <h2 class="ui huge orange header">
-                {{ product.name }}
-                <div class="sub header ui green">{{ product.price }} eur (emporté)</div>
-            </h2>
             <div class="ui segment">
                 <div class="ui bulleted list  horizontal">
                     {% for type in product.types %}
@@ -36,15 +44,15 @@
 
                 </div>
 
-                    <div class="spaced-1"><strong>Ingrédients:</strong></div>
-                    <div class="ui bulleted list  horizontal">
-                        {% for ingredient in product.ingredients %}
-                            <div class="item">
-                                {{ ingredient }}
-                            </div>
-                        {% endfor %}
+                <div class="spaced-1"><strong>Ingrédients:</strong></div>
+                <div class="ui bulleted list  horizontal">
+                    {% for ingredient in product.ingredients %}
+                        <div class="item">
+                            {{ ingredient }}
+                        </div>
+                    {% endfor %}
 
-                    </div>
+                </div>
 
                 <div class="spaced-1"><strong>Le '{{ product.name }}' s'accompagne généralement de </strong></div>
                 <div class="ui bulleted list  horizontal">
@@ -76,9 +84,9 @@
             </div>
             <div class="spaced-1">
                 {% if ((app.user is not null) and (app.user.username != 'admin') ) %}
-                   <a href="#" id ="test" class="circular ui icon green button">Ajouter au panier</a>
+                    <a href="#" id="test" class="circular ui icon green button">Ajouter au panier</a>
                 {% endif %}
-                <a href="{{'https://www.facebook.com/sharer/sharer.php?u=' ~ url('product_card', {'slug': product.slug}) }}"
+                <a href="{{ 'https://www.facebook.com/sharer/sharer.php?u=' ~ url('product_card', {'slug': product.slug}) }}"
                    target="_blank" class="circular ui facebook button">
                     <i class="facebook icon"></i> Partager
                 </a>
@@ -99,8 +107,8 @@
 
 {% block javascripts %}
     <script>
-        $(function(){
-            $("#test").click(function(){
+        $(function () {
+            $("#test").click(function () {
                 $(".test").modal('show');
             });
             $(".test").modal({
@@ -123,6 +131,10 @@
                     let collection = document.getElementById('images')
                     return JSON.parse(collection.dataset.images)
                 },
+                isHorizontal: function () {
+                    if (window.innerWidth < 950) return true
+                        else return false
+                }
             },
             mounted() {
                 if (this.images.length === 0) this.featured = '/images/logo_white-400.png'
@@ -137,21 +149,21 @@
             }
         })
 
-        const modal = new Vue ({
+        const modal = new Vue({
             el: '#modal',
             delimiters: ['${', '}'],
             data: {
                 mode: 'emporte',
                 qty: 1
-                  },
+            },
             computed: {
                 price: function () {
-                  let element = document.getElementById('price')
+                    let element = document.getElementById('price')
                     return Number(element.dataset.price)
                 },
                 sale_price: function () {
-                    if (this.mode === 'sur place') return  (this.price+.5)*Number(this.qty)
-                        else  return this.price*Number(this.qty)
+                    if (this.mode === 'sur place') return (this.price + .5) * Number(this.qty)
+                    else return this.price * Number(this.qty)
                 }
             }
         })
