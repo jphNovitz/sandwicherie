@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\ORM\Query as Query;
 
@@ -40,14 +41,14 @@ class ProductRepository extends ServiceEntityRepository
     }
     public function FindLast($n)
     {
-        return $this->createQueryBuilder('p')
+
+        $query =  $this->createQueryBuilder('p')
             ->leftJoin('p.images', 'images')
             ->leftJoin('p.likedBy', 'l')
             ->addSelect('p, images, partial l.{id}')
             ->setMaxResults($n)
-            ->getQuery()
-           ->getArrayResult()
             ;
+        return new Paginator($query);
     }
 
     public function findFavorites($id){
