@@ -28,14 +28,36 @@ class getInstagram extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+
+
         $output->writeln([
             'INSTAGRAM PHOTOS',
             '================',
             '',
         ]);
+        $output->writeln('Etape 1 - Vider les photos existantes');
 
-        $this->instagram->test();
-//        $output->writeln($this->instagram->test());
+        if ($this->instagram->truncate() == 1)
+        {
+            $output->writeln('<info>Succes</info>');
+            $output->writeln('<info>Anciennes photos effacees !</info>');
+            $output->writeln('<bg=green>=========== OK ===========</>');
+            $output->writeln(' ');
+            $output->writeln('Etape 2 - Récupération et enregistrement des images ');
+            $output->writeln('');
+
+            if ($this->instagram->add()){
+                $output->writeln('<info>Nouvelles photos enregistrees !</info>');
+                $output->writeln('<bg=green>=========== OK ===========</>');
+            } else {
+                $output->writeln('<error>AUCUNE photos enregistrees !</error>');
+                $output->writeln('<bg=red>=========== ECHEC ===========</>');
+            }
+
+
+            $output->writeln(' ');
+            $output->writeln('');
+        }
 
     }
 
