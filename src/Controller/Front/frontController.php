@@ -18,9 +18,13 @@ class frontController extends Controller {
     /**
      * @Route("/", name="home")
      */
-    public function index(Request $request, FeaturedProducts $featuredProducts, SiteConfiguration $siteConfiguration/*, Instagram $instagram*/){
+    public function index(Request $request,
+                          FeaturedProducts $featuredProducts,
+                          SiteConfiguration $siteConfiguration
+        /*, Instagram $instagram*/){
 
         $last = $featuredProducts->getLast(3);
+
         $featured = $featuredProducts->getFeatured();
         $pitch = $siteConfiguration->getPitch();
        return $this->render('Front/index.html.twig', [

@@ -1297,6 +1297,13 @@
   padding-bottom: (@rowSpacing / 2);
 }
 
+/* transparent */
+.ui.grid > .transparent.row,
+.ui.grid > .transparent.column,
+.ui.grid > .row > .transparent.column {
+  background-color: @transparent !important;
+  color: @white;
+}
 /* Red */
 .ui.grid > .red.row,
 .ui.grid > .red.column,
@@ -1310,6 +1317,13 @@
 .ui.grid > .row > .orange.column {
   background-color: @orange !important;
   color: @white;
+}
+/* light Orange */
+.ui.grid > .light.orange.row,
+.ui.grid > .light.orange.column,
+.ui.grid > .row > .light.orange.column {
+  background-color: @lightOrangeBackground !important;
+  color: @orange;
 }
 /* Yellow */
 .ui.grid > .yellow.row,

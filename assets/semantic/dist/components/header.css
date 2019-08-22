@@ -358,10 +358,10 @@ a.ui.orange.header:hover {
 
 /* Inverted */
 .ui.inverted.orange.header {
-  color: #FF851B !important;
+  color: #fce2d1 !important;
 }
 a.ui.inverted.orange.header:hover {
-  color: #ff7701 !important;
+  color: #fed2b6 !important;
 }
 
 /*--- Olive ---*/

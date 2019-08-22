@@ -236,7 +236,7 @@
 
 /*---  Light Colors  ---*/
 @lightRed         : #FF695E;
-@lightOrange      : #FF851B;
+@lightOrange      : #fce2d1;
 @lightYellow      : #FFE21F;
 @lightOlive       : #D9E778;
 @lightGreen       : #2ECC40;
@@ -255,10 +255,13 @@
 @darkWhite        : #F3F4F5;
 @midWhite         : #DCDDDE;
 @white            : #FFFFFF;
+@transparent      : transparent;
+
 
 /*--- Colored Backgrounds ---*/
 @redBackground    : #FFE8E6;
 @orangeBackground : #FFEDDE;
+@lightOrangeBackground : rgba(252,226,209,.2);
 @yellowBackground : #FFF8DB;
 @oliveBackground  : #FBFDEF;
 @greenBackground  : #E5F9E7;
@@ -268,6 +271,7 @@
 @purpleBackground : #F6E7FF;
 @pinkBackground   : #FFE3FB;
 @brownBackground  : #F1E2D3;
+@transparentBackground: rgba(255, 255, 255, 0)
 
 /*--- Colored Headers ---*/
 @redHeaderColor    : darken(@redTextColor, 5);

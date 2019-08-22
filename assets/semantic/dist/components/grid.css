@@ -1348,6 +1348,14 @@
   padding-bottom: 1rem;
 }
 
+/* transparent */
+.ui.grid > .transparent.row,
+.ui.grid > .transparent.column,
+.ui.grid > .row > .transparent.column {
+  background-color: transparent !important;
+  color: #FFFFFF;
+}
+
 /* Red */
 .ui.grid > .red.row,
 .ui.grid > .red.column,
@@ -1362,6 +1370,14 @@
 .ui.grid > .row > .orange.column {
   background-color: #F2711C !important;
   color: #FFFFFF;
+}
+
+/* light Orange */
+.ui.grid > .light.orange.row,
+.ui.grid > .light.orange.column,
+.ui.grid > .row > .light.orange.column {
+  background-color: rgba(252, 226, 209, 0.2) !important;
+  color: #F2711C;
 }
 
 /* Yellow */

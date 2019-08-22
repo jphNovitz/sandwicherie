@@ -6,6 +6,7 @@
          View
 --------------------*/
 
+@borderRadius: .8rem;
 @borderBoxShadow: none;
 @shadowBoxShadow: none;
 @boxShadow: none;

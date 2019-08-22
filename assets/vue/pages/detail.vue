@@ -3,13 +3,7 @@
         <sui-grid stackable>
             <sui-grid-row v-if="product">
             <sui-grid-column :width="16" >
-                <h1 is="sui-header" size="huge" style="margin-bottom: 2rem;" >
-                    {{product.name}}
-                </h1>
-
-                <p class="emph" v-if="product.description.length >0">
-                    {{product.description}}
-                </p>
+               
                 <sui-list horizontal relaxed  v-if="userID">
                     <sui-list-item>
                         <sui-button  circular
@@ -68,20 +62,39 @@
                 </sui-grid>
                  </div>
             </sui-grid-column>
-            <sui-grid-column :width="10" class="ui clearing left floated">
-                <sui-list left floated>
-                    <sui-list-item v-if="product.breads.length > 0">
-                        Pains disponibles
-                        <sui-list>
-                            <sui-list-item
-                                    v-for="bread in product.breads"
-                                    :key="bread.id">
-                                {{bread.name}}
+            <sui-grid-column :width="10" class="ui left aligned">
+                 <div is="sui-header" size="huge" style="margin-bottom: 2rem;" 
+                 class=" orange">
+                    {{product.name}}
+                </div>
+                <div is="sui-header" size="huge" class="green"> 
+                    eur
+                </div>
+
+                <p is="sui-header" size="large" class="emph" v-if="product.description.length >0">
+                    {{product.description}}
+                </p>
+                    <template v-if="product.breads.length > 0"> 
+                       <p is="sui-header" 
+                                size="medium"
+                                class="left aligned">
+                            Pains disponibles
+                        </p>
+                        <sui-list  bulleted>
+                            <sui-list-item clear
+                                v-for="bread in product.breads"
+                                :key="bread.id">
+                                 {{bread.name}}
                             </sui-list-item>
                         </sui-list>
-                    </sui-list-item>
-                    <sui-list-item v-if="product.vegetables.length > 0">
+                       
+                    </template>            
+                    <template  v-if="product.vegetables.length > 0"> 
+                        <p  is="sui-header" 
+                            size="medium"
+                            class="left aligned">
                         Les crudités proposées :
+                    </p>    
                         <sui-list>
                             <sui-list-item
                                     v-for="vegetable in product.vegetables"
@@ -89,27 +102,29 @@
                                 {{vegetable.name}}
                             </sui-list-item>
                         </sui-list>
-                    </sui-list-item>
-                </sui-list class>
+                    </template>
                 <template v-if="product.ingredients">
-                    <p>Ingrédients:
-                        <sui-list horizontal>
+                    <p  is="sui-header" 
+                        size="medium"
+                        class="left aligned">
+                            Ingrédients:
+                    </p>
+                        <sui-list horizontal class="bulleted">
                             <sui-list-item
                                     v-for="ingredient in product.ingredients"
                                     :key="ingredient.id"
                             >
                                 <em>{{ingredient.name}}</em>
-                                <span v-if="ingredient.components.length > 0">
+                               <!-- <span v-if="ingredient.components.length > 0">
                                     (<sui-list horizontal>
                                         <sui-list-item v-for="component in ingredient.components"
                                         :key="component.id">
                                         {{component.name}}
                                         </sui-list-item>
                                     </sui-list>
-                                )</span>
+                                )</span> -->
                             </sui-list-item>
                         </sui-list>
-                    </p>
                 </template>
 
             </sui-grid-column>

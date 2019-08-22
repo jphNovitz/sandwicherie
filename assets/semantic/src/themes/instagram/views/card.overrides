@@ -9,4 +9,20 @@
 .ui.card {
   font-family: 'Montserrat';
   font-size-adjust: 0.5;
+-webkit-box-shadow: 0px 12px 12px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 12px 12px -4px rgba(0,0,0,0.75);
+box-shadow: 0px 12px 12px -4px rgba(0,0,0,0.75);
 }
+
+.ui.cards > .card:hover,
+.ui.card:hover {
+  font-family: 'Montserrat';
+  font-size-adjust: 0.5;
+  -webkit-box-shadow: 0px 12px 15px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 12px 15px -3px rgba(0,0,0,0.75);
+  box-shadow: 0px 12px 15px -3px rgba(0,0,0,0.75);
+  transform: scale(1.06);
+}
+
+
+@borderRadius: 50%;
