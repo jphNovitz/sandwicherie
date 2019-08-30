@@ -6,16 +6,22 @@
         <div class="sixteen wide column left aligned">
             {% include '_elements/_products_front/_cards_front.html.twig' with {
                 'title' : 'Derniers ajouts',
-                'items' : last_products
+                'items' : last_products,
+                'columns' : 'three'
             } %}
         </div>
+    </div>
+
+    <div class="row spaced-2-1">
+        {% include '_elements/_big_picture.html.twig' %}
     </div>
 
     <div class="row spaced-2-1">
         <div class="sixteen wide column left aligned">
             {% include '_elements/_products_front/_cards_front.html.twig' with {
                 'title' : 'Les propositions de Clémentine',
-                'items' : featured_products
+                'items' : featured_products,
+                'columns' : 'five'
             } %}
         </div>
     </div>

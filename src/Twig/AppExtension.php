@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use function GuzzleHttp\Psr7\str;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Dump\Container;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -14,6 +15,7 @@ class AppExtension extends AbstractExtension
     {
         return array(
             new TwigFilter('entity', [$this, 'entityFilter']),
+            new TwigFilter('hashtag', [$this, 'hashtag']),
             new TwigFilter('json_decode', [$this, 'jsonDecode']),
         );
     }
@@ -27,6 +29,22 @@ class AppExtension extends AbstractExtension
              $word = $chain[2];
          endif;
          return strtolower($word.'s')   ;
+    }
+
+    public function hashtag($text='')
+    {
+        $new = '#';
+        $text = str_replace("'", " ", $text);
+        $parts = explode(" ", $text);
+        if (count($parts) > 1) {
+            for ($i = 0; $i < count($parts); $i++) {
+                $new = $new . ucfirst($parts[$i]);
+            }
+        } else {
+            $new = $new . ucfirst($text);
+        }
+
+        return $new;
     }
 
     public function jsonDecode($encoded)
