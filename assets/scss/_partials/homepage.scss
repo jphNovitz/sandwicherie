@@ -1,3 +1,15 @@
 .ui.card>.content>a.header:hover, .ui.cards>.card>.content>a.header:hover {
   color: #21ba45;
 }
+
+.tab-bottom{
+  position: absolute;
+  bottom: 0rem;
+  background-color: rgba(255, 255, 255, .8);
+  padding: 1.2rem;
+  width: 100%;
+}
+
+.tab-bottom a{
+  color: green !important;
+}
