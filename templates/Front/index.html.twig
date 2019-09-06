@@ -7,28 +7,41 @@
             {% include '_elements/_products_front/_cards_front.html.twig' with {
                 'title' : 'Derniers ajouts',
                 'items' : last_products,
-                'columns' : 'three'
-            } %}
-        </div>
-    </div>
-
-    <div class="row spaced-2-1">
-        {% include '_elements/_big_picture.html.twig' %}
-    </div>
-
-    <div class="row spaced-2-1">
-        <div class="sixteen wide column left aligned">
-            {% include '_elements/_products_front/_cards_front.html.twig' with {
-                'title' : 'Les propositions de Clémentine',
-                'items' : featured_products,
-                'columns' : 'five'
+                'position' : 'new'
             } %}
         </div>
         <div class="sixteen wide column right aligned">
-            <a class="ui positive basic button right aligned"
-                href="{{ path('front_products_list') }}">
-                La carte de Clem
+            <a class="ui positive button"
+               href="{{ path('front_products_list') }}">
+                La carte <i class="ui angle right icon"></i>
             </a>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class="ui fluid container">
+        <div class="ui center aligned  fluid grid">
+            <div class="row spaced-2-1">
+                {% include '_elements/_big_picture.html.twig' %}
+            </div>
+        </div>
+    </div>
+    <div class="ui container">
+    <div class="ui center aligned  grid">
+        <div class="row spaced-2-1">
+            <div class="sixteen wide column left aligned">
+                {% include '_elements/_products_front/_cards_front.html.twig' with {
+                    'title' : 'Les propositions de Clémentine',
+                    'items' : featured_products,
+                    'position' : 'proposal'
+                } %}
+            </div>
+            <div class="sixteen wide column right aligned">
+                <a class="ui positive button"
+                   href="{{ path('front_products_list') }}">
+                    La carte <i class="ui angle right icon"></i>
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}

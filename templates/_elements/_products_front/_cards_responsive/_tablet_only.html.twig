@@ -1,0 +1,35 @@
+<div class="image">
+    <span class="ui orange ribbon label">{{ item.price }} eur</span>
+    {% if  item.images is not empty %}
+        <img src="{{ asset('images/products/'~item.images[0].imageName) }}">
+    {% else %}
+        <img src="{{ asset('images/logo_white-400.png') }}">
+    {% endif %}
+</div>
+<div class="content">
+    <div class="meta ">
+    <span class="ui tiny green header">
+    {% for type in  item.types %}
+        {{ type.name }}
+    {% endfor %}
+    </span>
+    </div>
+    <a href="{{ path('product_card', {'slug': item.slug}) }}"
+       class="ui medium header"
+       style="margin-top: -1px ; "
+    >{{ item.name }}</a>
+    <div class="ui horizontal list ">
+        {% for ingredient in item.ingredients |slice(0, 3) %}
+            <i class="item">
+                {{ ingredient.name|hashtag }}
+            </i>
+        {% endfor %}
+    </div>
+</div>
+<div class="extra content">
+    {% if item.halal %}
+        <a>
+            <img src="{{ asset('images/flags/halal-flag-50.png') }}">
+        </a>
+    {% endif %}
+</div>

@@ -23,7 +23,7 @@ class frontController extends Controller {
                           SiteConfiguration $siteConfiguration
         /*, Instagram $instagram*/){
 
-        $last = $featuredProducts->getLast(3);
+        $last = $featuredProducts->getLast(5);
 
         $featured = $featuredProducts->getFeatured();
         $pitch = $siteConfiguration->getPitch();
