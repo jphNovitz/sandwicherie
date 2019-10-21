@@ -51,6 +51,10 @@ nav .mobile.menu .link.item{
   border: none;
   display: none;
 }
+nav .mobile.menu .show .link.item{
+  display: flex;
+  color: white;
+}
 nav .mobile.menu:first-child{
   display: block;
 }
