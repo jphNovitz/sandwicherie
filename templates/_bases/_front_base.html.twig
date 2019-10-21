@@ -18,7 +18,6 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-
 <div class="bg">
     <header>
         <div class="ui container">
@@ -33,7 +32,7 @@
                         {#<div class="three wide column">#}
                         {#</div>#}
                         {#<div class="eight wide column right aligned ui grid">#}
-                            {#{% include '_elements/_header_front/_connect_status.html.twig' %}#}
+                        {#{% include '_elements/_header_front/_connect_status.html.twig' %}#}
                         {#</div>#}
                     </div>
                 </div>
@@ -47,30 +46,32 @@
                     </a>
                 </div>
                 <div class="twelve wide column right aligned">
-                    <div class="ui stackable mobile menu">
+                    <div class="ui stackable mobile menu" id="menu">
                         <div class="item">
-                            <button class="ui primary basic button">menu</button>
+                            <button class="ui primary basic button" @click="menuClick()">menu</button>
 
                             {#<i class="large bars icon"></i>#}
                             {#</a>#}
                         </div>
-                        <div class="link item">
-                            <a href="{{ path('home') }}"> Accueil </a>
-                        </div>
-                        <div class="link item">
-                            <a href="{{ path('front_products_list') }}"> La Carte </a>
-                        </div>
-                        <div class="link item">
-                            <a href="{{ path('front_cater') }}">Traiteur</a>
-                        </div>
-                        <div class="link item">
-                            <a href="{{ path('front_photos_instagram') }}"> Photos </a>
-                        </div>
-                        <div class="link item">
-                            <a href="{{ path('front_schedules_list') }}">Horaires </a>
-                        </div>
-                        <div class="link item">
-                            Contact
+                        <div v-bind:class="{show: isActive}">
+                            <div class="link item">
+                                <a href="{{ path('home') }}"> Accueil </a>
+                            </div>
+                            <div class="link item">
+                                <a href="{{ path('front_products_list') }}"> La Carte </a>
+                            </div>
+                            <div class="link item">
+                                <a href="{{ path('front_cater') }}">Traiteur</a>
+                            </div>
+                            <div class="link item">
+                                <a href="{{ path('front_photos_instagram') }}"> Photos </a>
+                            </div>
+                            <div class="link item">
+                                <a href="{{ path('front_schedules_list') }}">Horaires </a>
+                            </div>
+                            <div class="link item">
+                                Contact
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -116,6 +117,21 @@
 {% endblock %}
 
 <script src="{{ asset('build/js/app.js') }}"></script>
+<script>
+    const menu = new Vue({
+        el: '#menu',
+        data() {
+            return {
+                isActive: false
+            }
+        },
+        methods: {
+            menuClick: function () {
+                this.isActive = !this.isActive
+            }
+        }
+    });
+</script>
 {% block javascripts %}
 
 {% endblock %}
