@@ -34,7 +34,7 @@ class UserTemp implements UserInterface, \Serializable
     private $plainPassword;
 
     /**
-     * @ORM\Column(type="string", length=200)
+     * @ORM\Column(type="string", length=190)
      */
     private $password;
 
