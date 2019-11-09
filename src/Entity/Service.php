@@ -36,7 +36,7 @@ class Service
     /**
      * @var string
      *
-     * @ORM\Column(type="text", length=255, nullable=true)
+     * @ORM\Column(type="text", length=190, nullable=true)
      */
     private $description;
 

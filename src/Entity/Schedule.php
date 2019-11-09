@@ -37,7 +37,7 @@ class Schedule
     private $active;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=190, nullable=true)
      */
     private $comment;
 

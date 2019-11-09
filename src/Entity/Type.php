@@ -35,7 +35,7 @@ class Type
 
     /**
      * @var string
-     * @ORM\Column(name="comment", type="string", length=255, nullable=true)
+     * @ORM\Column(name="comment", type="string", length=190, nullable=true)
      *
      */
     private $comment;

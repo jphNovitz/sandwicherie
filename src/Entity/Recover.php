@@ -20,7 +20,7 @@ class Recover
 
     /**
      *
-     * @ORM\Column(type="string", length=192, unique=true)
+     * @ORM\Column(type="string", length=191, unique=true)
      */
     private $uniqId;
 

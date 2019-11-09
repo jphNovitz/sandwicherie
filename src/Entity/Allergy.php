@@ -37,7 +37,7 @@ class Allergy
 
     /**
      * @var string
-     * @ORM\Column(name="description", length=255, nullable=true)
+     * @ORM\Column(name="description", length=190, nullable=true)
      */
     private $description;
 
@@ -76,7 +76,7 @@ class Allergy
     private $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=190, nullable=true)
      *
      * @var string
      */

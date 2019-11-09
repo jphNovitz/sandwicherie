@@ -40,7 +40,7 @@ class Invoice
     private $invoiceFile;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=190, nullable=true)
      *
      * @var string
      */
