@@ -34,6 +34,7 @@
             {% block other_buttons %} {% endblock %}
         </p>
     {% endblock %}
+    {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}
 
 
