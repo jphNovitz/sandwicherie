@@ -15,26 +15,28 @@
                      class="ui fluid rounded image"/>
             </div>
         </div>
-        <div class="row">
-            <div class="seven wide column center aligned">
-                {#<div class="ui stackable grid">#}
-                    {#<div class="row">#}
-                    {#<div class="ui sixteen wide column">#}
-                    {#<img :src="'/images/products/'+featured"#}
-                    {#class="ui fluid rounded image"/>#}
-                    {#</div>#}
+    </div>
+    <div class="row">
+        <div class="seven wide column center aligned">
+            {#<div class="ui stackable grid">#}
+            {#<div class="row">#}
+            {#<div class="ui sixteen wide column">#}
+            {#<img :src="'/images/products/'+featured"#}
+            {#class="ui fluid rounded image"/>#}
+            {#</div>#}
 
-                    {#</div>#}
-                    <div v-for="(image, loop) in images" :key="loop" class="ui horizontal list" >
-                        <div class="item ui image">
-                            <img :src="'/images/products/'+image.image_name"
-                                 class="ui rounded padded image" @click="change(loop)" :class="{tiny: isHorizontal, small: !isHorizontal}" style="cursor: pointer; padding: 5px"/>
-                        </div>
-                    </div>
-                {#</div>#}
-
-
+            {#</div>#}
+            <div v-for="(image, loop) in images" :key="loop" class="ui horizontal list">
+                <div class="item ui image">
+                    <img :src="'/images/products/'+image.image_name"
+                         class="ui rounded padded image" @click="change(loop)"
+                         :class="{tiny: isHorizontal, small: !isHorizontal}" style="cursor: pointer; padding: 5px"/>
+                </div>
             </div>
+            {#</div>#}
+
+
+        </div>
         <div class="nine wide column left aligned">
             <div class="ui segment">
                 <div class="ui bulleted list  horizontal">
@@ -133,7 +135,7 @@
                 },
                 isHorizontal: function () {
                     if (window.innerWidth < 950) return true
-                        else return false
+                    else return false
                 }
             },
             mounted() {
