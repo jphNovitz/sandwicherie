@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class caterController extends Controller
 {
     /**
-     * @Route("/traiteur", name="front_cater")
+     * @Route("/traiteur", name="front_cater", schemes={"https"})
      */
     public function show()
     {

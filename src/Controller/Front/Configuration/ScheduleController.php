@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ConfigurationController
  * @package App\Controller\Admin\Configuration
- * @Route("/")
+ * @Route("/", schemes={"https"})
  */
 class ScheduleController extends Controller
 {

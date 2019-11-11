@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class AdminController
  * @package App\Controller\Admin
- * @Route("/admin/")
+ * @Route("/admin/", schemes={"https"})
  */
 class AdminController extends Controller {
     /**

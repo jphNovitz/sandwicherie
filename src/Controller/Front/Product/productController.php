@@ -25,7 +25,7 @@ class productController extends Controller {
 
 
     /**
-     * @Route("/la-carte", name="front_products_list")
+     * @Route("/la-carte", name="front_products_list", schemes={"https"})
      */
     public function index(Request $request, CustomObjectLoader $loader){
 
@@ -42,7 +42,7 @@ class productController extends Controller {
     }
 
     /**
-     * @Route("/detail-produit/{slug}", name="product_card")
+     * @Route("/detail-produit/{slug}", name="product_card", schemes={"https"})
      */
     public function show(Request $request, Product $product = null, CustomPersister $persister){
         if (!$product){

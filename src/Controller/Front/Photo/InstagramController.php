@@ -10,7 +10,7 @@ class InstagramController extends Controller
 {
 
     /**
-     * @Route("/photos", name="front_photos_instagram", methods={"GET"})
+     * @Route("/photos", name="front_photos_instagram", methods={"GET"}, schemes={"https"})
      */
     public function list()
     {

@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Serializer;
 class ContactController extends Controller
 {
     /**
-     * @Route("/contact", name="front_contact")
+     * @Route("/contact", name="front_contact", schemes={"https"})
      **/
     public function index()
     {
