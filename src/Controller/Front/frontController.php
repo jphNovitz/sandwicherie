@@ -16,7 +16,7 @@ class frontController extends Controller {
 
 
     /**
-     * @Route("/", name="home", schemes={'https'})
+     * @Route("/", name="home", schemes={"https"})
      */
     public function index(Request $request,
                           FeaturedProducts $featuredProducts,
