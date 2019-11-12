@@ -2,11 +2,11 @@
 {% block title %} {{ product.name }} {% endblock %}
 {% block og_seo %}
     <!-- Open Graph data -->
-    <meta property="og:title" content={{ product.name ~ ' - laclementine.be'}} />
+    <meta property="og:title" content="{{ product.name ~ ' - laclementine.be'}}" />
     <meta property="og:type" content="product" />
     <meta property="og:url" content="http://www.laclementine.be" />
     <meta property="og:image" content="http://laclementine.be" />
-    <meta property="og:description" content={{ product.description }} />
+    <meta property="og:description" content="{{ product.description }}" />
 {% endblock %}
 {% block body %}
     {% include '_elements/_products_front/_card_modal.html.twig' %}
