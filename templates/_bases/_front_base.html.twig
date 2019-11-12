@@ -1,8 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Sandwicherie Saint-Nicolas - La clementine.be{% endblock %}</title>
+    {% block og_seo %}
+        <!-- Open Graph data -->
+        <meta property="og:title" content="Sandwicherie Saint-Nicolas - La clementine.be" />
+        <meta property="og:type" content="product" />
+        <meta property="og:url" content="http://www.laclementine.be" />
+        <meta property="og:image" content="http://laclementine.be" />
+        <meta property="og:description" content="Sandwicherie artisanale Saint-Nicolas Liège Montegnée " />
+    {% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
