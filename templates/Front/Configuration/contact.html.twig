@@ -4,8 +4,13 @@
     <div class="row">
         <div class="ui sixteen wide column center aligned">
             <h2 class="ui huge Header">
-                {{ site.title }} .::. Contactez-moi
+                {{ site.title }}
             </h2>
+
+            <h3 class="ui medium Header">
+                {{ site. introduction }}
+            </h3>
+            <p><strong><u>Avant 10h30</u> commandez par sms et c'est prêt !  </strong></p>
         </div>
     </div>
     <div class="row">
@@ -49,7 +54,7 @@
                     <div class="ui list">
                         <div class="item">
                             <a href="{{ site.socialFacebook }}">
-                                <i class="facebook icon" ></i>
+                                <i class="facebook icon"></i>
                                 {{ site.socialFacebook }}
                             </a>
                         </div>
@@ -57,7 +62,7 @@
 
 
                             <a href="{{ site.socialInstagram }}">
-                                <i class="instagram icon" ></i>
+                                <i class="instagram icon"></i>
                                 {{ site.socialInstagram }}
                             </a>
                         </div>
@@ -69,10 +74,30 @@
     </div>
     <div class="row">
         <div class="ui sixteen wide column center aligned">
-
-            <h3 class="ui medium Header">
-                {{ site. introduction }}
-            </h3>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.014859268457!2d5.521430915738466!3d50.64541517950273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c0fbcf117965c3%3A0x79875640011ac917!2sLa%20Cl%C3%A9mentine!5e0!3m2!1sfr!2sbe!4v1574025305368!5m2!1sfr!2sbe"
+                    width="400" height="300"
+                    frameborder="0"
+                    style="border:0;"
+                    allowfullscreen="">
+            </iframe>
         </div>
     </div>
+    <div class="row">
+        <div class="ui sixteen wide column center aligned">
+            <p>Toutes les salades et préparations sont faites maison.
+                <br />Pains au choix :</p>
+            <span class="ui list">
+                <span class="item left aligned">Demi baguette blanche (traditionnelle) ;</span>
+                <span class="item">multi céréales ;</span>
+                <span class="item">mafaldas.</span>
+            </span>
+                <p>* possibilité de pain sans gluten et veggie</p>
+
+            <div class="ui segment">
+                <a href="{{ path('front_cater') }}"> Service traiteur, buffet</a> à partir de cinq personnes, demandez la carte prévue à cet effet.
+            </div>
+            <p>Ouvert le vendredi soir</p>
+        </div>
+    </div>
+
 {% endblock %}
