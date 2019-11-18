@@ -27,6 +27,25 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function myFindAll(){
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    public function FindAllComplete(){
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.images', 'images')
+            ->leftJoin('p.ingredients', 'ingredients')
+            ->leftJoin('ingredients.categories', 'categories')
+            ->addSelect('p, images, ingredients, categories')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     public function FindFeatured()
     {
         return $this->createQueryBuilder('p')

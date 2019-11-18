@@ -9,6 +9,8 @@ use App\Form\ItemType;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
 use App\Service\FeaturedProducts;
+use Doctrine\ORM\EntityManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,19 +23,21 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Serializer\Serializer;
 
 
-class productController extends Controller {
+class productController extends AbstractController {
 
 
     /**
      * @Route("/la-carte", name="front_products_list", schemes={"https"})
      */
-    public function index(Request $request, CustomObjectLoader $loader){
+    public function index(Request $request, CustomObjectLoader $loader, ContainerInterface $container){
 
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
-        $list_products = $loader->LoadAll('App:Product');
-        $list_allergies = $loader->LoadAll('App:Allergy');
-
-
+        $list_products = $container->get('doctrine.orm.default_entity_manager')
+            ->getRepository('App:Product')
+            ->findAllComplete();
+        $list_allergies = $container->get('doctrine.orm.default_entity_manager')
+            ->getRepository('App:Allergy')
+            ->findAllWithCategories();
        return $this->render('Front/Product/products-list.html.twig', [
            'list_products' => $serializer->serialize($list_products, 'json'),
            'list_allergies' => $serializer->serialize($list_allergies, 'json')
@@ -74,10 +78,9 @@ class productController extends Controller {
         $item->setProduct($product);
         $cart->addItem($item);
         $cart->setClient($user);
-//dump($new);
-//dump($cart);die();
+
             $new ? $persister->insert($cart) : $persister->update($cart);
-//            die();
+
             $this->addFlash('success', 'Votre produit a été ajouté au panier');
             if($form->get('continue')->isClicked()){
                 return $this->redirectToRoute('front_products_list');

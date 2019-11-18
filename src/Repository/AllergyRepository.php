@@ -13,6 +13,22 @@ class AllergyRepository extends ServiceEntityRepository
         parent::__construct($registry, Allergy::class);
     }
 
+    public function myFindAll(){
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    public function findAllWithCategories(){
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.categories', 'categories')
+            ->addSelect('a, categories')
+            ->orderBy('a.id', 'DESC')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     /*
     public function findBySomething($value)
     {

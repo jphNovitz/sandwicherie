@@ -43,7 +43,10 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $list = $this->customLoader->LoadAll('App:Product');
+        $list = $this->get('doctrine.orm.default_entity_manager')
+            ->getRepository('App:Product')
+            ->myFindAll();
+
         if (!$list) {
             $this->addFlash('notice', "Aucun produit, je vous propose d'en ajouter un");
             return $this->redirectToRoute('products_add');

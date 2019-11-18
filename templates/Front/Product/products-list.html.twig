@@ -84,14 +84,19 @@
                     if (this.blackList.length) {
                         return this.products.filter(p => {
                             let flag = false;
-                            p.ingredients.map(ing => {
-                                ing.categories.map(category => {
-                                    if (this.blackList.indexOf(category.slug) > -1) {
-                                        flag = true;
+                                p.ingredients.map(ing => {
+                                    console.log(ing.categories)
+                                    if (ing.categories !== undefined) {
+                                        ing.categories.map(category => {
+                                            if (this.blackList.indexOf(category.slug) > -1) {
+                                                flag = true;
+                                            }
+                                        })
                                     }
                                 })
-                            })
+
                             if (flag) return p
+
                         })
                     } else return this.products
                 },
@@ -105,7 +110,7 @@
             methods: {
                 pick: function (name) {
                     let pos = this.pickedAllergies.indexOf(name)
-                    console.log(pos)
+
                     if (pos > -1)
                         this.pickedAllergies.splice(pos)
                     else this.pickedAllergies.push(name)
