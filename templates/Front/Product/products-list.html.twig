@@ -22,8 +22,8 @@
             <div class="ui three stackable cards">
                 <div v-for="product in filtered" class="card">
                     <div class="image">
-                        <template v-if="product.images.length && product.images!='undefined'">
-                            <img :src="'images/products/'+product.images[0].image_name">
+                        <template v-if="product.images.length ">
+                            <img :src="'images/products/'+product.images[0].imageName">
                         </template>
                         <template v-else>
                             <img src="{{ asset('images/logo_white-400.png') }}">
@@ -82,7 +82,7 @@
                 },
                 filtered: function () {
                     if (this.blackList.length) {
-                        return this.products.filter(p => {
+                        return this.products.filter(p => {git
                             let flag = false;
                                 p.ingredients.map(ing => {
                                     console.log(ing.categories)
