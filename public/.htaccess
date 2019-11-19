@@ -6,6 +6,8 @@
     RewriteRule ^public/(.*)$ /$1 [L]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php [QSA,L]
+    RewriteCond %{HTTPS_HOST} ^laclementine.be [NC]
+    RewriteRule ^(.*) https://www.laclementine.be/$1 [L,R=301,QSA]
 </IfModule>
 
 <IfModule !mod_rewrite.c>
