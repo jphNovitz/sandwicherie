@@ -2,10 +2,10 @@
 {% block title %} {{ product.name }} {% endblock %}
 {% block og_seo %}
     <!-- Open Graph data -->
-    <meta property="og:title" content="{{ product.name ~ ' - laclementine.be'}}" />
-    <meta property="og:type" content="product" />
-    <meta property="og:url" content="http://www.laclementine.be" />
-    <meta property="og:image" content="http://laclementine.be" />
+    <meta property="og:title" content="{{ product.name ~ ' | Liège | laclementine.be'}}" />
+    <meta property="og:type" content="{{ product.categories[0] }}" />
+    <meta property="og:url" content="https://www.laclementine.be" />
+    <meta property="og:image" content="https://laclementine.be/images/logo_white-400.png" />
     <meta property="og:description" content="{{ product.description }}" />
 {% endblock %}
 {% block body %}
