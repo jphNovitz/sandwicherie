@@ -1,5 +1,3 @@
-Redirect 301 https://laclementine.be https=//www.laclementine.be
-
 <IfModule mod_rewrite.c>
     Options -MultiViews
     RewriteEngine On
