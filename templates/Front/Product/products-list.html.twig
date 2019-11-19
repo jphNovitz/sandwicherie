@@ -1,5 +1,7 @@
 {% extends '_bases/_front_base.html.twig' %}
-
+{% block title %} Liste des sandwiches | La Clémentine, Saint-Nicolas (Liège) {% endblock %}
+{% block description %}La Clémentine vous propose un vaste choix de sandwiches originaux à petits prix.
+    Nos préparation sont faites maisons, sur place et du jour.{% endblock %}
 {% block body %}
     <span id="rawProducts" data-products="{{ list_products|json_encode }}"></span>
     <span id="rawAllergies" data-allergies="{{ list_allergies|json_encode }}"></span>
@@ -82,7 +84,7 @@
                 },
                 filtered: function () {
                     if (this.blackList.length) {
-                        return this.products.filter(p => {git
+                        return this.products.filter(p => {
                             let flag = false;
                                 p.ingredients.map(ing => {
                                     console.log(ing.categories)

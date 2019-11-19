@@ -1,9 +1,10 @@
 {% extends '_bases/_front_base.html.twig' %}
 {% block title %} {{ product.name }} {% endblock %}
+{% block description %} {{ product.description }} {% endblock %}
 {% block og_seo %}
     <!-- Open Graph data -->
     <meta property="og:title" content="{{ product.name ~ ' | Liège | laclementine.be'}}" />
-    <meta property="og:type" content="{{ product.categories[0] }}" />
+    <meta property="og:type" content="{{ product.types[0] }}" />
     <meta property="og:url" content="https://www.laclementine.be" />
     <meta property="og:image" content="https://laclementine.be/images/logo_white-400.png" />
     <meta property="og:description" content="{{ product.description }}" />

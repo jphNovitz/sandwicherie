@@ -35,6 +35,7 @@ class productController extends AbstractController {
         $list_products = $container->get('doctrine.orm.default_entity_manager')
             ->getRepository('App:Product')
             ->findAllComplete();
+//        dump($list_products); die;
         $list_allergies = $container->get('doctrine.orm.default_entity_manager')
             ->getRepository('App:Allergy')
             ->findAllWithCategories();
