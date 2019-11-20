@@ -45,7 +45,8 @@
                 <div class="item ui image">
                     <img :src="'/images/products/'+image.image_name"
                          class="ui rounded padded image" @click="change(loop)"
-                         :class="{tiny: isHorizontal, small: !isHorizontal}" style="cursor: pointer; padding: 5px"/>
+                         :class="{tiny: isHorizontal, small: !isHorizontal}" style="cursor: pointer; padding: 5px"
+                         alt="{{ product.name~' laclementine.be' }}" />
                 </div>
             </div>
             {#</div>#}
