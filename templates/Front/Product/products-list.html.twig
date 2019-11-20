@@ -2,6 +2,14 @@
 {% block title %} Liste des sandwiches | La Clémentine, Saint-Nicolas (Liège) {% endblock %}
 {% block description %}La Clémentine vous propose un vaste choix de sandwiches originaux à petits prix.
     Nos préparation sont faites maisons, sur place et du jour.{% endblock %}
+{% block og_seo %}
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Liste des sandwiches Saint-Nicolas (liège) | laclementine.be" />
+    <meta property="og:type" content="Site Web sandwicherie" />
+    <meta property="og:url" content="https://laclementine.be/la-carte" />
+    <meta property="og:image" content="https://laclementine.be/images/logo_white-400.png" />
+    <meta property="og:description" content="sandwiches à prix abordables, artisanaux frais et faits maison traiteur Saint-Nicolas Liège Montegnée " />
+{% endblock %}
 {% block body %}
     <span id="rawProducts" data-products="{{ list_products|json_encode }}"></span>
     <span id="rawAllergies" data-allergies="{{ list_allergies|json_encode }}"></span>
@@ -25,10 +33,11 @@
                 <div v-for="product in filtered" class="card">
                     <div class="image">
                         <template v-if="product.images.length ">
-                            <img :src="'images/products/'+product.images[0].imageName">
+                            <img :src="'images/products/'+product.images[0].imageName" alt="sandwiche la clementine">
                         </template>
                         <template v-else>
-                            <img src="{{ asset('images/logo_white-400.png') }}">
+                            <img src="{{ asset('images/logo_white-400.png') }}"
+                                 alt="sandwiche la clementine" />
                         </template>
                     </div>
                     <div class="content">
@@ -40,7 +49,8 @@
                     <div class="extra content">
                         <template v-if="product.halal ">
                             <a>
-                                <img src="{{ asset('images/flags/halal-flag-50.png') }}">
+                                <img src="{{ asset('images/flags/halal-flag-50.png') }}"
+                                alt="sandwiche halal "/>
                             </a>
                         </template>
                     </div>

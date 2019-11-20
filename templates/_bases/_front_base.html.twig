@@ -6,13 +6,14 @@
     <meta name="description" content="
     {% block description %}La sandwhicherie La Clémentine  vous propose des sanwdiches originaux, de la petite restauration italienne à petits prix. Montegnée, Saint-Nicolas (Liège) {% endblock %}
     ">
+    <link rel="canonical" href="https://laclementine.be" />
     {% block og_seo %}
         <!-- Open Graph data -->
         <meta property="og:title" content="Sandwicherie Saint-Nicolas (liège) | laclementine.be" />
         <meta property="og:type" content="Site Web sandwicherie" />
-        <meta property="og:url" content="https://www.laclementine.be" />
+        <meta property="og:url" content="https://laclementine.be" />
         <meta property="og:image" content="https://laclementine.be/images/logo_white-400.png" />
-        <meta property="og:description" content="Sandwicherie artisanale Saint-Nicolas Liège Montegnée " />
+        <meta property="og:description" content="Sandwicherie artisanale traiteur Saint-Nicolas Liège Montegnée " />
     {% endblock %}
     <link rel="icon" type="image/png" href="{{ asset('images/favicon-clementine.ico') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,6 +29,7 @@
     <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
     <link href="{{ asset('build/css/front.css') }}" rel="stylesheet">
     {% block stylesheets %}{% endblock %}
+    {% include '_elements/analytics.html.twig' %}
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->

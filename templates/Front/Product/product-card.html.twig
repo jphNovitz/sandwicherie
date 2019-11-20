@@ -5,8 +5,13 @@
     <!-- Open Graph data -->
     <meta property="og:title" content="{{ product.name ~ ' | Liège | laclementine.be'}}" />
     <meta property="og:type" content="{{ product.types[0] }}" />
-    <meta property="og:url" content="https://www.laclementine.be" />
-    <meta property="og:image" content="https://laclementine.be/images/logo_white-400.png" />
+    <meta property="og:url" content="{{ path(app.request.attributes.get('_route'),
+    app.request.attributes.get('_route_params')) }}" />
+    {%  if product.images[0] is defined and product.images[0] is not null  %}
+        <meta property="og:image" content="{{'https://laclementine.be/images/products/'~product.images[0]}}" />
+    {% else  %}
+        <meta property="og:image" content="https://laclementine.be/images/logo_white-400.png" />
+    {% endif %}
     <meta property="og:description" content="{{ product.description }}" />
 {% endblock %}
 {% block body %}
@@ -21,7 +26,8 @@
             </div>
             <div class="seven wide column left aligned">
                 <img :src="'/images/products/'+featured"
-                     class="ui fluid rounded image"/>
+                     class="ui fluid rounded image"
+                     alt="{{ product.name~' laclementine.be' }}" />
             </div>
         </div>
 
@@ -148,7 +154,7 @@
                 }
             },
             mounted() {
-                if (this.images.length === 0) this.featured = '/images/logo_white-400.png'
+                if (this.images.length === 0) this.featured = '../logo_white-400.png'
                 else {
                     this.featured = this.images[0].image_name
                 }
