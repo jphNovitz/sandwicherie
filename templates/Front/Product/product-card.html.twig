@@ -5,10 +5,9 @@
     <!-- Open Graph data -->
     <meta property="og:title" content="{{ product.name ~ ' | Liège | laclementine.be'}}" />
     <meta property="og:type" content="{{ product.types[0] }}" />
-    <meta property="og:url" content="{{ path(app.request.attributes.get('_route'),
-    app.request.attributes.get('_route_params')) }}" />
+    <meta property="og:url" content="{{ app.request.uri }}" />
     {%  if product.images[0] is defined and product.images[0] is not null  %}
-        <meta property="og:image" content="{{'https://laclementine.be/images/products/'~product.images[0]}}" />
+        <meta property="og:image" content="{{'https://laclementine.be/images/products/'~product.images[0].imageName}}" />
     {% else  %}
         <meta property="og:image" content="https://laclementine.be/images/logo_white-400.png" />
     {% endif %}
@@ -16,6 +15,7 @@
 {% endblock %}
 {% block body %}
     {% include '_elements/_products_front/_card_modal.html.twig' %}
+
     <div id="images" data-images="{{ images }}" class="row ui stackable grid">
         <div class="row">
             <div class="nine wide column center aligned middle aligned">
