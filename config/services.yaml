@@ -2,6 +2,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'fr_BE'
+    app.locales: 'fr'
     adm_service: Admin/Service/
     adm_allergy: Admin/Allergy/
     adm_type: Admin/Product/Type/
@@ -11,7 +12,7 @@ parameters:
     adm_input: Admin/Input/
     adm_user: Admin/User/
     email_from: info@laclementine.be
-    site_url: http://www.laclementine.be
+    site_url: https://laclementine.be
     ngrok: http://db0e5817.ngrok.io
     router.request_context.host: 'http://localhost:8000/'
     base_url: 'https://api.instagram.com/v1/'
