@@ -1,5 +1,5 @@
 {% extends '_bases/_front_base.html.twig' %}
-{% block title %} {{ product.name }} {% endblock %}
+{% block title %} {{ product.types[0].name }}{{ product.name }} {% endblock %}
 {% block description %} {{ product.description }} {% endblock %}
 {% block og_seo %}
     <!-- Open Graph data -->
@@ -19,10 +19,10 @@
     <div id="images" data-images="{{ images }}" class="row ui stackable grid">
         <div class="row">
             <div class="nine wide column center aligned middle aligned">
-                <h2 class="ui huge orange header">
+                <h1 class="ui huge orange header">
                     {{ product.name }}
                     <div class="sub header ui green">{{ product.price }} eur (emporté)</div>
-                </h2>
+                </h1>
             </div>
             <div class="seven wide column left aligned">
                 <img :src="'/images/products/'+featured"

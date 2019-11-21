@@ -21,11 +21,14 @@ body {
   box-sizing: border-box;
 }
 
-h1 {
-  font-family: 'Pacifico', cursive;
+.site-title {
+  font-family: 'Pacifico', cursive !important;
+  color: #ffffff;
+  font-size: 1.95rem;
+  font-weight: bold;
 }
 
-h2, h3, h4, h5, h6, .ui.header {
+h1, h2, h3, h4, h5, h6/*, .ui.header*/ {
   font-family: 'Cuprum', sans-serif !important;
 }
 

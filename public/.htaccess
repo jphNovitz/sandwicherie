@@ -6,6 +6,8 @@
     RewriteRule ^public/(.*)$ /$1 [L]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php [QSA,L]
+    RewriteRule ^(en|de|fr)/(.*)$  $2?language=$1 [L,QSA]
+    RewriteRule ^(.*)$  $1?language=en [L,QSA]
 </IfModule>
 
 <IfModule !mod_rewrite.c>
