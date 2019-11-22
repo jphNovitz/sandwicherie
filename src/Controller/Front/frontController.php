@@ -6,27 +6,43 @@ use App\Service\FeaturedProducts;
 use App\Service\Instagram;
 use App\Service\SiteConfiguration;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class frontController extends Controller {
 
+    protected $featuredProducts;
+    protected $siteConfiguration;
+
+    public function __construct(FeaturedProducts $featuredProducts, SiteConfiguration $siteConfiguration)
+    {
+        $this->featuredProducts = $featuredProducts;
+        $this->siteConfiguration = $siteConfiguration;
+    }
 
     /**
      * @Route("/", name="home", schemes={"https"})
      */
-    public function index(Request $request,
-                          FeaturedProducts $featuredProducts,
-                          SiteConfiguration $siteConfiguration
-        /*, Instagram $instagram*/){
+    public function index(CacheInterface $cache/*, Instagram $instagram*/){
 
-        $last = $featuredProducts->getLast(5);
+        $last = $cache->get('last_products', function (CacheItem $item){
+            $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
+           return  $this->featuredProducts->getLast(5);
+        });
+        $featured = $cache->get('featured_products', function (CacheItem $item){
+            $item->expiresAfter(\DateInterval::createFromDateString('3 day'));
+           return  $this->featuredProducts->getFeatured();
+        });
+        $pitch = $cache->get('site_pitch', function (CacheItem $item){
+            $item->expiresAfter(\DateInterval::createFromDateString('1 month'));
+           return  $this->siteConfiguration->getPitch();
+        });
 
-        $featured = $featuredProducts->getFeatured();
-        $pitch = $siteConfiguration->getPitch();
        return $this->render('Front/index.html.twig', [
            'last_products' => $last,
            'featured_products' => $featured,
