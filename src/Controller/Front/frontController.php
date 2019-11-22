@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 class frontController extends Controller {
 
@@ -28,7 +29,9 @@ class frontController extends Controller {
     /**
      * @Route("/", name="home", schemes={"https"})
      */
-    public function index(CacheInterface $cache/*, Instagram $instagram*/){
+    public function index(/*, Instagram $instagram*/){
+
+        $cache = new FilesystemAdapter();
 
         $last = $cache->get('last_products', function (CacheItem $item){
             $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
