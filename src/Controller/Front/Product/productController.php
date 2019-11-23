@@ -12,6 +12,7 @@ use App\Service\FeaturedProducts;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,24 +22,39 @@ use ElephantIO\Client;
 use ElephantIO\Engine\SocketIO\Version2X;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Contracts\Cache\CacheInterface;
 
 
 class productController extends AbstractController {
 
+     protected $container;
+
+     public function __construct(ContainerInterface $container)
+     {
+         $this->container = $container;
+     }
 
     /**
      * @Route("/la-carte", name="front_products_list", schemes={"https"})
      */
-    public function index(Request $request, CustomObjectLoader $loader, ContainerInterface $container){
+    public function index(Request $request, CustomObjectLoader $loader, ContainerInterface $container, CacheInterface $cache){
 
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
-        $list_products = $container->get('doctrine.orm.default_entity_manager')
-            ->getRepository('App:Product')
-            ->findAllComplete();
-//        dump($list_products); die;
-        $list_allergies = $container->get('doctrine.orm.default_entity_manager')
-            ->getRepository('App:Allergy')
-            ->findAllWithCategories();
+            $list_products = $cache->get('list_products', function(){
+                return $this->getListProducts();
+            });
+            $list_allergies = $cache->get('list_allergiesWithCategories', function(){
+                return $this->getAllergiesWithCategories();
+            });
+//            dump($list_products); die();
+
+//        $list_products = $container->get('doctrine.orm.default_entity_manager')
+//            ->getRepository('App:Product')
+//            ->findAllComplete();
+
+//        $list_allergies = $container->get('doctrine.orm.default_entity_manager')
+//            ->getRepository('App:Allergy')
+//            ->findAllWithCategories();
        return $this->render('Front/Product/products-list.html.twig', [
            'list_products' => $serializer->serialize($list_products, 'json'),
            'list_allergies' => $serializer->serialize($list_allergies, 'json')
@@ -103,4 +119,18 @@ class productController extends AbstractController {
         return $this->createForm(ItemType::class,$item);
     }
 
+    protected function getListProducts(){
+        $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
+
+        return $this->getDoctrine()->getManager()
+            ->getRepository('App:Product')
+            ->findAllComplete();
+
+    }
+    protected function getAllergiesWithCategories(){
+        return $this->getDoctrine()->getManager()
+            ->getRepository('App:Allergy')
+            ->findAllWithCategories();
+
+    }
 }

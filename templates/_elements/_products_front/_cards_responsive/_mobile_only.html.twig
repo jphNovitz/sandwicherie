@@ -25,25 +25,25 @@
                    class="ui medium header"
                    style="margin-top: -1px ; "
                 >{{ item.name }}</a>
-                <div class="ui list ">
-                    {% for ingredient in item.ingredients |slice(0, 2) %}
-                        <i class="item" style="word-break: break-word">
-                            {{ ingredient.name|hashtag }}
-                        </i>
-                    {% endfor %}
-                </div>
+                {#<div class="ui list ">#}
+                    {#{% for ingredient in item.ingredients |slice(0, 2) %}#}
+                        {#<i class="item" style="word-break: break-word">#}
+                            {#{{ ingredient.name|hashtag }}#}
+                        {#</i>#}
+                    {#{% endfor %}#}
+                {#</div>#}
             </div>
             <div class="extra content">
                 {% if item.halal %}
                     <a>
                         <img src="{{ asset('images/flags/halal-flag-50.png') }}">
                     </a>
-                    {% else %}
-                        <a>
-                            <img src="{{ asset('images/flags/square-transparent.png') }}">
-                        </a>
+                {% else %}
+                    <a>
+                        <img src="{{ asset('images/flags/square-transparent.png') }}">
+                    </a>
                 {% endif %}
             </div>
         </div>
     </div>
-{% endfor %}
+{% endfor %}cd

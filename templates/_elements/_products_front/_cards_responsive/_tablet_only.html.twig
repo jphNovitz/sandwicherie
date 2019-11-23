@@ -1,4 +1,4 @@
-<div class="image">
+<div class="image" style="min-height: 11rem;">
     <span class="ui orange ribbon label">{{ item.price }} eur</span>
     {% if  item.images is not empty %}
         <img src="{{ asset('images/products/'~item.images[0].imageName) }}">
@@ -6,7 +6,7 @@
         <img src="{{ asset('images/logo_white-400.png') }}">
     {% endif %}
 </div>
-<div class="content">
+<div class="content" style="min-height: 7rem;">
     <div class="meta ">
     <span class="ui tiny green header">
     {% for type in  item.types %}
@@ -18,13 +18,13 @@
        class="ui medium header"
        style="margin-top: -1px ; "
     >{{ item.name }}</a>
-    <div class="ui horizontal list ">
-        {% for ingredient in item.ingredients |slice(0, 3) %}
-            <i class="item">
-                {{ ingredient.name|hashtag }}
-            </i>
-        {% endfor %}
-    </div>
+    {#<div class="ui horizontal list ">#}
+        {#{% for ingredient in item.ingredients |slice(0, 3) %}#}
+            {#<i class="item">#}
+                {#{{ ingredient.name|hashtag }}#}
+            {#</i>#}
+        {#{% endfor %}#}
+    {#</div>#}
 </div>
 <div class="extra content">
     {% if item.halal %}
