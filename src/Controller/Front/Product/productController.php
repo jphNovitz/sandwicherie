@@ -38,7 +38,7 @@ class productController extends AbstractController {
     /**
      * @Route("/la-carte", name="front_products_list", schemes={"https"})
      */
-    public function index(Request $request, CustomObjectLoader $loader, ContainerInterface $container, CacheInterface $cache){
+    public function index(Request $request, CustomObjectLoader $loader, ContainerInterface $container){
 
         $cache = new FilesystemAdapter();
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
