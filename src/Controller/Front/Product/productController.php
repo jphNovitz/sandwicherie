@@ -12,6 +12,7 @@ use App\Service\FeaturedProducts;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -39,6 +40,7 @@ class productController extends AbstractController {
      */
     public function index(Request $request, CustomObjectLoader $loader, ContainerInterface $container, CacheInterface $cache){
 
+        $cache = new FilesystemAdapter();
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
             $list_products = $cache->get('list_products', function(){
                 return $this->getListProducts();
