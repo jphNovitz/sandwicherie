@@ -48,7 +48,7 @@ class productController extends AbstractController {
             $list_allergies = $cache->get('list_allergiesWithCategories', function(){
                 return $this->getAllergiesWithCategories();
             });
-//            dump($list_products); die();
+//            dump($serializer->serialize($list_allergies, 'json')); die();
 
 //        $list_products = $container->get('doctrine.orm.default_entity_manager')
 //            ->getRepository('App:Product')
