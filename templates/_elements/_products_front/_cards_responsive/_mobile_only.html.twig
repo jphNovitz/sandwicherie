@@ -8,9 +8,10 @@
             <div class="image">
                 <span class="ui orange ribbon label">{{ item.price }} eur</span>
                 {% if  item.images is not empty %}
-                    <img src="{{ asset('images/products/'~item.images[0].imageName) }}">
+                    <img src="{{ asset('images/products/'~item.images[0].imageName) }}"
+                         alt="{{ asset('images/products/'~item.images[0].imageName) }}">
                 {% else %}
-                    <img src="{{ asset('images/logo_white-400.png') }}">
+                    <img src="{{ asset('images/logo_white-400.png') }}" alt="laclementine.be">
                 {% endif %}
             </div>
             <div class="content">
@@ -36,11 +37,13 @@
             <div class="extra content">
                 {% if item.halal %}
                     <a>
-                        <img src="{{ asset('images/flags/halal-flag-50.png') }}">
+                        <img src="{{ asset('images/flags/halal-flag-50.png') }}"
+                        alt="halal friendly" />
                     </a>
                 {% else %}
                     <a>
-                        <img src="{{ asset('images/flags/square-transparent.png') }}">
+                        <img src="{{ asset('images/flags/square-transparent.png') }}"
+                        alt="laclementine.be">
                     </a>
                 {% endif %}
             </div>
