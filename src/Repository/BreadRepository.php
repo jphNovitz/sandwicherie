@@ -4,11 +4,11 @@ namespace App\Repository;
 
 use App\Entity\Bread;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 class BreadRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry  $registry)
     {
         parent::__construct($registry, Bread::class);
     }
