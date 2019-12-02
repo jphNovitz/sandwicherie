@@ -18,7 +18,7 @@ namespace App\Controller\Admin;
 use App\Entity\Ingredient;
 use App\Service\CustomObjectLoader;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -27,7 +27,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Controller\Admin
  * @Route("/admin/", schemes={"https"})
  */
-class AdminController extends Controller {
+class AdminController extends AbstractController {
     /**
      * @Route("", name="admin_default")
      */

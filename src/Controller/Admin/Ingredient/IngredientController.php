@@ -11,7 +11,7 @@ use App\Service\DeleteObject;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\SubmitButtonTypeInterface;
@@ -26,7 +26,7 @@ use Symfony\Component\Form\ClickableInterface;
  * @Route("/admin/ingredients/")
  * @Method({"GET"})
  */
-class IngredientController extends Controller
+class IngredientController extends AbstractController
 {
     protected $customPersister;
     protected $customLoader;

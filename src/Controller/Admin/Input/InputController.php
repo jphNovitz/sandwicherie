@@ -10,7 +10,7 @@ use App\Model\CustomPersisterInterface;
 use App\Service\DeleteObject;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @Route("admin/input/")
  * @Method({"GET"})
  */
-class InputController extends Controller{
+class InputController extends AbstractController{
 
     protected $loader ;
     protected $persister ;

@@ -11,10 +11,10 @@ use App\Service\CustomPersister;
 use App\Service\DeleteObject;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Doctrine\ORM\Mapping\Annotation;
 use ElephantIO\Client;
@@ -31,7 +31,7 @@ use Hateoas\HateoasBuilder;
  * @Route("admin/cart/")
  * @Method({"GET"})
  */
-class CartController extends Controller{
+class CartController extends AbstractController {
 
     protected $loader ;
     protected $persister;

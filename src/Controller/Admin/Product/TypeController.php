@@ -10,7 +10,7 @@ use App\Service\DeleteObject;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,7 @@ use App\Form\DeleteType;
  * @Route("/admin/types/")
  * @Method({"GET"})
  */
-class TypeController extends Controller
+class TypeController extends AbstractController
 {
     protected $customPersister;
     protected $customLoader;

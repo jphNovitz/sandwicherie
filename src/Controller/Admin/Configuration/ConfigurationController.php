@@ -6,7 +6,7 @@ use App\Entity\Site;
 use App\Form\SiteType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Serializer;
  * @package App\Controller\Admin\Configuration
  * @Route("/admin/configuration/")
  */
-class ConfigurationController extends Controller {
+class ConfigurationController extends AbstractController {
     /**
      * @Route("site", name="configuration")
      * @Method({"GET", "POST"})
