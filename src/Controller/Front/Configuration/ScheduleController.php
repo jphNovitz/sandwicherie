@@ -3,7 +3,7 @@
 namespace App\Controller\Front\Configuration ;
 
 use App\Entity\Schedule;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Controller\Admin\Configuration
  * @Route("/", schemes={"https"})
  */
-class ScheduleController extends Controller
+class ScheduleController extends AbstractController
 {
 
     /**

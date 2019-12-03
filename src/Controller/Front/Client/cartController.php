@@ -9,14 +9,14 @@ use App\Form\CartType;
 use App\Form\ItemType;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class cartController extends Controller {
+class cartController extends AbstractController {
 
     /**
      * @Route("mon-panier", name="front_get_user_Cart")

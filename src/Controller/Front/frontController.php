@@ -5,7 +5,7 @@ namespace App\Controller\Front;
 use App\Service\FeaturedProducts;
 use App\Service\Instagram;
 use App\Service\SiteConfiguration;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-class frontController extends Controller {
+class frontController extends AbstractController {
 
     protected $featuredProducts;
     protected $siteConfiguration;
@@ -54,8 +54,8 @@ class frontController extends Controller {
 
     }
 
-    public function infos(){
-        $path = $this->container->get('kernel')->getRootDir();
+    public function infos(ContainerInterface $container){
+        $path = $container->get('kernel')->getRootDir();
         $infos = file_get_contents ($path.'/File/site.json');
         return $this->render('_elements/footer_info.html.twig',
             ['raw_infos'=>$infos]);

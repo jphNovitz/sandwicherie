@@ -16,9 +16,9 @@ use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Patch;
 use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\FOSRestController;
 use Hateoas\HateoasBuilder;
 use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +28,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Class CartController
  * @package App\Controller\Api\Cart
  */
-class CartController extends FOSRestController
+class CartController extends AbstractController
 {
     protected $serializer;
     protected $customPersister;

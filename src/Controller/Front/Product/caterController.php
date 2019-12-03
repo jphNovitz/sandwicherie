@@ -3,9 +3,9 @@
 namespace App\Controller\Front\Product ;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class caterController extends Controller
+class caterController extends AbstractController
 {
     /**
      * @Route("/traiteur", name="front_cater", schemes={"https"})

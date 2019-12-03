@@ -18,7 +18,7 @@ use App\Entity\Ingredient;
 use App\Model\IngredientFillerInterface;
 use App\Model\PrepareBuilderInterface;
 use App\Service\CustomPersister;
-use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Hateoas\HateoasBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class IngredientController
  * @package App\Controller\Api\Ingredient
  */
-class IngredientController extends FOSRestController
+class IngredientController extends AbstractController
 {
 
     /**

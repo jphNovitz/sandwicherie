@@ -4,10 +4,10 @@ namespace App\Controller\Api\Ingredient;
 
 use App\Service\CustomObjectLoader;
 use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-class CategoryController extends FOSRestController{
+class CategoryController extends AbstractController{
 
     protected  $customLoader;
     public function __construct(CustomObjectLoader $customObjectLoader)

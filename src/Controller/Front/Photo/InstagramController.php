@@ -3,10 +3,10 @@
 namespace App\Controller\Front\Photo;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Instagram;
 
-class InstagramController extends Controller
+class InstagramController extends AbstractController
 {
 
     /**

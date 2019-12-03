@@ -3,7 +3,7 @@
 namespace App\Controller\Front\Configuration;
 
 use App\Entity\Site;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-class ContactController extends Controller
+class ContactController extends AbstractController
 {
     /**
      * @Route("/contact", name="front_contact", schemes={"https"})

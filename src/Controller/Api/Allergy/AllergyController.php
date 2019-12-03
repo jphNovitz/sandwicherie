@@ -6,12 +6,11 @@ use App\Entity\Allergy ;
 use App\Form\AllergyType;
 use App\Service\CustomObjectLoader;
 use App\Service\CustomPersister;
-use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +21,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use Hateoas\HateoasBuilder;
 use FOS\RestBundle\Controller\Annotations\Get;
 
-class AllergyController extends FOSRestController
+class AllergyController extends AbstractController
 {
     protected $serializer;
     protected $customPersister;

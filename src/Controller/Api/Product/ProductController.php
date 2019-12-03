@@ -8,11 +8,11 @@ use App\Service\CustomPersister;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Patch;
-use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Hateoas\HateoasBuilder;
 use Symfony\Component\HttpFoundation\Response;
 
-class ProductController extends FOSRestController{
+class ProductController extends AbstractController{
 
     protected  $customLoader;
     protected  $customPersister;

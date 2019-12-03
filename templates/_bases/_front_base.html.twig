@@ -28,6 +28,8 @@
     {#<script src="{{ asset('build/js/app-front.js') }}"></script>#}
     <link href="{{ asset('build/css/sui.css') }}" rel="stylesheet">
     <link href="{{ asset('build/css/front.css') }}" rel="stylesheet">
+    <script src="https://rawgit.com/ruyadorno/simple-slider/master/dist/simpleslider.min.js"></script>
+
     {% block stylesheets %}{% endblock %}
     {% include '_elements/analytics.html.twig' %}
 </head>
@@ -50,6 +52,7 @@
         ]
     }
 </script>
+
 <div class="bg">
     <header>
         <div class="ui container">
@@ -137,6 +140,7 @@
                 {% include '_elements/_flash_messages.html.twig' %}
             </div>
         </div>
+
         {% block body %}
             content
         {% endblock %}
@@ -162,6 +166,20 @@
                 this.isActive = !this.isActive
             }
         }
+    });
+</script>
+
+<script>
+    // simpleslider.getSlider();
+    var imgSlider = simpleslider.getSlider({
+        container: document.getElementById('homeSlider'),
+        prop: 'left',
+        init: -612,
+        show: 0,
+        end: 612,
+        unit: 'px',
+        delay: 5,
+        duration: 1
     });
 </script>
 {% block javascripts %}
