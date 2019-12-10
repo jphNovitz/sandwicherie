@@ -1,5 +1,5 @@
 {% extends '_bases/_front_base.html.twig' %}
-{% block title %} {{ product.types[0].name }}{{ product.name }} {% endblock %}
+{% block title %} {{ product.types[0].name }} {{ product.name }} Sandwicherie La Clémentine Saint-Nicolas {% endblock %}
 {% block description %} {{ product.description }} {% endblock %}
 {% block og_seo %}
     <!-- Open Graph data -->
@@ -23,6 +23,9 @@
                     {{ product.name }}
                     <div class="sub header ui green">{{ product.price }} eur (emporté)</div>
                 </h1>
+                <h2 class="ui medium header">
+                    {{ product.description }}
+                </h2>
             </div>
             <div class="seven wide column left aligned">
                 <img :src="'/images/products/'+featured"
@@ -114,13 +117,13 @@
         </div>
     </div>
     </div>
-    <div class="row spaced-2-1">
-        <div class="sixteen wide column left aligned">
-            <p class="ui medium header">
-                {{ product.description }}
-            </p>
-        </div>
-    </div>
+    {#<div class="row spaced-2-1">#}
+        {#<div class="sixteen wide column left aligned">#}
+            {#<p class="ui medium header">#}
+                {#{{ product.description }}#}
+            {#</p>#}
+        {#</div>#}
+    {#</div>#}
 {% endblock %}
 
 {% block javascripts %}
