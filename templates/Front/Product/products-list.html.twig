@@ -29,7 +29,12 @@
             {% block product_title %}
                 <h1 class="ui huge orange header">Les sandwiches de Clémentine</h1>
             {% endblock %}
-            <div class="ui four stackable cards">
+            {% if is_mobile() %}
+            <div class="ui two cards">
+            {% else %}
+                <div class="ui four  cards">
+            {% endif %}
+            {#<div class="ui four stackable cards">#}
                 <div v-for="product in filtered" class="card">
                     <div class="image">
                         <template v-if="product.images.length ">
