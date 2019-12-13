@@ -4,25 +4,27 @@
     Nos préparation sont faites maisons, sur place et du jour.{% endblock %}
 {% block og_seo %}
     <!-- Open Graph data -->
-    <meta property="og:title" content="Liste des sandwiches Saint-Nicolas (liège) | laclementine.be" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://laclementine.be/la-carte" />
-    <meta property="og:image" content="https://laclementine.be/images/logo_white-400.png" />
-    <meta property="og:description" content="sandwiches à prix abordables, artisanaux frais et faits maison traiteur Saint-Nicolas Liège Montegnée " />
+    <meta property="og:title" content="Liste des sandwiches Saint-Nicolas (liège) | laclementine.be"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="https://laclementine.be/la-carte"/>
+    <meta property="og:image" content="https://laclementine.be/images/logo_white-400.png"/>
+    <meta property="og:description"
+          content="sandwiches à prix abordables, artisanaux frais et faits maison traiteur Saint-Nicolas Liège Montegnée "/>
 {% endblock %}
 {% block body %}
     <span id="rawProducts" data-products="{{ list_products|json_encode }}"></span>
     <span id="rawAllergies" data-allergies="{{ list_allergies|json_encode }}"></span>
-    <span id="toto" class="ui stackable row">
+
+    <div id="toto" class="ui stackable row">
         <div class="two wide column left aligned">
             <h3>Allergies</h3>
-                <div class="ui celled list" :class="{horizontal: isHorizontal}">
-                  <div v-for="allergy in allergies" class="item">
+            <div class="ui celled list" :class="{horizontal: isHorizontal}">
+                <div v-for="allergy in allergies" class="item">
                     <div class="content">
-                      <div class="header" @click="pick(allergy.slug)">${allergy.name}</div>
+                        <div class="header" @click="pick(allergy.slug)">${allergy.name}</div>
                     </div>
-                  </div>
                 </div>
+            </div>
         </div>
 
         <div class="fourteen wide column left aligned">
@@ -31,39 +33,40 @@
             {% endblock %}
             {% if is_mobile() %}
             <div class="ui two cards">
-            {% else %}
+                {% else %}
                 <div class="ui four  cards">
-            {% endif %}
-            {#<div class="ui four stackable cards">#}
-                <div v-for="product in filtered" class="card">
-                    <div class="image">
-                        <template v-if="product.images.length ">
-                            <img :src="'images/products/'+product.images[0].imageName" alt="sandwiche la clementine">
-                        </template>
-                        <template v-else>
-                            <img src="{{ asset('images/logo_white-400.png') }}"
-                                 alt="sandwiche la clementine" />
-                        </template>
-                    </div>
-                    <div class="content">
-                        <a :href="'detail-produit/' + product.slug " class="header">${ product.name }</a>
-                         <div class="description">
-                            ${product.description}
-                         </div>
-                    </div>
-                    <div class="extra content">
-                        <template v-if="product.halal ">
-                            <a>
-                                <img src="{{ asset('images/flags/halal-flag-50.png') }}"
-                                alt="sandwiche halal "/>
-                            </a>
-                        </template>
+                    {% endif %}
+                    {#<div class="ui four stackable cards">#}
+                    <div v-for="product in filtered" class="card">
+                        <div class="image">
+                            <template v-if="product.images.length ">
+                                <img :src="'images/products/'+product.images[0].imageName"
+                                     alt="sandwiche la clementine">
+                            </template>
+                            <template v-else>
+                                <img src="{{ asset('images/logo_white-400.png') }}"
+                                     alt="sandwiche la clementine"/>
+                            </template>
+                        </div>
+                        <div class="content">
+                            <a :href="'detail-produit/' + product.slug " class="header">${ product.name }</a>
+                            <div class="description line-cut">
+                                ${product.description}
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <template v-if="product.halal ">
+                                <a>
+                                    <img src="{{ asset('images/flags/halal-flag-50.png') }}"
+                                         alt="sandwiche halal "/>
+                                </a>
+                            </template>
+                        </div>
                     </div>
                 </div>
+            </div>
         </div>
-        </div>
-        </div>
-</span>
+    </div>
 
 
 
@@ -101,16 +104,16 @@
                     if (this.blackList.length) {
                         return this.products.filter(p => {
                             let flag = false;
-                                p.ingredients.map(ing => {
-                                    console.log(ing.categories)
-                                    if (ing.categories !== undefined) {
-                                        ing.categories.map(category => {
-                                            if (this.blackList.indexOf(category.slug) > -1) {
-                                                flag = true;
-                                            }
-                                        })
-                                    }
-                                })
+                            p.ingredients.map(ing => {
+                                console.log(ing.categories)
+                                if (ing.categories !== undefined) {
+                                    ing.categories.map(category => {
+                                        if (this.blackList.indexOf(category.slug) > -1) {
+                                            flag = true;
+                                        }
+                                    })
+                                }
+                            })
 
                             if (flag) return p
 
@@ -119,7 +122,7 @@
                 },
                 isHorizontal: function () {
                     if (window.innerWidth < 950) return true
-                        else return false
+                    else return false
                 }
             },
             mounted() {
