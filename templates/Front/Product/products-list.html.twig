@@ -14,7 +14,31 @@
 {% block body %}
     <span id="rawProducts" data-products="{{ list_products|json_encode }}"></span>
     <span id="rawAllergies" data-allergies="{{ list_allergies|json_encode }}"></span>
+<div class="row">
+    <div class="sixteen wide column center aligned spaced">
+        <button class="large ui labeled circular basic green icon button"
+                style="padding: 1rem !important; margin-left: .2rem; margin-right: 2rem;"
+        >
+            <i class="fas fa-hamburger fa-2x" ></i>
+            <span class="label-not-mobile">Sandwiches</span>
+        </button><button class="large ui labeled circular basic green icon button"
+                         style="padding: 1rem !important;  margin-left: .2rem; margin-right: 2rem;">
+            <i class="fas fa-glass-whiskey fa-2x" ></i>
+            <span class="label-not-mobile">Softs</span>
+        </button>
+        <button class="large ui labeled circular basic green icon button"
+                style="padding: 1rem !important;  margin-left: .2rem; margin-right: 2rem;">
+            <i class="fas fa-coffee fa-2x" ></i>
+            <span class="label-not-mobile">Cafés</span>
+        </button>
 
+
+        {#<span class="ui center aligned icon header">#}
+            {#<i class="fas fa-hamburger circular icon"></i>#}
+            {#Friends#}
+        {#</span>#}
+    </div>
+</div>
     <div id="toto" class="ui stackable row">
         <div class="two wide column left aligned">
             <h3>Allergies</h3>
