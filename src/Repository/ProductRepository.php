@@ -35,14 +35,21 @@ class ProductRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
-    public function FindAllComplete(){
-        return $this->createQueryBuilder('p')
-            ->leftJoin('p.images', 'images')
+    public function FindAllComplete($type=null){
+        $query =  $this->createQueryBuilder('p');
+
+        $query->leftJoin('p.images', 'images')
             ->leftJoin('p.ingredients', 'ingredients')
             ->leftJoin('ingredients.categories', 'categories')
-            ->addSelect('p, images, ingredients, categories')
-            ->orderBy('p.id', 'DESC')
-            ->getQuery()
+            ->leftJoin('p.types', 'types')
+            ->addSelect('p, images, ingredients, categories, types')
+            ->orderBy('p.id', 'DESC');
+
+        if ($type){
+            $query->andWhere('types.slug like :type')
+            ->setParameter('type', $type);
+        }
+            return $query->getQuery()
             ->getArrayResult();
     }
 

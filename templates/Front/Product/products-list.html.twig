@@ -16,18 +16,27 @@
     <span id="rawAllergies" data-allergies="{{ list_allergies|json_encode }}"></span>
 <div class="row">
     <div class="sixteen wide column center aligned spaced">
-        <button class="large ui labeled circular basic green icon button"
-                style="padding: 1rem !important; margin-left: .2rem; margin-right: 2rem;"
+        <button class="medium ui labeled circular basic green icon button"
+                style="padding: .65rem !important; margin-left: .15rem; margin-right: .15rem;"
+        >
+            <i class="fas fa-ellipsis-v"></i>
+            <span class="label-not-mobile">Tout</span>
+        </button>
+        <button class="medium ui labeled circular basic green icon button"
+                style="padding: .65rem !important; margin-left: .15rem; margin-right: .15rem;"
         >
             <i class="fas fa-hamburger fa-2x" ></i>
             <span class="label-not-mobile">Sandwiches</span>
-        </button><button class="large ui labeled circular basic green icon button"
-                         style="padding: 1rem !important;  margin-left: .2rem; margin-right: 2rem;">
+        </button>
+        <button class="medium ui labeled circular basic green icon button"
+                style="padding: .65rem !important; margin-left: .15rem; margin-right: .15rem;"
+        >
             <i class="fas fa-glass-whiskey fa-2x" ></i>
             <span class="label-not-mobile">Softs</span>
         </button>
-        <button class="large ui labeled circular basic green icon button"
-                style="padding: 1rem !important;  margin-left: .2rem; margin-right: 2rem;">
+        <button class="medium ui labeled circular basic green icon button"
+                style="padding: .65rem !important; margin-left: .15rem; margin-right: .15rem;"
+                >
             <i class="fas fa-coffee fa-2x" ></i>
             <span class="label-not-mobile">Cafés</span>
         </button>
@@ -53,7 +62,7 @@
 
         <div class="fourteen wide column left aligned">
             {% block product_title %}
-                <h1 class="ui huge orange header">Les sandwiches de Clémentine</h1>
+                <h1 class="ui huge orange header">Les {{ type }} de Clémentine</h1>
             {% endblock %}
             {% if is_mobile() %}
             <div class="ui two cards">

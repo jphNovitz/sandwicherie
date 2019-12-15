@@ -23,6 +23,7 @@ use ElephantIO\Engine\SocketIO\Version2X;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 
 class productController extends AbstractController {
@@ -35,30 +36,37 @@ class productController extends AbstractController {
      }
 
     /**
-     * @Route("/la-carte", name="front_products_list", schemes={"https"})
+     * @Route("/la-carte/{type}", name="front_products_list", schemes={"https"})
      */
-    public function index(Request $request, CustomObjectLoader $loader, ContainerInterface $container){
+    public function index(Request $request, CustomObjectLoader $loader, ContainerInterface $container, $type=null){
 
         $cache = new FilesystemAdapter();
+        $cache->expiresAfter(DateInterval::createFromDateString('1 day'));
+//        $cache->delete('list_'.$type);die();
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
-            $list_products = $cache->get('list_products', function(){
+        if ($type) {
+            $list_products = $cache->get('list_' . $type, function () use ($type) {
+                return $this->getListProducts($type);
+            });
+        }else {
+            $list_products = $cache->get('list_products', function () {
                 return $this->getListProducts();
             });
+        }
+
             $list_allergies = $cache->get('list_allergiesWithCategories', function(){
                 return $this->getAllergiesWithCategories();
             });
-//            dump($serializer->serialize($list_allergies, 'json')); die();
 
-//        $list_products = $container->get('doctrine.orm.default_entity_manager')
-//            ->getRepository('App:Product')
-//            ->findAllComplete();
-
-//        $list_allergies = $container->get('doctrine.orm.default_entity_manager')
-//            ->getRepository('App:Allergy')
-//            ->findAllWithCategories();
+        if (empty($list_products)){
+            $this->addFlash('error', 'cette catégorie n\'existe pas');
+            return $this->redirectToRoute('front_products_list');
+        }
+        if (!$type) $type='sandwiches';
        return $this->render('Front/Product/products-list.html.twig', [
            'list_products' => $serializer->serialize($list_products, 'json'),
-           'list_allergies' => $serializer->serialize($list_allergies, 'json')
+           'list_allergies' => $serializer->serialize($list_allergies, 'json'),
+           'type' =>  ucfirst($type)
        ]);
 
     }
@@ -120,12 +128,12 @@ class productController extends AbstractController {
         return $this->createForm(ItemType::class,$item);
     }
 
-    protected function getListProducts(){
-        $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
+    protected function getListProducts($type='salades'){
 
+//        $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
         return $this->getDoctrine()->getManager()
             ->getRepository('App:Product')
-            ->findAllComplete();
+            ->findAllComplete($type);
 
     }
     protected function getAllergiesWithCategories(){
