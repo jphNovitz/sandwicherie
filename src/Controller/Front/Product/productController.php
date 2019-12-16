@@ -50,7 +50,7 @@ class productController extends AbstractController {
             });
         }else {
             $list_products = $cache->get('list_products', function (ItemInterface $item) {
-                $itemgit->expiresAfter(DateInterval::createFromDateString('1 day'));
+                $item->expiresAfter(DateInterval::createFromDateString('1 day'));
                 return $this->getListProducts();
             });
         }
