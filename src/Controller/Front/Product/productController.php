@@ -45,12 +45,12 @@ class productController extends AbstractController {
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
         if ($type) {
             $list_products = $cache->get('list_' . $type, function (ItemInterface $item) use ($type) {
-                $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
+//                $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
                 return $this->getListProducts($type);
             });
         }else {
             $list_products = $cache->get('list_products', function (ItemInterface $item) {
-                $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
+//                $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
                 return $this->getListProducts();
             });
         }
