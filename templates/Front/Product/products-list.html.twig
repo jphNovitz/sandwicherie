@@ -16,30 +16,30 @@
     <span id="rawAllergies" data-allergies="{{ list_allergies|json_encode }}"></span>
 <div class="row">
     <div class="sixteen wide column center aligned spaced">
-        <button class="medium ui labeled circular basic green icon button"
+        <a href="{{ path('front_products_list') }}" class="medium ui labeled circular basic green icon button"
                 style="padding: .65rem !important; margin-left: .15rem; margin-right: .15rem;"
         >
             <i class="fas fa-ellipsis-v"></i>
             <span class="label-not-mobile">Tout</span>
-        </button>
-        <button class="medium ui labeled circular basic green icon button"
+        </a>
+        <a href="{{ path('front_products_list', {'type': 'sandwiches'}) }}" class="medium ui labeled circular basic green icon button"
                 style="padding: .65rem !important; margin-left: .15rem; margin-right: .15rem;"
         >
             <i class="fas fa-hamburger fa-2x" ></i>
             <span class="label-not-mobile">Sandwiches</span>
-        </button>
-        <button class="medium ui labeled circular basic green icon button"
-                style="padding: .65rem !important; margin-left: .15rem; margin-right: .15rem;"
-        >
-            <i class="fas fa-glass-whiskey fa-2x" ></i>
-            <span class="label-not-mobile">Softs</span>
-        </button>
-        <button class="medium ui labeled circular basic green icon button"
+        </a>
+        {#<button class="medium ui labeled circular basic green icon button"#}
+                {#style="padding: .65rem !important; margin-left: .15rem; margin-right: .15rem;"#}
+        {#>#}
+            {#<i class="fas fa-glass-whiskey fa-2x" ></i>#}
+            {#<span class="label-not-mobile">Softs</span>#}
+        {#</button>#}
+        <a href="{{ path('front_products_list', {'type': 'cafes'}) }}" class="medium ui labeled circular basic green icon button"
                 style="padding: .65rem !important; margin-left: .15rem; margin-right: .15rem;"
                 >
             <i class="fas fa-coffee fa-2x" ></i>
             <span class="label-not-mobile">Cafés</span>
-        </button>
+        </a>
 
 
         {#<span class="ui center aligned icon header">#}

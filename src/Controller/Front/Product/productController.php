@@ -41,15 +41,16 @@ class productController extends AbstractController {
     public function index(Request $request, CustomObjectLoader $loader, ContainerInterface $container, $type=null){
 
         $cache = new FilesystemAdapter();
-        $cache->expiresAfter(DateInterval::createFromDateString('1 day'));
 //        $cache->delete('list_'.$type);die();
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
         if ($type) {
-            $list_products = $cache->get('list_' . $type, function () use ($type) {
+            $list_products = $cache->get('list_' . $type, function (ItemInterface $item) use ($type) {
+                $item->expiresAfter(DateInterval::createFromDateString('1 day'));
                 return $this->getListProducts($type);
             });
         }else {
-            $list_products = $cache->get('list_products', function () {
+            $list_products = $cache->get('list_products', function (ItemInterface $item) {
+                $itemgit->expiresAfter(DateInterval::createFromDateString('1 day'));
                 return $this->getListProducts();
             });
         }
@@ -62,7 +63,7 @@ class productController extends AbstractController {
             $this->addFlash('error', 'cette catégorie n\'existe pas');
             return $this->redirectToRoute('front_products_list');
         }
-        if (!$type) $type='sandwiches';
+        if (!$type) $type='délices';
        return $this->render('Front/Product/products-list.html.twig', [
            'list_products' => $serializer->serialize($list_products, 'json'),
            'list_allergies' => $serializer->serialize($list_allergies, 'json'),
