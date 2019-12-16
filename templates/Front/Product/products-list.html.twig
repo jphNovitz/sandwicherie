@@ -73,7 +73,7 @@
                     <div v-for="product in filtered" class="card">
                         <div class="image">
                             <template v-if="product.images.length ">
-                                <img :src="'images/products/'+product.images[0].imageName"
+                                <img :src="'/images/products/'+product.images[0].imageName"
                                      alt="sandwiche la clementine">
                             </template>
                             <template v-else>

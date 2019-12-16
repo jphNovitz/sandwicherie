@@ -38,32 +38,32 @@ class productController extends AbstractController {
     /**
      * @Route("/la-carte/{type}", name="front_products_list", schemes={"https"})
      */
-    public function index(Request $request, CustomObjectLoader $loader, ContainerInterface $container, $type=null){
+    public function index(Request $request, CustomObjectLoader $loader, ContainerInterface $container, $type=''){
 
         $cache = new FilesystemAdapter();
-//        $cache->delete('list_'.$type);die();
+        //$cache->delete('list_products');die();
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
-        if ($type) {
+
+        if ($type != '') {
             $list_products = $cache->get('list_' . $type, function (ItemInterface $item) use ($type) {
-//                $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
+                $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
                 return $this->getListProducts($type);
             });
         }else {
             $list_products = $cache->get('list_products', function (ItemInterface $item) {
-//                $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
+                $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
                 return $this->getListProducts();
             });
         }
-
             $list_allergies = $cache->get('list_allergiesWithCategories', function(){
                 return $this->getAllergiesWithCategories();
             });
-
+//dd($list_products);
         if (empty($list_products)){
             $this->addFlash('error', 'cette catégorie n\'existe pas');
             return $this->redirectToRoute('front_products_list');
         }
-        if (!$type) $type='délices';
+        if ($type=='') $type='délices';
        return $this->render('Front/Product/products-list.html.twig', [
            'list_products' => $serializer->serialize($list_products, 'json'),
            'list_allergies' => $serializer->serialize($list_allergies, 'json'),
@@ -129,7 +129,7 @@ class productController extends AbstractController {
         return $this->createForm(ItemType::class,$item);
     }
 
-    protected function getListProducts($type='salades'){
+    protected function getListProducts($type=null){
 
 //        $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
         return $this->getDoctrine()->getManager()
