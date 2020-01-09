@@ -15,5 +15,4 @@ framework:
     #fragments: ~
     php_errors:
         log: true
-    framework:
-        disallow_search_engine_index: false
+    disallow_search_engine_index: false
