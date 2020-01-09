@@ -1,0 +1,4 @@
+User-agent: *
+Sitemap: https://laclementine.be/sitemap.xml
+Disallow: /admin/*
+Disallow: /admin_clem
