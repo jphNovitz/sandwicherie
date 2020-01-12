@@ -9,7 +9,11 @@
     <meta name="description" content="
     {% block description %}La sandwhicherie La Clémentine  vous propose des sanwdiches originaux, de la petite restauration italienne à petits prix. Montegnée, Saint-Nicolas (Liège) {% endblock %}
     ">
-    <link rel="canonical" href="https://laclementine.be" />
+
+    {% block seo %}
+        <link rel="canonical" href="{{app.request.uri }}" />
+    {% endblock %}
+
     {% block og_seo %}
         <!-- Open Graph data -->
         <meta property="og:title" content="Sandwicherie Saint-Nicolas, Liège, Grâce-Hollogne | laclementine.be" />
