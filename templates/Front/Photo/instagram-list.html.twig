@@ -7,7 +7,7 @@
                 {% for photo in col %}
                     <div class="ui card card-zoom">
                         <div class="image">
-                            <img src="{{ photo.lowResolution }}" class="ui fluid rounded image"/>
+                            <img src="{{ photo.low_resolution }}" class="ui fluid rounded image"/>
                         </div>
                         <div
                                 :class="{expanded : isExpanded({{ photo.id }})}"
