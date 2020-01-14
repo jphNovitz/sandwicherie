@@ -27,17 +27,17 @@ class Instagram
     private $link;
 
     /**
-     * @ORM\Column(type="string", length=240)
+     * @ORM\Column(type="text")
      */
     private $thumbnail;
 
     /**
-     * @ORM\Column(type="string", length=240, nullable=true)
+     * @ORM\Column(type="text")
      */
     private $low_resolution;
 
     /**
-     * @ORM\Column(type="string", length=240)
+     * @ORM\Column(type="text")
      */
     private $standard_resolution;
 

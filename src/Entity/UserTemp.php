@@ -47,12 +47,13 @@ class UserTemp implements UserInterface, \Serializable
 
     /**
      *
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string",length=190, unique=true)
      */
     private $uniqId;
 
     /**
-     * UserTemp constructor.
+     * UserTem
+     * p constructor.
      */
 
     public function __construct()
