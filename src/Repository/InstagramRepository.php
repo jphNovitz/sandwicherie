@@ -19,6 +19,8 @@ class InstagramRepository extends ServiceEntityRepository
         parent::__construct($registry, Instagram::class);
     }
 
+
+
 //    /**
 //     * @return Instagram[] Returns an array of Instagram objects
 //     */
@@ -47,4 +49,21 @@ class InstagramRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function myFindAll()
+    {
+        return $this->createQueryBuilder('i')
+            ->select('i.id',
+                'i.insta_id',
+                'i.link',
+                'i.caption',
+                'i.thumbnail',
+                'i.low_resolution',
+                'i.standard_resolution')
+            ->getQuery()
+            ->getScalarResult();
+        ;
+    }
+
 }
