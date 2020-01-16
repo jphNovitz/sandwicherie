@@ -7,6 +7,7 @@ namespace App\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpClient\HttpClient;
 
 
 class Instagram
@@ -22,6 +23,46 @@ class Instagram
         $this->access_token = $container->getParameter('access_token');
         $this->em = $entityManager;
     }
+
+    public function updateInstagramPhotos(){
+        $client = HttpClient::create();
+
+        $response = $client->request('GET', $this->base_url.'users/self/media/recent'.'?access_token='.$this->access_token);
+
+        $statusCode = $response->getStatusCode();
+        $contentType = $response->getHeaders()['content-type'][0];
+        $content = $response->getContent();
+        $content = $response->toArray();
+
+        $photos = $this->em
+            ->getRepository('App:Instagram')
+            ->myFindAll();
+
+        foreach ($content['data'] as $pic):
+            if(array_search($pic['id'], array_column($photos, 'insta_id')) == FALSE) {
+                $instagram = new \App\Entity\Instagram();
+                $instagram->setInstaId($pic['id']);
+                $instagram->setLink($pic['link']);
+                if (!is_null($pic['caption']))   $instagram->setCaption($pic['caption']['text']);
+                $instagram->setThumbnail($pic['images']['thumbnail']['url']);
+                $instagram->setLowResolution($pic['images']['low_resolution']['url']);
+                $instagram->setStandardResolution($pic['images']['standard_resolution']['url']);
+                $this->em->persist($instagram);
+            }
+
+        endforeach;
+        $this->em->flush();
+        $updated_photos = $this->em
+            ->getRepository('App:Instagram')
+            ->myFindAll();
+
+        return $updated_photos;
+    }
+
+    /**  ===================      */
+    /**  MAYBE TO BE REMOVED      */
+    /**  @Todo 'check and remove' */
+    /**  ===================      */
 
     public function truncate()
     {

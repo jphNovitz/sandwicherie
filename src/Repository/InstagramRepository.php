@@ -50,7 +50,6 @@ class InstagramRepository extends ServiceEntityRepository
     }
     */
 
-
     public function myFindAll()
     {
         return $this->createQueryBuilder('i')
@@ -61,6 +60,7 @@ class InstagramRepository extends ServiceEntityRepository
                 'i.thumbnail',
                 'i.low_resolution',
                 'i.standard_resolution')
+            ->orderBy('i.id', 'DESC')
             ->getQuery()
             ->getScalarResult();
         ;
