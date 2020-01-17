@@ -2,9 +2,9 @@
 
 {% block body %}
     <div id="cards" class="stackable doubling four column row">
-        {% for col in photos|batch(5) %}
-            <div class="column">
-                {% for photo in col %}
+        {#{% for col in photos|batch(5) %}#}
+            {#<div class="column">#}
+                {% for photo in photos %}
                     <div class="ui card card-zoom">
                         <div class="image">
                             <img src="{{ photo.low_resolution }}" class="ui fluid rounded image"/>
@@ -42,8 +42,8 @@
                         </div>
                     </div>
                 {% endfor %}
-            </div>
-        {% endfor %}
+            {#</div>#}
+        {#{% endfor %}#}
     </div>
 
 {% endblock %}

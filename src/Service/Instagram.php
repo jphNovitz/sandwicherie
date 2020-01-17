@@ -25,6 +25,7 @@ class Instagram
     }
 
     public function updateInstagramPhotos(){
+
         $client = HttpClient::create();
 
         $response = $client->request('GET', $this->base_url.'users/self/media/recent'.'?access_token='.$this->access_token);
@@ -38,8 +39,9 @@ class Instagram
             ->getRepository('App:Instagram')
             ->myFindAll();
 
+//if(array_search('2158229563348320989_5919541710', array_column($photos, 'insta_id')) === FALSE ) echo 'NON';
         foreach ($content['data'] as $pic):
-            if(array_search($pic['id'], array_column($photos, 'insta_id')) == FALSE) {
+            if(array_search($pic['id'], array_column($photos, 'insta_id')) === false) {
                 $instagram = new \App\Entity\Instagram();
                 $instagram->setInstaId($pic['id']);
                 $instagram->setLink($pic['link']);

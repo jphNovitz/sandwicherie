@@ -60,7 +60,7 @@ class InstagramRepository extends ServiceEntityRepository
                 'i.thumbnail',
                 'i.low_resolution',
                 'i.standard_resolution')
-            ->orderBy('i.id', 'DESC')
+            ->orderBy('i.id', 'ASC')
             ->getQuery()
             ->getScalarResult();
         ;

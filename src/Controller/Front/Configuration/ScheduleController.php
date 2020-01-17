@@ -4,6 +4,7 @@ namespace App\Controller\Front\Configuration ;
 
 use App\Entity\Schedule;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,9 +19,9 @@ class ScheduleController extends AbstractController
     /**
      * @Route("heures-d-ouverture", name="front_schedules_list", methods={"GET", "POST"})
      */
-    public function list(Request $request)
+    public function list(Request $request, ContainerInterface $container)
     {
-        $schedule = $this->get('doctrine.orm.default_entity_manager')
+        $schedule = $container->get('doctrine.orm.default_entity_manager')
             ->getRepository('App:Schedule')
             ->groupByDay();
 
