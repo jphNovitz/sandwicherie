@@ -1,24 +1,76 @@
 {% extends '_bases/_front_base.html.twig' %}
-
+{% set days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'] %}
 {% block body %}
     <h1>Heures d'ouverture de La Clémentine</h1>
- {%  for row, detail in schedule %}
-   <div class="row ">
-    <div class="eight wide  column ui">
-        <span class="ui medium green header">{{ row }} </span>
+
+    <div class="row " style="border: solid 1px orangered">
+        {% if schedule[days[wday-1]]  is defined %}
+            <div class="eight wide  column ui">
+                <span class="ui medium green header"> {{ days[wday] }} </span>
+            </div>
+            <div class="eight wide column left aligned">
+                <div class="ui segment">
+                    <span class="ui medium header">
+                            Ouvre: {{ schedule[days[wday-1]][0].s_open|date("H:i") }} <br/>
+                                Ferme: {{ schedule[days[wday-1]][0].s_close|date("H:i") }}
+
+                    </span>
+                </div>
+            </div>
+        {% else %}
+            <div class="eight wide  column ui">
+                Le <span class="ui medium green header">{{ days[wday-1] }} </span> La Clémentine est <span
+                        class="ui medium red header"> fermée </span>
+                 (elle se repose et prépare demain)
+                <br /> <a href="tel:+3248538605" title="3248538605">Téléphonez</a> dès le prochain jour d'ouverture, par <a href="mailto:info@laclementine.be" title="info@laclementine.be">email</a>
+                <br />Suivez <a href="https://fb.me/laclementine.be" title="https://fb.me/laclementine.be"> La Clémentine sur Facebook </a> .
+            </div>
+        {% endif %}
+
     </div>
-    <div class="eight wide column left aligned">
-        <div class="ui segment">
-            <span class="ui medium header">
-                {% for day in detail %}
-                    <p>Ouvre: {{day.s_open|date("H:i") }} <br />
-                        Ferme: {{day.s_close|date("H:i") }} </p>
-                {% endfor %}
+
+    {% for day in days %}
+        {%  if schedule[day] is defined %}
+        <div class="row ">
+            <div class="eight wide  column ui">
+
+                    <span class="ui medium green header">{{ schedule[day][0].s_day }}</span>
+
+            </div>
+
+            <div class="eight wide column left aligned">
+                <div class="ui segment">
+                  <span class="ui medium header">
+                    {% for day in schedule[day] %}
+                        <p>Ouvre: {{ day.s_open|date("H:i") }} <br/>
+                            Ferme: {{ day.s_close|date("H:i") }} </p>
+                    {% endfor %}
             </span>
+                </div>
+            </div>
         </div>
-    </div>
-   </div>
+        {%  endif %}
 
 
- {% endfor %}
+    {% endfor %}
+    {#{% for row, detail in schedule %}#}
+        {#<div class="row ">#}
+            {#<div class="eight wide  column ui">#}
+                {#<span class="ui medium green header">{{ row }} </span>#}
+            {#</div>#}
+
+            {#<div class="eight wide column left aligned">#}
+                {#<div class="ui segment">#}
+            {#<span class="ui medium header">#}
+                {#{% for day in detail %}#}
+                    {#<p>Ouvre: {{ day.s_open|date("H:i") }} <br/>#}
+                        {#Ferme: {{ day.s_close|date("H:i") }} </p>#}
+                {#{% endfor %}#}
+            {#</span>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+
+
+    {#{% endfor %}#}
 {% endblock %}

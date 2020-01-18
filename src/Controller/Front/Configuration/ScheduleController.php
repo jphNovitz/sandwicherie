@@ -25,8 +25,9 @@ class ScheduleController extends AbstractController
             ->getRepository('App:Schedule')
             ->groupByDay();
 
+
         return $this->render('Front/Configuration/schedule-list.html.twig', [
-            'schedule' => $schedule
+            'schedule' => $schedule, 'wday' => getdate()['wday']
         ]);
     }
 }
