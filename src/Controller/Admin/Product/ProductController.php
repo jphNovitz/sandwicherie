@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,9 +42,9 @@ class ProductController extends AbstractController
     /**
      * @Route("", name="products_list")
      */
-    public function index(Request $request)
+    public function index(Request $request, ContainerInterface $container)
     {
-        $list = $this->get('doctrine.orm.default_entity_manager')
+        $list = $container->get('doctrine.orm.default_entity_manager')
             ->getRepository('App:Product')
             ->myFindAll();
 
