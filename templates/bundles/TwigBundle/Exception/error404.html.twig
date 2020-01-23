@@ -1,0 +1,29 @@
+{% extends '_bases/_front_base.html.twig' %}
+
+{% block body %}
+
+    <div class="ui container fluid">
+        <div class="ui grid ">
+            <div class="sixteen wide column">
+                <h2 class="ui huge header">
+                    <img src="/images/logo_white-400.png">
+                    <div class="content">
+                        Tu es à Saint-Nicolas, Liège et tu as faim ?
+                        <div class="sub large header"><strong>Tu es sur le bon site mais pas sur la bonne page !</strong></div>
+                    </div>
+                </h2>
+            </div>
+
+            <div class="sixteen wide column" style="margin: 2rem auto;">
+                <img class="ui fluid image" src="/images/errors/laclementine-404.png">
+            </div>
+            <div class="sixteen wide column" style="margin: 2rem auto;">
+                <h3>La Clémentine est à ton service</h3>
+                <p >Tu veux un excellent sandwiche ? voici la <a href="https://laclementine.be/la-carte/sandwiches">carte des sandwiches</a> <br />
+                   Tu veux un bon café ? voici la <a href="https://laclementine.be/la-carte/cafes">carte des cafes</a> </br>
+                   Où est La Clémentine ?  Comment la contacter ?  la <a href="https://laclementine.be/contact">page contact</a> <br />
+                   L'adresse du site c'est <a href="https://laclementine.be">laclementine.be</a> </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
