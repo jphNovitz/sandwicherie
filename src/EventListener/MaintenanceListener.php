@@ -27,7 +27,8 @@ class MaintenanceListener
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-
+         $uri = $event->getRequest()->getRequestUri();
+//         dd(strpos($uri, 'admin')!== FALSE);
         // This will get the value of our maintenance parameter
         $maintenance = $this->params->get('maintenance') ? $this->params->get('maintenance') : false;
 
@@ -35,7 +36,7 @@ class MaintenanceListener
         $debug = in_array($this->container->get('kernel')->getEnvironment(), ['dev']);
 
         // If maintenance is active and in prod environment
-        if ($maintenance && !$debug) {
+        if ($maintenance && !$debug && strpos($uri, 'admin')== false) {
             // We load our maintenance template
 //            $engine =  $this->container->get('templating');
             $filesystemLoader = new FilesystemLoader(__DIR__.'/../../templates/%name%');
