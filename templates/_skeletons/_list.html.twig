@@ -66,7 +66,7 @@
                         {#<img class="ui avatar image" src="/images/"~${object.images[0].imageName}~">#}
                         <div class="middle aligned content" style="line-height: 2rem">
                             {% block element_title %}  {#sometime it's title#}
-                                <a :href="path(key, '')">${ object.name }</a>
+                               <a :href="'/'+path(key, '', '{{ entity }}')">${ object.name }</a>
                             {% endblock %}
                         </div>
                     </div>
@@ -105,6 +105,7 @@
                 //     entity+='/'
                 // }
                 let pre = 'admin/' + entity
+
                 if (action === 'pdf'){
                     action = 'view'
                     pre = 'pdf'
@@ -113,8 +114,9 @@
                 if (!slug){
                     slug =  this.base_object[key].username
                 }
+
                 let path = pre+'/'+slug+'/'+action
-                console.log(path)
+                console.log(pre)
                 return (path)
             }
         }
