@@ -5,9 +5,9 @@
     <meta name="robots" content="index" />
     <meta name="robots" content="follow" />
 
-    <title>{% block title %}Sandwicherie Saint-Nicolas, Liège, Grâce-Hollogne - La clementine.be{% endblock %}</title>
+    <title>{% block title %}Sandwicherie Saint-Nicolas, Liège, Grâce-Hollogne - sandwicherie.jphnovitz.be{% endblock %}</title>
     <meta name="description" content="
-    {% block description %}La sandwhicherie La Clémentine  vous propose des sanwdiches originaux, de la petite restauration italienne à petits prix. Montegnée, Saint-Nicolas (Liège) {% endblock %}
+    {% block description %}La sandwhicherie Lorem Ipsum  vous propose des sanwdiches originaux, de la petite restauration à petits minis. Montegnée, Grâce-Hollogne,Saint-Nicolas, Liège {% endblock %}
     ">
 
     {% block seo %}
@@ -16,13 +16,13 @@
 
     {% block og_seo %}
         <!-- Open Graph data -->
-        <meta property="og:title" content="Sandwicherie Saint-Nicolas, Liège, Grâce-Hollogne | laclementine.be" />
+        <meta property="og:title" content="Sandwicherie Saint-Nicolas, Liège, Grâce-Hollogne | sandwicherie.jphnovitz.be" />
         <meta property="og:type" content="Site Web sandwicherie" />
-        <meta property="og:url" content="https://laclementine.be" />
-        <meta property="og:image" content="https://laclementine.be/images/logo_white-400.png" />
-        <meta property="og:description" content="Sandwicherie artisanale traiteur Saint-Nicolas Liège Montegnée " />
+        <meta property="og:url" content="https://sandwicherie.jphnovitz.be" />
+        <meta property="og:image" content="sandwicherie.jphnovitz.be" />
+        <meta property="og:description" content="Sandwicherie artisanale traiteur Petite restauration Grâce-Hollogne Liège Montegnée " />
     {% endblock %}
-    <link rel="icon" type="image/png" href="{{ asset('images/favicon-clementine.ico') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -68,8 +68,8 @@
                 <div id="toolbar" class="ui stackable grid">
                     <div class=" row">
                         <div class="five wide column left aligned bottom aligned middle aligned phone-cell">
-                            <a href="tel:+320468538605">
-                                <i class="phone icon"></i>0468 53 86 05
+                            <a href="tel:+324560941407">
+                                <i class="phone icon"></i>456 094 1407
                             </a>
                         </div>
                         {#<div class="three wide column">#}
@@ -85,7 +85,7 @@
             <div class="ui stackable  mobile reversed grid">
                 <div class="four wide column left aligned">
                     <a href="http://laclementine.be" class="item">
-                        <div class="site-title">La Clémentine</div>
+                        <div class="site-title">Lorem Ipsum</div>
                     </a>
                 </div>
                 <div class="twelve wide column right aligned">
@@ -125,11 +125,11 @@
                         <p class="cta-pitch">
                             {{ render(controller('App\\Controller\\Front\\frontController::pitch')) }}
                         </p>
-                        <a href="http://facebook.com/laclementine.be" class="ui primary basic huge button">
+                        <a href="https://www.facebook.com/jphNovitz" class="ui primary basic huge button">
                             <i class="facebook icon"></i>
                             <span class="not-mobile"> Facebook </span>
                         </a>
-                        <a href="http://facebook.com/laclementine.be" class="ui primary basic huge button">
+                        <a href="https://www.instagram.com/jphNovitz" class="ui primary basic huge button">
                             <i class="instagram icon"></i>
                             <span class="not-mobile"> Instagram </span>
                         </a>
@@ -177,19 +177,19 @@
     });
 </script>
 
-<script>
-    // simpleslider.getSlider();
-    var imgSlider = simpleslider.getSlider({
-        container: document.getElementById('homeSlider'),
-        prop: 'left',
-        init: -612,
-        show: 0,
-        end: 612,
-        unit: 'px',
-        delay: 5,
-        duration: 1
-    });
-</script>
+{#<script>#}
+    {#// simpleslider.getSlider();#}
+    {#var imgSlider = simpleslider.getSlider({#}
+        {#container: document.getElementById('homeSlider'),#}
+        {#prop: 'left',#}
+        {#init: -612,#}
+        {#show: 0,#}
+        {#end: 612,#}
+        {#unit: 'px',#}
+        {#delay: 5,#}
+        {#duration: 1#}
+    {#});#}
+{#</script>#}
 {% block javascripts %}
 
 {% endblock %}
