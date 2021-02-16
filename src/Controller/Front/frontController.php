@@ -27,7 +27,7 @@ class frontController extends AbstractController {
     }
 
     /**
-     * @Route("/", name="home", schemes={"https"})
+     * @Route("/", name="home")
      */
     public function index(/*, Instagram $instagram*/){
 
