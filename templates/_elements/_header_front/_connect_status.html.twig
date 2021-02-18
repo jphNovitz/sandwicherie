@@ -6,21 +6,21 @@
             </a>
         {% else %}
             <a href="{{ path('login') }}">
-                <i class="user icon"></i>connexion
+                <i class="user icon not-mobile"></i>connexion
             </a>
         {% endif %}
     </div>
     <div class="eight wide column right aligned">
         {% if app.user %}
             <a href="{{ path('front_get_user_Cart') }}">
-                <i class="cart icon"></i>panier
+                <i class="cart icon not-mobile"></i>panier
                 (
                 {{ render(controller('App\\Controller\\Front\\Client\\cartController::getCartNumber')) }}
                 )
             </a>
         {% else %}
             <a href="{{ path('register') }}">
-                <i class="user icon"></i>Inscription
+                <i class="user icon not-mobile"></i>Inscription
             </a>
         {% endif %}
 

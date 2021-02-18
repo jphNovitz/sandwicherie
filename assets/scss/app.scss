@@ -3,14 +3,20 @@
 $darkOrange: rgb(255, 140, 0);
 $lightOrange: #FFB479;
 $green: rgb(0, 100, 0);
+$green-alt: #566629;
 $greenPastel: #A1E7AE;
 $white: rgb(255, 255, 255);
 $black: rgb(0, 0, 0);
 $grey: #212121;
-$primary: #3e75b3;
-$info: #00A2B5;
+
 $red: #D63246;
 $lightred: #f2dadc;
+
+
+$primary: $green;
+$info: #00A2B5;
+
+
 
 html, body {
   margin: 0;

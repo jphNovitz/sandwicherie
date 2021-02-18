@@ -1,13 +1,20 @@
+/**
+Toolbar.scss
+This is the place for the toolbar, the logo, menu and homepage background pig bicture
+ */
+
 .bg {
-  background-image: url("../../images/vince-lee-mobile.png");
+  background-image: url("../../images/background_2021.png");
+  background-position-x: center;
   background-repeat: no-repeat;
   background-size: cover;
   margin-bottom: 3rem;
+  min-height: 99vh;
 }
 
 
 #toolbar {
-  font-size: 1.55rem;
+  font-size: 1rem;
   border-bottom: solid 1px #cecece;
 }
 
@@ -20,7 +27,7 @@
 }
 #toolbar a{
   background-color: inherit;
-  color: #ffffff;
+  color: $primary;
   line-height: 3.10rem;
   //font-size: 1.5rem;
 }
@@ -28,7 +35,7 @@
 nav,
 nav a{
   margin-top: 1rem;
-  color: #ffffff;
+  color: $primary;
 }
 
 //nav .ui.basic.primary.button,
@@ -39,6 +46,7 @@ nav a{
 //}
 nav .ui.menu {
   box-shadow: none;
+  border:none;
 }
 nav .mobile.menu{
   background: none;
@@ -64,7 +72,7 @@ nav .link.item{
 }
 nav .ui.basic.primary.button,
 nav .ui.basic.primary.buttons .button {
-  color: #ffffff !important;
+  color:$primary !important;
   border-color: #cecece;
   box-shadow: 0 0 0 1px #cecece inset!important;
 }
@@ -77,12 +85,11 @@ nav .ui.basic.primary.buttons .button {
   margin: 3rem auto;
 }
 
-.not-mobile{
-  display: none;
-}
+
 @media only screen and (min-width: 768px) {
-  .bg {
-    background-image: url("../../images/vince-lee-desktop.png");
+ .bg {
+    //background-image: url("../../images/vince-lee-desktop.png");
+   background-position-y: center;
   }
 
   #toolbar {
@@ -96,11 +103,11 @@ nav .ui.basic.primary.buttons .button {
 
   header .ui.menu {
     background: none;
-    color: #ffffff;
+    color: $primary;
   }
   header .ui.menu a,
   .ui.menu:not(.vertical) .item {
-    color: #ffffff;
+    color: $primary;
   }
 
   nav .mobile.menu .link.item{
@@ -117,9 +124,6 @@ nav .ui.basic.primary.buttons .button {
 
   .cta{
     margin: 5rem auto;
-  }
-  .not-mobile{
-    display: inline;
   }
 }
 

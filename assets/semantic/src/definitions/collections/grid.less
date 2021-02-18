@@ -139,7 +139,7 @@
   margin: (@rowSpacing / 2) (@gutterWidth / 2);
 }
 .ui.grid .column + .ui.vertical.divider {
-  height: ~"calc(50% - "(@rowSpacing/2)~")";
+  height: calc(50% - (@rowSpacing / 2));
 }
 
 /* Remove Border on Last Horizontal Segment */
@@ -1077,7 +1077,7 @@
   top: 0em;
   left: 0px;
 
-  width: ~"calc(100% - "@gutterWidth~")";
+  width: calc(100% - @gutterWidth);
   height: 1px;
 
   margin: 0% (@gutterWidth / 2);
@@ -1112,12 +1112,12 @@
 .ui.relaxed[class*="vertically divided"].grid > .row:before {
   margin-left: (@relaxedGutterWidth / 2);
   margin-right: (@relaxedGutterWidth / 2);
-  width: ~"calc(100% - "@relaxedGutterWidth~")";
+  width: calc(100% - @relaxedGutterWidth);
 }
 .ui[class*="very relaxed"][class*="vertically divided"].grid > .row:before {
-  margin-left: @veryRelaxedGutterWidth;
-  margin-right: @veryRelaxedGutterWidth;
-  width: ~"calc(100% - "@veryRelaxedGutterWidth~")";
+  margin-left: (@veryRelaxedGutterWidth / 2);
+  margin-right: (@veryRelaxedGutterWidth / 2);
+  width: calc(100% - @veryRelaxedGutterWidth);
 }
 
 /*----------------------
@@ -1297,13 +1297,6 @@
   padding-bottom: (@rowSpacing / 2);
 }
 
-/* transparent */
-.ui.grid > .transparent.row,
-.ui.grid > .transparent.column,
-.ui.grid > .row > .transparent.column {
-  background-color: @transparent !important;
-  color: @white;
-}
 /* Red */
 .ui.grid > .red.row,
 .ui.grid > .red.column,
@@ -1317,13 +1310,6 @@
 .ui.grid > .row > .orange.column {
   background-color: @orange !important;
   color: @white;
-}
-/* light Orange */
-.ui.grid > .light.orange.row,
-.ui.grid > .light.orange.column,
-.ui.grid > .row > .light.orange.column {
-  background-color: @lightOrangeBackground !important;
-  color: @orange;
 }
 /* Yellow */
 .ui.grid > .yellow.row,

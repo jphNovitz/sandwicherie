@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.3.1 - Header
+ * # Semantic UI 2.4.2 - Header
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -358,10 +358,10 @@ a.ui.orange.header:hover {
 
 /* Inverted */
 .ui.inverted.orange.header {
-  color: #fce2d1 !important;
+  color: #FF851B !important;
 }
 a.ui.inverted.orange.header:hover {
-  color: #fed2b6 !important;
+  color: #ff7701 !important;
 }
 
 /*--- Olive ---*/

@@ -1,0 +1,9 @@
+.not-mobile {
+  display: none !important;
+}
+
+@media only screen and (min-width: 768px) {
+  .not-mobile {
+    display: inline !important;
+  }
+}

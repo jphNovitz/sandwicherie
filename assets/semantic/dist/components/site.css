@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.3.1 - Site
+ * # Semantic UI 2.4.2 - Site
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -13,6 +13,7 @@
              Page
 *******************************/
 
+@import url('https://fonts.googleapis.com/css?family=Cuprum:400,700,400italic,700italic&subset=latin');
 html,
 body {
   height: 100%;
@@ -143,6 +144,10 @@ input::-webkit-selection {
 }
 textarea::-moz-selection,
 input::-moz-selection {
+  background-color: rgba(100, 100, 100, 0.4);
+  color: rgba(0, 0, 0, 0.87);
+}
+textarea::-moz-selection, input::-moz-selection {
   background-color: rgba(100, 100, 100, 0.4);
   color: rgba(0, 0, 0, 0.87);
 }
